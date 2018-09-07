@@ -32,27 +32,36 @@
 					</a>
 				</div>
 				<div class="col-xs-8" style="height:75px; padding:19px 0px; font-size: 25px;">
-					<div>리뷰 보기</div>
 				</div>
 			</div>
+		</div>
+		<div class="container-fluid">
 			<div class="row" >
-				<div class="col-xs-12" style="font-size: xx-large;">
-				<%=revDTO.getRev_title() %>
+				<div class="col-xs-6">
+					<h2><%=revDTO.getRev_title() %></h2>
+				</div>
+				<div class="col-xs-6" style="padding:20px; text-align:right;">
+					<h5>
+						<%for(int q = 0; q < (revDTO.getRev_point()); q++) {%>
+								<img src="/resources/img/consumer/starRating.png">
+						<%} %>
+					</h5>
+				</div>
 			</div>
-			</div>
+			
+			
 			<div class="row" style="margin-top:15px; margin-bottom:15px;">
 				<div class="col-xs-6">
-					<label>작성자:&nbsp;</label><%=revDTO.getUser_nick() %>
+					<%=revDTO.getUser_nick() %>
 				</div>
-				<div class="col-xs-6">
-					<label>날짜:&nbsp;&nbsp;</label><%=revDTO.getRev_regdate() %>
+				<div class="col-xs-6" style="text-align:right;">
+					<%=revDTO.getRev_regdate() %>
 				</div>
 			</div>
 
 			<div class="row" >
 				<div class="col-xs-12">
 					<div class="form-group">
-						<label for="contents">리뷰 내용</label>
 					</div>
 				</div>
 			</div>
@@ -77,32 +86,25 @@
 					
 			
 
-			<div class="row" style="margin-top:15px;">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="rating">푸드트럭 평점</label>
-						<%=revDTO.getRev_point() %>
-					</div>
-				</div>
-			</div>
-			<div class="row" >
+			<div class="row" style="margin: 0 2px; margin-top: 50px;  height: 3px; background-color: #eeeeee;">
 				<div class="col-xs-12">
 				</div>
 			</div>
+		</div>
 			<div style="padding:4px 0;"></div>
 			<%if(userSeq == String.valueOf(revDTO.getUser_seq())) {%>
 				<!-- 수정 버튼 -->
 				<div class="row" >
-					<div class="col-xs-12">
-						<button onclick="javscript:void(0)" class="btn btn-primary" style="width:100%;">리뷰 수정</button>
-					</div>
+					<button onclick="javscript:void(0)" class="btn btn-primary" style="width:100%;">
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/logout.png"/>
+					</button>
 				</div>
 				<div style="padding:4px 0;"></div>
 				<!-- 삭제 버튼 -->
 				<div class="row" >
-					<div class="col-xs-12">
-						<button onclick="javscript:void(0)"  class="btn btn-danger" style="width:100%;">리뷰 삭제</button>
-					</div>
+					<button onclick="javscript:void(0)"  class="btn btn-danger" style="width:100%;">
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/cancel.png"/>
+					</button>
 				</div>
 			<%} %>
 			<div style="padding:18px 0;"></div>
@@ -126,15 +128,14 @@
 						</div>	
 						<%if(userSeq.equals(String.valueOf(repleList.get(i).getUser_seq()))) {%>
 							<!-- 댓글 수정/삭제 버튼 - 로그인 세션 정보와 댓글쓴이가 일치해야 나타남 -->
-							<div class="row" id="bttnCont">
-								<div class="col-xs-8"></div>
-								<div class="col-xs-2">
-									<!-- 인덱스값을 넘겨서 해당 div를 수정할 수 있도록 함-->
-									<button onclick="editReply(<%=i%>)" class="btn btn-primary float-right">댓글 수정</button>
-								</div>
-								<div class="col-xs-2">
-									<button onclick="removeReply(<%=i%>)" class="btn btn-danger float-right">댓글 삭제</button>
-								</div>
+							<div class="row" id="bttnCont" style="float:right; margin-right: 3px;">
+								<!-- 인덱스값을 넘겨서 해당 div를 수정할 수 있도록 함-->
+								<button onclick="editReply(<%=i%>)" class="btn btn-primary float-right" style="margin-right:5px;">
+										<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/tools.png"/>
+								</button>
+								<button onclick="removeReply(<%=i%>)" class="btn btn-danger float-right">
+										<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/cancel.png"/>
+								</button>
 							</div>
 						<%} %>
 					</form>
@@ -158,23 +159,22 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" >
-							<!-- 로그인세션 유저 기본키 값과 리뷰글의 유저시퀀스 값이 일치 할 경우  -->
+						<div class="row" style="padding:0 15px;">
+							<%--  로그인세션 유저 기본키 값과 리뷰글의 유저시퀀스 값이 일치 할 경우 dd --%>
 							<%if (userSeq.equals(String.valueOf(revDTO.getUser_seq()))) {%>
-								<div class="col-xs-2">
-									<button onclick="editReview();" style="float:right;"class="btn btn-primary">리뷰 수정</button>
-								</div>
-								<div class="col-xs-2">
-									<button onclick="removeReview();" style="float:right;"class="btn btn-danger">리뷰 삭제</button>
-								</div>
+								<button onclick="editReview();" style="float:left; margin-right: 10px;"class="btn btn-primary">
+									<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/tools.png"/>
+								</button>
+								<button onclick="removeReview();" style="float:left;"class="btn btn-danger">
+									<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/cancel.png"/>
+								</button>
 							<%}else{ %>
 							<!-- 일치하지 않을 경우 빈자리 채우기 -->
 								<div class="col-xs-4"></div>
 							<%} %>
-							<div class="col-xs-4"></div>
-							<div class="col-xs-4">
-								<button onclick="writeReply()" style="float:right;"class="btn btn-default">댓글 쓰기</button>
-							</div>
+								<button onclick="writeReply()" style=" float:right;"class="btn btn-default">
+									<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/edit.png"/>
+								</button>
 						</div>
 					</div>
 				</form>
