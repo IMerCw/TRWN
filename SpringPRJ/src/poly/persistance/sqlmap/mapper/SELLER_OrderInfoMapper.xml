@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+
+<mapper namespace="poly.persistance.mapper.SELLER_OrderMapper">
+	<!-- 주문서 작성 userSEQ -->
+	<select id="getOrderUserDTO" parameterType="CMMN_UserDTO" resultType="CMMN_UserDTO">
+		SELECT 
+				USER_SEQ as userSeq,
+				USER_AUTH as userAuth,
+				USER_EMAIL as userEmail,
+				USER_NICK as userNick,
+				USER_HP as userHp
+		FROM	USER_INFO
+		WHERE	USER_SEQ = #{userSeq}
+	
+	</select>
+	
+	<select id="getOrderList" parameterType="string" resultType="SELLER_OrderInfoDTO">
+		SELECT 
+			OI.ORD_SEQ AS ord_seq,
+			FI.USER_SEQ AS user_seq,
+			OI.ORD_SUMPRICE AS ord_sumprice,
+			OI.ORD_WAY AS ord_way,
+			OI.ORD_DATE AS ord_date,
+			OI.ORD_STATUS AS ord_status,
+			OI.BUY_WAY AS buy_way,
+			OI.USR_RCV_TIME AS usr_rcv_time,
+			OI.RCV_TIME AS rcv_time,
+			FI.FT_SEQ AS ft_seq
+		FROM ORDER_INFO OI 
+		INNER JOIN FT_INFO FI
+		ON OI.USER_SEQ = FI.USER_SEQ 
+		WHERE FI.USER_SEQ=#{userSeq}
+		ORDER BY OI.ORD_DATE DESC
+	</select>
+	
+	<!-- 주문하기에서 쿠폰 리스트 뽑아오기 -->
+	
+	<select id="getCpList" parameterType="ADMIN_Coupon_IssueDTO" resultType="ADMIN_Coupon_IssueDTO">
+		SELECT 
+         CPIS.ISSUE_CODE as issue_code,
+         CPIS.USER_SEQ as user_seq,
+         CPIS.COUPON_CODE as coupon_code,
+         CPIS.COUPON_COUNT as coupon_count,
+         CPIS.COUPON_USE as coupon_use,
+         CP.COUPON_NAME as coupon_name,
+         CP.COUPON_OPTION as coupon_option,
+         CP.COUPON_DATE as coupon_date
+      FROM COUPON_ISSUE CPIS INNER JOIN COUPON CP
+      ON  CPIS.COUPON_CODE = CP.COUPON_CODE 
+      WHERE   COUPON_USE <![CDATA[<]]> COUPON_COUNT AND USER_SEQ =#{user_seq}
+      ORDER BY ISSUE_CODE DESC
+	</select>
+	<!-- 쿠폰 사용   카운트 증가-->
+	<update id="updateCouponUse" parameterType="ADMIN_Coupon_IssueDTO">
+		UPDATE COUPON_ISSUE
+		SET
+			COUPON_USE = #{coupon_use}
+		WHERE
+			ISSUE_CODE = #{issue_code}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Menu_InfoMapper">
+	<select id="getFt_Menu_List" parameterType="integer" resultType="ADMIN_Menu_InfoDTO">
+		SELECT 
+			MENU_SEQ,
+		    FT_SEQ,
+		    CATE_SORT_NO,
+		    FILE_ID,
+		    MENU_SORT_NO,
+		    MENU_NAME,
+		    MENU_PRICE,
+		    MENU_INTRO,
+		    MENU_RQTIME,
+		    ORIGN,
+		    EXP_YN
+		FROM MENU_INFO WHERE FT_SEQ=#{ft_seq} ORDER BY MENU_SORT_NO ASC
+	</select>
+	
+	<insert id="ft_Menu_Create" parameterType="ADMIN_Menu_InfoDTO">
+		INSERT INTO MENU_INFO
+		(
+			MENU_SEQ,
+		    FT_SEQ,
+		    CATE_SORT_NO,
+		    FILE_ID,
+		    MENU_SORT_NO,
+		    MENU_NAME,
+		    MENU_PRICE,
+		    MENU_INTRO,
+		    MENU_RQTIME,
+		    ORIGN,
+		    EXP_YN
+		)
+		VALUES
+		(
+			MENU_SEQ.NEXTVAL,
+			#{ft_seq},
+		    #{cate_sort_no},
+		    #{file_id},
+		    #{menu_sort_no},
+		    #{menu_name},
+		    #{menu_price},
+		    #{menu_intro},
+		    #{menu_rqtime},
+		    #{orign},
+		    #{exp_yn}
+		)
+	</insert>
+	
+	<select id="getFt_CateToMenu_List" parameterType="ADMIN_Menu_InfoDTO" resultType="ADMIN_Menu_InfoDTO">
+		SELECT 
+			MENU_SEQ,
+		    FT_SEQ,
+		    CATE_SORT_NO,
+		    FILE_ID,
+		    MENU_SORT_NO,
+		    MENU_NAME,
+		    MENU_PRICE,
+		    MENU_INTRO,
+		    MENU_RQTIME,
+		    ORIGN,
+		    EXP_YN
+		FROM MENU_INFO WHERE FT_SEQ=#{ft_seq} AND CATE_SORT_NO=#{cate_sort_no} ORDER BY MENU_SORT_NO ASC
+	</select>
+	
+	<select id="getFt_Menu_Info" parameterType="integer" resultType="ADMIN_Menu_InfoDTO">
+		SELECT 
+			MENU_SEQ,
+		    FT_SEQ,
+		    CATE_SORT_NO,
+		    FILE_ID,
+		    MENU_SORT_NO,
+		    MENU_NAME,
+		    MENU_PRICE,
+		    MENU_INTRO,
+		    MENU_RQTIME,
+		    ORIGN,
+		    EXP_YN
+		FROM MENU_INFO WHERE MENU_SEQ=#{menu_seq} ORDER BY MENU_SORT_NO ASC
+	</select>
+	
+	<update id="ft_Menu_Edit" parameterType="ADMIN_Menu_InfoDTO" >
+		UPDATE MENU_INFO SET
+			CATE_SORT_NO=#{cate_sort_no},
+			MENU_SORT_NO=#{menu_sort_no},
+			FILE_ID=#{file_id},
+			MENU_NAME=#{menu_name},
+			MENU_INTRO=#{menu_intro},
+			MENU_PRICE=#{menu_price},
+			MENU_RQTIME=#{menu_rqtime},
+			ORIGN=#{orign},
+			EXP_YN=#{exp_yn}
+		WHERE MENU_SEQ=#{menu_seq}
+	</update>
+	
+	<delete id="ft_Menu_Delete" parameterType="integer">
+		DELETE FROM MENU_INFO WHERE MENU_SEQ=#{menu_seq} 
+	</delete>
+	
+	<update id="ft_Menu_Sort" parameterType="ADMIN_Menu_InfoDTO">
+		UPDATE MENU_INFO SET
+		MENU_SORT_NO=#{edit_menu_sort_no}
+		WHERE CATE_SORT_NO=#{cate_sort_no} AND MENU_SORT_NO=#{menu_sort_no}
+	</update>
+</mapper>

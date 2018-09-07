@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+
+<mapper namespace="poly.persistance.mapper.SELLER_OrderWaitMapper">
+	<!-- ftseq 구하기  -->
+	<select id="getftSeqDTO" parameterType="SELLER_FtSellerDTO" resultType="SELLER_FtSellerDTO">
+		SELECT 
+			FT_SEQ as ftSeq,
+			USER_SEQ as userSeq,
+			SEL_NAME as selName
+		FROM
+			FT_INFO
+		WHERE USER_SEQ = #{userSeq}
+	</select>
+	<!-- 3개 조인 해서 주문대기열 뽑아보기  -->
+	<select id="getwaitDTO" parameterType="SELLER_WaitDTO" resultType="SELLER_WaitDTO">
+		 SELECT
+		    W.WAIT_SEQ as waitSeq,
+		    W.ORD_SEQ as ordSeq,
+		    O.USER_SEQ as userSeq,
+		    W.FT_SEQ as ftSeq,
+		    U.USER_HP as userHp,
+		    COUNT(*) OVER() as waitRow
+		  FROM ORDER_WAIT W
+		      INNER JOIN ORDER_INFO O
+		        ON  W.ORD_SEQ = O.ORD_SEQ
+		      INNER JOIN USER_INFO U
+		        ON  O.USER_SEQ = U.USER_SEQ
+		  WHERE W.FT_SEQ = #{ftSeq} AND W.ORD_STATUS='0'
+		  ORDER BY W.WAIT_SEQ ASC 
+		 
+		  <!-- STATUS 0 은 아직 완료 전 1은 완료  -->
+	</select>
+	<!-- 조리 완료 -->
+	<update id="updateWaitSeq" parameterType="SELLER_WaitDTO">
+		UPDATE 	ORDER_WAIT
+		SET		ORD_STATUS='1'
+		WHERE	FT_SEQ = #{ftSeq} AND WAIT_SEQ = #{waitSeq}
+	</update>
+	
+</mapper>

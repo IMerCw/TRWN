@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Banner_PopMapper">
+	<select id="getBanner_List" resultType="ADMIN_Banner_PopDTO">
+		SELECT 
+			BANNER_SEQ,
+			FILE_ID,
+			BANNER_NAME,
+			BANNER_LOC,
+			BANNER_REGDATE,
+			EXP_YN
+		FROM BANNER_POP ORDER BY BANNER_SEQ DESC
+	</select>
+	
+	<select id="getBanner_List_Search" parameterType="ADMIN_Banner_PopDTO" resultType="ADMIN_Banner_PopDTO">
+		SELECT 
+			BANNER_SEQ,
+			FILE_ID,
+			BANNER_NAME,
+			BANNER_LOC,
+			BANNER_REGDATE,
+			EXP_YN
+		FROM BANNER_POP WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY BANNER_SEQ DESC
+	</select>
+	
+	<select id="getBanner_Info" parameterType="integer" resultType="ADMIN_Banner_PopDTO">
+		SELECT 
+			BANNER_SEQ,
+			FILE_ID,
+			BANNER_NAME,
+			BANNER_LOC,
+			BANNER_REGDATE,
+			EXP_YN
+		FROM BANNER_POP WHERE BANNER_SEQ = #{banner_seq}
+	</select>
+	
+	<insert id="banner_Create" parameterType="ADMIN_Banner_PopDTO">
+		INSERT INTO BANNER_POP
+		(
+			FILE_ID,
+			BANNER_NAME,
+			BANNER_LOC,
+			BANNER_REGDATE,
+			EXP_YN
+		)
+		VALUES
+		(
+			#{file_id},
+			#{banner_name},
+			#{banner_loc},
+			#{banner_regdate},
+			#{exp_yn}
+		)
+	</insert>
+	
+	<update id="banner_Edit" parameterType="ADMIN_Banner_PopDTO" >
+			UPDATE BANNER_POP SET
+				FILE_ID=#{file_id},
+				BANNER_NAME=#{banner_name},
+				BANNER_LOC=#{banner_loc},
+				EXP_YN=#{exp_yn}
+			WHERE BANNER_SEQ=#{banner_seq}
+	</update>
+	
+	<delete id="banner_Delete" parameterType="integer" >
+		DELETE FROM BANNER_POP WHERE BANNER_SEQ=#{banner_seq}
+	</delete>
+</mapper>

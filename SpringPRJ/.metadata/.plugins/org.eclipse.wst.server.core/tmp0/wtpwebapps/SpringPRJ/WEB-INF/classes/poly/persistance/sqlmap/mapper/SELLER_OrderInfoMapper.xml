@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+
+<mapper namespace="poly.persistance.mapper.SELLER_OrderMapper">
+	<!-- 주문서 작성 userSEQ -->
+	<select id="getOrderUserDTO" parameterType="CMMN_UserDTO" resultType="CMMN_UserDTO">
+		SELECT 
+				USER_SEQ as userSeq,
+				USER_AUTH as userAuth,
+				USER_EMAIL as userEmail,
+				USER_NICK as userNick,
+				USER_HP as userHp
+		FROM	USER_INFO
+		WHERE	USER_SEQ = #{userSeq}
+	
+	</select>
+
+
+</mapper>

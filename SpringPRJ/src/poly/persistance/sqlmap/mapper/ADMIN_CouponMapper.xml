@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_CouponMapper">
+	<select id="getCoupon_List" resultType="ADMIN_CouponDTO">
+		SELECT 
+			COUPON_CODE,
+			COUPON_NAME,
+			COUPON_OPTION,
+			COUPON_DATE
+		FROM COUPON ORDER BY COUPON_CODE DESC
+	</select>
+	
+	<select id="getCoupon_Info" parameterType="string" resultType="ADMIN_CouponDTO">
+		SELECT 
+			COUPON_CODE,
+			COUPON_NAME,
+			COUPON_OPTION,
+			COUPON_DATE
+		FROM COUPON WHERE COUPON_CODE=#{coupon_code}
+	</select>
+	
+	<insert id="Coupon_Create" parameterType="ADMIN_CouponDTO">
+		INSERT INTO COUPON
+		(
+			COUPON_NAME,
+			COUPON_OPTION,
+			COUPON_DATE
+		)
+		VALUES
+		(
+			#{coupon_name},
+			#{coupon_option},
+		    #{coupon_date}
+		)
+	</insert>
+	
+	<update id="Coupon_Edit" parameterType="ADMIN_CouponDTO" >
+		UPDATE COUPON SET
+			COUPON_NAME=#{coupon_name},
+			COUPON_OPTION=#{coupon_option},
+			COUPON_DATE=#{coupon_date}
+		WHERE COUPON_CODE=#{coupon_code}
+	</update>
+	
+	<delete id="Coupon_delete" parameterType="string">
+		DELETE FROM COUPON WHERE COUPON_CODE=#{coupon_code}
+	</delete>
+	
+	<select id="getCoupon_Search_List" parameterType="map" resultType="ADMIN_CouponDTO">
+		SELECT 
+			COUPON_CODE,
+			COUPON_NAME,
+			COUPON_OPTION,
+			COUPON_DATE
+		FROM COUPON WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY COUPON_CODE DESC
+	</select>
+	
+</mapper>

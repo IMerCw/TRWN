@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CONSUMER_Ft_Menu_CateMapper">
+	<select id="getFT_Cate_List" parameterType="integer" resultType="CONSUMER_FtMenuCateDTO">
+		SELECT 
+			FT_SEQ,
+			CATE_SORT_NO,
+			CATE_NAME,
+			EXP_YN
+		FROM FT_MENU_CATE WHERE FT_SEQ=#{ft_seq} ORDER BY CATE_SORT_NO ASC
+	</select>
+	
+	<select id="getFt_Cate_Info" parameterType="CONSUMER_FtMenuCateDTO" resultType="CONSUMER_FtMenuCateDTO">
+		SELECT 
+			FT_SEQ,
+			CATE_SORT_NO,
+			CATE_NAME,
+			EXP_YN
+		FROM FT_MENU_CATE WHERE FT_SEQ=#{ft_seq} AND CATE_SORT_NO=#{cate_sort_no}
+	</select>
+
+</mapper>

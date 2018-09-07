@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CONSUMER_ImageMapper">
+	<insert id="Image_Add" parameterType="CONSUMER_ImageDTO">
+		INSERT INTO IMAGE
+		(
+			FILE_ID,
+			USER_SEQ,
+			FILE_ORGNAME,
+			FILE_SEVNAME,
+			FILE_PATH
+		)
+		VALUES
+		(
+			FILE_SEQ.NEXTVAL,
+			#{userSeq},
+			#{fileOrgname},
+		    #{fileSevname},
+		    #{filePath}
+		)
+	</insert>
+	
+	<select id="getFile_Seq" resultType="string">
+		SELECT FILE_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<select id="getImageInfo" parameterType="string" resultType="CONSUMER_ImageDTO">
+		SELECT 
+			FILE_ID as fileId,
+			USER_SEQ as userSeq,
+			FILE_ORGNAME as fileOrgname,
+			FILE_SEVNAME as fileSevname,
+			FILE_PATH as filePath
+		FROM IMAGE WHERE FILE_ID=#{fileId}
+	</select>
+	
+	<update id="Image_Edit" parameterType="CONSUMER_ImageDTO" >
+		UPDATE IMAGE SET
+			FILE_ORGNAME=#{fileOrgname},
+			FILE_SEVNAME=#{fileSevname},
+			FILE_PATH=#{filePath}
+		WHERE FILE_ID=#{fileId}
+	</update>
+	
+	<delete id="Image_Delete" parameterType="string">
+		DELETE FROM IMAGE WHERE FILE_ID=#{fileId}
+	</delete>
+	
+	<select id="getMenuImage" parameterType="java.util.List" resultType="CONSUMER_ImageDTO">
+      SELECT 
+            FILE_ID,
+            USER_SEQ,
+            FILE_ORGNAME,
+            FILE_SEVNAME,
+            FILE_PATH
+      FROM IMAGE 
+      WHERE FILE_ID IN
+		<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+   </select>
+</mapper>

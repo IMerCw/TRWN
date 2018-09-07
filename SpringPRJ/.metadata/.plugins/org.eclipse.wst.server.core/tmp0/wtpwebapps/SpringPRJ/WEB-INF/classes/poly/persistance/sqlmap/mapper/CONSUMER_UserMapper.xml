@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CONSUMER_UserMapper">
+
+	<!-- 회원가입  -->
+	<insert id="insertUserDTO" parameterType="CONSUMER_UserDTO">
+		INSERT INTO USER_INFO
+		(
+			USER_SEQ,
+			USER_EMAIL,
+			USER_PWD,
+			USER_NICK,
+			USER_GENDER,
+			USER_HP,
+			USER_STATUS
+		)
+		VALUES
+		(
+			USER_SEQ.NEXTVAL,
+			#{userEmail},
+			#{userPwd},
+			#{userNick},
+			#{userGender},
+			#{userHp},
+			#{userStatus}
+			<!-- DTO 변수 이름으로 등록  -->
+		)
+	</insert>
+	<!-- 회원목록  select -->
+	
+	<!-- DTO 객체가 넘어오면 받는  -->
+	<select id="getUserList" resultType="CONSUMER_UserDTO">
+		SELECT USER_SEQ as userSeq,
+				USER_EMAIL as userEmail,
+				USER_PWD as userPwd,
+				USER_NICK as userNick,
+				USER_GENDER as userGender,
+				USER_HP as userHp,
+		FROM	USER_INFO
+	</select>
+	
+	<!-- 회원 상세보기  -->
+	<select id="getUserDetail" parameterType="CONSUMER_UserDTO" resultType="CONSUMER_UserDTO">
+			SELECT USER_SEQ as userSeq,
+					USER_EMAIL as userEmail,
+					USER_PWD as userPwd,
+					USER_NICK as userNick,
+					USER_GENDER as userGender,
+					USER_HP as userHp
+			FROM	USER_INFO
+			WHERE USER_SEQ = #{userSeq}
+	
+	</select>
+	
+	<!-- 회원 삭제  -->
+	<delete id="deleteUser" parameterType="CONSUMER_UserDTO">
+		DELETE FROM USER_INFO 
+		WHERE USER_SEQ = #{userSeq}
+	</delete>
+	
+	<!-- 회원 수정  update-->
+	<update id="updateUser" parameterType="CONSUMER_UserDTO">
+		UPDATE USER_INFO
+		SET USER_PWD = #{userPwd},
+			USER_NICK = #{userNick},
+			USER_HP = #{userHp}
+		WHERE USER_SEQ = #{userSeq}
+	</update>
+	
+	<!-- 로그인 -->
+	<select id="getUserLogin" parameterType="CONSUMER_UserDTO" resultType="CONSUMER_UserDTO">
+		SELECT  USER_SEQ as userSeq,
+				USER_EMAIL as userEmail,
+				USER_PWD as userPwd,
+				USER_NICK as userNick,
+				USER_GENDER as userGender,
+				USER_HP as userHp
+		FROM	USER_INFO
+		WHERE	USER_EMAIL=#{userEmail} AND USER_PWD=#{userPwd} AND USER_STATUS LIKE 'AuthY'
+		<!-- 정보가 틀리면 null 반환  -->
+	</select>
+	
+	<!-- 이메일 체크 -->
+	<select id="emailCheck" parameterType="CONSUMER_UserDTO" resultType="int">
+		SELECT COUNT(*)
+		FROM	USER_INFO
+		WHERE USER_EMAIL =#{userEmail}
+	</select>
+	
+	<!-- 이메일 찾기  -->
+	<select id="getUserFindEmail" parameterType="CONSUMER_UserDTO" resultType="CONSUMER_UserDTO">
+		SELECT USER_EMAIL as userEmail
+		FROM	USER_INFO
+		WHERE USER_NICK = #{userNick} AND USER_HP =#{userHp}
+	</select>
+	
+	<!-- 비밀번호 찾기  -->
+	<select id="getUserFindPwd" parameterType="CONSUMER_UserDTO" resultType="CONSUMER_UserDTO">
+		SELECT 	USER_SEQ as userSeq,
+				USER_EMAIL as userEmail,
+				USER_PWD as userPwd,
+				USER_NICK as userNick
+		FROM	USER_INFO
+		WHERE USER_EMAIL = #{userEmail} AND USER_NICK = #{userNick} AND USER_HP =#{userHp}
+	</select>	
+	
+	<!--비밀번호 변경  -->
+	<update id="updateUserPwd" parameterType="CONSUMER_UserDTO">
+		UPDATE USER_INFO
+		SET USER_PWD = #{userPwd}
+		WHERE USER_SEQ = #{userSeq}
+	</update>	
+	
+	<!-- 임시 비밀번호 -->
+	<update id="updateTmpPass" parameterType="CONSUMER_UserDTO">
+		UPDATE
+				USER_INFO
+		SET
+				USER_PWD = #{userPwd}
+		WHERE
+				USER_NICK = #{userNick} AND
+				USER_EMAIL = #{userEmail} AND
+				USER_HP = #{userHp}
+	</update>
+	<!-- 이메일 인증 회원상태 변경  -->
+	<update id="updateUserStatus" parameterType="CONSUMER_UserDTO">
+		UPDATE USER_INFO
+		SET USER_STATUS = #{userStatus}
+		WHERE USER_EMAIL = #{userEmail} AND USER_STATUS ='AuthN'
+	</update>
+	
+	<!-- GPS정보 DB저장 -->
+	<insert id="setGps" parameterType="CONSUMER_GpsTableDTO">
+		INSERT INTO GPS_TABLE
+			(
+				USER_SEQ,
+				GPS_DATA,
+				GPS_RENEW_DATE
+			)
+			VALUES
+			(
+				#{user_seq},
+				#{gps_data},
+				#{gps_renew_date}
+			)
+	</insert>
+	
+	
+	<!-- 관심매장 추가 -->
+	<insert id="ftAddFavortie" parameterType="CONSUMER_FtLikeDTO">
+		INSERT INTO FT_LIKE
+		(
+			USER_SEQ,
+			FT_SEQ,
+			LIKE_REGDATE
+		)
+		VALUES
+		(
+			#{user_seq},
+			#{ft_seq},
+			#{like_regdate}
+			
+		)
+	</insert>
+	<!-- 관심매장 추가 여부 확인 -->
+	<select id="ftCheckFavrotie" parameterType="CONSUMER_FtLikeDTO" resultType="CONSUMER_FtLikeDTO">
+		SELECT 
+			USER_SEQ as user_seq,
+			FT_SEQ as ft_seq
+		FROM			
+			FT_LIKE
+		WHERE 
+			USER_SEQ = #{user_seq} AND FT_SEQ = #{ft_seq} 
+	</select>
+	
+	<!-- 회원 삭제  -->
+	<delete id="ftRemoveFavorite" parameterType="CONSUMER_FtLikeDTO">
+		DELETE FROM FT_LIKE
+		WHERE 
+			USER_SEQ = #{user_seq} AND FT_SEQ = #{ft_seq}
+	</delete>
+	
+</mapper>

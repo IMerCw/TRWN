@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Board_RepleMapper">
+	<insert id="board_R_Create" parameterType="ADMIN_Board_RepleDTO">
+		INSERT INTO BOARD_REPLE
+		(
+			BOARD_P_SEQ,
+			USER_SEQ,
+			BOARD_REPLE_CONTENT,
+			REG_DATE,
+			BOARD_REPLE_LEVEL,
+			EXP_YN
+		)
+		VALUES
+		(
+			<!-- 시퀀스 자리 -->
+			#{board_p_seq},
+			#{user_seq},
+			#{board_reple_content},
+			#{reg_date},
+			#{board_reple_level},
+			#{exp_yn}
+		)
+	</insert>
+	
+	<select id="getBoard_R_List" parameterType="integer" resultType="ADMIN_Board_RepleDTO">
+		SELECT 
+			REPLE_SEQ,
+			BOARD_P_SEQ,
+			USER_SEQ,
+			BOARD_REPLE_CONTENT,
+			REG_DATE,
+			BOARD_REPLE_LEVEL,
+			EXP_YN
+		FROM BOARD_REPLE WHERE BOARD_P_SEQ=#{board_p_seq} ORDER BY BOARD_REPLE_LEVEL DESC
+	</select>
+	
+	
+	<update id="board_R_Edit" parameterType="ADMIN_Board_RepleDTO" >
+			UPDATE BOARD_REPLE SET
+				BOARD_REPLE_CONTENT=#{board_reple_content}
+			WHERE REPLE_SEQ=#{reple_seq}
+	</update>
+	
+	
+	<delete id="board_R_Delete" parameterType="integer" >
+		DELETE FROM BOARD_REPLE WHERE REPLE_SEQ=#{reple_seq}
+	</delete>
+	
+	<update id="board_R_CreateUpdate" parameterType="integer">
+			UPDATE BOARD_REPLE SET
+				BOARD_REPLE_LEVEL=#{reple_seq}
+				WHERE REPLE_SEQ=#{reple_seq}
+	</update>
+	
+	<select id="getBoard_LevR_List" parameterType="string" resultType="ADMIN_Board_RepleDTO">
+		SELECT * FROM BOARD_REPLE 
+		WHERE SUBSTR(BOARD_REPLE_LEVEL,1,(INSTR(BOARD_REPLE_LEVEL, '-'))) = #{search_level}
+	</select>
+	
+	<update id="board_R_LCreateUpdate" parameterType="ADMIN_Board_RepleDTO">
+			UPDATE BOARD_REPLE SET
+				BOARD_REPLE_LEVEL=#{board_reple_level}
+				WHERE REPLE_SEQ=#{reple_seq}
+	</update>
+	
+	<select id="board_R_Count" parameterType="integer" resultType="integer">
+		SELECT COUNT(*) FROM BOARD_REPLE
+		WHERE BOARD_P_SEQ = #{board_p_seq}
+	</select>
+</mapper>

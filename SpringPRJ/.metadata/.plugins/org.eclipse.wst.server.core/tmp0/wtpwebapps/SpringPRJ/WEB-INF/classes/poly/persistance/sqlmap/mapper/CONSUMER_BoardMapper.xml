@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CONSUMER_BoardMapper">
+	<insert id="insertBoardDTO" parameterType="CONSUMER_BoardDTO">	<!-- 대문자로 써주어야 함!! -->
+		INSERT INTO BOARD_POST
+			(
+				BOARD_SEQ,
+				BOARD_P_SEQ,
+				TITLE,
+				BOARD_CONTENT,
+				REG_DATE,
+				USER_EMAIL
+			)
+			VALUES
+			(
+				#{boardSeq},
+				BOARD_P_SEQ.NEXTVAL,
+				#{title},
+				#{boardContent},
+				SYSDATE,
+				#{userEmail}
+			)
+	</insert>
+	
+	<!-- 공공게시판 리스트 보기 -->
+	<select id="getBoardList" resultType="CONSUMER_BoardDTO">	<!-- SQL문은 대문자로 써주어야 함!! -->
+		SELECT BOARD_P_SEQ AS BOARDPSEQ,
+			TITLE,
+			BOARD_CONTENT AS BOARDCONTENT,
+			REG_DATE AS REGDATE,
+			USER_EMAIL AS USEREMAIL
+		FROM BOARD_POST	
+		WHERE BOARD_SEQ='2'
+		ORDER BY BOARDPSEQ DESC
+	</select>
+	
+	<!-- 공지사항 리스트 보기 -->
+	<select id="getNoticeList" resultType="CONSUMER_BoardDTO">
+		SELECT 
+			BOARD_P_SEQ AS BOARDPSEQ,
+			TITLE,
+			CONTENT AS BOARDCONTENT,
+			REG_DATE AS REGDATE
+		FROM BOARD_POST	
+		WHERE BOARD_SEQ='1'
+		ORDER BY BOARDPSEQ DESC
+	</select>
+	
+	<!-- 공지사항 글 자세히 보기 -->
+	<select id="getBoardDetail" parameterType="string" resultType="CONSUMER_BoardDTO">	<!-- SQL문은 대문자로 써주어야 함!! -->
+		SELECT BOARD_P_SEQ AS BOARDPSEQ,
+			TITLE,
+			BOARD_CONTENT AS BOARDCONTENT,
+			REG_DATE AS REGDATE
+		FROM BOARD_POST
+		WHERE BOARD_P_SEQ=#{boardPSeq}
+		
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="string">
+		DELETE 
+		FROM BOARD_POST
+		WHERE BOARD_P_SEQ=#{boardPSeq} 
+	
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="CONSUMER_BoardDTO">
+		UPDATE BOARD_POST
+			SET TITLE=#{title},
+				BOARD_CONTENT=#{boardContent},
+				REG_DATE=SYSDATE
+			WHERE BOARD_P_SEQ=#{boardPSeq}
+			
+	</update>
+	
+	<!-- 코멘트 추가 -->
+	<insert id="insertComment" parameterType="CONSUMER_BoardRepleDTO">
+		INSERT INTO BOARD_REPLE
+			(
+			REPLE_SEQ,
+			BOARD_P_SEQ,
+			USER_SEQ,
+			BOARD_CONTENT,
+			REG_DATE
+			)
+			VALUES
+			(
+			REPLE_SEQ.NEXTVAL,
+			#{boardPSeq},
+			#{userSeq},
+			#{content},
+			SYSDATE
+			) 
+			
+	</insert>
+	
+	<!-- 코멘트 불러오기 -->
+	<select id="getComment" parameterType="CONSUMER_BoardRepleDTO" resultType="CONSUMER_BoardRepleDTO">
+		SELECT BOARD_P_SEQ as boardPSeq,
+			USER_SEQ as userSeq,
+			BOARD_CONTENT as content,
+			REG_DATE as regDate
+		FROM BOARD_REPLE 
+		WHERE BOARD_P_SEQ=#{boardPSeq}
+		ORDER BY REPLE_SEQ ASC
+		
+	</select>
+	
+	<!-- 코멘트 리스트 불러오기 -->
+	<select id="commentList" parameterType="string" resultType="CONSUMER_BoardRepleDTO">
+		SELECT BOARD_P_SEQ as boardPSeq,
+			USER_SEQ as userSeq,
+			BOARD_CONTENT as content,
+			REG_DATE as regDate
+		FROM BOARD_REPLE 
+		WHERE BOARD_P_SEQ=#{boardPSeq}
+		ORDER BY REPLE_SEQ ASC
+	
+	</select>
+	
+</mapper>

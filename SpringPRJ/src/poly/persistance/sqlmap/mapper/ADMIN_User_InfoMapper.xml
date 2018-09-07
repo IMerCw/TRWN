@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_User_InfoMapper">
+	<select id="getUser" parameterType="integer" resultType="ADMIN_User_InfoDTO">
+		SELECT 
+			USER_SEQ, 
+			USER_AUTH, 
+			USER_EMAIL, 
+			USER_NICK, 
+			USER_PWD, 
+			USER_HP, 
+			USER_GENDER, 
+			USER_REGDATE, 
+			USER_CHAN, 
+			USER_STATUS,
+			STATUS
+			FROM USER_INFO WHERE USER_SEQ = #{user_seq}
+	</select>
+	
+	<select id="getUser_InfoList" resultType="ADMIN_User_InfoDTO">
+		SELECT 
+			USER_SEQ, 
+			USER_AUTH, 
+			USER_EMAIL, 
+			USER_NICK, 
+			USER_PWD, 
+			USER_HP, 
+			USER_GENDER, 
+			USER_REGDATE, 
+			USER_CHAN, 
+			USER_STATUS,
+			STATUS
+		FROM USER_INFO ORDER BY USER_SEQ DESC
+	</select>
+	
+	<select id="getUser_Search" parameterType="ADMIN_User_InfoDTO" resultType="ADMIN_User_InfoDTO">
+		SELECT 
+			USER_SEQ, 
+			USER_AUTH, 
+			USER_EMAIL, 
+			USER_NICK, 
+			USER_PWD, 
+			USER_HP, 
+			USER_GENDER, 
+			USER_REGDATE, 
+			USER_CHAN, 
+			USER_STATUS,
+			STATUS
+			FROM USER_INFO WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY USER_SEQ DESC
+	</select>
+	
+	<update id="user_Active" parameterType="ADMIN_User_InfoDTO">
+			UPDATE USER_INFO SET
+				USER_CHAN=#{user_chan},
+				STATUS=#{status}
+				WHERE USER_SEQ=#{user_seq}
+	</update>
+	
+	<update id="user_Drop" parameterType="ADMIN_User_InfoDTO">
+			UPDATE USER_INFO SET
+				USER_CHAN=#{user_chan},
+				STATUS=#{status}
+				WHERE USER_SEQ=#{user_seq}
+	</update>
+	
+	<update id="user_Auth" parameterType="ADMIN_User_InfoDTO">
+			UPDATE USER_INFO SET
+				USER_AUTH=${user_auth}
+				WHERE USER_SEQ=#{user_seq}
+	</update>
+</mapper>

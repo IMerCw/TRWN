@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CONSUMER_FtMapper">
+	<!--근처 푸드트럭 목록 보기 -->
+	<select id="getFtList" parameterType="string" resultType="CONSUMER_Ft_InfoDTO">
+		SELECT 
+			FT_SEQ AS ft_seq, <!-- 푸드트럭 번호 -->
+			USER_SEQ AS user_seq, <!-- 푸드트럭 운영자 번호 -->
+			FT_NAME AS ft_name, <!-- 푸드트럭 이름 -->
+			FT_INTRO AS ft_intro, <!-- 푸드트럭 소개 -->
+			FT_LOC AS ft_loc, <!-- 푸드트럭 위치(위도,경도) -->
+			FT_OPTIME AS ft_optime, <!-- 푸드트럭 영업시간 -->
+			FT_FUNC AS ft_func, <!-- 푸드트럭 서비스(배달/케이터링/주문예약)  -->
+			FILE_ID AS file_id <!-- 푸드트럭 이미지 파일 고유 번호 -->
+		FROM FT_INFO
+		WHERE FT_REGCODE = #{regCode} and FT_STATUS = 0 <!-- 푸드트럭 영업상태가 0 이고 지역코드가 일치하는 것만 가져옴 -->
+		ORDER BY FILE_ID
+	</select>	
+	
+	<!-- 푸드트럭 상세 보기 -->
+	<select id="getFtDetail" parameterType="string" resultType="CONSUMER_Ft_InfoDTO">
+		SELECT	
+			FT_SEQ AS ft_seq, <!-- 푸드트럭 번호 기본키-->
+			USER_SEQ AS user_seq, <!-- 푸드트럭 번호 기본키-->
+			FILE_ID AS file_id, <!-- 푸드트럭 이미지 파일 고유 번호-->
+			SEL_NAME AS sel_name, <!-- 판매자 닉네임 -->
+			SEL_NO AS sel_no, <!-- 판매자 번호 -->
+			FT_NAME AS ft_name, <!-- 푸드트럭 이름 -->
+			FT_INTRO AS ft_intro, <!-- 푸드트럭 소개 -->
+			FT_LOC AS ft_loc,	<!-- 푸드트럭 위치 -->
+			FT_JOIN AS ft_join, <!-- 푸드트럭 가입일 -->
+			FT_OPTIME AS ft_optime, <!-- 푸드트럭 영업 시간 -->
+			FT_FUNC AS ft_func, <!-- 푸드트럭 서비스(배달/케이터링/주문예약) -->
+			FT_STATUS AS ft_status <!-- 푸드트럭 서비스(배달/케이터링/주문예약) -->
+		FROM FT_INFO
+		WHERE FT_SEQ = #{ft_seq}
+	</select>
+	
+	<!-- 임의의 트럭의 리뷰 가져오기 -->
+ 	<select id="getReviewDetail" parameterType="string" resultType="CONSUMER_Ft_ReviewDTO">
+		SELECT
+			FR.REVIEW_SEQ as review_seq,
+			FR.FT_SEQ as ft_seq,
+			FR.USER_SEQ as user_seq,
+			FR.REV_TITLE as rev_title,
+			FR.REV_TEXT as rev_text,
+			FR.REV_POINT as rev_point,
+			FR.REV_REGDATE as rev_regdate,
+			FR.REV_LEVEL as rev_level,
+			UI.USER_NICK as user_nick,
+			FR.FILE_ID as file_id
+			
+		FROM FT_REVIEW FR, USER_INFO UI
+		
+		WHERE 
+			FR.FT_SEQ = #{ft_seq} AND 
+			FR.EXP_YN = 1 AND 
+			FR.USER_SEQ = UI.USER_SEQ
+	</select> 
+	
+	<!-- 푸드트럭 상세 보기 내의 메뉴들 가져오기 -->
+	<select id="getFtMenuList" parameterType="string" resultType="CONSUMER_Menu_InfoDTO">
+		SELECT
+			MENU_SEQ as menu_seq,
+			FT_SEQ as ft_seq,
+			CATE_SORT_NO as cate_sort,
+			FILE_ID as file_id,
+			MENU_SORT_NO as menu_sort_no,
+			MENU_NAME as menu_name,
+			MENU_PRICE as menu_price,
+			MENU_INTRO as menu_intro,
+			MENU_RQTIME as menu_rqtime,
+			ORIGN as menu_orign	 	
+		FROM MENU_INFO
+		WHERE FT_SEQ = #{ft_seq} AND EXP_YN = 1
+	    ORDER BY FILE_ID
+	</select>
+	
+	<!-- 검색을 통한 메뉴들 가져오기 -->
+ 	<select id="getMenuList" parameterType="string" resultType="CONSUMER_Menu_InfoDTO">
+		SELECT
+			MN.MENU_SEQ as menu_seq,
+			MN.FT_SEQ as ft_seq,
+			MN.CATE_SORT_NO as cate_sort_no,
+			MN.FILE_ID as file_id,
+			MN.MENU_SORT_NO as menu_sort_no,
+			MN.MENU_NAME as menu_name,
+			MN.MENU_PRICE as menu_price,
+			MN.MENU_INTRO as menu_intro,
+			MN.MENU_RQTIME as menu_rqtime,
+			MN.ORIGN as orign,
+			FT.FT_NAME as ft_name
+		FROM 
+			MENU_INFO MN, FT_INFO FT
+		WHERE 
+			MN.FT_SEQ = FT.FT_SEQ AND
+			MN.EXP_YN = 1 AND
+			FT.FT_STATUS = 0 AND
+			MN.MENU_NAME like '%' ||  #{keyWord} || '%'
+	</select> 
+	
+	<!-- 특정 푸드트럭의 메뉴 이미지들 불러오기  -->
+	<select id="getMenuImage" parameterType="java.util.List" resultType="CONSUMER_ImageDTO">
+		SELECT 
+				FILE_ID as fileId,
+				USER_SEQ as userSeq,
+				FILE_ORGNAME as fileOrgname,
+				FILE_SEVNAME as fileSevname,
+				FILE_PATH as filePath
+		FROM	IMAGE 
+		WHERE	FILE_ID IN
+	    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+	        	#{item.fileId}
+	    	</foreach>
+	    ORDER BY FILE_ID
+	</select>
+	
+	
+	<!-- 트럭 이미지들 불러오기  -->
+	<select id="getTruckImage" parameterType="java.util.List" resultType="CONSUMER_ImageDTO">
+		SELECT 
+				FILE_ID as fileId,
+				USER_SEQ as userSeq,
+				FILE_ORGNAME as fileOrgname,
+				FILE_SEVNAME as fileSevname,
+				FILE_PATH as filePath
+		FROM	IMAGE 
+		WHERE	USER_SEQ IN
+	    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+	        	#{item.userSeq}
+	    	</foreach>
+	    ORDER BY FILE_ID
+	</select>
+	
+	<!-- 1개 임의의 트럭의  리뷰 이미지들 불러오기  -->
+	<select id="getReviewImage" parameterType="java.util.List" resultType="CONSUMER_ImageDTO">
+		SELECT 
+				IMG.FILE_ID as fileId,
+				IMG.USER_SEQ as userSeq,
+				IMG.FILE_ORGNAME as fileOrgname,
+				IMG.FILE_SEVNAME as fileSevname,
+				IMG.FILE_PATH as filePath
+				
+		FROM	IMAGE IMG, FT_REVIEW FR
+		
+		WHERE	
+			IMG.FILE_ID = FR.FILE_ID AND
+			<!-- 이미지테이블의 유저 번호 조건 -->	
+			IMG.USER_SEQ IN 
+	    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+	        	#{item.userSeq}
+	    	</foreach>
+	    	AND
+	    	<!-- 푸드트럭 번호 조건 -->
+			FR.FT_SEQ IN
+	    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+	        	#{item.ftSeq}
+	    	</foreach>
+	</select>
+	
+	<!-- 메인 배너 이미지들 불러오기  -->
+	<select id="getBannerImages" resultType="CONSUMER_ImageDTO">
+		SELECT 
+				IMG.FILE_ID as fileId,
+				IMG.USER_SEQ as userSeq,
+				IMG.FILE_ORGNAME as fileOrgname,
+				IMG.FILE_SEVNAME as fileSevname,
+				IMG.FILE_PATH as filePath
+				
+		FROM	IMAGE IMG, BANNER_POP BP
+		
+		WHERE	
+			IMG.FILE_ID = BP.FILE_ID AND 
+			BP.EXP_YN = 1
+			
+	</select>
+	
+	<!-- 푸드트럭  1개 이미지 불러오기-->	
+	<select id="getFtImage" parameterType="string" resultType="CONSUMER_ImageDTO">
+		SELECT
+			FILE_ID as fileId,
+			USER_SEQ as userSeq,
+			FILE_ORGNAME as fileOrgname,
+			FILE_SEVNAME as fileSevname,
+			FILE_PATH as filePath
+		FROM IMAGE
+		WHERE FILE_ID = #{file_id}
+	</select>
+	
+
+</mapper>

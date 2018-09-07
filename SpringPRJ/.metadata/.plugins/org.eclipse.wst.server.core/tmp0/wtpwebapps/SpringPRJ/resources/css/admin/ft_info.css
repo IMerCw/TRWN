@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/*왼쪽*/
+#leftContents {
+	
+	float:left;
+	width:30%;
+	border-right: 1px solid #cccccc;
+	text-align:center;
+}	
+
+/*트럭이미지*/
+.truckImg {
+	height:360px; border:1px solid #cccccc; margin:8px; 
+}
+.truckDelivery {
+	background-color: white;
+} 
+.truckDelivery div{
+	display:inline-block;
+	
+} 
+.truckConfigButton {
+	padding:0px;
+
+}
+.truckConfigButton > a{
+	line-height: 31px;
+	display: block;
+	padding:10px;
+}
+
+/*************** 오른쪽 시작 ***************/
+#rightContents{
+	float:right;
+	width:69%;
+}	
+/* 오른쪽 1 행 */
+#containerRightFirst {
+	overflow:hidden;
+}	
+.rightMenu{
+	float:left;
+}
+.configButton {
+	float:right;	
+}
+/* 오른쪽 1 행 끝*/
+
+/* 오른쪽 2 행 */
+#containerRightSecond{
+	text-align: center;
+}
+
+.selectButton{
+	display:inline-block;
+	width: 26%;
+
+}
+
+/* 오른쪽 3 행 */
+.containerRightThird{
+	text-align:left;
+}
+.productBox{
+	width:20%; height:180px; 
+	margin:12px; float:left;
+
+}
+.productImg{
+	height: 80%; 
+	background-color: #cecece;
+	border-radius: 10px;
+}
+.productName{
+	height: 20%; margin-top:5px;
+	border-radius: 10px;
+	border: 1px solid #cecece;
+}

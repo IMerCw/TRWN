@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Board_PostMapper">
+	<insert id="board_P_Create" parameterType="ADMIN_Board_PostDTO">
+		INSERT INTO BOARD_POST
+		(
+			BOARD_P_SEQ,
+			BOARD_SEQ,
+			USER_SEQ,
+			FILE_ID,
+			TITLE,
+			CONTENT,
+			BOARD_COUNT,
+			REG_DATE,
+			BOARD_LEVEL,
+			EXP_YN
+		)
+		VALUES
+		(
+			<!-- 시퀀스 자리 -->
+			BOARD_P_SEQ.NEXTVAL,
+			#{board_seq},
+			#{user_seq},
+			#{file_id},
+			#{title},
+			#{content},
+			#{board_count},
+			#{reg_date},
+			#{board_level},
+			#{exp_yn}
+		)
+	</insert>
+	
+	<select id="getBoard_P_List" resultType="ADMIN_Board_PostDTO">
+		SELECT 
+			BOARD_P_SEQ,
+			BOARD_SEQ,
+			USER_SEQ,
+			FILE_ID,
+			TITLE,
+			CONTENT,
+			BOARD_COUNT,
+			REG_DATE,
+			BOARD_LEVEL,
+			EXP_YN 
+		FROM BOARD_POST ORDER BY BOARD_LEVEL DESC
+	</select>
+	
+	<select id="getBoard_P_List_S" parameterType="integer" resultType="ADMIN_Board_PostDTO">
+		SELECT 
+			BOARD_P_SEQ,
+			BOARD_SEQ,
+			USER_SEQ,
+			FILE_ID,
+			TITLE,
+			CONTENT,
+			BOARD_COUNT,
+			REG_DATE,
+			BOARD_LEVEL,
+			EXP_YN 
+		FROM BOARD_POST WHERE BOARD_SEQ=#{board_seq} ORDER BY BOARD_LEVEL DESC
+	</select>
+	
+	<select id="getBoard_P_ALL_Search" parameterType="ADMIN_Board_PostDTO" resultType="ADMIN_Board_PostDTO">
+		SELECT 
+			BOARD_P_SEQ,
+			BOARD_SEQ,
+			USER_SEQ,
+			FILE_ID,
+			TITLE,
+			CONTENT,
+			BOARD_COUNT,
+			REG_DATE,
+			BOARD_LEVEL,
+			EXP_YN 
+		FROM BOARD_POST WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY BOARD_LEVEL DESC
+	</select>
+	
+	<select id="getBoard_P_Search" parameterType="ADMIN_Board_PostDTO" resultType="ADMIN_Board_PostDTO">
+		SELECT 
+			BOARD_P_SEQ,
+			BOARD_SEQ,
+			USER_SEQ,
+			FILE_ID,
+			TITLE,
+			CONTENT,
+			BOARD_COUNT,
+			REG_DATE,
+			BOARD_LEVEL,
+			EXP_YN 
+		FROM BOARD_POST WHERE BOARD_SEQ=${board_seq} AND ${option} LIKE '%'||#{value}||'%' ORDER BY BOARD_LEVEL DESC
+	</select>
+	
+	<select id="getBoard_P_Detail" parameterType="integer" resultType="ADMIN_Board_PostDTO">
+		SELECT 
+			BOARD_P_SEQ,
+			BOARD_SEQ,
+			USER_SEQ,
+			FILE_ID,
+			TITLE,
+			CONTENT,
+			BOARD_COUNT,
+			REG_DATE,
+			BOARD_LEVEL,
+			EXP_YN 
+		FROM BOARD_POST WHERE BOARD_P_SEQ=#{board_p_seq}
+	</select>
+	
+	<update id="board_P_Edit" parameterType="ADMIN_Board_PostDTO" >
+			UPDATE BOARD_POST SET
+				FILE_ID=#{file_id},
+				TITLE=#{title},
+				CONTENT=#{content},
+				EXP_YN=#{exp_yn}
+			WHERE BOARD_P_SEQ=#{board_p_seq}
+	</update>
+	
+	<update id="board_P_Exp_yn" parameterType="integer">
+			UPDATE BOARD_POST SET
+				EXP_YN=EXP_YN*-1
+				WHERE BOARD_P_SEQ=#{board_p_seq}
+	</update>
+	
+	<delete id="board_P_Delete" parameterType="integer" >
+		DELETE FROM BOARD_POST WHERE BOARD_P_SEQ=#{board_p_seq}
+	</delete>
+	
+	<update id="board_P_CreateUpdate" parameterType="integer">
+			UPDATE BOARD_POST SET
+				BOARD_LEVEL=#{board_p_seq}
+				WHERE BOARD_P_SEQ=#{board_p_seq}
+	</update>
+	
+	<select id="getBoard_LevP_List" parameterType="string" resultType="ADMIN_Board_PostDTO">
+		SELECT * FROM BOARD_POST 
+		WHERE SUBSTR(BOARD_LEVEL,1,(INSTR(BOARD_LEVEL, '-'))) = #{search_level}
+	</select>
+	
+	<update id="board_P_LCreateUpdate" parameterType="ADMIN_Board_PostDTO">
+			UPDATE BOARD_POST SET
+				BOARD_LEVEL=#{board_level}
+				WHERE BOARD_P_SEQ=#{board_p_seq}
+	</update>
+	
+	<update id="board_P_CountUP" parameterType="integer">
+			UPDATE BOARD_POST SET
+				BOARD_COUNT=BOARD_COUNT+1
+				WHERE BOARD_P_SEQ=#{board_p_seq}
+	</update>
+	<select id="board_P_Count" parameterType="integer" resultType="integer">
+		SELECT COUNT(*) FROM BOARD_POST
+		WHERE BOARD_SEQ = #{board_seq}
+	</select>
+</mapper>

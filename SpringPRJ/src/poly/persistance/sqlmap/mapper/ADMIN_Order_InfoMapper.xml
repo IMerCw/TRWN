@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Order_InfoMapper">
+	<select id="getOrder_List" resultType="ADMIN_Order_InfoDTO">
+		SELECT 
+			ORD_SEQ,
+			USER_SEQ,
+			ITEM_SEQ,
+			ORD_SUMPRICE,
+			ORD_WAY,
+			ORD_DATE,
+			ORD_STATUS,
+			BUY_WAY,
+			USR_RCV_TIME,
+			RCV_TIME,
+			TID
+		FROM ORDER_INFO ORDER BY ORD_DATE DESC
+	</select>
+	
+	<select id="getOrder_List_Search" parameterType="ADMIN_Order_InfoDTO" resultType="ADMIN_Order_InfoDTO">
+		SELECT 
+			ORD_SEQ,
+			USER_SEQ,
+			ITEM_SEQ,
+			ORD_SUMPRICE,
+			ORD_WAY,
+			ORD_DATE,
+			ORD_STATUS,
+			BUY_WAY,
+			USR_RCV_TIME,
+			RCV_TIME,
+			TID
+		FROM ORDER_INFO WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY ORD_SEQ DESC
+	</select>
+
+	
+	<delete id="order_Delete" parameterType="integer" >
+		DELETE FROM ORDER_INFO WHERE ORD_SEQ=#{ord_seq}
+	</delete>
+</mapper>

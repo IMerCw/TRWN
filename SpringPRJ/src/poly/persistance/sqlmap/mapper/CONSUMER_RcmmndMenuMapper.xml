@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CONSUMER_RcmmndMenuMapper">
+
+	<!-- 추천점수가 높은 메뉴 리스트 가져오기 -->
+	<select id="getRcmmndMenuList" parameterType="string" resultType="CONSUMER_RcmmndMenuDTO">
+	SELECT 
+		fi.FT_SEQ AS ft_seq,
+	    fi.FT_NAME AS ft_name,
+	    mi.MENU_NAME as menu_name,
+	    mi.MENU_INTRO as menu_intro,
+	    fr.REV_SCORE as rev_score,
+	    mi.FILE_SEVNAME as file_sevname,
+		gt.GPS_SIDO
+	FROM 
+	    FT_INFO fi
+	      
+		INNER JOIN
+	    	GPS_TABLE gt 
+	    ON 
+	    	fi.GPS_SEQ = gt.GPS_SEQ
+	        
+		INNER JOIN 
+	    	(SELECT 
+	    		AVG(REV_POINT)*COUNT(REVIEW_SEQ) as rev_score,
+	            FT_SEQ
+	    	FROM 
+	            FT_REVIEW
+	        GROUP BY 
+	            FT_SEQ
+	        HAVING 
+	            AVG(REV_POINT) > 3) fr
+	        ON 
+	          fi.FT_SEQ = fr.FT_SEQ
+					
+	     INNER JOIN 
+	     	(SELECT 
+	        	MENU_NAME,
+	            MENU_INTRO,
+	            FILE_SEVNAME,
+	            FT_SEQ
+	     	FROM
+	            MENU_INFO
+	        INNER JOIN IMAGE ON MENU_INFO.FILE_ID = IMAGE.FILE_ID
+	        WHERE
+	            CATE_SORT_NO = 1 AND
+	            MENU_SORT_NO = 1 AND
+	            EXP_YN = 1) mi
+	        ON 
+	            fi.FT_SEQ = mi.FT_SEQ
+	          
+	          
+	WHERE 
+		gt.GPS_SIDO LIKE '%' || #{sido} || '%'
+	ORDER BY
+		fr.REV_SCORE DESC
+	</select>
+	
+
+</mapper>

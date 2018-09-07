@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+
+<mapper namespace="poly.persistance.mapper.SELLER_OutMapper">
+	<!-- 트럭정보 얻기 -->
+	<select id="getOutTruckInfo" parameterType="SELLER_FtSellerDTO" resultType="SELLER_FtSellerDTO">
+		SELECT 
+				FT_SEQ as ftSeq,
+				FILE_ID as fileId,
+				SEL_NAME as selName,
+				SEL_NO as selNo,
+				FT_NAME as ftName,
+				FT_INTRO as ftIntro,
+				FT_LOC as ftLoc,
+				FT_JOIN as ftJoin,
+				FT_OPTIME as ftOptime,
+				FT_FUNC as ftFunc,
+				FT_CHAN as ftChan,
+				FT_STATUS as ftStatus
+		FROM
+				FT_INFO
+		WHERE	USER_SEQ = #{userSeq}
+	</select>
+	<!-- 장바구니 메뉴 이름  -->
+	<select id="getItemDTO" parameterType="SELLER_MenuJsDTO" resultType="SELLER_MenuJsDTO">
+		SELECT
+				MENU_SEQ as menuSeq,
+				FT_SEQ as ftSeq,
+				CATE_SORT_NO as cateSortNo,
+				FILE_ID as fileId,
+				MENU_SORT_NO as menuSortNo ,
+				MENU_NAME as menuName,
+				MENU_PRICE as menuPrice ,
+				MENU_INTRO as menuIntro,
+				MENU_RQTIME as menuRqtime,
+				ORIGN as orign,
+				EXP_YN as expYn
+		FROM	MENU_INFO
+		WHERE	FT_SEQ = #{ftSeq} AND MENU_SEQ = #{menuSeq}
+				
+	
+	</select>
+
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+    
+		<!-- 공통 CMMN -->    
+		<typeAlias type="poly.dto.cmmn.CMMN_UserDTO" alias="CMMN_UserDTO"/>
+		
+    	<!-- 소비자 CONSUMER  -->
+		<typeAlias type="poly.dto.consumer.CONSUMER_NoticeDTO" alias="CONSUMER_NoticeDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_UserDTO" alias="CONSUMER_UserDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_BoardDTO" alias="CONSUMER_BoardDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_Ft_InfoDTO" alias="CONSUMER_Ft_InfoDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_Ft_ReviewDTO" alias="CONSUMER_Ft_ReviewDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_Menu_InfoDTO" alias="CONSUMER_Menu_InfoDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_ImageDTO" alias="CONSUMER_ImageDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_BannerPopDTO" alias="CONSUMER_BannerPop"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_BoardRepleDTO" alias="CONSUMER_BoardRepleDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_CouponDTO" alias="CONSUMER_CouponDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_CouponIssueDTO" alias="CONSUMER_CouponIssueDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_FtLikeDTO" alias="CONSUMER_FtLikeDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_FtReviewDTO" alias="CONSUMER_FtReviewDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_MenuInfoDTO" alias="CONSUMER_MenuInfoDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_OrderInfoDTO" alias="CONSUMER_OrderInfoDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_OrderItemDTO" alias="CONSUMER_OrderItemDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_OrderWaitDTO" alias="CONSUMER_OrderWaitDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_UserInfoDTO" alias="CONSUMER_UserInfoDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_FtMenuCateDTO" alias="CONSUMER_FtMenuCateDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_Gps_TableDTO" alias="CONSUMER_Gps_TableDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_RcmmndMenuDTO" alias="CONSUMER_RcmmndMenuDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_BoardCounterDTO" alias="CONSUMER_BoardCounterDTO"/>
+		
+		
+		<!-- 관리자 -->
+		<!--  사용할 DTO 등록   -->
+		<typeAlias type="poly.dto.admin.ADMIN_Banner_PopDTO" alias="ADMIN_Banner_PopDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Board_PostDTO" alias="ADMIN_Board_PostDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Board_RepleDTO" alias="ADMIN_Board_RepleDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_BoardDTO" alias="ADMIN_BoardDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Coupon_IssueDTO" alias="ADMIN_Coupon_IssueDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_CouponDTO" alias="ADMIN_CouponDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Ft_LikeDTO" alias="ADMIN_Ft_LikeDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Ft_Menu_CateDTO" alias="ADMIN_Ft_Menu_CateDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Ft_ReviewDTO" alias="ADMIN_Ft_ReviewDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Ft_InfoDTO" alias="ADMIN_Ft_InfoDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Gps_TableDTO" alias="ADMIN_Gps_TableDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_ImageDTO" alias="ADMIN_ImageDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Menu_InfoDTO" alias="ADMIN_Menu_InfoDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Order_InfoDTO" alias="ADMIN_Order_InfoDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Order_ItemDTO" alias="ADMIN_Order_ItemDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Order_WaitDTO" alias="ADMIN_Order_WaitDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_User_InfoDTO" alias="ADMIN_User_InfoDTO"/>
+		
+		<!-- 판매자  -->
+		<typeAlias type="poly.dto.seller.SELLER_FtSellerDTO" alias="SELLER_FtSellerDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_MenuJsDTO" alias="SELLER_MenuJsDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_BoardDTO" alias="SELLER_BoardDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_ReviewDTO" alias="SELLER_ReviewDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_WaitDTO" alias="SELLER_WaitDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_FtDistrictDataDTO" alias="SELLER_FtDistrictDataDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_OrderInfoDTO" alias="SELLER_OrderInfoDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_ImageDTO" alias="SELLER_ImageDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_TmpDTO" alias="SELLER_TmpDTO"/>
+		<typeAlias type="poly.dto.seller.SELLER_Gps_TableDTO" alias="SELLER_Gps_TableDTO"/>
+		
+    </typeAliases>
+</configuration>

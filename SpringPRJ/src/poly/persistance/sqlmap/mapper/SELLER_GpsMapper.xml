@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.SELLER_Gps_TableMapper">
+
+	<!-- GPS정보 DB저장 -->
+	<insert id="setGps" parameterType="SELLER_Gps_TableDTO">
+		INSERT INTO GPS_TABLE
+			(
+				USER_SEQ,
+				GPS_RENEW_DATE,
+				GPS_SIDO,
+				GPS_SIGUNGU,
+				GPS_DONG,
+				GPS_X,
+				GPS_Y
+			)
+			VALUES
+			(
+				#{user_seq},
+				#{gps_renew_date},
+				#{gps_sido},
+				#{gps_sigungu},
+				#{gps_dong},
+				#{gps_x},
+				#{gps_y}
+			)
+	</insert>
+	<update id="updateGps" parameterType="integer">
+			UPDATE FT_INFO FI
+			SET
+				FI.GPS_SEQ = 
+				(	
+					SELECT 
+						GT.GPS_SEQ
+					FROM 
+						( 
+							SELECT GPST.*, <![CDATA[@RNUM := @RNUM+1 ROWNUM ]]>	
+							FROM GPS_TABLE GPST, <![CDATA[(SELECT @RNUM:=0) R]]>  
+							WHERE GPST.USER_SEQ = #{user_seq} 
+							ORDER BY GPST.GPS_RENEW_DATE DESC
+						) GT
+					WHERE
+						<![CDATA[GT.ROWNUM = 1]]>	
+	    	    )
+			WHERE
+				FI.USER_SEQ = #{user_seq}
+	</update>
+	
+</mapper>
