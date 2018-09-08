@@ -7,12 +7,23 @@
 <head>
 <title>트럭왔냠 - 메인페이지</title>
 <style>
-/* 커밋 테스트1 */
+	/* 메인페이지 배너 양쪽 그림자 제거 */
+	.carousel-control.right, .carousel-control.left {
+		background-image:none;
+	}
+	
+	/* 반응형을 위한 이미지 width 조정 */
+	.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img {
+	/* 	width:100%; */
+	}
+	.carousel-inner{
+  		width:100%;
+  		max-height: 480px;
+	}	
 </style>
 </head>
 <body>
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
-<%@include file="/WEB-INF/view/consumer/maintestCssScript.jsp" %>
 	<%if(!imgDTOs.isEmpty()) {%>
 			<div class="container">
 			  <div id="myCarousel" class="carousel slide" data-ride="carousel">

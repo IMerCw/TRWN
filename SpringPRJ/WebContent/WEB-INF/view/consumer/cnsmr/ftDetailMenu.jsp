@@ -33,6 +33,9 @@
 	.imgRow > img{
 		height:100%;
 	}
+	.footer{
+		background-color: #f2f2f2;
+	}
 </style>
 <body>
 	

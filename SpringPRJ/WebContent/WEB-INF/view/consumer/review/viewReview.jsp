@@ -131,10 +131,10 @@
 							<div class="row" id="bttnCont" style="float:right; margin-right: 3px;">
 								<!-- 인덱스값을 넘겨서 해당 div를 수정할 수 있도록 함-->
 								<button onclick="editReply(<%=i%>)" class="btn btn-primary float-right" style="margin-right:5px;">
-										<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/tools.png"/>
+										<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/tools.png" height="13px"/>
 								</button>
 								<button onclick="removeReply(<%=i%>)" class="btn btn-danger float-right">
-										<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/cancel.png"/>
+										<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/cancel.png" height="13px"/>
 								</button>
 							</div>
 						<%} %>
