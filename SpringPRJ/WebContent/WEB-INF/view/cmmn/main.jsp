@@ -10,7 +10,8 @@
 <body style="margin: 0 auto">
 	
 	<div style="text-align:center; width:100%; padding:28px 0;">
-		<h2>트럭왔냠 메인 페이지</h2>
+		<!-- <h2>트럭왔냠 메인 페이지</h2> -->
+		<img src="<%=request.getContextPath()%>/resources/img/consumer/main_logo_240px.png" />
 	</div>
 	<div>
 	 	<div><%@ include file="/WEB-INF/view/cmmn/user/userLoginBody.jsp" %></div>
@@ -18,11 +19,12 @@
 	<!--test git  -->
 	<!-- test git	 -->
 </body>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 <style>
 	body {
+		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f5f5f5;
 		padding: 100px 0;
-		font-family: sans-serif;
 	}
 	/* 로그인/회원가입 글자 색상 */
 	.panel-login>.panel-heading a{

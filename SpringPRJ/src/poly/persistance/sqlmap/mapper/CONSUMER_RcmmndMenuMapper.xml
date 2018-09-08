@@ -57,5 +57,43 @@
 		fr.REV_SCORE DESC
 	</select>
 	
+	<!-- 중복을 제외한 전체 리뷰 리스트 가져오기 -->
+	<select id="getReviewList" parameterType="integer" resultType="CONSUMER_FtReviewDTO">
+		SELECT 
+			FR.REVIEW_SEQ as review_seq,
+			FR.FT_SEQ as ft_seq,
+		    FR.USER_SEQ as user_seq,
+		    FR.REV_POINT as rev_point,
+		    FR.REV_REGDATE rev_regdate
+		FROM FT_REVIEW AS FR, 
+		(SELECT 
+				FR.FT_SEQ,
+		        FR.USER_SEQ,
+				MAX(FR.REV_REGDATE) AS LATEST
+				FROM (SELECT * FROM FT_REVIEW WHERE REVIEW_SEQ = REV_LEVEL) AS FR
+				GROUP BY USER_SEQ, FT_SEQ
+		) AS SORTED
+		WHERE FR.REV_REGDATE = SORTED.LATEST AND FR.USER_SEQ != #{user_seq}
+		ORDER BY USER_SEQ
+	</select>
 
+	<!-- 중복을 제외한 한명의 리뷰 리스트 가져오기 -->
+	<select id="getUsersReviewList" parameterType="integer" resultType="CONSUMER_FtReviewDTO">
+		SELECT 
+			FR.review_seq,
+			FR.FT_SEQ,
+		    FR.USER_SEQ,
+		    FR.REV_POINT,
+		    FR.REV_REGDATE
+		FROM FT_REVIEW AS FR, 
+		(SELECT 
+				FR.FT_SEQ,
+		        FR.USER_SEQ,
+				MAX(FR.REV_REGDATE) AS LATEST
+				FROM (SELECT * FROM FT_REVIEW WHERE REVIEW_SEQ = REV_LEVEL AND USER_SEQ = #{userSeq}) AS FR
+				GROUP BY USER_SEQ, FT_SEQ
+		) AS SORTED
+		WHERE FR.REV_REGDATE = SORTED.LATEST
+		ORDER BY USER_SEQ;
+	</select>
 </mapper>

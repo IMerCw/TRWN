@@ -58,23 +58,8 @@
 		box-shadow: none;
 		border-color: #ccc;
 	}
-	.btn-login {
-		background-color: #59B2E0;
-		outline: none;
-		color: #fff;
-		font-size: 14px;
-		height: auto;
-		font-weight: normal;
-		padding: 14px 0;
-		text-transform: uppercase;
-		border-color: #59B2E6;
-	}
-	.btn-login:hover,
-	.btn-login:focus {
-		color: #fff;
-		background-color: #53A3CD;
-		border-color: #53A3CD;
-	}
+
+
 	.forgot-id_password {
 		text-decoration: underline;
 		color: #888;
@@ -154,8 +139,9 @@
 										</div>
 										<div class="form-group">
 											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="로그인">
+												<div class="col-sm-12">
+													<input type="submit" name="login-submit" id="login-submit" 
+															tabindex="4" class="form-control btn" value="로그인" style="padding:0;">
 												</div>
 											</div>
 										</div>
