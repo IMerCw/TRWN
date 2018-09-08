@@ -1,9 +1,12 @@
 package poly.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpRequest;
@@ -16,9 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.admin.ADMIN_CouponDTO;
 import poly.dto.admin.ADMIN_Coupon_IssueDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
+import poly.dto.seller.SELLER_OrderInfoDTO;
+import poly.dto.seller.SELLER_WaitDTO;
 import poly.service.SELLER_IOrderService;
 import poly.service.impl.SELLER_OrderService;
 import poly.util.CmmUtil;
+import poly.util.UtilTime;
 
 @Controller
 public class SELLER_OrderController {
@@ -103,7 +109,7 @@ public class SELLER_OrderController {
 	 */
 	
 	 //페이누리로 보내는 RETURN_URL(결제결과 데이터 받기)에 대응하는 메소드
-	   /*@RequestMapping(value="orderComplete")
+	   @RequestMapping(value="/orderComplete")
 	   public void orerComplete(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 	      log.info(this.getClass() + "orderComplete start!!!");
 	      //결과코드
@@ -176,25 +182,35 @@ public class SELLER_OrderController {
 	      log.info(this.getClass() + " etc_data2 : " + etc_data2);//수령시간
 	      String etc_data3 =CmmUtil.nvl(req.getParameter("ETC_DATA3"));      
 	      log.info(this.getClass() + " etc_data3 : " + etc_data3);//주문 제품 목록
+	      String etc_data4 =CmmUtil.nvl(req.getParameter("ETC_DATA4"));      
+	      log.info(this.getClass() + " etc_data4 : " + etc_data4);//트럭번호
+	      
+	      
 	      if(rep_code.equals("0000")){
-	         *//**
+	         /**
 	          * 결제 성공
-	          *//*
-
+	         */
+	    	  log.info("결제 성공");
 	         log.info("orderss ss_user_no = "+session.getAttribute("ss_user_no"));
-	         Order_infoDTO oDTO = new Order_infoDTO();
-	         oDTO.setOrd_no(tran_no);
-	         oDTO.setReal_ord_price(amt);
+	         SELLER_OrderInfoDTO oDTO = new SELLER_OrderInfoDTO();
+	         oDTO.setUser_seq(Integer.parseInt(etc_data1));
+	         String ord_date = UtilTime.getDateYYMMDD("a");
+	         oDTO.setOrd_date(ord_date);
+	         oDTO.setOrd_seq(Integer.parseInt(tran_no));
+	         
+	         oDTO.setOrd_sumprice(Integer.parseInt(amt));
 	         if(tran_type.equals("PHON")){
-	            oDTO.setPayment_tp("p");
+	            oDTO.setBuy_way("p");
 	         }else{
-	            oDTO.setPayment_tp("c");
+	            oDTO.setBuy_way("c");
 	         }
-	         oDTO.setOrd_stat("1");
+	         oDTO.setOrd_status(0);
 	         oDTO.setUsr_rcv_time(etc_data2);
-	         oDTO.setRcv_yn("n");
+	         //oDTO.setRcv_yn("n");
 	         oDTO.setTid(tid);
-	         String[] userNoAndMil = etc_data1.split(";");
+	         oDTO.setFt_seq(etc_data4);
+	         
+	        /* String[] userNoAndMil = etc_data1.split(";");
 	         String[] mil = userNoAndMil[1].split("-");
 	         Map<String, String> milMap = new HashMap();
 	         oDTO.setUser_no(userNoAndMil[0]);
@@ -207,35 +223,37 @@ public class SELLER_OrderController {
 	            oDTO.setReg_user_no(userNoAndMil[0]);
 	            oDTO.setTotal_ord_price(amt);
 	            milMap.put("inc", mil[1]);
-	         }
+	         }*/
 	         String[] orderItems = etc_data3.split("-");
-	         List<Order_itemDTO> oList = new ArrayList<Order_itemDTO>();
+	         List<SELLER_WaitDTO> oList = new ArrayList<SELLER_WaitDTO>();
 	         for(int i = 0; i< orderItems.length; i++){
 	            String[] orderItem = orderItems[i].split(":");
-	            Order_itemDTO oIDTO = new Order_itemDTO();
-	            oIDTO.setOrd_no(tran_no);
-	            oIDTO.setPrdt_no(orderItem[0]);
-	            oIDTO.setOrd_amnt(orderItem[1]);
-	            oIDTO.setReg_user_no(userNoAndMil[0]);
+	            SELLER_WaitDTO oIDTO = new SELLER_WaitDTO();
+	            oIDTO.setWaitSeq("");
+	            oIDTO.setOrdSeq(tran_no);// ordSeq랑 동일하게 널어줌
+	            oIDTO.setOrdHis(orderItem[0] +":"+ orderItem[1]);
+	            
+	            //oIDTO.setReg_user_no(userNoAndMil[0]);
 	            oList.add(oIDTO);
 	         }
 	         log.info(this.getClass() + " useremail" + CmmUtil.nvl((String)session.getAttribute("ss_user_email")));
 	         session.setAttribute("ss_tmpBasket", "");
-	         req.setAttribute("user_no", userNoAndMil[0]);
-	         orderService.insertOrderSuccess(oDTO, oList, milMap);
+	         //req.setAttribute("user_no", userNoAndMil[0]);
+	         orderService.insertOrderSuccess(oDTO, oList/*, milMap*/);
 	      }else{
-	         *//**
+	         /**
 	          * 
 	          * 
 	          * 
 	          * 결제 실패
 	          * 
 	          * 
-	          *//*
+	          */
+	    	  log.info("결제실패");
 	      }
 	      log.info(this.getClass() + "orderComplete end!!!");
 	      
-	   }*/
+	   }
 	   
 	   
 	   /****************************************************************
@@ -243,13 +261,13 @@ public class SELLER_OrderController {
 	    * 
 	    */
 	   //페이누리로 보내는 COMPLETE_URL(결제 성공후 가맹점 페이지로 넘어갈 URL)에 대응하는 메소드
-	  /* @RequestMapping(value="orderSuccess")
+	   @RequestMapping(value="orderSuccess")
 	   public String orderSuccess(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 	      log.info(this.getClass() + "orderSuccess start!!!");
 	      String userNo = CmmUtil.nvl(req.getParameter("uNo")).split("[?]")[0];
 	      session.setAttribute("ss_user_no", userNo);
 	      log.info(this.getClass() + "user_no = "+userNo);
-	      Order_infoDTO oDTO = orderService.getOrderNo(userNo);
+	      /*Order_infoDTO oDTO = orderService.getOrderNo(userNo);
 	      if(oDTO == null){
 	         oDTO = new Order_infoDTO();
 	      }
@@ -263,22 +281,23 @@ public class SELLER_OrderController {
 	      log.info(this.getClass() + " otListSize = "+ otList.size());
 	      
 	      model.addAttribute("ordNo", CmmUtil.nvl(oDTO.getOrd_no()));
-	      model.addAttribute("otList", otList);
+	      model.addAttribute("otList", otList);*/
 	      session.setAttribute("ss_tmpBasket", null);
 	      userNo = null;
-	      oDTO = null;
-	      otList = null;
+	      /*oDTO = null;
+	      otList = null;*/
 	      log.info(this.getClass() + "orderSuccess end!!!");
 	      return "user/orderSuccess";
-	   }*/
+	   }
 	   
 	 //이거슨 결제 도중 취소 URL이였던 것이였던 것이다
-	 	/*	@RequestMapping(value="orderCancelResult")
+	 		@RequestMapping(value="orderCancelResult")
 	 		public String orderCancelResult(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception{
+	 			log.info("결제 도중 최소");
 	 			session.setAttribute("ss_tmpBasket", null);
 	 			return "redirect:userMenuList.do";
 	 		
-	 		}*/
+	 		}
 	
 	
 }

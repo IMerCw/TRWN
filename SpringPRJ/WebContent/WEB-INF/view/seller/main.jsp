@@ -12,7 +12,7 @@
 	//nvl 널값이 들어오면 공백으로 바꿔줍니다.
 	
 	
-	//위치정보 세션
+	 //위치정보 세션
 	String myLat = CmmUtil.nvl((String)session.getAttribute("myLat"));	// 위도
 	String myLon = CmmUtil.nvl((String)session.getAttribute("myLon"));	// 경도
 	String myAddress = CmmUtil.nvl((String)session.getAttribute("myAddress")); // 내 주소 (지번)
@@ -22,7 +22,7 @@
 	String t3hCode = CmmUtil.nvl((String)session.getAttribute("t3hCode"));	//t3hCode 3시간 동안의 기온(단위 ℃)
 	//nvl 널값이 들어오면 공백으로 바꿔줍니다.
 	//식중독 위럼지수
-	SELLER_DissInfoDTO dissInfoDTO = (SELLER_DissInfoDTO)session.getAttribute("dissInfoDTO");
+	SELLER_DissInfoDTO dissInfoDTO = (SELLER_DissInfoDTO)session.getAttribute("dissInfoDTO"); 
 	
 	 int chart = (int)request.getAttribute("chart");
  
@@ -166,7 +166,7 @@
 			
 			
 			</div>
-			<div style="background-color:#505050" class="col-sm-12">
+			 <div style="background-color:#505050" class="col-sm-12">
 				<div class="col-sm-6" style="display:inline-block; padding:0; width:50%">
 					<!-- 날씨정보 / 값 받아 온 경우 -->
 					<%if(!"".equals(t3hCode)) {%>
@@ -196,9 +196,9 @@
 						&nbsp;&nbsp;
 					
 				</div>
-			</div >
+			</div > 
 			 <!--  질병예방 공지 -->
-			 <div style="background-color:#505050" class="col-sm-12">
+			  <div style="background-color:#505050" class="col-sm-12">
 			 
 					<div id = top_notice style="color:white;">
 						
@@ -232,7 +232,7 @@
 						<%} %> 
 					</div> 
 					<div style="height:10px"></div>
-			</div>
+			</div> 
 			
 		<!-- Banner -->
 		<!--

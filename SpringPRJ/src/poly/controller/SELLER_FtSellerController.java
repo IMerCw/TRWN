@@ -207,6 +207,8 @@ public class SELLER_FtSellerController {
 		model.addAttribute("url",url);
 		model.addAttribute("msg",msg);
 		
+		int resultMonth = FtSellerService.insertMonth(ftSDTO);
+		log.info("insertMOnth result : " + resultMonth);
 		url =null;
 		msg =null;
 		hMap= null;
@@ -619,12 +621,9 @@ public class SELLER_FtSellerController {
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
 		ftsDTO.setUserSeq(userSeq);
 		ftsDTO = FtSellerService.getTruckConfig(ftsDTO);
-		/*if(ftsDTO == null) {
-			log.info("ftSeq null : ");
-			model.addAttribute("ftsNull",ftsDTO);
-			return "/seller/main";
-		}*/
-		
+	//	log.info("ftsDTO.get :" + ftsDTO.getFtSeq());
+	//	log.info("ftsDTO .get user : " + ftsDTO.getUserSeq());
+		log.info("확인");
 		if(userSeq != null && ftsDTO != null) {
 			log.info("차트가 있을 경우 ? ");
 			log.info("userSeq , ftSeq : " + userSeq +","+ftsDTO.getFtSeq());
@@ -687,6 +686,9 @@ public class SELLER_FtSellerController {
 			List<SELLER_OrderInfoDTO> oList = orderService.getOrderList(userSeq);
 			if(oList.isEmpty()) {
 				log.info("oList is Empty");
+				int chart = 0;
+				model.addAttribute("chart",chart);
+				return "/seller/main";
 			}
 			log.info("oList size : " + oList.size());
 			log.info("============ 주문내역 시작  ============");
@@ -708,7 +710,7 @@ public class SELLER_FtSellerController {
 			//데이터를 FtsellerService에 태워
 			
 			SELLER_OrderInfoDTO sumChartWeek = FtSellerService.getChartWeek(userSeq);
-			log.info("sumChart : " + sumChartWeek.getOrd_sumprice());
+			//log.info("sumChart : " + sumChartWeek.getOrd_sumprice());
 			model.addAttribute("sumChartWeek", sumChartWeek);
 			log.info("chart End");
 			
@@ -721,16 +723,22 @@ public class SELLER_FtSellerController {
 	            log.info("--------------------------");
 	            
 	         }
-	         if(wList.size() != 7) {
+	         
+	        /* if(wList.size() != 7) {
+	        	 String date = UtilTime.getDateYYMMDD("a");
+	        	 log.info("date is empty  : " + date);
+	        	 ftsDTO.setOrdDate(date);//util 시간 넣기
+	        	 log.info("insert 7 : " + ftsDTO.getOrdDate());
+	        	 
 	        	 wList = FtSellerService.insertwList(ftsDTO);
-	         }
+	         }*/
 	        
 	         model.addAttribute("wList", wList);
 
 			//jinsu 월간매출 시작 !!
 			log.info(this.getClass() + "monthChart start =====================");
 			log.info("ftsDTO userSeq : " + ftsDTO.getUserSeq()); // ?null
-			log.info("ftsDTO ftSEq : " + ftsDTO.getFtSeq()); // 3
+			log.info("ftsDTO ftSEq : " + ftsDTO.getFtSeq()); // 1
 			List<SELLER_OrderInfoDTO> monthChart = FtSellerService.getMonthChart(ftsDTO);
 			log.info("===================monthChart");
 			log.info("monthChart : " + monthChart);

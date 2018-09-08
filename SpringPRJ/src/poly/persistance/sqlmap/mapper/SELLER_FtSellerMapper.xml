@@ -151,35 +151,62 @@
 	<select id="getMonthChart" parameterType="SELLER_FtSellerDTO" resultType="SELLER_OrderInfoDTO">
 		SELECT 
 		  SUM(ORD_SUMPRICE) AS ord_sumprice,
-		  SUBSTR(ORD_DATE,4,2) AS ord_date
+		  SUBSTR(ORD_DATE,1,10) AS ord_date
 		FROM ORDER_INFO
-		WHERE FT_SEQ = #{ftSeq} AND ORD_DATE LIKE '18%'
-		GROUP BY SUBSTR(ORD_DATE,4,2)
-		ORDER BY SUBSTR(ORD_DATE,4,2) ASC
+		WHERE FT_SEQ = #{ftSeq} AND ORD_DATE LIKE '2018%'
+		GROUP BY SUBSTR(ORD_DATE,1,10)
+		ORDER BY SUBSTR(ORD_DATE,1,10) ASC
 	</select>
 	<!-- 최근 7일간 매출 차트 불러오기 -->
 	<select id="latelyWeek" parameterType="SELLER_FtSellerDTO" resultType="SELLER_OrderInfoDTO">
 	SELECT 
         SUM(ORD_SUMPRICE) AS ord_sumprice,
-        SUBSTR(ORD_DATE,1,8) AS ord_date
+        SUBSTR(ORD_DATE,1,10) AS ord_date
       FROM ORDER_INFO
       WHERE FT_SEQ=#{ftSeq} AND ORD_DATE BETWEEN date_add(now(),interval -7 day) 
          AND now()
-      GROUP BY SUBSTR(ORD_DATE,1,8)
-      ORDER BY SUBSTR(ORD_DATE,1,8) ASC
+      GROUP BY SUBSTR(ORD_DATE,1,10)
+      ORDER BY SUBSTR(ORD_DATE,1,10) ASC
 	</select>
 	<!-- 7일 매출 0 insert  -->
 	<insert id="insertwList" parameterType="SELLER_FtSellerDTO">
 		INSERT INTO ORDER_INFO
 		(ORD_SEQ, USER_SEQ, ORD_SUMPRICE, ORD_DATE, ORD_STATUS,FT_SEQ)
 		VALUES
-		( null, -10, 0, CURDATE()- INTERVAL 6 DAY, 1,#{ftSeq}),
-		( null, -10, 0, CURDATE()- INTERVAL 5 DAY, 1,#{ftSeq}),
-		( null, -10, 0, CURDATE()- INTERVAL 4 DAY, 1,#{ftSeq}),
-		( null, -10, 0, CURDATE()- INTERVAL 3 DAY, 1,#{ftSeq}),
-		( null, -10, 0, CURDATE()- INTERVAL 2 DAY, 1,#{ftSeq}),
-		( null, -10, 0, CURDATE()- INTERVAL 1 DAY, 1,#{ftSeq}),
-		( null, -10, 0, CURDATE()- INTERVAL 0 DAY, 1,#{ftSeq})
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
+		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq})
+	</insert>
+	<!-- 트럭 월별 매출 값 등록 전 ftseq 찾아오기 -->
+	<select id="getNewFtseq" parameterType="SELLER_FtSellerDTO" resultType="SELLER_FtSellerDTO">
+	select 
+		FT_SEQ as ftSeq,
+		USER_SEQ as userSeq
+	from FT_INFO
+	WHERE USER_SEQ = #{userSeq}
+	</select>
+	<!-- 트럭 등록시 월별 매출 0 값 insert -->
+	<insert id="insertMonth" parameterType="SELLER_FtSellerDTO">
+	insert into order_info
+		(ord_seq, user_seq, ord_sumprice, ord_date, ord_status,ft_seq)
+	values
+		(null,#{userSeq}, 0, '2018.01.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.02.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.03.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.04.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.05.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.06.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.07.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.08.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.09.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.10.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.11.01 / 00:00:00',1,#{ftSeq}),
+		(null,#{userSeq}, 0, '2018.12.01 / 00:00:00',1,#{ftSeq})
+	
 	</insert>
 	
 </mapper>

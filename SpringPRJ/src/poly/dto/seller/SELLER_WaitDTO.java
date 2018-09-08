@@ -12,8 +12,15 @@ public class SELLER_WaitDTO {
 	private String usrRcvTime;
 	private String userHp;
 	private String waitRow;
+	private String ordHis;
 	
 	
+	public String getOrdHis() {
+		return ordHis;
+	}
+	public void setOrdHis(String ordHis) {
+		this.ordHis = ordHis;
+	}
 	public String getWaitRow() {
 		return waitRow;
 	}

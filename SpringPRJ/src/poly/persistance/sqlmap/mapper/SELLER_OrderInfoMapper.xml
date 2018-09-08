@@ -60,6 +60,34 @@
 		WHERE
 			ISSUE_CODE = #{issue_code}
 	</update>
+	<!-- 주문완료 시 insert -->
+	<insert id="insertOrderInfo" parameterType="SELLER_OrderInfoDTO">
+		INSERT INTO ORDER_INFO
+		(
+		ORD_SEQ,
+		USER_SEQ,
+		ORD_SUMPRICE,
+		BUY_WAY,
+		ORD_DATE,
+		ORD_STATUS,
+		USR_RCV_TIME,
+		TID,
+		FT_SEQ,
+		)
+		VALUES
+		(
+		#{ord_seq},
+		#{user_seq},
+		#{ord_sumprice},
+		#{buy_way},
+		#{ord_date},
+		#{ord_status},
+		#{usr_rcv_time},
+		#{tid},
+		#{ft_seq}
+		)
+	
+	</insert>
 
 
 </mapper>

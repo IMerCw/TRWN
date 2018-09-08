@@ -60,7 +60,7 @@ public class SELLER_OutController {
 	private SELLER_IFtSellerService FtSellerService;
 	
 	@RequestMapping(value="/seller/out/out_info")
-	public String out_info(HttpServletRequest request , Model model) throws Exception{
+	public String out_info(HttpServletRequest request , Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + " out start !!~");
 		String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
 		log.info("userSeq : " + userSeq);
@@ -78,6 +78,7 @@ public class SELLER_OutController {
 			//판재자일 경우에는 판매자 id를 이용하여 ftSeq를 뽑아옵니다.
 			log.info("if userAuth = '2' 시작합니다.");
 			ftsDTO = OutService.getOutTruckInfo(ftsDTO);
+			session.setAttribute("ftSeq", ftsDTO.getFtSeq());
 			log.info("ftsDTO .get : " +ftsDTO.getFtSeq());
 		}else {
 			log.info("if else 소비자 시작합니다.");

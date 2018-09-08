@@ -57,8 +57,8 @@ public class SELLER_FtSellerService implements SELLER_IFtSellerService {
 		
 		
 		int resultFtReg = sELLER_FtSellerMapper.insertFtSInfo(ftsDTO);
-		
 		System.out.println("resultFtReg : " + resultFtReg);
+		
 		
 		//System.out.println("ftsDTO fileId : " + ftsDTO.getFileId());
 		//select key 에서 받아온 값을 String FileId 저장 ?? 
@@ -161,6 +161,18 @@ public class SELLER_FtSellerService implements SELLER_IFtSellerService {
 		System.out.println("service result : " + result);
 		
 		return sELLER_FtSellerMapper.latelyWeek(ftsDTO);
+	}
+
+	@Override
+	public int insertMonth(SELLER_FtSellerDTO ftSDTO) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("=========insertMonth");
+		System.out.println("service ftSDTO user, ftseq : " +ftSDTO.getUserSeq()+","+ ftSDTO.getFtSeq());
+		
+		SELLER_FtSellerDTO ftsDTO2 = sELLER_FtSellerMapper.getNewFtseq(ftSDTO);
+		System.out.println("ftsDTO2 : " + ftsDTO2.getUserSeq());
+		System.out.println("ftsDTO2 : " + ftsDTO2.getFtSeq());
+		return sELLER_FtSellerMapper.insertMonth(ftsDTO2);
 	}
 
 

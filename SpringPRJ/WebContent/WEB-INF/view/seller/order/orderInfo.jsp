@@ -30,11 +30,14 @@
 	if(tMap == null){
 		tMap = new HashMap();	
 	} */
+	session.setAttribute("userHp", uDTO.getUserHp());
 	
+	String ftSeq = (String)session.getAttribute("ftSeq");
 	
 	
 %>
-
+	<%=uDTO.getUserSeq()%><%=ftSeq  %>
+	
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -154,7 +157,7 @@
 		//전화번호 유효성 검사 함수
 		 $(function() {
 		   $('#CUSTOMER_TEL').keydown(function(e){
-			  	alert("test");
+			  	//alert("test");
 		      	 /* if((e.keyCode<48 || e.keyCode>57)&&e.keyCode!=8&&(e.keyCode<96||e.keyCode>105)){
 		         alert("전화번호는 숫자만 입력됩니다.");
 		         return false;
@@ -464,7 +467,7 @@
 						
 						<input type="hidden" type="text" id="GOODS_NAME" name="GOODS_NAME" value="<%=prdtNames2%>" size=15 maxlength=20 />
 						<!-- 결제 금액  !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-						<input type="hidden" type="text" id="AMT" name="AMT" value="1004" size=8 />
+						<input type="hidden" type="text" id="AMT" name="AMT" value="<%=sum%>" size=8 />
 						<!-- 상품 갯수 !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 						<input type="hidden" type="text" id="QUANTITY" name="QUANTITY" value="<%=Ilist.size() %>" size=3 maxlength=3/>
 						<!-- 거래 일자  오늘 날짜로 바꿔주기-->
@@ -472,13 +475,13 @@
 						<!-- 고객명  !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 						<!-- <input type="hidden" id="CUSTOMER_NAME" name="CUSTOMER_NAME" value="홍길동" size=30 maxlength=100 /> -->
 						<!-- 리턴 URL  !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-						<input type="hidden" id="RETURN_URL" name="RETURN_URL" value="http://cupbobs.com/orderComplete.do" size=30 maxlength=100 />
+						<input type="hidden" id="RETURN_URL" name="RETURN_URL" value="http://54.180.77.82:8080/orderComplete.do" size=30 maxlength=100 />
 						<!-- 결제 성공  URL !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-						<input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL" value="http://cupbobs.com/orderSuccess.do?uNo=<%=CmmUtil.nvl((String)session.getAttribute("ss_user_no"))%>" size=30 maxlength=100 />
+						<input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL" value="http://54.180.77.82:8080/orderSuccess.do?uNo=<%=CmmUtil.nvl((String)session.getAttribute("ss_user_no"))%>" size=30 maxlength=100 />
 						<!-- 결제도중 취소  URL !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-						<input type="hidden" id="CANCEL_URL" name="CANCEL_URL" value="http://cupbobs.com/orderCancelResult.do" size=30 maxlength=100 />
+						<input type="hidden" id="CANCEL_URL" name="CANCEL_URL" value="http://54.180.77.82:8080/orderCancelResult.do" size=30 maxlength=100 />
 						<!-- 여분의 데이터 1 -->
-						<input type="hidden" id="ETC_DATA1" name="ETC_DATA1" value="<%=CmmUtil.nvl((String)session.getAttribute("ss_user_no"))%>" />
+						<input type="hidden" id="ETC_DATA1" name="ETC_DATA1" value="<%=uDTO.getUserSeq()%>,<%=ftSeq%>" />
 						<!-- 여분의 데이터 2 -->
 						<!-- 여분의 데이터 3 -->
 						<%--<%
@@ -500,6 +503,8 @@
 						
 						
 						<input type="hidden" id="ETC_DATA3" name="ETC_DATA3" value="<%=orderItems2%>" />
+						<!-- 여분의 데이터 4 -->
+						<input type="hidden" id="ETC_DATA4" name="ETC_DATA4" value="<%=ftSeq%>"/>
 									
 							<!-- 주문자 정보  -->
 							<section class="section-orderer" style="background-color:white;">

@@ -143,7 +143,7 @@
 					<tr id="<%=cnt%>"> 
 	            	<td><input type="checkbox" name="cate_check" value="<%=cateDTOarr.get(i).getCate_sort_no()%>"/></td> 
 	                <td><%=cateDTOarr.get(i).getCate_sort_no()%></td>
-					<td  style="cursor:pointer;" onclick="location.href='<%=request.getContextPath()%>/admin/ft/ft_info.do?cmd=category_edit&ft_seq=<%=ftDTO2.getFt_seq()%>&cate_sort_no=<%=cateDTOarr.get(i).getCate_sort_no()%>'">
+					<td  style="cursor:pointer;" onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=category_edit&ft_seq=<%=ftDTO2.getFt_seq()%>&cate_sort_no=<%=cateDTOarr.get(i).getCate_sort_no()%>'">
 					<%=cateDTOarr.get(i).getCate_name()%>
 					</td>
 					<td>
