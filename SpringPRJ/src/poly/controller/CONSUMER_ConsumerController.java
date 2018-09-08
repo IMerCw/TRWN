@@ -1,14 +1,14 @@
 package poly.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -17,29 +17,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import poly.dto.admin.ADMIN_Ft_Menu_CateDTO;
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_FtMenuCateDTO;
 import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
 import poly.dto.consumer.CONSUMER_Menu_InfoDTO;
-import poly.dto.consumer.CONSUMER_UserDTO;
 import poly.service.CONSUMER_IFtService;
-import poly.util.CmmUtil;
-import poly.util.GeoUtil;
-import poly.util.CONSUMER_UtilFile;
-import poly.util.SortTruck;
-import poly.util.UtilRegex;
-import poly.util.UtilTime;
 import poly.service.CONSUMER_IImageService;
 import poly.service.CONSUMER_IUserService;
-import poly.service.impl.CONSUMER_ImageService;
-import poly.service.impl.CONSUMER_UserService;
+import poly.util.CONSUMER_UtilFile;
+import poly.util.CmmUtil;
+import poly.util.SortTruck;
+import poly.util.UtilTime;
 
 /*
  * Controller 선언해야만 Spring 프레임워크에서 Controller인지 인식 가능
@@ -61,12 +54,7 @@ public class CONSUMER_ConsumerController {
 	@Resource(name="CONSUMER_UserService")
 	private CONSUMER_IUserService UserService;
 	
-	public String getDate() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
-		String date = sdf1.format(cal.getTime());
-		return date;
-	}
+
 
 	
 	// 근처 푸드트럭 찾기
@@ -200,8 +188,6 @@ public class CONSUMER_ConsumerController {
 		for(int i =0; i < repleList.size();i++) {
 			String newRegDate = UtilTime.SetupRegDate(repleList.get(i).getRev_regdate());
 			repleList.get(i).setRev_regdate(newRegDate);
-			log.info(repleList.get(i).getRev_regdate());
-			log.info(repleList.get(i).getRev_title());
 		}
 		model.addAttribute("repleList", repleList);
 		/////////////
@@ -326,7 +312,7 @@ public class CONSUMER_ConsumerController {
 		revDTO.setRev_title(request.getParameter("rev_title"));
 		revDTO.setRev_text(request.getParameter("rev_text"));
 		revDTO.setRev_point(Integer.parseInt(request.getParameter("rev_point")));
-		revDTO.setRev_regdate(getDate());
+		revDTO.setRev_regdate(UtilTime.getDateYMDhms());
 		revDTO.setRev_level(" ");
 		revDTO.setExp_yn(1);
 		ftService.ft_Review_Create(revDTO);
@@ -406,7 +392,7 @@ public class CONSUMER_ConsumerController {
 		revDTO.setRev_title(" ");
 		revDTO.setRev_text(request.getParameter("rev_text"));
 		revDTO.setRev_point(0);
-		revDTO.setRev_regdate(getDate());
+		revDTO.setRev_regdate(UtilTime.getDateYMDhms());
 		revDTO.setRev_level(search_level+"1");
 		revDTO.setExp_yn(1);
 		ftService.ft_Review_Create(revDTO);

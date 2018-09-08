@@ -2,16 +2,18 @@
 
 package poly.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class UtilTime {
 	
 	//오늘 날짜("yyyy.MM.dd / hh:mm:ss")
 	public static String getDateYMDhms() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd / hh:mm:ss"); //년,월,일,시간,분,초
+		Calendar cal = Calendar.getInstance(Locale.KOREA);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss"); //년,월,일,시간,분,초
 		/*SimpleDateFormat sdf1 = new SimpleDateFormat("M월 d일");*/
 		String date = sdf1.format(cal.getTime());
 		
@@ -86,7 +88,7 @@ public class UtilTime {
 		//현 날짜 YYYY.MM.DD / hh:mm:ss
 		String todayNow =  getDateYMDhms();
 		String todayArr[] = todayNow.split("/");
-		String todayDate[] = todayArr[0].split("\\.");
+		String todayDate[] = todayArr[0].split("\\. ");
 		
 		String resultDate = null;
 		String regDateArr[] = regDate.split("/");
@@ -95,8 +97,6 @@ public class UtilTime {
 		
 		
 		for(int i = 0; i < 3; i++) {
-			System.out.println(todayDate[i]);
-			System.out.println(regDateyymmdd[i]);
 			
 			if(!todayDate[i].equals(regDateyymmdd[i])) {
 				resultDate = regDateyymmdd[0].substring(2) + "." + regDateyymmdd[1] + "." + regDateyymmdd[2];

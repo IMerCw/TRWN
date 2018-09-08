@@ -16,6 +16,9 @@
 	.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img {
 	/* 	width:100%; */
 	}
+	.carousel-control:focus, .carousel-control:hover {
+		opacity: 0;
+	}
 	.carousel-inner{
   		width:100%;
   		max-height: 480px;

@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_FtMenuCateDTO;
+import poly.dto.consumer.CONSUMER_FtReviewDTO;
 import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
@@ -47,8 +48,10 @@ import poly.service.CONSUMER_IUserService;
 import poly.service.impl.CONSUMER_ImageService;
 import poly.service.impl.CONSUMER_UserService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -80,30 +83,60 @@ public class CONSUMER_DataAnalysisController {
 	
 	//소비자 맞춤 추천 메뉴
 	@RequestMapping(value="consumer/rcmmnd/CustomRcmmnd")
-	public String CustomRcmmnd(HttpServletRequest request, Model model) throws Exception{
+	public String CustomRcmmnd(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		log.info("Access CustomRcmmnd...");
+		//로그인 안되어 있는 경우
+		String userSeq = (CmmUtil.nvl((String)session.getAttribute("userSeq")));
+		if("".equals(userSeq)) {
+			String url = "/cmmn/main.do"; //로그인 화면 이동
+			String msg = "로그인 후 이용해주시길 바랍니다.";
+			model.addAttribute("url", url);
+			model.addAttribute("msg", msg);
+			return "/cmmn/alert";
+		}
+		
+		
 		CosineSimilarity cossim = new CosineSimilarity();
-		Map<CharSequence, Integer> leftVector = new HashMap<>();
-		Map<CharSequence, Integer> rightVector= new HashMap<>();
-		leftVector.put("수학", 10);
-		leftVector.put("영어", 4);
-		leftVector.put("과학", 0);
-		leftVector.put("국어", 0);
-		
-		rightVector.put("수학", 10);
-		rightVector.put("영어", 6999);
-		rightVector.put("과학", 9999);
-		rightVector.put("국어", 10000);
+		List<CONSUMER_FtReviewDTO> usersReivew = ftService.getUsersReviewList(Integer.parseInt(userSeq));
+		Map<CharSequence, Integer> mainVector = new HashMap<>();
+
+		for(int i = 0; i < usersReivew.size(); i++) {
+			mainVector.put(String.valueOf(usersReivew.get(i).getFt_seq()), usersReivew.get(i).getRev_point());
+			log.info("메인 벡터:" + usersReivew.get(i).getFt_seq() + " // " + usersReivew.get(i).getRev_point());
+			
+		}
 		
 		
+		List<Map<CharSequence, Integer>> vectorList = new ArrayList<>(); //비교대상이 되는 벡터들을 저장할 리스트
+		List<CONSUMER_FtReviewDTO> frDTO = ftService.getReviewList(Integer.parseInt(userSeq)); //유저들의 리뷰 정보
+		Map<CharSequence, Integer> compVector = new HashMap<>(); //비교 대상이 될 벡터형식의 리뷰 값 <푸드트럭번호, 리뷰점수>
 		
-		Double result = cossim.cosineSimilarity(leftVector, rightVector);
+		log.info("현재 유저번호 :" + userSeq);
 		
-		log.info("The cosine Similariry of two vectors is " + result);
+		Double result = cossim.cosineSimilarity(mainVector, compVector);
+		
+		
+		
+		log.info("The cosine Similariry of two vectors is "+ result);
 		
 		log.info("Terminate CustomRcmmnd...");
 		return "/consumer/rcmmnd/customRcmmnd";
 	}
 	
 	
+	//리스트에서 비교할 벡터를 가져옴
+	private Map<CharSequence, Integer> getCompVector(List<CONSUMER_FtReviewDTO> frDTO, int index) {
+		Map<CharSequence, Integer> compVec = new HashMap<>();
+		
+		for(int i = index; i < frDTO.size(); i++) {
+			log.info(frDTO.get(i).getUser_seq());
+			if(frDTO.get(index).getUser_seq() != frDTO.get(i).getUser_seq()) {
+				index=i;
+				break;
+			}
+			log.info("비교대상 벡터 :" +frDTO.get(i).getFt_seq() + " // " + frDTO.get(i).getRev_point());
+			compVec.put(String.valueOf(frDTO.get(i).getFt_seq()) ,frDTO.get(i).getRev_point());
+		}
+		return compVec;
+	}
 }
