@@ -104,7 +104,7 @@
   				<div class="row contentBox" onclick="location.href='/consumer/review/viewReview.do?&review_seq=<%=repleList.get(i).getReview_seq()%>'" style="padding:15px;">
 	  				<div class="row">
 		  				<!-- 리뷰 작성자 닉네임 -->
-						<div class="col-xs-4"><%=repleList.get(i).getUser_nick()%>님</div>
+						<div class="col-xs-4" style="font-size:16px;"><%=repleList.get(i).getUser_nick()%>님</div>
 						<!-- 리뷰 작성일  -->
 						<div class="col-xs-8" style="text-align:right;"> <%=repleList.get(i).getRev_regdate()%></div>
 					</div>

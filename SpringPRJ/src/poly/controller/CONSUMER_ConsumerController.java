@@ -3,6 +3,7 @@ package poly.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ import poly.util.GeoUtil;
 import poly.util.CONSUMER_UtilFile;
 import poly.util.SortTruck;
 import poly.util.UtilRegex;
+import poly.util.UtilTime;
 import poly.service.CONSUMER_IImageService;
 import poly.service.CONSUMER_IUserService;
 import poly.service.impl.CONSUMER_ImageService;
@@ -193,7 +195,14 @@ public class CONSUMER_ConsumerController {
 		
 		////리뷰리스트////
 		List<CONSUMER_Ft_ReviewDTO> repleList = new ArrayList<CONSUMER_Ft_ReviewDTO>();
-		repleList = ftService.getFt_Review_List_ftDetail(ft_seq);	//특정 푸드트럭 상세 정보 리뷰 전용 -- 답글 제외
+		repleList = ftService.getFt_Review_List_ftDetail(ft_seq);	//특정 푸드트럭 상세 정보 리뷰 리스트-- 답글 제외
+		//날짜 수정
+		for(int i =0; i < repleList.size();i++) {
+			String newRegDate = UtilTime.SetupRegDate(repleList.get(i).getRev_regdate());
+			repleList.get(i).setRev_regdate(newRegDate);
+			log.info(repleList.get(i).getRev_regdate());
+			log.info(repleList.get(i).getRev_title());
+		}
 		model.addAttribute("repleList", repleList);
 		/////////////
 		
@@ -202,49 +211,7 @@ public class CONSUMER_ConsumerController {
 		model.addAttribute("fDTO", fDTO);
 		/////////////
 		
-		//////////////////리뷰 사진들 불러오기////////////////// 	
-		/*log.info("fReviewDTO is NULL?" + fReviewDTO.isEmpty()); //리뷰 테이블에 정보가 있는지 확인하고 있으면 가져옴
-		if(fReviewDTO.isEmpty() == false) {
-													
-			log.info(this.getClass() + " // Review Images start !!");
-			List<String> userSeqs = new ArrayList<String>();
-			List<ImageDTO> ImgDTOs = new ArrayList<ImageDTO>();
-			
-			
-			for(int i = 0; i < fReviewDTO.size(); i++) { 
-				userSeqs.add(CmmUtil.nvl(Integer.toString(fReviewDTO.get(i).getUser_seq()))); //유저번호 리스트
-				ImgDTOs.add(new ImageDTO());	//이미지 객체 생성
-				ImgDTOs.get(i).setUserSeq(userSeqs.get(i)); //생성된 이미지 객체 각각에 유저번호 리스트를 입력 
-				ImgDTOs.get(i).setFtSeq(ft_seq); //생성된 이미지 객체 각각에 푸드트럭 번호를 입력
-				log.info("file userSeqs : " + userSeqs.get(i)); // 유저번호 확인
-				log.info("확인:" + ImgDTOs.get(i).getFtSeq());
-			}
-														
-			ImgDTOs = ftService.getReviewImage(ImgDTOs);
-			
-			if (ImgDTOs == null) {			
-				ImgDTOs = new ArrayList<ImageDTO>();
-			}		
-			log.info("ImgDTOs size is :" + ImgDTOs.size());
-			//받아온 이미지 DTO 들 확인
-			for(int i = 0; i < ImgDTOs.size(); i++) {
-				log.info("ImgDTOs. get : " + ImgDTOs.get(i).getFileId());											
-				log.info("ImgDTOs. get : " + ImgDTOs.get(i).getFileOrgname());
-				log.info("ImgDTOs.get : " + ImgDTOs.get(i).getFilePath());				
-				log.info("ImgDTOs. get : " + ImgDTOs.get(i).getFileSevname());
-				log.info("ImgDTOs.get : " + ImgDTOs.get(i).getUserSeq());
-			}
-			
-			model.addAttribute("ImgDTOs",ImgDTOs);
-			
-			ImgDTOs = null;
-			fReviewDTO = null;
-			fDTO = null;
-			
-			log.info(this.getClass() + "truckImage end !!");
 		
-		}*/
-		///////////////////////////////////////////////////////
 		
 		return "/consumer/cnsmr/ftDetailReview";
 	}

@@ -50,7 +50,9 @@
 <head>
 <title>푸드트럭 상세 보기 </title>
 <style>
-	
+	.footer{
+	    background-color: #f5f5f5;
+	}
 	#ft-detail-menu {
 		text-align: center;
 	}
@@ -145,7 +147,7 @@
 	<div id="map" style="width: 100%; height: 350px;"></div>
 	
 	<!-- 정보/메뉴/리뷰 탭 스크롤 내려도 고정됨 -->
-	<div class="header" id="myHeader" align="center">
+	<div class="header" id="myHeader" align="center" style="font-size:18px;">
 		<ul class="nav nav-tabs" id="ft-detail-menu">
 			<li class="active">
 				<a data-toggle="tab" href="#menu0" id="ftDetailInfo">정보</a>

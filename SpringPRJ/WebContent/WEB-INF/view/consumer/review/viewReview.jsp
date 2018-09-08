@@ -17,6 +17,7 @@
 	.row{
 		margin: 5px 0;
 	}
+
 </style>
 <body>
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
