@@ -9,14 +9,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
 	
-	
-<!-- 창원이형이 주신 css 시작  -->
-	<style>
-	
- 	body {
+<style>
+	body {
+		font-family: 'Noto Sans KR', sans-serif;
 		margin: 0 auto;
-	    font-family: "Lato", sans-serif;
 	}
 	
 	a {

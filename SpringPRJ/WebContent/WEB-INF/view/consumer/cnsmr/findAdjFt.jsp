@@ -150,17 +150,29 @@
 		    }); 
 		    
 		    /* 커스텀 오버레이 생성 */ 
-		    var content =  '<div class="panel panel-default" style="margin-bottom:20px;"> <div class="panel-body" style="padding:2px;">' + 
-		    					marker.getTitle()+ '</div></div>'
-		    				+'<div style="height:20px"></div>'; 
-		    				
+/* 		    var content =  '<div class="ballon">' + 
+		    					marker.getTitle()+ '</div>';
+		 
 		    var customOverlay = new daum.maps.CustomOverlay({
 		        position: marker.getPosition(),
 		        content: content,
-		        xAnchor: 0.3,
-		        yAnchor: 0.91
+		        xAnchor: 0.5,
+		        yAnchor: 0.5
 		    });
-		    customOverlay.setMap(map);
+		    customOverlay.setMap(map); */
+		    
+		    var iwContent = '<div style="padding:5px; width:150px; text-align:center;"><p style="margin:4px 0; font-size:1.3rem; font-weight:bold;">'+positions[i].title+'</p>',
+		    	iwPosition = new daum.maps.LatLng(positions[i].latlng + ", " +  positions[i].title); //인포윈도우 표시 위치입니다
+		
+			// 인포윈도우를 생성합니다
+			var infowindow = new daum.maps.InfoWindow({
+			    position : iwPosition, 
+			    content : iwContent 
+			});
+		  
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+			infowindow.open(map, marker); 
+		    
 		    
 		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -192,7 +204,7 @@
 		var marker = new daum.maps.Marker({
 		    position: markerPosition
 		});
-
+		map.setCenter(new daum.maps.LatLng(<%=Double.parseDouble(myLocLat) %>,<%=Double.parseDouble(myLocLon)%>));
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map);
 		
