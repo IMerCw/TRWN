@@ -74,9 +74,9 @@
 				GROUP BY USER_SEQ, FT_SEQ
 		) AS SORTED
 		WHERE FR.REV_REGDATE = SORTED.LATEST AND FR.USER_SEQ != #{user_seq}
-		ORDER BY USER_SEQ
+		ORDER BY USER_SEQ, FT_SEQ
 	</select>
-
+	
 	<!-- 중복을 제외한 한명의 리뷰 리스트 가져오기 -->
 	<select id="getUsersReviewList" parameterType="integer" resultType="CONSUMER_FtReviewDTO">
 		SELECT 
@@ -94,6 +94,6 @@
 				GROUP BY USER_SEQ, FT_SEQ
 		) AS SORTED
 		WHERE FR.REV_REGDATE = SORTED.LATEST
-		ORDER BY USER_SEQ;
+		ORDER BY FT_SEQ
 	</select>
 </mapper>

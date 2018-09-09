@@ -110,33 +110,36 @@ public class CONSUMER_DataAnalysisController {
 		List<Map<CharSequence, Integer>> vectorList = new ArrayList<>(); //비교대상이 되는 벡터들을 저장할 리스트
 		List<CONSUMER_FtReviewDTO> frDTO = ftService.getReviewList(Integer.parseInt(userSeq)); //유저들의 리뷰 정보
 		Map<CharSequence, Integer> compVector = new HashMap<>(); //비교 대상이 될 벡터형식의 리뷰 값 <푸드트럭번호, 리뷰점수>
-		
+		Double []resultCossimArr = new Double[100]; //유사도가 저장된 배열
 		log.info("현재 유저번호 :" + userSeq);
+		int j = 0;
 		
-		Double result = cossim.cosineSimilarity(mainVector, compVector);
+		Map<CharSequence, Integer> compVec = new HashMap<>();
+		for(int k =0, i = 0;i < frDTO.size(); k=i) {
+			
+			int userSeqTmp = frDTO.get(k).getUser_seq();
+			log.info("피벗시작: " + userSeqTmp); //피벗
+			
+			for(; i < frDTO.size(); i++) {
+				log.info("피벗비교 :" + userSeqTmp); //피벗
+				log.info("비교대상: " + frDTO.get(i).getUser_seq());//비교 대상
+				
+				if(userSeqTmp!= frDTO.get(i).getUser_seq()) {
+					break;
+				}
+				log.info("비교대상 벡터 :" +frDTO.get(i).getFt_seq() + " // " + frDTO.get(i).getRev_point());
+				compVec.put(String.valueOf(frDTO.get(i).getFt_seq()) ,frDTO.get(i).getRev_point());
+			}
+			
+		}
 		
 		
-		
-		log.info("The cosine Similariry of two vectors is "+ result);
+		double resultCossim = cossim.cosineSimilarity(mainVector, compVector);
+		resultCossimArr[j++] = resultCossim;
+		log.info("The cosine Similariry of two vectors is "+ resultCossim);
 		
 		log.info("Terminate CustomRcmmnd...");
 		return "/consumer/rcmmnd/customRcmmnd";
 	}
 	
-	
-	//리스트에서 비교할 벡터를 가져옴
-	private Map<CharSequence, Integer> getCompVector(List<CONSUMER_FtReviewDTO> frDTO, int index) {
-		Map<CharSequence, Integer> compVec = new HashMap<>();
-		
-		for(int i = index; i < frDTO.size(); i++) {
-			log.info(frDTO.get(i).getUser_seq());
-			if(frDTO.get(index).getUser_seq() != frDTO.get(i).getUser_seq()) {
-				index=i;
-				break;
-			}
-			log.info("비교대상 벡터 :" +frDTO.get(i).getFt_seq() + " // " + frDTO.get(i).getRev_point());
-			compVec.put(String.valueOf(frDTO.get(i).getFt_seq()) ,frDTO.get(i).getRev_point());
-		}
-		return compVec;
-	}
 }
