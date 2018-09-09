@@ -13,6 +13,6 @@ public interface SELLER_IOrderService {
 	public List<ADMIN_Coupon_IssueDTO> getCpList(ADMIN_Coupon_IssueDTO couponList)throws Exception;
 	
 	public int updateCouponUse (ADMIN_Coupon_IssueDTO codeDTO)throws Exception;
-	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, List<SELLER_WaitDTO> oList)throws Exception;
+	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, SELLER_WaitDTO oIDTO)throws Exception;
 
 }

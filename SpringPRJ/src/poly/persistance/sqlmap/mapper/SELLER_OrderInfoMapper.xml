@@ -91,30 +91,25 @@
 	
 	</insert>
 	<!-- 주문완료시 wait insert -->
-	<insert id="insertOrderItem" parameterType="list">
+	<insert id="insertOrderItem" parameterType="SELLER_WaitDTO">
 	INSERT INTO ORDER_WAIT
 	(
 		WAIT_SEQ,
 		ORD_SEQ,
 		FT_SEQ,
 		ORD_DATE,
-		WAIT_TIME,
 		ORD_HIS,
-		ORD_STATUS,
-		TRAN_NO
+		ORD_STATUS
 	)
 	VALUES
 	(
 		NULL,
-		NULL,
+		#{ordSeq},
 		#{ftSeq},
 		#{ordDate},
-		'10',
 		#{ordHis},
-		#{ordStatis},
-		#{tranNo}
+		#{ordStatus}
 	)
-	
 	</insert>
 
 

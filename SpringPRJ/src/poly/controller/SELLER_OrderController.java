@@ -182,19 +182,20 @@ public class SELLER_OrderController {
 	      log.info(this.getClass() + " etc_data2 : " + etc_data2);//수령시간
 	      String etc_data3 =CmmUtil.nvl(req.getParameter("ETC_DATA3"));      
 	      log.info(this.getClass() + " etc_data3 : " + etc_data3);//주문 제품 목록
-	      String etc_data4 =CmmUtil.nvl(req.getParameter("ETC_DATA4"));      
-	      log.info(this.getClass() + " etc_data4 : " + etc_data4);//트럭번호
-	      
 	      
 	      if(rep_code.equals("0000")){
 	         /**
 	          * 결제 성공
 	         */
 	    	  log.info("결제 성공");
-	         log.info("orderss ss_user_no = "+session.getAttribute("ss_user_no"));
+	         log.info("orderss ss_user_no = " + session.getAttribute("userSeq"));
 	         SELLER_OrderInfoDTO oDTO = new SELLER_OrderInfoDTO();
-	         oDTO.setUser_seq(Integer.parseInt(etc_data1));
-	         String ord_date = UtilTime.getDateYYMMDD("a");
+	         oDTO.setUser_seq(Integer.parseInt(etc_data1.split(",")[0]));
+	         log.info("oDTO get userSEq :"+ oDTO.getUser_seq());
+	         oDTO.setFt_seq(etc_data1.split(",")[1]);
+	         log.info("oDTO get ftsEQ : " +oDTO.getFt_seq());
+	         String ord_date = UtilTime.getDateYMDhms();
+	         log.info(ord_date);
 	         oDTO.setOrd_date(ord_date);
 	         oDTO.setTran_no(tran_no);
 	         oDTO.setOrd_sumprice(Integer.parseInt(amt));
@@ -207,8 +208,8 @@ public class SELLER_OrderController {
 	         oDTO.setUsr_rcv_time(etc_data2);
 	         //oDTO.setRcv_yn("n");
 	         oDTO.setTid(tid);
-	         oDTO.setFt_seq(etc_data4);
 	         
+	         log.info("oDTO.setting");
 	        /* String[] userNoAndMil = etc_data1.split(";");
 	         String[] mil = userNoAndMil[1].split("-");
 	         Map<String, String> milMap = new HashMap();
@@ -223,25 +224,31 @@ public class SELLER_OrderController {
 	            oDTO.setTotal_ord_price(amt);
 	            milMap.put("inc", mil[1]);
 	         }*/
-	         String[] orderItems = etc_data3.split("-");
+	        /* String[] orderItems = etc_data3.split("-");
 	         List<SELLER_WaitDTO> oList = new ArrayList<SELLER_WaitDTO>();
 	         for(int i = 0; i< orderItems.length; i++){
 	            String[] orderItem = orderItems[i].split(":");
-	            SELLER_WaitDTO oIDTO = new SELLER_WaitDTO();
+	        */    SELLER_WaitDTO oIDTO = new SELLER_WaitDTO();
 	            oIDTO.setWaitSeq("");
-	            oIDTO.setFtSeq(etc_data4);
+	            oIDTO.setFtSeq(etc_data1.split(",")[1]);
+	            log.info(oIDTO.getFtSeq());
 	            oIDTO.setOrdDate(ord_date);
-	            oIDTO.setOrdHis(orderItem[0] +":"+ orderItem[1]);
+	            log.info(oIDTO.getOrdDate());
+	            oIDTO.setOrdHis(etc_data3);
+	            log.info(oIDTO.getOrdHis());
 	            oIDTO.setOrdStatus("0");
-	            oIDTO.setTranNO(tran_no);
+	            oIDTO.setOrdSeq(tid);
+	            log.info(oIDTO.getOrdSeq());
 	            
 	            //oIDTO.setReg_user_no(userNoAndMil[0]);
-	            oList.add(oIDTO);
-	         }
-	         log.info(this.getClass() + " useremail" + CmmUtil.nvl((String)session.getAttribute("ss_user_email")));
+	          /*  oList.add(oIDTO);
+	            
+	         }*/
+	         log.info("oIDTO : " + oIDTO);
+	        
 	         session.setAttribute("ss_tmpBasket", "");
 	         //req.setAttribute("user_no", userNoAndMil[0]);
-	         orderService.insertOrderSuccess(oDTO, oList/*, milMap*/);
+	         orderService.insertOrderSuccess(oDTO, oIDTO);
 	      }else{
 	         /**
 	          * 
@@ -289,7 +296,7 @@ public class SELLER_OrderController {
 	      /*oDTO = null;
 	      otList = null;*/
 	      log.info(this.getClass() + "orderSuccess end!!!");
-	      return "user/orderSuccess";
+	      return "/seller/order/orderSuccess";
 	   }
 	   
 	 //이거슨 결제 도중 취소 URL이였던 것이였던 것이다

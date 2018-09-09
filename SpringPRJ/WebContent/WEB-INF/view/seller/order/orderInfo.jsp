@@ -467,7 +467,7 @@
 						
 						<input type="hidden" type="text" id="GOODS_NAME" name="GOODS_NAME" value="<%=prdtNames2%>" size=15 maxlength=20 />
 						<!-- 결제 금액  !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-						<input type="hidden" type="text" id="AMT" name="AMT" value="<%=sum%>" size=8 />
+						<input type="hidden" type="text" id="AMT" name="AMT" value="1004" size=8 />
 						<!-- 상품 갯수 !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 						<input type="hidden" type="text" id="QUANTITY" name="QUANTITY" value="<%=Ilist.size() %>" size=3 maxlength=3/>
 						<!-- 거래 일자  오늘 날짜로 바꿔주기-->
@@ -503,8 +503,7 @@
 						
 						
 						<input type="hidden" id="ETC_DATA3" name="ETC_DATA3" value="<%=orderItems2%>" />
-						<!-- 여분의 데이터 4 -->
-						<input type="hidden" id="ETC_DATA4" name="ETC_DATA4" value="<%=ftSeq%>"/>
+						
 									
 							<!-- 주문자 정보  -->
 							<section class="section-orderer" style="background-color:white;">

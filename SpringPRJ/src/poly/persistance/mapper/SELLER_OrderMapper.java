@@ -20,7 +20,7 @@ public interface SELLER_OrderMapper {
 
 	public int insertOrderInfo(SELLER_OrderInfoDTO oDTO)throws Exception;
 
-	public int insertOrderItem(List<SELLER_WaitDTO> oList)throws Exception;
+	public int insertOrderItem(SELLER_WaitDTO oIDTO)throws Exception;
 
 
 

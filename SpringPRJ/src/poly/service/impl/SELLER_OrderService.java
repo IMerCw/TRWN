@@ -49,10 +49,10 @@ public class SELLER_OrderService implements SELLER_IOrderService {
 	}
 
 	@Override
-	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, List<SELLER_WaitDTO> oList) throws Exception {
+	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, SELLER_WaitDTO oIDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int insertOrderInfo = orderMapper.insertOrderInfo(oDTO);
-		int insertOrderItem = orderMapper.insertOrderItem(oList);
+		int insertOrderItem = orderMapper.insertOrderItem(oIDTO);
 		
 		System.out.println("insertOrderInfo : " + insertOrderInfo);
 		System.out.println("insertOrderItem : " + insertOrderItem);
