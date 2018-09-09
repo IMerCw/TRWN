@@ -13,8 +13,26 @@ public class SELLER_WaitDTO {
 	private String userHp;
 	private String waitRow;
 	private String ordHis;
+	private String tranNO;
+	private String ordDate;
 	
 	
+	
+	
+	
+	
+	public String getOrdDate() {
+		return ordDate;
+	}
+	public void setOrdDate(String ordDate) {
+		this.ordDate = ordDate;
+	}
+	public String getTranNO() {
+		return tranNO;
+	}
+	public void setTranNO(String tranNO) {
+		this.tranNO = tranNO;
+	}
 	public String getOrdHis() {
 		return ordHis;
 	}

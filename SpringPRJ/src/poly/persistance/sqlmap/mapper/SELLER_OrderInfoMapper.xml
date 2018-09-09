@@ -73,10 +73,11 @@
 		USR_RCV_TIME,
 		TID,
 		FT_SEQ,
+		TRAN_NO
 		)
 		VALUES
 		(
-		#{ord_seq},
+		null,
 		#{user_seq},
 		#{ord_sumprice},
 		#{buy_way},
@@ -84,8 +85,35 @@
 		#{ord_status},
 		#{usr_rcv_time},
 		#{tid},
-		#{ft_seq}
+		#{ft_seq},
+		#{tran_no}
 		)
+	
+	</insert>
+	<!-- 주문완료시 wait insert -->
+	<insert id="insertOrderItem" parameterType="list">
+	INSERT INTO ORDER_WAIT
+	(
+		WAIT_SEQ,
+		ORD_SEQ,
+		FT_SEQ,
+		ORD_DATE,
+		WAIT_TIME,
+		ORD_HIS,
+		ORD_STATUS,
+		TRAN_NO
+	)
+	VALUES
+	(
+		NULL,
+		NULL,
+		#{ftSeq},
+		#{ordDate},
+		'10',
+		#{ordHis},
+		#{ordStatis},
+		#{tranNo}
+	)
 	
 	</insert>
 

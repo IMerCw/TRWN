@@ -196,8 +196,7 @@ public class SELLER_OrderController {
 	         oDTO.setUser_seq(Integer.parseInt(etc_data1));
 	         String ord_date = UtilTime.getDateYYMMDD("a");
 	         oDTO.setOrd_date(ord_date);
-	         oDTO.setOrd_seq(Integer.parseInt(tran_no));
-	         
+	         oDTO.setTran_no(tran_no);
 	         oDTO.setOrd_sumprice(Integer.parseInt(amt));
 	         if(tran_type.equals("PHON")){
 	            oDTO.setBuy_way("p");
@@ -230,8 +229,11 @@ public class SELLER_OrderController {
 	            String[] orderItem = orderItems[i].split(":");
 	            SELLER_WaitDTO oIDTO = new SELLER_WaitDTO();
 	            oIDTO.setWaitSeq("");
-	            oIDTO.setOrdSeq(tran_no);// ordSeq랑 동일하게 널어줌
+	            oIDTO.setFtSeq(etc_data4);
+	            oIDTO.setOrdDate(ord_date);
 	            oIDTO.setOrdHis(orderItem[0] +":"+ orderItem[1]);
+	            oIDTO.setOrdStatus("0");
+	            oIDTO.setTranNO(tran_no);
 	            
 	            //oIDTO.setReg_user_no(userNoAndMil[0]);
 	            oList.add(oIDTO);

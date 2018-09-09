@@ -13,7 +13,16 @@ public class SELLER_OrderInfoDTO {
 	private String rcv_time;
 	private String tid;
 	private String ft_seq;
+	private String tran_no;
 	
+	
+	
+	public String getTran_no() {
+		return tran_no;
+	}
+	public void setTran_no(String tran_no) {
+		this.tran_no = tran_no;
+	}
 	public int getOrd_seq() {
 		return ord_seq;
 	}

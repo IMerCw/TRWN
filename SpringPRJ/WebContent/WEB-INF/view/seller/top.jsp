@@ -68,7 +68,7 @@
 		<!-- Header -->
 			<header id="header" class="alt">
 				<div class="logo" style="backgournd-color:black">
-					<a href="#">
+					<a href="/seller/out/inOut.do">
 					트럭왔냠 
 						<span>
 						BY TRWN
