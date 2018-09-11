@@ -56,13 +56,13 @@ String stringTime ="";
 						<span class="label label-Warning">
 						<%
 						switch(dayIndex)  {
-								case 0 : stringDay="월"; break;
-								case 1 : stringDay="화"; break;
-								case 2 : stringDay="수"; break;
-								case 3 : stringDay="목"; break;
-								case 4 : stringDay="금"; break;
-								case 5 : stringDay="토"; break;
-								case 6 : stringDay="일"; break;
+								case 0 : stringDay="일"; break;
+								case 1 : stringDay="월"; break;
+								case 2 : stringDay="화"; break;
+								case 3 : stringDay="수"; break;
+								case 4 : stringDay="목"; break;
+								case 5 : stringDay="금"; break;
+								case 6 : stringDay="토"; break;
 								}
 						%>
 						<%=stringDay%>요일,
@@ -110,11 +110,6 @@ String stringTime ="";
 						</div>
 						
 					</div>
-					***********************************************************<br/>
-					select to_char(sysdate, 'yy/mm/dd/dy/hh24/mi/ss') from dual;<br/>
-					18/08/21/화/17/47/16 <br/>
-					ORDER_WAIT ORD_DATE 값 INSERT 형식으로 넣으세요 까먹지말고<br/>
-					***********************************************************
 					
 				</div>
 			</td>

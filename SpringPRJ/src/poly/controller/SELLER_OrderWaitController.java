@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -44,13 +45,32 @@ public class SELLER_OrderWaitController {
 		SELLER_WaitDTO wDTO = new SELLER_WaitDTO();
 		wDTO.setFtSeq(ftsDTO.getFtSeq());
 		
+		
 		List<SELLER_WaitDTO> wList = orderWaitService.getwaitDTO(wDTO);
 		if(wList.isEmpty()) {
 			log.info("if wList.isEmpty");
 			return  "/seller/orderWait/waitEmpty";
 		}
+		log.info("wList size : " + wList.size());
+		for(int i=0; i <wList.size(); i++) {
+			log.info("wList get  : " + wList.get(i).getOrdSeq());
+			log.info("wList get  : " + wList.get(i).getUserHp());
+			log.info("wList get  : " + wList.get(i).getWaitSeq());
+			log.info("wList get : " + wList.get(i).getOrdHis());
+		}
 		
+		List<String> menuView = new ArrayList();
+		log.info("wList size  : " + wList.size());
+
 		
+		for(int i = 0; i < wList.size(); i++) {
+			log.info("wList 히스토리 각 길이: " +  wList.get(i).getOrdHis().split("-").length);
+		}
+		for(int i=0; i< wList.get(0).getOrdHis().split("-").length; i++){
+			menuView.add(wList.get(0).getOrdHis().split("-")[i]);
+			log.info(menuView);
+		}
+		model.addAttribute("menuView",menuView);
 		model.addAttribute("wList",wList);
 		
 		wList=null;

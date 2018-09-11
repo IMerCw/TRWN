@@ -19,11 +19,11 @@
     	//out.println(sumChartWeek.getOrd_sumprice());
     	//DateUtil.getDate();
     	//String todayDate = (String)DateUtil.getDate();
-	   	int todayY = Integer.parseInt(todayYMDhms.substring(0, 4));
+	   	//int todayY = Integer.parseInt(todayYMDhms.substring(0, 4));
 	   	//out.println(todayY);
-	   	int todayM = Integer.parseInt(todayYMDhms.substring(5, 7));
+	   	//int todayM = Integer.parseInt(todayYMDhms.substring(5, 7));
 	   	//out.println(todayM);
-	   	int todayD = Integer.parseInt(todayYMDhms.substring(8, 10));
+	   	//int todayD = Integer.parseInt(todayYMDhms.substring(8, 10));
 	   	//out.println(todayD);
     %> 
     

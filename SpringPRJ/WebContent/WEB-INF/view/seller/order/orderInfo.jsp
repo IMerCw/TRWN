@@ -496,7 +496,7 @@
 						<%
 							String orderItems2 = "";
 							for(int i=0; i< Ilist.size(); i++){
-								orderItems2 += Ilist.get(i).get("menuSeq") + " : " + Ilist.get(i).get("amnt") + "-";
+								orderItems2 += Ilist.get(i).get("menuName") + " : " + Ilist.get(i).get("amnt") + "-";
 							}
 							
 						%>

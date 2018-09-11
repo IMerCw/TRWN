@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="poly.dto.seller.SELLER_WaitDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,7 @@
 <html>
 
 <% List<SELLER_WaitDTO> wList = (List<SELLER_WaitDTO>)request.getAttribute("wList"); %>
+<% List menuView = (ArrayList)request.getAttribute("menuView"); %>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -77,7 +79,7 @@
 					<div id="newWaitList">
 						<div style="height:10%;" class="col-sm-12">
 							<div class="col-sm-6" style="margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px;">&nbsp;&nbsp;조리중인 주문 &nbsp;&nbsp;</span></div>
-							<div class="col-sm-6" style="text-align:right; margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px;">&nbsp;&nbsp; 대기열 : <%=wList.get(0).getWaitRow() %> &nbsp;&nbsp; </span></div>			
+							<div class="col-sm-6" style="text-align:right; margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px;">&nbsp;&nbsp; 대기열 : <%=wList.size()%> &nbsp;&nbsp; </span></div>			
 						</div>
 						<div class="col-sm-12" style="padding:0;">
 							<div class="col-sm-8" style="background-color:#D5D5D5; height:70%;" id="waitFirst">
@@ -86,7 +88,19 @@
 									order No. <%=wList.get(0).getOrdSeq()%><br/>
 									order Hp. <%=wList.get(0).getUserHp()%>	
 								</div>
-								<div style="background-color:white; margin-top:10%; height:50%; text-align:center;">메뉴 이름  : 수량 </div>
+								<div style="background-color:white; margin-top:10%; height:50%; text-align:center;">
+									<div class="col-sm-12">
+									<div class="col-sm-6" style="font-size:100%">메뉴 이름</div> 
+									<div class="col-sm-6" style="font-size:100%">수량</div> 
+									</div>
+									<%for(int i=0; i < menuView.size(); i++){ %>
+										<div class="col-sm-12">
+											<div class="col-sm-6"><b style="font-size:250%"><%=menuView.get(i).toString().split(":")[0]%></b></div>
+											<div class="col-sm-6"><b style="font-size:250%"><%=menuView.get(i).toString().split(":")[1]%></b></div>
+											
+										</div>
+									<%} %>
+								</div>
 							</div>
 							<div class="col-sm-4" style="height:70%;">
 								<div style="height:80%;" id="waitSecond">
