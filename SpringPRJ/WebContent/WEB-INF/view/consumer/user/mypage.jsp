@@ -79,12 +79,10 @@
 				</table>
 		
 				<div align="right" style="width:90%; padding:15px 0;">
-		
-					<button class="btn btn-default" onclick="location.herf='/consumer/user/userUpdateView.do?userSeq=<%=uDTO.getUserSeq()%>'">수정하기</button>
-					<button class="btn btn-default" onclick="userDelete('<%=uDTO.getUserSeq()%>');">탈퇴하기</button>
-					
+					<button class="btn btn-default" onclick="location.herf='/consumer/user/userUpdateView.do?userSeq=<%=userSeq%>'">수정하기</button>
+					<button class="btn btn-default" onclick="userDelete('<%=userSeq%>');">탈퇴하기</button>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
