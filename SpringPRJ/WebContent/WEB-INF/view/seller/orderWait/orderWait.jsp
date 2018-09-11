@@ -88,7 +88,7 @@
 									order No. <%=wList.get(0).getOrdSeq()%><br/>
 									order Hp. <%=wList.get(0).getUserHp()%>	
 								</div>
-								<div style="background-color:white; margin-top:10%; height:50%; text-align:center;">
+								<div style="background-color:white; overflow:auto; margin-top:10%; height:50%; text-align:center;">
 									<div class="col-sm-12">
 									<div class="col-sm-6" style="font-size:100%">메뉴 이름</div> 
 									<div class="col-sm-6" style="font-size:100%">수량</div> 
@@ -118,6 +118,7 @@
 											order No. <%=wList.get(i).getOrdSeq()%><br/>
 											order Hp. <%=wList.get(i).getUserHp() %>
 											</div>
+											
 										<%} %>
 									<%} %>
 							
