@@ -99,13 +99,14 @@
 	<!-- 푸트드럭 상권 분석 -->
 	<select id="getFtDstctData" parameterType="string" resultType="SELLER_FtDistrictDataDTO">
 		SELECT	ROW_NUM AS rowNo,
-				BPLC_NUM AS blpcNum,
-				SITE_WHL_ADDR AS siteWhlAddr, 
-				RDN_WHL_ADDR AS rdnWhlAddr,
-				TRD_STATE_NM AS trdStateNm,
-				TRIM(X) AS x,
-				TRIM(Y) AS y
+			BPLC_NUM AS blpcNum,
+			SITE_WHL_ADDR AS siteWhlAddr, 
+			RDN_WHL_ADDR AS rdnWhlAddr,
+			TRD_STATE_NM AS trdStateNm,
+			TRIM(X) AS x,
+			TRIM(Y) AS y
 		FROM	FT_DISTRICT_DATA
+		WHERE x like '% %'
 		<!-- WHERE 	SITE_WHL_ADDR like '%' || #{keyWord} || '%' or SITE_WHL_ADDR is null -->
 		<!-- <![CDATA[ ROWNUM <= 50 ]]> -->
 	</select>
@@ -159,27 +160,27 @@
 	</select>
 	<!-- 최근 7일간 매출 차트 불러오기 -->
 	<select id="latelyWeek" parameterType="SELLER_FtSellerDTO" resultType="SELLER_OrderInfoDTO">
-	SELECT 
+     SELECT 
         SUM(ORD_SUMPRICE) AS ord_sumprice,
-        SUBSTR(ORD_DATE,1,10) AS ord_date
+        SUBSTR(ORD_DATE,1,12) AS ord_date
       FROM ORDER_INFO
-      WHERE FT_SEQ=#{ftSeq} AND ORD_DATE BETWEEN date_add(now(),interval -7 day) 
-         AND now()
-      GROUP BY SUBSTR(ORD_DATE,1,10)
-      ORDER BY SUBSTR(ORD_DATE,1,10) ASC
+      WHERE FT_SEQ=#{ftSeq} AND ORD_DATE BETWEEN DATE_FORMAT (NOW() - INTERVAL 7 DAY, "%Y. %m. %d")
+         AND DATE_FORMAT(now(),"%Y. %m. %d")
+      GROUP BY SUBSTR(ORD_DATE,1,12)
+      ORDER BY SUBSTR(ORD_DATE,1,12) ASC;
 	</select>
 	<!-- 7일 매출 0 insert  -->
 	<insert id="insertwList" parameterType="SELLER_FtSellerDTO">
 		INSERT INTO ORDER_INFO
 		(ORD_SEQ, USER_SEQ, ORD_SUMPRICE, ORD_DATE, ORD_STATUS,FT_SEQ)
 		VALUES
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq}),
-		( null, #{userSeq}, 0, #{ordDate}, 1,#{ftSeq})
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW() - INTERVAL 7 DAY, "%Y. %m. %d"), 1,#{ftSeq}),
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW() - INTERVAL 6 DAY, "%Y. %m. %d"), 1,#{ftSeq}),
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW() - INTERVAL 5 DAY, "%Y. %m. %d"), 1,#{ftSeq}),
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW() - INTERVAL 4 DAY, "%Y. %m. %d"), 1,#{ftSeq}),
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW() - INTERVAL 3 DAY, "%Y. %m. %d"), 1,#{ftSeq}),
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW() - INTERVAL 2 DAY, "%Y. %m. %d"), 1,#{ftSeq}),
+		( null, #{userSeq}, 0, DATE_FORMAT (NOW(), "%Y. %m. %d"), 1,#{ftSeq})
 	</insert>
 	<!-- 트럭 월별 매출 값 등록 전 ftseq 찾아오기 -->
 	<select id="getNewFtseq" parameterType="SELLER_FtSellerDTO" resultType="SELLER_FtSellerDTO">

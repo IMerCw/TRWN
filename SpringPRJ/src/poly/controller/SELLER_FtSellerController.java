@@ -749,6 +749,7 @@ public class SELLER_FtSellerController {
 			
 			//최근 7일 매충 그래프 
 			List<SELLER_OrderInfoDTO> wList = FtSellerService.latelyWeek(ftsDTO);
+			log.info("wLIst size : " + wList.size());
 	         for(int i=0; i < wList.size(); i++) {
 	            log.info("--------------------------");
 	            log.info("sumWeek : " + wList.get(i).getOrd_sumprice());
