@@ -42,9 +42,9 @@
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg');">
 					<!-- 판매자 푸드트럭관리 -->
-				<div class="container">
+				<div class="container" style="background-color:white; opacity:0.8">
 					<!-- 푸드트럭이미지 & 푸드트럭 소개 -->
 					<div id="leftContents" style="height:auto;">
 						<!-- 트럭이미지 -->

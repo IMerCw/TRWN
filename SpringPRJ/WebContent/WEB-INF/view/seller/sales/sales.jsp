@@ -48,9 +48,9 @@ String stringTime ="";
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 				<div class="container" style="height:100%">
-					<h3>매출분석</h3>
+					<h3 style="color:white;">매출분석</h3>
 					<hr>
 					<h3>
 						<span class="label label-Warning">
@@ -87,7 +87,7 @@ String stringTime ="";
 						<%} %>
 						이 주요고객</span>
 					</h3>
-					<span>
+					<span style="color:white;">
 						분석지역 내 매출특성은
 						<%=stringDay%>요일
 						(<%=percentD %>%),
@@ -100,7 +100,7 @@ String stringTime ="";
 						<%} %>
 						 이 주요고객인 것으로 분석 되었습니다 .	
 					</span>
-					<div style="border:1px solid black;" class="col-sm-12">
+					<div style="border:1px solid black; background-color:white;" class="col-sm-12">
 					
 						<div class="col-sm-6">
 							<canvas id="myChart" width="400" height="400"></canvas>
