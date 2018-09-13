@@ -73,30 +73,30 @@
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 				<div class="container" style="height:100%;">
 				<%if(wList.isEmpty() == false){ %>
 					<div id="newWaitList">
 						<div style="height:10%;" class="col-sm-12">
-							<div class="col-sm-6" style="margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px;">&nbsp;&nbsp;조리중인 주문 &nbsp;&nbsp;</span></div>
-							<div class="col-sm-6" style="text-align:right; margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px;">&nbsp;&nbsp; 대기열 : <%=wList.size()%> &nbsp;&nbsp; </span></div>			
+							<div class="col-sm-6" style="margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px; color:white;">&nbsp;&nbsp;조리중인 주문 &nbsp;&nbsp;</span></div>
+							<div class="col-sm-6" style="text-align:right; margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px; color:black;">&nbsp;&nbsp; 대기열 : <%=wList.size()%> &nbsp;&nbsp; </span></div>			
 						</div>
 						<div class="col-sm-12" style="padding:0;">
-							<div class="col-sm-8" style="background-color:#D5D5D5; height:70%;" id="waitFirst">
-								<div style="background-color:white; margin-top:10%; height:20%; text-align:center;" >
-									wait No. <%=wList.get(0).getWaitSeq()%><br/>
-									order No. <%=wList.get(0).getOrdSeq()%><br/>
-									order Hp. <%=wList.get(0).getUserHp()%>	
+							<div class="col-sm-8" style="background-color:#b2afab; height:70%; border-radius:20px 20px 20px 20px; opacity: 0.9" id="waitFirst">
+								<div style="background-color:#dbd8d4; margin-top:10%; height:20%; text-align:center; opacity: 0.9 overflow:auto" >
+									<span>wait No. <%=wList.get(0).getWaitSeq()%></span><br/>
+									<span>order No. <%=wList.get(0).getOrdSeq()%></span><br/>
+									<span>order Hp. <%=wList.get(0).getUserHp()%></span>	
 								</div>
-								<div style="background-color:white; overflow:auto; margin-top:10%; height:50%; text-align:center;">
+								<div style="background-color:#dbd8d4; overflow:auto; margin-top:10%; height:50%; text-align:center;">
 									<div class="col-sm-12">
-									<div class="col-sm-6" style="font-size:100%">메뉴 이름</div> 
-									<div class="col-sm-6" style="font-size:100%">수량</div> 
+									<div class="col-sm-6" style="font-size:100%; ">메뉴 이름</div> 
+									<div class="col-sm-6" style="font-size:100%; ">수량</div> 
 									</div>
 									<%for(int i=0; i < menuView.size(); i++){ %>
-										<div class="col-sm-12">
-											<div class="col-sm-6"><b style="font-size:250%"><%=menuView.get(i).toString().split(":")[0]%></b></div>
-											<div class="col-sm-6"><b style="font-size:250%"><%=menuView.get(i).toString().split(":")[1]%></b></div>
+										<div class="col-sm-12" >
+											<div class="col-sm-6"><b style="font-size:250%;"><%=menuView.get(i).toString().split(":")[0]%></b></div>
+											<div class="col-sm-6"><b style="font-size:250%;"><%=menuView.get(i).toString().split(":")[1]%></b></div>
 											
 										</div>
 									<%} %>
@@ -107,14 +107,14 @@
 								
 									<%if(wList.size() <5){ %>
 										<%for (int i=1; i<wList.size(); i++){ %>
-											<div style="background-color:white; border:1px solid black; margin-top:15%; height:15%;" >
+											<div style="background-color:#dbd8d4; border:1px solid black; border-radius:10px 10px 10px 10px; margin-top:15%; height:15%; opacity: 0.9" >
 											order No. <%=wList.get(i).getOrdSeq()%><br/>
 											order Hp. <%=wList.get(i).getUserHp() %>
 											</div>
 										<%} %>
 									<%}else{ %>
 										<%for (int i=1; i< 5; i++){ %>
-											<div style="background-color:white; border:1px solid black; margin-top:15%; height:15%;" >
+											<div style="background-color:#dbd8d4; border:1px solid black; margin-top:15%; height:15%; opacity: 0.9" >
 											order No. <%=wList.get(i).getOrdSeq()%><br/>
 											order Hp. <%=wList.get(i).getUserHp() %>
 											</div>
@@ -130,7 +130,7 @@
 						</div>
 					</div>
 						
-						<button type="button" class="btn btn-secondary col-sm-12" onclick="JavaScript:waitComplete();" style="height:15%; font-size:400%; margin-top:1%; ">완료</button>
+						<button type="button" class="btn btn-secondary col-sm-12" onclick="JavaScript:waitComplete();" style="height:15%; font-size:400%; margin-top:1%; background-color:#dbd8d4; border-radius:20px 20px 20px 20px; opacity: 0.9 ">완료</button>
 					</div>
 					<%}%>
 			</td>

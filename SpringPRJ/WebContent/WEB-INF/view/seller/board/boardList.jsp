@@ -46,12 +46,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 			<!--tab 부분 시작-->
 			<div class="container" style="height:100%; margin-top:3%;" >
 				<div class="row" >
 					
-			            <div class="panel with-nav-tabs panel-dark" style="width:100%">
+			            <div class="panel with-nav-tabs panel-dark" style="width:100%; opacity: 0.9;">
 			                <div class="panel-heading">
 			                        <ul class="nav nav-tabs">
 			                            <li class="active"><a href="#tab1info" data-toggle="tab">공지사항</a></li>

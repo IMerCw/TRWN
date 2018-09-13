@@ -286,7 +286,7 @@
 			var y;
 			var tm128;
 			
-			alert(text);
+			//alert(text);
 			
 			var geocoder = new daum.maps.services.Geocoder();
 			// 주소로 좌표를 검색합니다
@@ -408,8 +408,8 @@
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
-			<div class="container">
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
+			<div class="container" style="background-color:white; opacity: 0.8;">
 			<h2>주유정보</h2><small>제공 : daum 지도 ,한국석유공사 Opinet</small>
 				<hr />
 					<div class="gas">

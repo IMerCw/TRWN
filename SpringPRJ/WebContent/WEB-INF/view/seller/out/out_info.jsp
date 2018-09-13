@@ -133,10 +133,10 @@
 		</tr>
 		<tr bgcolor="">
 		
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg');">
 		
 			<!-- 판매자 푸드트럭관리 -->
-			<div class="container">
+			<div class="container" style="background-color:white; opacity:0.8">
 				
 				<div><!------------------ 주문하기  ------------------>
 				<div>
@@ -217,7 +217,7 @@
 						<!--git test -->
 						<!-- 장바구니  -->
 						<div>
-							<div class="col-sm-12" style="height:120px;">
+							<div class="col-sm-12" style="height:120px; overflow:auto;">
 								<div class="col-sm-4" style="padding :0; position:absolute; right:0px; top: 0px;">
 									<button type="button" class="btn btn-default col-sm-12" onclick="JavaScript:itemBtn('1','delAll');">전체메뉴취소</button>
 									<div class="col-sm-12" style="text-align:center;"><b>총금액</b></div>
