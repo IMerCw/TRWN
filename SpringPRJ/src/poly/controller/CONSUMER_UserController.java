@@ -81,7 +81,7 @@ public class CONSUMER_UserController {
 	
 	//수정 화면 업데이트
 	@RequestMapping(value="consumer/user/userUpdateView", method=RequestMethod.GET)
-	
+		
 	public String userUpdateView(HttpServletRequest request , Model model) throws Exception{
 		log.info("userUpdateView Start");
 

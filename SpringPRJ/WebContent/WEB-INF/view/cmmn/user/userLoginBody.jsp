@@ -464,8 +464,8 @@
 				};
 				 if($('#register_userPassword').val() != $('#register_confirm-password').val()){
 					$('#register_confirm-password').focus();
-					alert('비밀번호/확인 동일하게 설정해주세요');
-				
+					alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');	
+					
 					return false;
 				};
 				//비밀번호 유효성 검사
