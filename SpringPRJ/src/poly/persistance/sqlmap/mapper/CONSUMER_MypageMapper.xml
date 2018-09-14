@@ -44,6 +44,7 @@
 			OINFO.ORD_SUMPRICE as ord_sumprice,
 			OINFO.ORD_WAY as ord_way,
 			OINFO.BUY_WAY as buy_way,
+			OITEM.ORD_AMNT as ord_amnt,
 			OINFO.ORD_DATE as ord_date
 		FROM ORDER_INFO OINFO
 		
@@ -51,7 +52,8 @@
 			ON OINFO.ITEM_SEQ=OITEM.ITEM_SEQ
 		INNER JOIN MENU_INFO MINFO
 			ON OITEM.MENU_SEQ=MINFO.MENU_SEQ
-		WHERE OITEM.USER_SEQ=#{userSeq};
+		WHERE OITEM.USER_SEQ=#{userSeq}
+		ORDER BY OINFO.ORD_DATE DESC
 	
 	</select>
 	

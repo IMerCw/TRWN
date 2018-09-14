@@ -11,7 +11,7 @@ int[] arrayDay2 = (int[])request.getAttribute("arrayDay");
 String stringDay = "";
 String stringTime ="";
 %>
-요일은 = <%=dayIndex %>
+<%-- 요일은 = <%=dayIndex %>
 요일% = <%=percentD %>
 시간은 = <%=timeIndex %>*3 ~ +3시간 까지
 시간대% = <%=percentT %>
@@ -21,7 +21,7 @@ String stringTime ="";
 	<% for(int i=0; i< arrayDay2.length; i++){
 		out.println(arrayDay2[i]);	
 	}
-	%>
+	%> --%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,8 +50,10 @@ String stringTime ="";
 		<tr bgcolor="">
 			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 				<div class="container" style="height:100%">
+				<br>
 					<h3 style="color:white;">매출분석</h3>
 					<hr>
+					<br>
 					<h3>
 						<span class="label label-Warning">
 						<%
@@ -87,6 +89,7 @@ String stringTime ="";
 						<%} %>
 						이 주요고객</span>
 					</h3>
+					<br>
 					<span style="color:white;">
 						분석지역 내 매출특성은
 						<%=stringDay%>요일
@@ -100,6 +103,7 @@ String stringTime ="";
 						<%} %>
 						 이 주요고객인 것으로 분석 되었습니다 .	
 					</span>
+					<br>
 					<div style="border:1px solid black; background-color:white;" class="col-sm-12">
 					
 						<div class="col-sm-6">

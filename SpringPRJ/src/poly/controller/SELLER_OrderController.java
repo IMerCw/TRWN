@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import poly.dto.seller.SELLER_WaitDTO;
 import poly.service.SELLER_IOrderService;
 import poly.service.impl.SELLER_OrderService;
 import poly.util.CmmUtil;
+import poly.util.SHA256Util;
 import poly.util.UtilTime;
 
 @Controller
@@ -266,7 +268,7 @@ public class SELLER_OrderController {
 	   
 	   
 	   /****************************************************************
-	    * 여기도 컵밥ㅂ 코드 싹다 수정해야합니다 .
+	    * 여기도  코드 싹다 수정해야합니다 .
 	    * 
 	    */
 	   //페이누리로 보내는 COMPLETE_URL(결제 성공후 가맹점 페이지로 넘어갈 URL)에 대응하는 메소드
@@ -296,6 +298,12 @@ public class SELLER_OrderController {
 	      /*oDTO = null;
 	      otList = null;*/
 	      log.info(this.getClass() + "orderSuccess end!!!");
+	      
+	      /*out 주문하기 화면으로 반환 시켜줘야합니다.
+	       * 
+	       * /seller/out/out_info.do?userSeq=<%=userSeq%>&userAuth=2
+	       * userSeq 판매자 Seq 넘겨야 out 주문하면 띄울수 있어요.
+	       * */
 	      return "/seller/order/orderSuccess";
 	   }
 	   
@@ -307,6 +315,42 @@ public class SELLER_OrderController {
 	 			return "redirect:userMenuList.do";
 	 		
 	 		}
+	 		
+	 	@RequestMapping(value="seller/order/orderLogin" ,method=RequestMethod.GET)
+	 	public String orderLogin(HttpServletRequest request, Model model) throws Exception{
+	 		String sum = CmmUtil.nvl(request.getParameter("sum"));
+			log.info("sum : " + sum);
+			String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
+			log.info("userSeq : " + userSeq);
+	 		
+			model.addAttribute("userSeq",userSeq);
+			model.addAttribute("sum",sum);
+	 		return "/seller/order/orderLogin";
+	 	}
+	 	@RequestMapping(value="seller/order/LoginOrder", method=RequestMethod.POST)
+	 	public @ResponseBody CMMN_UserDTO loginOrder(HttpServletRequest request)throws Exception{
+	 		log.info(this.getClass() + " LoginOrder start !!!");
+	 		
+	 		String email = CmmUtil.nvl(request.getParameter("email"));
+	 		log.info("eamil : " + email);
+	 		String pwd = SHA256Util.sha256(CmmUtil.nvl(request.getParameter("pwd")));
+	 		log.info("pwd : " + pwd);
+	 		
+	 		CMMN_UserDTO uDTO = new CMMN_UserDTO();
+	 		uDTO.setUserEmail(email);
+	 		uDTO.setUserPwd(pwd);
+	 		
+	 		uDTO = orderService.getUserDTO(uDTO);
+	 		if(uDTO ==null) {
+	 			uDTO = new CMMN_UserDTO();
+	 		}
+	 		log.info("uDTO get : " +uDTO.getUserSeq());
+	 		log.info("uDTO get : " +uDTO.getUserEmail());
+	 		
+	 		
+	 		log.info(this.getClass() + " LoginOrder end !!!!");
+	 		return uDTO;
+	 	}
 	
 	
 }

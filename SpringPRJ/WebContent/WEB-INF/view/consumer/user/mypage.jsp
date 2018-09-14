@@ -12,6 +12,7 @@
 <head>
 	<title>트럭왔냠 - 마이페이지</title>
 	<script type="text/javascript">
+		//탈퇴 여부 마지막 확인
 		function userDelete(userSeq){
 			r = confirm("정말로 회원 탈퇴를 하시겠습니까?");
 			if(r) {
@@ -39,7 +40,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/view/consumer/topBody.jsp" %>
-	<div class="container" style="width:100%;">
+	<div class="container">
 		<div class="mypageMenu" style="text-align:center; padding:30px 0; margin-bottom:10px; border-bottom:1px solid #bebebe; font-size:14px;">
 			<div class="col-xs-3">
 				<a class="nav-link active" href="/consumer/user/mypage.do">회원정보</a>
@@ -54,7 +55,7 @@
 				<a class="nav-link" href="/consumer/user/userCouponList.do">내 쿠폰목록</a>
 			</div>
 		</div>
-		<div style="width:100%;">
+		<div>
 			<!-- 	<h2>지역행사정보</h2> -->
 				<table class="table table-font-size" style="border: 1px solid #dddddd; width:100%; margin: 0 auto;" >
 					<thead>
@@ -88,7 +89,7 @@
 		
 				</table>
 		
-				<div align="right" style="width:90%; padding:15px 0;">
+				<div align="right" style="margin:10px;">
 					<button class="btn btn-default" onclick="location.href='/consumer/user/userUpdateView.do?userSeq=<%=userSeq%>'">수정하기</button>
 					<button class="btn btn-default" onclick="userDelete('<%=userSeq%>');">탈퇴하기</button>
 				</div>

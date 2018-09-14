@@ -48,7 +48,7 @@ body { font-family:gulim; font-size:12px; }
 				
 				</div>
 					<div class="col-sm-12" style="height:80%;">
-						<div id="map" style="width:90%; opacity:0.8 height:350px; float:none;" class="col-sm-12"></div>
+						<div id="map" style="width:90%; opacity:0.8; height:350px; float:none;" class="col-sm-12"></div>
 						<div style="height: 2px;background-color: black;margin: 10px 0;">
 						
 						</div>

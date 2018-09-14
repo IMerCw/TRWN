@@ -57,6 +57,12 @@ public class SELLER_OrderService implements SELLER_IOrderService {
 		System.out.println("insertOrderInfo : " + insertOrderInfo);
 		System.out.println("insertOrderItem : " + insertOrderItem);
 	}
+
+	@Override
+	public CMMN_UserDTO getUserDTO(CMMN_UserDTO uDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return orderMapper.getUserDTO(uDTO);
+	}
 	
 	
 }

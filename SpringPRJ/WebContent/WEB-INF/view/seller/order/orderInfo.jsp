@@ -36,7 +36,6 @@
 	
 	
 %>
-	<%=uDTO.getUserSeq()%><%=ftSeq  %>
 	
 <html>
 <head>

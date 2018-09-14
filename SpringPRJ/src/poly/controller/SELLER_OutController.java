@@ -86,6 +86,15 @@ public class SELLER_OutController {
 			ftsDTO.setFtSeq(ftSeq);
 			log.info("ftsDTO .get : " + ftsDTO.getFtSeq());
 		}
+		if(ftsDTO.getFtSeq() == null) {
+			String msg ="";
+			String url="";
+			msg = "등록된 트럭이 없습니다.";
+			url ="/seller/out/out_info.do";
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			return "/cmmn/alert";
+		}
 		
 		
 		ADMIN_Ft_InfoDTO fDTO = new ADMIN_Ft_InfoDTO();
