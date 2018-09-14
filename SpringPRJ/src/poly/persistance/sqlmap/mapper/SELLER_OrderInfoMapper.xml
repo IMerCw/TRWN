@@ -111,6 +111,19 @@
 		#{ordStatus}
 	)
 	</insert>
-
-
+	
+	<!-- 회원 구매 userSeq select  -->
+	<select id="getUserDTO" parameterType="CMMN_UserDTO" resultType="CMMN_UserDTO">
+		SELECT  USER_SEQ as userSeq,
+				USER_AUTH as userAuth,
+				USER_EMAIL as userEmail,
+				USER_PWD as userPwd,
+				USER_NICK as userNick,
+				USER_GENDER as userGender,
+				USER_HP as userHp
+		FROM	USER_INFO
+		WHERE	USER_EMAIL=#{userEmail} AND USER_PWD=#{userPwd} AND USER_STATUS LIKE 'AuthY'
+		
+	
+	</select>
 </mapper>

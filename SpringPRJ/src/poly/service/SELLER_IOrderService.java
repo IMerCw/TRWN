@@ -15,4 +15,5 @@ public interface SELLER_IOrderService {
 	public int updateCouponUse (ADMIN_Coupon_IssueDTO codeDTO)throws Exception;
 	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, SELLER_WaitDTO oIDTO)throws Exception;
 
+	public CMMN_UserDTO getUserDTO(CMMN_UserDTO uDTO)throws Exception;
 }

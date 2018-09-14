@@ -23,6 +23,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>order</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- 합쳐지고 최소화된 최신 CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<!-- 부가적인 테마 -->
@@ -30,7 +31,54 @@
 	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	 
+<script>
+$(document).ready(function(){
+	$('#sumbitBtn').click(function(){
+		var email = $('#username-email').val();
+		
+		//alert(email);
+		var pwd = $('#password').val();
+		//alert(pwd);
+		if(email == ""){
+			alert("이메일을 입력해주세요 ");
+			return false;
+		}
+		if(pwd == ""){
+			alert("패스워드를 입력해주세요");
+			return false;
+		}
+		var sum = <%=sum%>;
+		
+		
+		$.ajax({
+			url: "/seller/order/LoginOrder.do",
+			data: {
+				"email" : email,
+				"pwd" : pwd
+			},
+			method: "post",
+			success : function(data){
+				console.log(data);		
+				console.log(data.userSeq);
+				if(data != null){
+					console.log(" data != null")
+					location.href="/seller/order/orderInfo.do?sum="+sum+"&userSeq="+data.userSeq;
+				}
+			}
+			
+			
+		}) 
+		
+	});
+		
 
+	
+	
+})
+
+
+
+</script>
 
 </head>
 
@@ -50,8 +98,8 @@
 			        </div>
 			        <div class="">
 			          <div class="login-box well">
-			        <form accept-charset="UTF-8" role="form" method="post" action="">
-			            <legend>로그인</legend>
+			        <form accept-charset="UTF-8" role="form" method="post" action="#">
+			            <legend>회원 구매</legend>
 			            <div class="form-group">
 			                <label for="username-email">이메일 or 아이디</label>
 			                <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
@@ -61,15 +109,15 @@
 			                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
 			            </div>
 			            <div class="form-group">
-			                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
+			                <button type="button" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" id="sumbitBtn">Login</button>
 			            </div>
-			            <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
+			           <!--  <span class='text-center'><a href="#" class="text-sm">비밀번호 찾기</a></span> -->
 			            <hr />
 			           
-			            <form>
-			            
-			            <legend>비회원 구매</legend>
 			            </form>
+			            
+			            
+			            <h4>비회원 구매</h4>
 			            <div>
 			            	<textarea rows="8" style="width:100%; background-color:#f7f7f7; color:#b2b2b2;">
 비회원정보수집 동의
@@ -96,13 +144,11 @@
 3.소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
 							
 고객의 동의를 받아 보유하고 있는 거래정보 등을 고객께서 열람을 요구하는 경우 무신사는 지체 없이 그 정보를 열람·확인 할 수 있도록 조치합니다.
-			            	
-			            	</textarea>
+	         	</textarea>
 			            </div>
 			            <div class="form-group">
 			                <a href="/seller/order/orderInfo.do?sum=<%=sum %>&userSeq=<%=userSeq %>" class="btn btn-default btn-block m-t-md">비회원 구매하기</a>
 			            </div>
-			        </form>
 			          </div>
 			        </div>
 			      </div>
@@ -119,5 +165,6 @@
 	
 
 </body>
+
 
 </html>
