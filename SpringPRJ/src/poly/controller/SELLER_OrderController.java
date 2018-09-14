@@ -307,6 +307,18 @@ public class SELLER_OrderController {
 	 			return "redirect:userMenuList.do";
 	 		
 	 		}
+	 		
+	 	@RequestMapping(value="seller/order/orderLogin" ,method=RequestMethod.GET)
+	 	public String orderLogin(HttpServletRequest request, Model model) throws Exception{
+	 		String sum = CmmUtil.nvl(request.getParameter("sum"));
+			log.info("sum : " + sum);
+			String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
+			log.info("userSeq : " + userSeq);
+	 		
+			model.addAttribute("userSeq",userSeq);
+			model.addAttribute("sum",sum);
+	 		return "/seller/order/orderLogin";
+	 	}
 	
 	
 }
