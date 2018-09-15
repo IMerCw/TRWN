@@ -45,6 +45,7 @@
 			OINFO.ORD_WAY as ord_way,
 			OINFO.BUY_WAY as buy_way,
 			OITEM.ORD_AMNT as ord_amnt,
+			OINFO.FT_SEQ as ft_seq,
 			OINFO.ORD_DATE as ord_date
 		FROM ORDER_INFO OINFO
 		

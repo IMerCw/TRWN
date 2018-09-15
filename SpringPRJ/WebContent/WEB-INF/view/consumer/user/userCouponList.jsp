@@ -59,14 +59,14 @@
 							<th colspan="5"
 								style="background-color: #f9f9f9; text-align: center;">내 쿠폰목록</th>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
 							<td style="text-align: left;">쿠폰명</td>
 							<td style="text-align: left;">내용</td>
 							<td style="text-align: left;">개수</td>
-							<td style="text-align: left;">쿠폰발행일</td>
+							<td style="text-align: left;">쿠폰발행일w</td>
 						</tr>
+					</thead>
+					<tbody>
 						<%for(int i=0; i < cList.size(); i++) { %>
 						<tr>
 							<td style="text-align: left;"><%=cList.get(i).getCoupon_name()%></td>

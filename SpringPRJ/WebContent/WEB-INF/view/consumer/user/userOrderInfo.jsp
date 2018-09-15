@@ -30,7 +30,7 @@
 	</style>
 	
 	<script>
-		function orderDetail(i) {	//i는 숫자임
+		<%-- function orderDetail(i) {	//i는 숫자임
 			
 			var j=0;
 			var sum = j + i;
@@ -38,7 +38,7 @@
 			var menu = "";
 			menu = <%=oList.get(0).getMenu_name()%>;
 			alert("menu : " + menu);
-		}
+		} --%>
 		
 	</script>
 	
@@ -106,7 +106,8 @@
 			<table class="table table-font-size" style="border:1px solid #dddddd; width:100%; margin:0 auto;" >
 					<thead>
 						<tr>
-							<th colspan="5" style="background-color: #f9f9f9; text-align: center;">주문내역</th>
+							<th colspan="5" 
+								style="background-color: #f9f9f9; text-align: center;">주문내역</th>
 						</tr>
 						<tr>
 							<td style="text-align: left;">메뉴</td>
@@ -170,7 +171,7 @@
 					</div>
 					<div class="modal-body">고객님께서 <%=oList.get(i).getMenu_name() %> 메뉴 <%=oList.get(i).getOrd_amnt() %>개 주문하셨습니다.</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default">보러가기</button>
+						<button type="button" class="btn btn-default" onclick="location.href='/consumer/cnsmr/ftDetail.do?ft_seq=<%=oList.get(i).getFt_seq()%>'">다른 메뉴 보러가기</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					</div>
 				</div>
