@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 //import com.sun.java.util.jar.pack.Package.Class.Method;
 import com.sun.mail.handlers.message_rfc822;
 
+import poly.dto.consumer.CONSUMER_BoardRepleDTO;
 import poly.dto.consumer.CONSUMER_CouponIssueDTO;
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_OrderInfoDTO;
@@ -81,7 +82,7 @@ public class CONSUMER_UserController {
 	
 	//수정 화면 업데이트
 	@RequestMapping(value="consumer/user/userUpdateView", method=RequestMethod.GET)
-	
+		
 	public String userUpdateView(HttpServletRequest request , Model model) throws Exception{
 		log.info("userUpdateView Start");
 
@@ -196,6 +197,31 @@ public class CONSUMER_UserController {
 		log.info("Terminate userOrderInfo");
 		return "/consumer/user/userOrderInfo";
 	}
+	
+	//주문내역 상세 불러오기 ajax
+	/*@RequestMapping(value="consumer/user/userOrderInfo", method=RequestMethod.POST)
+	public @ResponseBody List<CONSUMER_OrderInfoDTO> oListModal(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+		log.info("oListModal Start");
+		
+		String userSeq = (String)session.getAttribute("userSeq");
+		rDTO.setBoardPSeq(boardPSeq);
+	    log.info("리뷰 rDTO getboardPSeq : " + rDTO.getBoardPSeq());
+		rDTO.setUserSeq(userSeq);
+		log.info("리뷰 rDTO getUserSeq : " + rDTO.getUserSeq());
+		rDTO.setContent(content);
+		log.info("리뷰 rDTO getContent : "+rDTO.getContent());
+		
+		List<CONSUMER_OrderInfoDTO> oListM = UserService.getOrderList(userSeq);		
+		
+		model.addAttribute("oListM", oListM);
+		
+		log.info("oList 시작:"+oListM);
+		log.info("이전 페이지 : " + request.getHeader("referer"));		//이전페이지 주소를 불러오는 함수
+		
+		log.info("oListModal End");
+		return oListM;
+		
+	}*/
 	
 	//관심매장
 	@RequestMapping(value="consumer/user/userFavoriteFt", method=RequestMethod.GET)

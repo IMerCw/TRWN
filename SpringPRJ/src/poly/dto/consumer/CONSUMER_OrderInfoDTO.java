@@ -13,6 +13,9 @@ public class CONSUMER_OrderInfoDTO {
 	private String rcv_time;
 	private String tid;
 	private String menu_name;
+	private String ord_amnt;
+	private String ft_seq;
+	private String ft_name;
 	
 	public int getOrd_seq() {
 		return ord_seq;
@@ -85,6 +88,24 @@ public class CONSUMER_OrderInfoDTO {
 	}
 	public void setMenu_name(String menu_name) {
 		this.menu_name = menu_name;
+	}
+	public String getOrd_amnt() {
+		return ord_amnt;
+	}
+	public void setOrd_amnt(String ord_amnt) {
+		this.ord_amnt = ord_amnt;
+	}
+	public String getFt_seq() {
+		return ft_seq;
+	}
+	public void setFt_seq(String ft_seq) {
+		this.ft_seq = ft_seq;
+	}
+	public String getFt_name() {
+		return ft_name;
+	}
+	public void setFt_name(String ft_name) {
+		this.ft_name = ft_name;
 	}
 	
 }

@@ -409,7 +409,7 @@
 		</tr>
 		<tr bgcolor="">
 			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
-			<div class="container" style="background-color:white; opacity: 0.8;">
+			<div class="container" style="background-color:white; opacity: 0.9;">
 			<h2>주유정보</h2><small>제공 : daum 지도 ,한국석유공사 Opinet</small>
 				<hr />
 					<div class="gas">

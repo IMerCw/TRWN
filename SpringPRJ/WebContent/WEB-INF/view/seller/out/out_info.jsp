@@ -58,7 +58,7 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>board</title>
-	<%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %>
+	
 	
 	
 	 <script type="text/javascript">
@@ -113,10 +113,20 @@
 		
 	};
 	
+	function complete(a,b){
+		
+		if(<%=sum%> == 0){
+			alert("주문할 상품을 선택해주세요")
+			return false;
+		}
+		
+		location.href="/seller/order/orderLogin.do?sum="+a+"&userSeq="+b;
+		//location.href="/seller/order/orderInfo.do?sum="+a+"&userSeq="+b;
+	}
+	
 	
 	
 	</script> 
-	<style>
 	<style>
 		body{
 			background-image:url('/resource/img/seller/pic02.jpg'); 
@@ -129,6 +139,8 @@
 		<tr height="7%" bgcolor="#444">
 			<td style="padding:0;">
 				<%@ include file="/WEB-INF/view/seller/top.jsp" %>
+				<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 			</td>
 		</tr>
 		<tr bgcolor="">
@@ -136,7 +148,7 @@
 			<td style="background-image:url('/resources/img/seller/pic02.jpg');">
 		
 			<!-- 판매자 푸드트럭관리 -->
-			<div class="container" style="background-color:white; opacity:0.8">
+			<div class="container" style="background-color:white; opacity:0.9">
 				
 				<div><!------------------ 주문하기  ------------------>
 				<div>
@@ -228,7 +240,7 @@
 										</div>
 										<span class="col-sm-2" style="padding :0">원</span>
 									</div>
-									<button type="button" class="btn btn-default col-sm-12" onclick="location.href='/seller/order/orderInfo.do?sum=<%=sum%>&userSeq=<%=userSeq%>'">주문완료</button>
+									<button type="button" class="btn btn-default col-sm-12" onclick="Javascript:complete(<%=sum%>,<%=userSeq%>)">주문완료</button>
 								</div>
 								<%if(Ilist == null){ %>
 								
@@ -264,7 +276,15 @@
 				
 					
 			</div>
+			
+			
+			
+			
+			
+			
 			</td>
+			
+			
 			
 		</tr>
 		<tr height="7%" style="background-color:#444">
@@ -274,6 +294,11 @@
 		</tr>
 	</table>
 	
+	
+	
+	
+		
 
 </body>
+
 </html>
