@@ -116,6 +116,9 @@
 	}
 	/* 배달/예약/케이터링 가능 뱃지 */
 	.label {
+	    font-size: 15px;
+	    padding-top: 8px;
+	    height: 30px;
 		display:inline-block;
 		margin:3px 0;
 	}

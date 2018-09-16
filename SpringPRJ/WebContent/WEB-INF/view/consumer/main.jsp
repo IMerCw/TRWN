@@ -14,7 +14,7 @@
 	
 	/* 반응형을 위한 이미지 width 조정 */
 	.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img {
-	/* 	width:100%; */
+		width:100%;
 	}
 	.carousel-control:focus, .carousel-control:hover {
 		opacity: 0;
@@ -28,19 +28,18 @@
 <body>
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
 	<%if(!imgDTOs.isEmpty()) {%>
-			<div class="container">
-			  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-			    <!-- Indicators -->
-			    <ol class="carousel-indicators">
-			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			      <li data-target="#myCarousel" data-slide-to="1"></li>
-			      <li data-target="#myCarousel" data-slide-to="2"></li>
-			      <li data-target="#myCarousel" data-slide-to="3"></li>
-			    </ol>
-				
-			    <!-- Wrapper for slides -->
+		<div class="container">
+		  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		    <!-- Indicators -->
+		    <ol class="carousel-indicators">
+		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		      <li data-target="#myCarousel" data-slide-to="1"></li>
+		      <li data-target="#myCarousel" data-slide-to="2"></li>
+		      <li data-target="#myCarousel" data-slide-to="3"></li>
+		    </ol>
+			
+		    <!-- Wrapper for slides -->
 				<%if(imgDTOs != null && imgDTOs.isEmpty() == false) {%>
-					<%try { %>
 				    <div class="carousel-inner">
 				      <div class="item active">
 				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(0).getFileSevname()%>">
@@ -56,9 +55,7 @@
 				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(3).getFileSevname()%>">
 				      </div>
 				    </div>
-					<%} catch(IndexOutOfBoundsException ie){ %>
-					<%} %>
-				<%} %>
+				<%} %> 
 			    <!-- Left and right controls -->
 			    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
 			      <span class="glyphicon glyphicon-chevron-left"></span>

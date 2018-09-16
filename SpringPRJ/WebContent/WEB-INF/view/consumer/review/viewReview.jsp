@@ -29,17 +29,15 @@
 				<div class="col-xs-4">
 					<!-- 목록으로 가기 // 뒤로 가기 -->
 					<a href="/consumer/cnsmr/ftDetail.do?ft_seq=<%=revDTO.getFt_seq()%>&cmd=2">
-						<img src="/resources/img/consumer/left-arrow.png" width="35px" style="margin:20px 0;"/>
+						<img src="/resources/img/consumer/left-arrow.png" width="35px" style="margin-top:10px;"/>
 					</a>
-				</div>
-				<div class="col-xs-8" style="height:75px; padding:19px 0px; font-size: 25px;">
 				</div>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row" >
 				<div class="col-xs-6">
-					<h2><%=revDTO.getRev_title() %></h2>
+					<h2 style="font-weight:bold"><%=revDTO.getRev_title() %></h2>
 				</div>
 				<div class="col-xs-6" style="padding:20px; text-align:right;">
 					<h5>
@@ -53,17 +51,17 @@
 			
 			<div class="row" style="margin-top:15px; margin-bottom:15px;">
 				<div class="col-xs-6">
+					<%int personalCon = (revDTO.getUser_seq() < 1) ?  0 : revDTO.getUser_seq() % 62;%>
+					<img src="<%=request.getContextPath()%>/resources/img/consumer/personalCon/psnlCn (<%=personalCon%>).png" style="height: 40px; margin-right:10px;"/>
 					<%=revDTO.getUser_nick() %>
 				</div>
-				<div class="col-xs-6" style="text-align:right;">
-					<%=revDTO.getRev_regdate() %>
+				<div class="col-xs-6" style="text-align:right; font-size: 12px; padding-top: 6px;">
+					<%=revDTO.getRev_regdate()%>
 				</div>
 			</div>
 
 			<div class="row" >
-				<div class="col-xs-12">
-					<div class="form-group">
-					</div>
+				<div style="background-color:#cecece; height:2px; margin:20px 10px;">
 				</div>
 			</div>
 			<div class="row" >
@@ -87,8 +85,8 @@
 					
 			
 
-			<div class="row" style="margin: 0 2px; margin-top: 50px;  height: 3px; background-color: #eeeeee;">
-				<div class="col-xs-12">
+			<div class="row" >
+				<div style="background-color:#cecece; height:2px; margin:20px 10px;">
 				</div>
 			</div>
 		</div>
@@ -120,8 +118,14 @@
 						<input type="hidden" value="<%=revDTO.getReview_seq()%>" name="review_seq"/>
 						<div id="replTxtBox<%=i%>">
 							<div class="row" >
-								<div class="col-xs-4"><%=repleList.get(i).getUser_nick()%></div>
-								<div class="col-xs-8" style="text-align:right;"><%=repleList.get(i).getRev_regdate()%></div>
+								<div class="col-xs-6">
+									<%personalCon = (repleList.get(i).getUser_seq() < 1) ?  0 : repleList.get(i).getUser_seq() % 62;%>
+									<img src="<%=request.getContextPath()%>/resources/img/consumer/personalCon/psnlCn (<%=personalCon%>).png" style="height: 30px; margin-right:10px;"/>
+									<%=repleList.get(i).getUser_nick()%>
+								</div>
+								<div class="col-xs-6" style="text-align:right; font-size: 12px; padding-top: 6px;">
+									<%=repleList.get(i).getRev_regdate()%>
+								</div>
 							</div>
 							<div class="row" style="padding: 10px 0;">
 								<div class="col-xs-12"><%=repleList.get(i).getRev_text() %></div>

@@ -156,7 +156,7 @@
 	<!-- 푸터 -->
 	<footer class="footer">
 		<div style="padding-top:28px;"></div>
-		<div class="container" style="padding:0px 10px; background-color: #f5f5f5;"><span class="text-muted">© All Rights Reserved.</span></div>
+		<div class="footerContainer" style="padding:0px 10px; background-color: #f5f5f5;"><span class="text-muted">© All Rights Reserved.</span></div>
 	</footer>
 
 <!--  top body끝  -->

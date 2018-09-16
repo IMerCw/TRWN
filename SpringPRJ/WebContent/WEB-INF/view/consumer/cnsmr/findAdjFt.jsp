@@ -33,7 +33,7 @@
 	.panel-body{ /* 푸드트럭 사진 밑 내용 소개 */
 		text-align:center; 
 	}
-
+	
 </style>
 <title>트럭왔냠 - 근처 푸드트럭 찾기</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -49,7 +49,7 @@
 	<!-- 다음 맵이 차지할 공간 -->
 	<div id="map" style="width:100%;height:350px;"></div>
 	<!-- 푸드트럭 목록 -->  
-	<div class="container">
+	<div class="FtListcontainer" style="margin:0;">
 		<div class="row" style="margin: 0">
 		<%if(ftList != null && ftList.isEmpty() == false) {%>
 			<%for(int i = 0; i <ftList.size(); i++) {%>

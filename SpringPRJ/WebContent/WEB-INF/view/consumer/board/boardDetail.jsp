@@ -4,11 +4,10 @@
 <%@page import="poly.dto.consumer.CONSUMER_BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-		<%
-		
+	<%
 		CONSUMER_BoardDTO bDTO = (CONSUMER_BoardDTO)request.getAttribute("bDTO");
 		List<CONSUMER_BoardRepleDTO> rList = (List<CONSUMER_BoardRepleDTO>)request.getAttribute("rList");
-		%>
+	%>
 <html>
 <head>
 <title>트럭왔냠 - 게시판 상세보기</title>
@@ -65,11 +64,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
-
-		
 		<div class="container" style="bgcolor:#e0e0e0">
-				
-			
 			<ul style="list-style:none;">
 				<li>제목 : <%=bDTO.getTitle()%></li>
 			</ul>
@@ -86,7 +81,6 @@
 				<li>내용 : <%=bDTO.getContent()%></li>
 			</ul>
                
-			
 			<div style="height:100px">
 			</div>
 			
@@ -109,7 +103,7 @@
 			<!-- 댓글 불러오기 -->
 			<div id="ListAjax">
 				<%for (int i=0; i < rList.size(); i++) {%>
-				<div><table class='table'><h6><strong>userSeq : <%=rList.get(i).getUserSeq()%> &nbsp;&nbsp;Date : <%=rList.get(i).getRegDate() %></strong></h6>
+				<div><table class='table'><h6 style="font-weight:bold">userSeq : <%=rList.get(i).getUserSeq()%> &nbsp;&nbsp;Date : <%=rList.get(i).getRegDate() %></h6>
 				<%=rList.get(i).getContent() %><tr><td><div align="right"><button class="btn btn-default">수정</button><button class="btn btn-default">삭제</button></div></td></tr>
 				</table></div>
 				<%} %>

@@ -1,3 +1,4 @@
+<%@page import="poly.util.CmmUtil"%>
 <%@page import="poly.dto.consumer.CONSUMER_FtMenuCateDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.consumer.CONSUMER_Ft_InfoDTO"%>
@@ -88,8 +89,23 @@
 	</div>
 	<br/><br/> <!-- 메뉴가 버튼에 가리지 않도록 공백 설정 -->
 	<div class="header" id="myHeader2">
-		<button type="button" class="btn btn-primary" id="goToOrder">주문하러 가기</button>
+		<button type="button" onclick="goToOrder(); return false;" 
+			class="btn btn-primary" id="goToOrder" style="font-size:20px;">주문하러 가기</button>
 	</div>
 
 </body>
+<script>
+	function goToOrder() {
+		<% String userSequence = CmmUtil.nvl((String)session.getAttribute("userSeq"));%>
+		<%if ("".equals(userSequence)) {%>
+			alert('로그인을 해주시기 바랍니다.');
+		<%}else {%>
+			var r = confirm('주문하시겠습니까?');
+			if(r){
+				location.href='seller/out/out_info.do?userSeq=3&userAuth=2&pgCmd=1';
+			}
+		<%}%>
+		
+	}
+</script>
 </html>
