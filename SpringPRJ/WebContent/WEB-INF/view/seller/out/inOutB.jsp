@@ -1,26 +1,22 @@
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
 	String userAuth = CmmUtil.nvl((String)session.getAttribute("userAuth"));
 %>
-<!--
-	Transitive by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
 	<head>
-		<title>inOut</title>
+		<title>inOut TETST</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/seller/main.css" />
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
 		<style>
-			
-	
-	  	  
+			body {
+				font-family: 'Noto Sans KR', sans-serif;
+				margin: 0 auto;
+			}
 		</style>
 	</head>
 	<body>
@@ -46,29 +42,30 @@
 			its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
 			formats to work correctly.
 		-->
+		<form action="/seller/out/out_info.do" method="POST">
+		<input type="hidden" value="<%=userSeq%>" name="userSeq"/>
+		<input type="hidden" value="<%=userAuth%>" name="userAuth"/>
 			<section id="banner">
 				<div class="inner">
 					<div id="floatL">
-						 <a href="/seller/main.do">
-				            <div id="truck_in" onmouseover="changeBg('in')" onmouseout="changeBg_out('in')">
-				                <h1>IN</h1>
-				                <p>푸드트럭 안</p>
-				                <hr width="100%"/>
-				            </div>
-				        </a>
+			            <div onclick = "location.href='/seller/main.do'" id="truck_in">
+			                <h1>IN</h1>
+			                <p>푸드트럭 안</p>
+			                <hr width="100%"/>
+			            </div>
 					</div>
 					<div id="floatR">
-				        <a href="/seller/out/out_info.do?userSeq=<%=userSeq%>&userAuth=<%=userAuth%>">
-				            <div id="truck_out"  onmouseover="changeBg('out')" onmouseout="changeBg_out('out')">
+				        <button type="submit" style="background: none;">
+				            <div id="truck_out" >
 				                <hr width="100%"/>
 				                <h1>OUT</h1>
-				                <p>푸드트럭 밖</p>
+				                <p style="font-family:'Noto Sans KR', sans-serif;">푸드트럭 밖</p>
 				            </div>
-				        </a>
+				        </button>
 					</div>
 				</div>
 			</section>
-
+		</form>
 	
 		<!-- Footer -->
 			<footer id="footer" class="wrapper">

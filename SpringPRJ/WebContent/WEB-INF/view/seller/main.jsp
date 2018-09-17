@@ -127,7 +127,9 @@
 						</span>
 					</a>
 				</div>
-				<a href="#menu" class="toggle"><span>Menu</span></a>
+				<a href="#menu" class="toggle">
+					<img src="<%=request.getContextPath()%>/resources/img/seller/menu-button.png">
+				</a>
 			
 			</header>
 

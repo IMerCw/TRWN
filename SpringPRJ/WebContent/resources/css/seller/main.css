@@ -3467,15 +3467,6 @@
 				-webkit-tap-highlight-color: transparent;
 			}
 
-				#header > a[href="#menu"]:before {
-					content: "";
-					-moz-osx-font-smoothing: grayscale;
-					-webkit-font-smoothing: antialiased;
-					font-family: FontAwesome;
-					font-style: normal;
-					font-weight: normal;
-					text-transform: none !important;
-				}
 
 				#header > a[href="#menu"]:before {
 					margin: 0 0.5em 0 0;
@@ -3648,15 +3639,6 @@
 			width: 7em;
 		}
 
-			#menu .close:before {
-				content: "";
-				-moz-osx-font-smoothing: grayscale;
-				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
-				font-style: normal;
-				font-weight: normal;
-				text-transform: none !important;
-			}
 
 			#menu .close:before {
 				font-size: 1.25em;

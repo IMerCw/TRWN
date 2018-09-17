@@ -48,8 +48,6 @@
 				body {
 					margin: 0 auto;
 					
-				    font-family: "Lato", sans-serif;
-				    
 				}
 				a {
 					text-decoration: none;

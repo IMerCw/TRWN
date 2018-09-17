@@ -66,7 +66,7 @@ public class SELLER_OutController {
 		log.info("userSeq : " + userSeq);
 		String userAuth = CmmUtil.nvl(request.getParameter("userAuth"));
 		log.info("userAuth : " + userAuth);
-		//소비자가 주문하기 클릭할경루 소비자가 보고 있던 푸드트럭의 번호를 받는다.
+		//소비자가 주문하기 클릭할경우 소비자가 보고 있던 푸드트럭의 번호를 받는다.
 		String ftSeq =CmmUtil.nvl(request.getParameter("ftSeq"));
 		log.info("ftSeq : " + ftSeq);
 		
@@ -142,6 +142,8 @@ public class SELLER_OutController {
 		return "/seller/out/out_info";
 		// 0223 주석 담
 	}
+	
+	
 	@RequestMapping(value="seller/out/item")//장바구니 메뉴 클릭 시
 	public String insertTemp (HttpServletRequest request,HttpSession session,Model model) throws Exception{
 		log.info(this.getClass() + "insert item Start !!!!!");

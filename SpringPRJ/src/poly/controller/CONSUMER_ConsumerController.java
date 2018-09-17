@@ -253,7 +253,7 @@ public class CONSUMER_ConsumerController {
 			
 		}
 		///////////////////////////////////////////////////////
-		
+		model.addAttribute("ft_seq", ft_seq);
 		
 		menuDTOs = null;
 		return "/consumer/cnsmr/ftDetailMenu";

@@ -50,13 +50,21 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/bootstrap.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/ft_info.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-
+	<style>
+		#menuController {
+			width:100%; 
+			bottom: 0;
+			left:0;
+			background-color: white;
+		}
+	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>트럭왔냠 - 주문하기</title>
 	
@@ -120,15 +128,52 @@
 				alert("주문할 상품을 선택해주세요")
 				return false;
 			}
+			if(b == null){
+				alert("로그인을 해주세요.");
+				return false;
+			}
+			// 폼 생성
+			var form = document.createElement("form");     
+
+			form.setAttribute("method","post");                    
+			form.setAttribute("action","/seller/order/orderLogin.do");        
+
+			document.body.appendChild(form);                        
+
+			// input 생성
+			var input_id = document.createElement("input");  
+
+			input_id.setAttribute("type", "hidden");                 
+
+			input_id.setAttribute("name", "sum");                        
+			input_id.setAttribute("value", a);                          
 			
-			location.href="/seller/order/orderLogin.do?sum="+a+"&userSeq="+b;
-			//location.href="/seller/order/orderInfo.do?sum="+a+"&userSeq="+b;
+			form.appendChild(input_id);
+
+			var input_id2 = document.createElement("input");
+
+			input_id2.setAttribute("type", "hidden");
+			
+			input_id2.setAttribute("name", "userSeq"); 
+			input_id2.setAttribute("value", b);     
+			
+			form.appendChild(input_id2);
+			 
+			//폼전송
+
+			form.submit();  
+			
+			/* location.href="/seller/order/orderLogin.do?sum="+a+"&userSeq="+b; */
 		}
 		
 		
 		
 		</script> 
 	<style>
+		* {
+			font-family: 'Noto Sans KR', sans-serif;
+			margin: 0 auto;
+		}
 		/* body{
 			background-image:url('/resource/img/seller/pic02.jpg'); 
 		}
@@ -141,14 +186,14 @@
 		
 			<!-- 판매자 푸드트럭관리 -->
 		<div id="menuContainer">
-			<div class="menuInnerContainer" style="width:90%; margin:0 auto; background-color:white;">
+			<div class="menuInnerContainer" style="width:96%; margin:0 auto; background-color:white;">
 				<div><!------------------ 주문하기  ------------------>
 				<div>
 					<div style="float:left; width:70%; height:42px;">
 							<h3>메뉴/카테고리</h3>
 					</div>
 					<div style="clear:both;"></div>
-					<hr>
+					<hr style="margin-top:18px; margin-bottom:14px;">
 					<!-- Nav tabs -->
 			  <ul class="nav nav-pills">
 			  <%for(ADMIN_Ft_Menu_CateDTO cateDTO : cateDTOarr){ %>
@@ -173,10 +218,11 @@
 			  	<%} %>
 			  <%} %>
 			  </ul>
-			
+				
 			  <!-- Tab panes -->
-			  <div class="tab-content" style="margin-top:10px; height:465px; overflow:auto;">
+			  <div class="tab-content container-fluid" style="padding:0 6px;margin-top:10px; ">
 			  	<%int i=0; %>
+			  	<%=(cateDTOarr == null) ? "등록된메뉴가 없습니다." : "" %>
 			  	<%for(ADMIN_Ft_Menu_CateDTO cateDTO : cateDTOarr){ %>
 			  		<%if(cateDTO.getCate_sort_no()==1){ %>
 			  			<div role="tabpanel" class="tab-pane active" id="home">
@@ -186,8 +232,8 @@
 			  			<%for(ADMIN_Menu_InfoDTO menuDTO : menuDTOarr){ %>
 			  				<%if(cateDTO.getCate_sort_no()==menuDTO.getCate_sort_no()){ %>
 			  					<div style="border:1px solid #cccccc; width:138px; height:200px; margin:3px; float:left; cursor:pointer;"
-			  					onmouseover="this.style='border:1px solid #D9534F; width:165px; height:200px; margin:3px; float:left; cursor:pointer;'"
-			  					onmouseout="this.style='border:1px solid #cccccc; width:165px; height:200px; margin:3px; float:left; cursor:pointer;'"
+			  					onmouseover="this.style='border:1px solid #D9534F; width:138px; height:200px; margin:3px; float:left; cursor:pointer;'"
+			  					onmouseout="this.style='border:1px solid #cccccc; width:138px; height:200px; margin:3px; float:left; cursor:pointer;'"
 			  					onclick="JavaScript:item('<%=ftDTO2.getFt_seq()%>','<%=menuDTO.getMenu_seq()%>','RegItem');">
 			  					<%-- onclick="location.href='<%=request.getContextPath()%>/admin/ft/ft_info.do?cmd=menu_info&ft_seq=<%=ftDTO2.getFt_seq()%>&menu_seq=<%=menuDTO.getMenu_seq()%>'"> --%>
 						    		<div style="width:100%; height:165px; padding:3px; ">
@@ -227,16 +273,17 @@
 					
 			</div>
 		<!-- 장바구니  -->
-		<div class="container-fluid" >
+		<div class="container-fluid" id="menuController">
 			<%-- 장바구니 --%>
-			<%if(Ilist == null){ %>
-		
-			<div class="row" style="padding :0; height:120px;">
-				<button type="button" class="btn btn-default col-sm-2">취소</button>
+			<%if(Ilist == null ){ %>
+			
+			<div class="row" style="padding :0 15px;">
+				메뉴를 추가해 주세요.
+				<!-- <button type="button" class="btn btn-default col-sm-2">취소</button>
 				<p><b>메뉴이름</b></p>
 				<button type="button" class="btn btn-default col-sm-1">-</button>
 				<p style="padding :0; text-align:center"><b>수량</b></p>
-				<button type="button" class="btn btn-default col-sm-1" >+</button>
+				<button type="button" class="btn btn-default col-sm-1" >+</button> -->
 			</div>
 				
 				
@@ -247,18 +294,18 @@
 						<div class="col-xs-2">
 							<button type="button" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','amntMinus');">-</button>
 						</div>
-						<div class="col-xs-2" style="text-align:center;">
+						<div class="col-xs-2" style="text-align:center; height: 34px; padding-top:6px">
 							<%=Ilist.get(j).get("amnt")%>
 						</div>
 						<div class="col-xs-2">
 							<button type="button" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','amntPlus');" >+</button>
 						</div>
-						<div class="col-xs-4" style="text-align:center;">
+						<div class="col-xs-4" style="text-align:center; padding-top: 6px; height: 34px;">
 							<%=Ilist.get(j).get("menuName")%>
 						</div>
 						<div class="col-xs-2">
-							<button type="button" style="width:100%;" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','delItem');">
-								 <b style="text-align:center;">X</b>
+							<button type="button" style="width:100%; padding-right: 16px; padding-bottom: 8px;" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','delItem');">
+								 <b style="">x</b>
 							</button>
 						</div>
 					</div>
@@ -267,8 +314,8 @@
 			<div style="height:32px;"></div>
 			<%-- 총금액 표시--%>
 			<div class="row" style="padding :0;">
-				<div class="col-xs-12">
-					<button type="button" style="width:100%" class="btn btn-default" onclick="JavaScript:itemBtn('1','delAll');">전체메뉴취소</button>
+				<div class="col-xs-12" style="margin-bottom: 12px;">
+					<button type="button" style="width:100%; margin-bottom: 12px;" class="btn btn-default" onclick="JavaScript:itemBtn('1','delAll');">전체메뉴취소</button>
 					<div class="col-xs-4" style="text-align:center; height:34px;"><b>총금액</b></div>
 					<div class="col-xs-4" style="text-align:center; height:34px;">
 						<div style="padding :0;">

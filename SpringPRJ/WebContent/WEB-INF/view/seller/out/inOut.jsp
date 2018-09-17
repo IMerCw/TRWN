@@ -131,47 +131,49 @@
 
 </head>
 <body>
-
-	<table style="height: 100%; width: 100%">
-		<tr height="7%" bgcolor="#333333">
-			<td>
-
-			</td>
-		</tr>
-		<tr bgcolor="">
-			<td>
-				<div class="container">
-					<div id="logo_main"> <img src="/resources/img/consumer/logo.png" width="100%"/></div>
-			
-				    <div id="container">
-				        <a href="/seller/inMain.do">
-				            <div id="truck_in" onmouseover="changeBg('in')" onmouseout="changeBg_out('in')">
-				                <h1>IN</h1>
-				                <hr width="80%"/>
-				                <p>푸드트럭 안</p>
-				            </div>
-				        </a>
-				        <a href="/seller/out/out_info.do?userSeq=<%=userSeq%>&userAuth=<%=userAuth%>">
-				            <div id="truck_out"  onmouseover="changeBg('out')" onmouseout="changeBg_out('out')">
-				                <h1>OUT</h1>
-				                <hr width="80%"/>
-				                <p>푸드트럭 밖</p>
-				            </div>
-				        </a>
-				    </div>
-			
-			
-				</div>
-
-			</td>
-		</tr>
-		<tr height="7%" bgcolor="#333333">
-			<td>
-				<%@ include file="/WEB-INF/view/seller/bottom.jsp" %>
-			</td>
-		</tr>
-	</table>
+	<form action="/seller/out/out_info.do">
+		<input type="hidden" value="<%=userSeq%>" name="userSeq"/>
+		<input type="hidden" value="<%=userAuth%>" name="userAuth"/>
+		<table style="height: 100%; width: 100%">
+			<tr height="7%" bgcolor="#333333">
+				<td>
 	
+				</td>
+			</tr>
+			<tr bgcolor="">
+				<td>
+					<div class="container">
+						<div id="logo_main"> <img src="/resources/img/consumer/logo.png" width="100%"/></div>
+				
+					    <div id="container">
+					        <a href="/seller/inMain.do">
+					            <div id="truck_in" onmouseover="changeBg('in')" onmouseout="changeBg_out('in')">
+					                <h1>IN</h1>
+					                <hr width="80%"/>
+					                <p>푸드트럭 안</p>
+					            </div>
+					        </a>
+					        <button type="submit">
+					            <div id="truck_out"  onmouseover="changeBg('out')" onmouseout="changeBg_out('out')">
+					                <h1>OUT</h1>
+					                <hr width="80%"/>
+					                <p>푸드트럭 밖</p>
+					            </div>
+					        </button>
+					    </div>
+				
+				
+					</div>
+	
+				</td>
+			</tr>
+			<tr height="7%" bgcolor="#333333">
+				<td>
+					<%@ include file="/WEB-INF/view/seller/bottom.jsp" %>
+				</td>
+			</tr>
+		</table>
+	</form>
 
 </body>
 </html>

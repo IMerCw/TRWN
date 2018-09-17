@@ -55,6 +55,8 @@
 	
 	<!-- 우편검색 -->
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
+	
 	<script>
 	    function sample6_execDaumPostcode() {
 	        new daum.Postcode({
@@ -400,14 +402,18 @@
 		console.log(f.CUSTOMER_TEL.value); */
 	}
 </script>
-
+<style>
+	body{
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+</style>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">
 		<tr height="7%" bgcolor="black">
 			<td>
 				<div class="contatiner">
-					<h5 style="text-align:center;" class="text-white">주문서 작성</h5>
+					<h5 style="text-align:center; padding-top: 10px; padding-bottom: 5px;" class="text-white">주문서 작성</h5>
 				</div>
 			</td>
 		</tr>
@@ -506,7 +512,7 @@
 									
 							<!-- 주문자 정보  -->
 							<section class="section-orderer" style="background-color:white;">
-								<h6 class="title-sugject">
+								<h6 class="title-sugject" style="padding-top:10px;">
 									<a href="#" onclick="JavaScript:toggleBtn();" style="text-decoration:none; color:black;">
 										<span class="fas fa-chevron-up" id="toggleupdown"></span>
 										<b>주문자 정보</b>
@@ -515,11 +521,15 @@
 								<div style="display:block;" id="orderInfo">
 								<hr>
 									<div class="col-sm-12">
-										이름 : <input type="text" value="<%=uDTO.getUserNick() %>" name="CUSTOMER_NAME" id="CUSTOMER_NAME" class="col-sm-11" style="text-align:center; padding:0;"/>
+										이름 : <input type="text" value="<%=uDTO.getUserNick() %>"
+											name="CUSTOMER_NAME" id="CUSTOMER_NAME" class="col-sm-11" disabled="disabled" 
+												style="text-align:center; padding:0;"/>
 									</div>
 									<br/>
 									<div class="col-sm-12">
-										휴대전화 : <input type="tel" value="<%=uDTO.getUserHp() %>" name="CUSTOMER_TEL" id="CUSTOMER_TEL" maxlength="11" size="11" class="col-sm-10" style="text-align:center;padding:0;">
+										휴대전화 : <input type="tel" value="<%=uDTO.getUserHp() %>"
+											name="CUSTOMER_TEL" id="CUSTOMER_TEL" maxlength="11" size="11" class="col-sm-10" disabled="disabled"
+												style="text-align:center;padding:0;">
 									</div>
 									<br/>
 									
@@ -541,10 +551,9 @@
 												}%>
 										</select>
 										<br />
-										!<small>푸드트럭 특성상 시간을 정확하게 맞추지 못할 수 있습니다. 양해바랍니다^^</small> 
+										<p style="color:tomato;">!<small>&nbsp;푸드트럭 특성상 시간을 정확하게 맞추지 못할 수 있습니다. 양해바랍니다^^</small></p> 
 									</div>
 									<div class="col-sm-12">
-										<br/>
 										<div>요청사항 </div>
 										<textarea rows="3" class="col-sm-12"></textarea>
 									</div>		
@@ -554,7 +563,7 @@
 								<br/>
 							<!-- 배송정보 -->
 							<section class="section-orderer" style="background-color:white;">
-								<h6 class="title-sugject">
+								<h6 class="title-sugject" style="padding-top:10px;">
 									<a href="#" onclick="JavaScript:deliveryBtn();" style="text-decoration:none; color:black;">
 										<span class="fas fa-chevron-down" id="deliveryupdown"></span>
 										<b>배송지</b> 
@@ -657,11 +666,6 @@
 						</form>
 						<button type="button" style="height:5%;"class=" btn-dark orderButton02 col-sm-12" onclick="doSubmitOrder(); return false;" id="sum"><%=sum%>원 결제하기</button>
 				</div>
-			</td>
-		</tr>
-		<tr height="7%" bgcolor="black">
-			<td>
-				<%@ include file="/WEB-INF/view/seller/bottom.jsp" %>
 			</td>
 		</tr>
 	</table>

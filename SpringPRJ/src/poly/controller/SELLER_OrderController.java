@@ -307,16 +307,15 @@ public class SELLER_OrderController {
 	      return "/seller/order/orderSuccess";
 	   }
 	   
-	 //이거슨 결제 도중 취소 URL이였던 것이였던 것이다
-	 		@RequestMapping(value="orderCancelResult")
-	 		public String orderCancelResult(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception{
-	 			log.info("결제 도중 최소");
-	 			session.setAttribute("ss_tmpBasket", null);
-	 			return "redirect:userMenuList.do";
+	    //이거슨 결제 도중 취소 URL이였던 것이였던 것이다
+ 		@RequestMapping(value="orderCancelResult")
+ 		public String orderCancelResult(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception{
+ 			log.info("결제 도중 최소");
+ 			session.setAttribute("ss_tmpBasket", null);
+ 			return "redirect:userMenuList.do";
+ 		}
 	 		
-	 		}
-	 		
-	 	@RequestMapping(value="seller/order/orderLogin" ,method=RequestMethod.GET)
+	 	@RequestMapping(value="seller/order/orderLogin" ,method=RequestMethod.POST)
 	 	public String orderLogin(HttpServletRequest request, Model model) throws Exception{
 	 		String sum = CmmUtil.nvl(request.getParameter("sum"));
 			log.info("sum : " + sum);
@@ -327,6 +326,7 @@ public class SELLER_OrderController {
 			model.addAttribute("sum",sum);
 	 		return "/seller/order/orderLogin";
 	 	}
+	 	
 	 	@RequestMapping(value="seller/order/LoginOrder", method=RequestMethod.POST)
 	 	public @ResponseBody CMMN_UserDTO loginOrder(HttpServletRequest request)throws Exception{
 	 		log.info(this.getClass() + " LoginOrder start !!!");

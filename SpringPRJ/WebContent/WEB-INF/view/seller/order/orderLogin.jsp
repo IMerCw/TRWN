@@ -15,8 +15,7 @@
 	String userSeq = (String)request.getAttribute("userSeq");
 			
 %>    
-<%= sum %>,<%= userSeq %>
-
+<%-- <%= sum %>,<%= userSeq %>--%> <%-- 파라미터 확인 --%>
 	
 <html>
 <head>
@@ -49,7 +48,6 @@ $(document).ready(function(){
 		}
 		var sum = <%=sum%>;
 		
-		
 		$.ajax({
 			url: "/seller/order/LoginOrder.do",
 			data: {
@@ -58,22 +56,47 @@ $(document).ready(function(){
 			},
 			method: "post",
 			success : function(data){
-				console.log(data);		
+				console.log(data);
 				console.log(data.userSeq);
 				if(data != null){
 					console.log(" data != null")
-					location.href="/seller/order/orderInfo.do?sum="+sum+"&userSeq="+data.userSeq;
+					// form 생성
+					var form = document.createElement("form");     
+					
+					form.setAttribute("method","post");                    
+					form.setAttribute("action","/seller/order/orderInfo.do");        
+					
+					document.body.appendChild(form);                        
+					
+					//input 생성
+					var input_id = document.createElement("input");  
+					
+					input_id.setAttribute("type", "hidden");                 
+					input_id.setAttribute("name", "sum");                        
+					input_id.setAttribute("value", sum);                          
+					
+					form.appendChild(input_id);
+					
+					//input 생성
+					var input_id2 = document.createElement("input");  
+					
+					input_id2.setAttribute("type", "hidden");                 
+					input_id2.setAttribute("name", "userSeq");                        
+					input_id2.setAttribute("value", +data.userSeq);                          
+					
+					form.appendChild(input_id2);
+					
+					//폼전송
+					
+					form.submit();  
+ 
+					
 				}
 			}
-			
 			
 		}) 
 		
 	});
-		
-
-	
-	
 })
 
 
@@ -114,9 +137,8 @@ $(document).ready(function(){
 			           <!--  <span class='text-center'><a href="#" class="text-sm">비밀번호 찾기</a></span> -->
 			            <hr />
 			           
-			            </form>
-			            
-			            
+					</form>
+					
 			            <h4>비회원 구매</h4>
 			            <div>
 			            	<textarea rows="8" style="width:100%; background-color:#f7f7f7; color:#b2b2b2;">
@@ -146,9 +168,13 @@ $(document).ready(function(){
 고객의 동의를 받아 보유하고 있는 거래정보 등을 고객께서 열람을 요구하는 경우 무신사는 지체 없이 그 정보를 열람·확인 할 수 있도록 조치합니다.
 	         	</textarea>
 			            </div>
-			            <div class="form-group">
-			                <a href="/seller/order/orderInfo.do?sum=<%=sum %>&userSeq=<%=userSeq %>" class="btn btn-default btn-block m-t-md">비회원 구매하기</a>
-			            </div>
+			            <form action="/seller/order/orderInfo.do" method="POST">
+			            	<input type="hidden" value="<%=sum%>" name="sum"/>
+			            	<input type="hidden" value="<%=userSeq %>" name="userSeq"/>
+				            <div class="form-group">
+				                <button type="submit" class="btn btn-default btn-block m-t-md">비회원 구매하기</a>
+				            </div>
+			           	</form>
 			          </div>
 			        </div>
 			      </div>

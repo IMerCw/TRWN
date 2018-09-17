@@ -69,13 +69,15 @@
 			<header id="header" class="alt">
 				<div class="logo" style="backgournd-color:black">
 					<a href="/seller/out/inOut.do">
-					트럭왔냠 
+					트럭왔냠
 						<span>
 						BY TRWN
 						</span>
 					</a>
 				</div>
-				<a href="#menu" class="toggle"><span>Menu</span></a>
+				<a href="#menu" class="toggle">
+					<img src="<%=request.getContextPath()%>/resources/img/seller/menu-symbol-of-three-parallel-lines.png">
+				</a>
 			</header>
 
 		<!-- Nav -->
