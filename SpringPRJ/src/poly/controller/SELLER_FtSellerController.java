@@ -1,7 +1,7 @@
 package poly.controller;
 
 import java.io.File;
-
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -207,6 +207,8 @@ public class SELLER_FtSellerController {
 		model.addAttribute("url",url);
 		model.addAttribute("msg",msg);
 		
+		int resultMonth = FtSellerService.insertMonth(ftSDTO);
+		log.info("insertMOnth result : " + resultMonth);
 		url =null;
 		msg =null;
 		hMap= null;
@@ -331,7 +333,15 @@ public class SELLER_FtSellerController {
 		log.info("ftsDTO : " + ftsDTO.getFtSeq());
 		
 		List<SELLER_FtSellerDTO> sList = FtSellerService.getSalesList(ftsDTO);
-		
+		for(int i=0; i<sList.size();i++) {
+			log.info("sList  : " +sList.get(i).getOrdDate());
+			log.info("sList : " +sList.get(i).getUserGender());
+			
+			log.info("sList : " + sList.get(i).getOrdDate().split("/")[0]);
+			log.info("sList : " + sList.get(i).getOrdDate().split("/")[1]);
+			
+			log.info("sList ===============================");
+		}
 		int M = 0;//남성
 		int F = 0;//여성
 		double percentM= 0;
@@ -347,23 +357,39 @@ public class SELLER_FtSellerController {
 		int timeI = 0;//시간대 인덱스
 		double percentT =0;//시간대 퍼센트
 		int timeSum =0;//시간대 총합
+		String day =""; //날짜
 		for(int i=0; i< sList.size(); i++) {
 			if(sList.get(i).getUserGender().equals("M")) {
 				M++;
 				F = sList.size()-M;
 			}
-			log.info("sList : " + sList.get(i).getOrdDate());
+			log.info("sList:"+sList.get(i).getOrdDate());
+			
 			log.info("==============================");
-			switch(sList.get(i).getOrdDate().split("/")[3]) {
-			case "월" : arrayDay[0]++; break;
-			case "화" : arrayDay[1]++; break;
-			case "수" : arrayDay[2]++; break;
-			case "목" : arrayDay[3]++; break;
-			case "금" : arrayDay[4]++; break;
-			case "토" : arrayDay[5]++; break;
-			case "일" : arrayDay[6]++; break;
+			time = Integer.parseInt(sList.get(i).getOrdDate().split("/")[1].split(":")[0].trim());
+			log.info("time : " + time);
+			day = sList.get(i).getOrdDate().split("/")[0].replace(".", "");
+			log.info("day " +i+ ":" + day);
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			Date date = dateFormat.parse(day);
+			
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			
+			log.info("date : " + calendar.get(Calendar.DAY_OF_WEEK));
+
+			
+			switch(calendar.get(Calendar.DAY_OF_WEEK)) {
+			case 1 : arrayDay[0]++; break; //일
+			case 2 : arrayDay[1]++; break; //월
+			case 3 : arrayDay[2]++; break; //화
+			case 4 : arrayDay[3]++; break; //수
+			case 5 : arrayDay[4]++; break; //목
+			case 6 : arrayDay[5]++; break; //금
+			case 7 : arrayDay[6]++; break; //토
 			}
-			time =  Integer.parseInt(sList.get(i).getOrdDate().split("/")[4]);
+			log.info("time : " +time);
 			if(0 <= time && time < 3 ) {
 				arrayTime[0]++;
 			}else if(3 <= time && time <6) {
@@ -383,6 +409,15 @@ public class SELLER_FtSellerController {
 			}
 			
 		}
+		log.info("arrayDay : " +  arrayDay[0]);
+		log.info("arrayDay : " +  arrayDay[1]);
+		log.info("arrayDay : " +  arrayDay[2]);
+		log.info("arrayDay : " +  arrayDay[3]);
+		log.info("arrayDay : " +  arrayDay[4]);
+		log.info("arrayDay : " +  arrayDay[5]);
+		log.info("arrayDay : " +  arrayDay[6]);
+		
+		log.info("arrayTime : " + arrayTime[0]);
 		for(int i=0; i < arrayTime.length; i++) {
 			if(maxTime < arrayTime[i]) {
 				maxTime = arrayTime[i];
@@ -619,12 +654,9 @@ public class SELLER_FtSellerController {
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
 		ftsDTO.setUserSeq(userSeq);
 		ftsDTO = FtSellerService.getTruckConfig(ftsDTO);
-		/*if(ftsDTO == null) {
-			log.info("ftSeq null : ");
-			model.addAttribute("ftsNull",ftsDTO);
-			return "/seller/main";
-		}*/
-		
+	//	log.info("ftsDTO.get :" + ftsDTO.getFtSeq());
+	//	log.info("ftsDTO .get user : " + ftsDTO.getUserSeq());
+		log.info("확인");
 		if(userSeq != null && ftsDTO != null) {
 			log.info("차트가 있을 경우 ? ");
 			log.info("userSeq , ftSeq : " + userSeq +","+ftsDTO.getFtSeq());
@@ -687,6 +719,9 @@ public class SELLER_FtSellerController {
 			List<SELLER_OrderInfoDTO> oList = orderService.getOrderList(userSeq);
 			if(oList.isEmpty()) {
 				log.info("oList is Empty");
+				int chart = 0;
+				model.addAttribute("chart",chart);
+				return "/seller/main";
 			}
 			log.info("oList size : " + oList.size());
 			log.info("============ 주문내역 시작  ============");
@@ -708,12 +743,13 @@ public class SELLER_FtSellerController {
 			//데이터를 FtsellerService에 태워
 			
 			SELLER_OrderInfoDTO sumChartWeek = FtSellerService.getChartWeek(userSeq);
-			log.info("sumChart : " + sumChartWeek.getOrd_sumprice());
+			//log.info("sumChart : " + sumChartWeek.getOrd_sumprice());
 			model.addAttribute("sumChartWeek", sumChartWeek);
 			log.info("chart End");
 			
 			//최근 7일 매충 그래프 
 			List<SELLER_OrderInfoDTO> wList = FtSellerService.latelyWeek(ftsDTO);
+			log.info("wLIst size : " + wList.size());
 	         for(int i=0; i < wList.size(); i++) {
 	            log.info("--------------------------");
 	            log.info("sumWeek : " + wList.get(i).getOrd_sumprice());
@@ -721,16 +757,22 @@ public class SELLER_FtSellerController {
 	            log.info("--------------------------");
 	            
 	         }
-	         if(wList.size() != 7) {
+	         
+	        /* if(wList.size() != 7) {
+	        	 String date = UtilTime.getDateYYMMDD("a");
+	        	 log.info("date is empty  : " + date);
+	        	 ftsDTO.setOrdDate(date);//util 시간 넣기
+	        	 log.info("insert 7 : " + ftsDTO.getOrdDate());
+	        	 
 	        	 wList = FtSellerService.insertwList(ftsDTO);
-	         }
+	         }*/
 	        
 	         model.addAttribute("wList", wList);
 
 			//jinsu 월간매출 시작 !!
 			log.info(this.getClass() + "monthChart start =====================");
 			log.info("ftsDTO userSeq : " + ftsDTO.getUserSeq()); // ?null
-			log.info("ftsDTO ftSEq : " + ftsDTO.getFtSeq()); // 3
+			log.info("ftsDTO ftSEq : " + ftsDTO.getFtSeq()); // 1
 			List<SELLER_OrderInfoDTO> monthChart = FtSellerService.getMonthChart(ftsDTO);
 			log.info("===================monthChart");
 			log.info("monthChart : " + monthChart);

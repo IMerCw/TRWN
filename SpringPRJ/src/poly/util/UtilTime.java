@@ -2,16 +2,20 @@
 
 package poly.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class UtilTime {
 	
 	//오늘 날짜("yyyy.MM.dd / hh:mm:ss")
 	public static String getDateYMDhms() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd / hh:mm:ss"); //년,월,일,시간,분,초
+		TimeZone seoul = TimeZone.getTimeZone("Asia/Seoul");
+		Calendar cal = Calendar.getInstance(seoul);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / HH:mm:ss"); //년,월,일,시간,분,초
 		/*SimpleDateFormat sdf1 = new SimpleDateFormat("M월 d일");*/
 		String date = sdf1.format(cal.getTime());
 		
@@ -19,7 +23,7 @@ public class UtilTime {
 	}
 	public static String getDateYYMMDD(String a) {
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); //년,월,일,시간,분,초
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //년,월,일,시간,분,초
 		try {
 			cal.setTime(formatter.parse(a));
 			String date = new SimpleDateFormat("yyyyMMdd").format(cal.getTime());
@@ -40,7 +44,7 @@ public class UtilTime {
 				
 		return date;
 	}
-		
+	
 	//오늘 요일()
 	public static String getDateDD() {
 		
@@ -80,5 +84,30 @@ public class UtilTime {
 		date = strDayOfWeek;
 		return date;
 		
+	}
+	
+	public static String SetupRegDate(String regDate) {
+		//현 날짜 YYYY.MM.DD / hh:mm:ss
+		String todayNow =  getDateYMDhms();
+		String todayArr[] = todayNow.split("/");
+		String todayDate[] = todayArr[0].split("\\. ");
+		
+		String resultDate = null;
+		String regDateArr[] = regDate.split("/");
+		String regDateyymmdd[] = regDateArr[0].split("\\. ");
+		String regDateTime[] = regDateArr[1].split(":");
+		
+		
+		for(int i = 0; i < 3; i++) {
+			
+			if(!todayDate[i].equals(regDateyymmdd[i])) {
+				resultDate = regDateyymmdd[0].substring(2) + "." + regDateyymmdd[1] + "." + regDateyymmdd[2];
+				return resultDate;
+			}
+		}
+		
+		resultDate = regDateTime[0] + ":" + regDateTime[1];
+		
+		return resultDate; 
 	}
 }

@@ -60,6 +60,73 @@
 		WHERE
 			ISSUE_CODE = #{issue_code}
 	</update>
-
-
+	<!-- 주문완료 시 insert -->
+	<insert id="insertOrderInfo" parameterType="SELLER_OrderInfoDTO">
+		INSERT INTO ORDER_INFO
+		(
+			USER_SEQ,
+			ORD_SUMPRICE,
+			ORD_WAY,
+			BUY_WAY,
+			ORD_DATE,
+			ORD_STATUS,
+			USR_RCV_TIME,
+			TID,
+			FT_SEQ,
+			TRAN_NO,
+			GPS_SEQ
+		)
+		VALUES
+		(
+			#{user_seq},
+			#{ord_sumprice},
+			#{ord_way},
+			#{buy_way},
+			#{ord_date},
+			#{ord_status},
+			#{usr_rcv_time},
+			#{tid},
+			#{ft_seq},
+			#{tran_no},
+			#{gps_seq}
+		)
+	
+	</insert>
+	<!-- 주문완료시 wait insert -->
+	<insert id="insertOrderItem" parameterType="SELLER_WaitDTO">
+	INSERT INTO ORDER_WAIT
+	(
+		ORD_SEQ,
+		FT_SEQ,
+		ORD_DATE,
+		ORD_HIS,
+		ORD_STATUS,
+		CSTMR_NAME,
+		CSTMR_TEL
+	)
+	VALUES
+	(
+		#{ordSeq},
+		#{ftSeq},
+		#{ordDate},
+		#{ordHis},
+		#{ordStatus},
+		#{cstmrName},
+		#{cstmrTel}
+	)
+	</insert>
+	
+	<!-- 회원 구매 userSeq select  -->
+	<select id="getUserDTO" parameterType="CMMN_UserDTO" resultType="CMMN_UserDTO">
+		SELECT  USER_SEQ as userSeq,
+				USER_AUTH as userAuth,
+				USER_EMAIL as userEmail,
+				USER_PWD as userPwd,
+				USER_NICK as userNick,
+				USER_GENDER as userGender,
+				USER_HP as userHp
+		FROM	USER_INFO
+		WHERE	USER_EMAIL= #{userEmail} AND USER_PWD=#{userPwd} AND USER_STATUS LIKE 'AuthY'
+		
+	</select>
 </mapper>

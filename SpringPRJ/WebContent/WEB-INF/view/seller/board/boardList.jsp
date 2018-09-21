@@ -32,6 +32,8 @@
 		<tr height="7%" bgcolor="#444">
 			<td style="padding:0;"> 
 				<%@ include file="/WEB-INF/view/seller/top.jsp" %>
+				<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 				<!-- 테이블 페이징  -->
 				<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 				<!-- tabs -->
@@ -44,12 +46,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 			<!--tab 부분 시작-->
 			<div class="container" style="height:100%; margin-top:3%;" >
 				<div class="row" >
 					
-			            <div class="panel with-nav-tabs panel-dark" style="width:100%">
+			            <div class="panel with-nav-tabs panel-dark" style="width:100%; opacity: 0.9;">
 			                <div class="panel-heading">
 			                        <ul class="nav nav-tabs">
 			                            <li class="active"><a href="#tab1info" data-toggle="tab">공지사항</a></li>

@@ -1,3 +1,4 @@
+<%@page import="poly.util.CmmUtil"%>
 <%@page import="poly.dto.consumer.CONSUMER_FtMenuCateDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.consumer.CONSUMER_Ft_InfoDTO"%>
@@ -11,11 +12,13 @@
 	List<CONSUMER_Menu_InfoDTO> menuDTOs = (List<CONSUMER_Menu_InfoDTO>) request.getAttribute("menuDTOs"); // 메뉴 DTO 리스트
 	List<CONSUMER_ImageDTO> imgDTOs = (List<CONSUMER_ImageDTO>) request.getAttribute("imgDTOs"); // 이미지 DTO 리스트
 	List<CONSUMER_FtMenuCateDTO> cateDTOs = (List<CONSUMER_FtMenuCateDTO>) request.getAttribute("cateDTOs"); //카테고리 데이터 리스트
+	String userSequence = (String) session.getAttribute("userSeq");
+	String ftSeq = (String) request.getParameter("ft_seq");
 %>
 
 <html>
 <style>
-	#goToOrder{
+	#OrderBttnContainer{
 		width:100%;
 		position: fixed;
 		bottom: 0;
@@ -33,16 +36,17 @@
 	.imgRow > img{
 		height:100%;
 	}
+	.footer{
+		background-color: #f2f2f2;
+	}
 </style>
 <body>
-	
 	
 	<div class="container-fluid">
 	<%if(menuDTOs.isEmpty() == false) {%>
 		<%for(int k = 0; k < cateDTOs.size(); k++) {%>
 			<div class="col-sm-12">
 				<!-- 메뉴카테고리 명 출력 -->
-				
 				<div style="margin-bottom: 20px;">
 					<h3><%=cateDTOs.get(k).getCate_name() %></h3>
 					<div style="border-bottom:3px solid black; height:10px; width:80px;"></div>
@@ -84,9 +88,28 @@
 		<%} %>	
 	</div>
 	<br/><br/> <!-- 메뉴가 버튼에 가리지 않도록 공백 설정 -->
+	<form action="/seller/out/out_info.do" method="POST" id="sbmtOrdrForm">
+		<input type="hidden" value="<%=userSequence%>" name="userSeq"/>
+		<input type="hidden" value="1" name="userAuth"/>
+		<input type="hidden" value="<%=ftSeq%>" name="ftSeq"/>
 	<div class="header" id="myHeader2">
-		<button type="button" class="btn btn-primary" id="goToOrder">주문하러 가기</button>
+		<button type="button" onclick="goToOrder(); return false;" class="btn btn-primary" id="OrderBttnContainer" style="font-size:18px;">주문하러 가기</button>
 	</div>
-
+	</form>
 </body>
+<script>
+	function goToOrder() {
+		<%if ("".equals(userSequence)) {%>
+			alert('로그인을 해주시기 바랍니다.');
+		<%}else {%>
+			var r = confirm('주문하시겠습니까?');
+			if(r){
+				
+				$('#sbmtOrdrForm').submit();
+			}
+		<%}%>
+		
+	}
+
+</script>
 </html>

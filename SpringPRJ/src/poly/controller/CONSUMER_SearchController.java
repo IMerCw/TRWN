@@ -56,12 +56,6 @@ public class CONSUMER_SearchController {
 	private CONSUMER_IUserService UserService;
 	
 	
-	public String getDate() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
-		String date = sdf1.format(cal.getTime());
-		return date;
-	}
 
 	//키워드로 메뉴를 검색한 페이지 
 	@RequestMapping(value="consumer/cnsmr/findFtByMenu", method=RequestMethod.POST)

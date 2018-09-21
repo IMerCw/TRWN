@@ -39,6 +39,8 @@ public interface SELLER_IFtSellerService {
 	public List<SELLER_OrderInfoDTO> latelyWeek(SELLER_FtSellerDTO ftsDTO)throws Exception;
 
 	public List<SELLER_OrderInfoDTO> insertwList(SELLER_FtSellerDTO ftsDTO)throws Exception;
+
+	public int insertMonth(SELLER_FtSellerDTO ftSDTO)throws Exception;
 	
 	
 }

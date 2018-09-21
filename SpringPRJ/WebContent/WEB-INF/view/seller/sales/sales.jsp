@@ -11,7 +11,7 @@ int[] arrayDay2 = (int[])request.getAttribute("arrayDay");
 String stringDay = "";
 String stringTime ="";
 %>
-요일은 = <%=dayIndex %>
+<%-- 요일은 = <%=dayIndex %>
 요일% = <%=percentD %>
 시간은 = <%=timeIndex %>*3 ~ +3시간 까지
 시간대% = <%=percentT %>
@@ -21,7 +21,7 @@ String stringTime ="";
 	<% for(int i=0; i< arrayDay2.length; i++){
 		out.println(arrayDay2[i]);	
 	}
-	%>
+	%> --%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -48,21 +48,23 @@ String stringTime ="";
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 				<div class="container" style="height:100%">
-					<h3>매출분석</h3>
+				<br>
+					<h3 style="color:white;">매출분석</h3>
 					<hr>
+					<br>
 					<h3>
 						<span class="label label-Warning">
 						<%
 						switch(dayIndex)  {
-								case 0 : stringDay="월"; break;
-								case 1 : stringDay="화"; break;
-								case 2 : stringDay="수"; break;
-								case 3 : stringDay="목"; break;
-								case 4 : stringDay="금"; break;
-								case 5 : stringDay="토"; break;
-								case 6 : stringDay="일"; break;
+								case 0 : stringDay="일"; break;
+								case 1 : stringDay="월"; break;
+								case 2 : stringDay="화"; break;
+								case 3 : stringDay="수"; break;
+								case 4 : stringDay="목"; break;
+								case 5 : stringDay="금"; break;
+								case 6 : stringDay="토"; break;
 								}
 						%>
 						<%=stringDay%>요일,
@@ -87,7 +89,8 @@ String stringTime ="";
 						<%} %>
 						이 주요고객</span>
 					</h3>
-					<span>
+					<br>
+					<span style="color:white;">
 						분석지역 내 매출특성은
 						<%=stringDay%>요일
 						(<%=percentD %>%),
@@ -100,7 +103,8 @@ String stringTime ="";
 						<%} %>
 						 이 주요고객인 것으로 분석 되었습니다 .	
 					</span>
-					<div style="border:1px solid black;" class="col-sm-12">
+					<br>
+					<div style="border:1px solid black; background-color:white;" class="col-sm-12">
 					
 						<div class="col-sm-6">
 							<canvas id="myChart" width="400" height="400"></canvas>
@@ -110,11 +114,6 @@ String stringTime ="";
 						</div>
 						
 					</div>
-					***********************************************************<br/>
-					select to_char(sysdate, 'yy/mm/dd/dy/hh24/mi/ss') from dual;<br/>
-					18/08/21/화/17/47/16 <br/>
-					ORDER_WAIT ORD_DATE 값 INSERT 형식으로 넣으세요 까먹지말고<br/>
-					***********************************************************
 					
 				</div>
 			</td>

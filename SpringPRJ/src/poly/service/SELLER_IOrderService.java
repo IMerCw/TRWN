@@ -5,6 +5,7 @@ import java.util.List;
 import poly.dto.admin.ADMIN_Coupon_IssueDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
 import poly.dto.seller.SELLER_OrderInfoDTO;
+import poly.dto.seller.SELLER_WaitDTO;
 
 public interface SELLER_IOrderService {
 	public CMMN_UserDTO getOrderUserDTO(CMMN_UserDTO uDTO)throws Exception;
@@ -12,5 +13,7 @@ public interface SELLER_IOrderService {
 	public List<ADMIN_Coupon_IssueDTO> getCpList(ADMIN_Coupon_IssueDTO couponList)throws Exception;
 	
 	public int updateCouponUse (ADMIN_Coupon_IssueDTO codeDTO)throws Exception;
+	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, SELLER_WaitDTO oIDTO)throws Exception;
 
+	public CMMN_UserDTO getUserDTO(CMMN_UserDTO uDTO)throws Exception;
 }

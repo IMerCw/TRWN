@@ -1,16 +1,11 @@
 package poly.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +19,6 @@ import poly.dto.admin.ADMIN_Ft_InfoDTO;
 import poly.dto.admin.ADMIN_Ft_Menu_CateDTO;
 import poly.dto.admin.ADMIN_ImageDTO;
 import poly.dto.admin.ADMIN_Menu_InfoDTO;
-import poly.dto.seller.SELLER_DissInfoDTO;
 import poly.dto.seller.SELLER_FtSellerDTO;
 import poly.dto.seller.SELLER_MenuJsDTO;
 import poly.dto.seller.SELLER_OrderInfoDTO;
@@ -34,7 +28,6 @@ import poly.service.SELLER_IFtSellerService;
 import poly.service.SELLER_IOrderService;
 import poly.service.SELLER_IOutService;
 import poly.util.CmmUtil;
-import poly.util.OpenAPI;
 import poly.util.UtilTime;
 
 @Controller
@@ -60,16 +53,16 @@ public class SELLER_OutController {
 	private SELLER_IFtSellerService FtSellerService;
 	
 	@RequestMapping(value="/seller/out/out_info")
-	public String out_info(HttpServletRequest request , Model model) throws Exception{
+	public String out_info(HttpServletRequest request , Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + " out start !!~");
 		String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
 		log.info("userSeq : " + userSeq);
 		String userAuth = CmmUtil.nvl(request.getParameter("userAuth"));
 		log.info("userAuth : " + userAuth);
-		//소비자가 주문하기 클릭할경루 소비자가 보고 있던 푸드트럭의 번호를 받는다.
+		//소비자가 주문하기 클릭할 경우 소비자가 보고 있던 푸드트럭의 번호를 받는다.
 		String ftSeq =CmmUtil.nvl(request.getParameter("ftSeq"));
 		log.info("ftSeq : " + ftSeq);
-		
+		session.setAttribute("ftSeq", ftSeq);
 		
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
 		ftsDTO.setUserSeq(userSeq);
@@ -78,12 +71,23 @@ public class SELLER_OutController {
 			//판재자일 경우에는 판매자 id를 이용하여 ftSeq를 뽑아옵니다.
 			log.info("if userAuth = '2' 시작합니다.");
 			ftsDTO = OutService.getOutTruckInfo(ftsDTO);
+			session.setAttribute("ftSeq", ftsDTO.getFtSeq());
 			log.info("ftsDTO .get : " +ftsDTO.getFtSeq());
-		}else {
+		} else {
+			userAuth = "0"; //권한  0 : 소비자
 			log.info("if else 소비자 시작합니다.");
 			//소비자 화면에서 넘어올경루 소비자가  보고 있던 푸드트럭의 번호를 셋팅해줍니다.
 			ftsDTO.setFtSeq(ftSeq);
 			log.info("ftsDTO .get : " + ftsDTO.getFtSeq());
+		}
+		if(ftsDTO.getFtSeq() == null) {
+			String msg ="";
+			String url="";
+			msg = "등록된 트럭이 없습니다.";
+			url ="/seller/out/out_info.do";
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			return "/cmmn/alert";
 		}
 		
 		
@@ -95,7 +99,7 @@ public class SELLER_OutController {
 		int ft_seq = Integer.parseInt(ftsDTO.getFtSeq());
 		log.info("ft_seq : " + ft_seq);
 		
-		//메뉴&카테고리 리스트
+		////메뉴&카테고리 리스트
 		List<ADMIN_Ft_Menu_CateDTO> cateDTOarr = ftService.getFT_Cate_List(ft_seq);
 		List<ADMIN_Menu_InfoDTO> menuDTOarr = ftService.getFt_Menu_List(ft_seq);
 		List<String> ImgDTOs = new ArrayList<String>();
@@ -111,9 +115,8 @@ public class SELLER_OutController {
 		model.addAttribute("cateDTOarr", cateDTOarr);
 		model.addAttribute("menuDTOarr", menuDTOarr);
 		
-		log.info("outC cmd : " +cmd );
+		log.info("outC cmd : " + cmd );
 		log.info("outC ft_seq : " + ft_seq);
-		
 		
 		//페이지 커맨드 전송
 		model.addAttribute("cmd", cmd);
@@ -123,6 +126,7 @@ public class SELLER_OutController {
 		
 		model.addAttribute("ftDTO", fDTO);
 		model.addAttribute("ft_seq", ft_seq);
+		model.addAttribute("userAuth", userAuth);
 		
 		cmd = null;
 		fDTO = null;
@@ -130,8 +134,10 @@ public class SELLER_OutController {
 		log.info(this.getClass() + " out end !!@@");
 		
 		return "/seller/out/out_info";
-		// 0223 주석 담
+		
 	}
+	
+	
 	@RequestMapping(value="seller/out/item")//장바구니 메뉴 클릭 시
 	public String insertTemp (HttpServletRequest request,HttpSession session,Model model) throws Exception{
 		log.info(this.getClass() + "insert item Start !!!!!");
@@ -283,6 +289,7 @@ public class SELLER_OutController {
 		log.info(this.getClass() + "itemBtn end !!! ");
 		
 	}
+	
 	@RequestMapping(value="/seller/out/inOut")
 	public String inout (HttpSession session) throws Exception{
 		log.info("inout view start !!!");

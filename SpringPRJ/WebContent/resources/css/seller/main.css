@@ -1,6 +1,4 @@
 @charset "UTF-8";
-@import url(font-awesome.min.css);
-@import url("https://fonts.googleapis.com/css?family=Taviraj:300,400,700,300i,400i,700i");
 
 /*
 	Transitive by TEMPLATED
@@ -3469,15 +3467,6 @@
 				-webkit-tap-highlight-color: transparent;
 			}
 
-				#header > a[href="#menu"]:before {
-					content: "";
-					-moz-osx-font-smoothing: grayscale;
-					-webkit-font-smoothing: antialiased;
-					font-family: FontAwesome;
-					font-style: normal;
-					font-weight: normal;
-					text-transform: none !important;
-				}
 
 				#header > a[href="#menu"]:before {
 					margin: 0 0.5em 0 0;
@@ -3650,15 +3639,6 @@
 			width: 7em;
 		}
 
-			#menu .close:before {
-				content: "";
-				-moz-osx-font-smoothing: grayscale;
-				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
-				font-style: normal;
-				font-weight: normal;
-				text-transform: none !important;
-			}
 
 			#menu .close:before {
 				font-size: 1.25em;
@@ -3712,7 +3692,6 @@
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		background-image: url("../../images/banner.jpg");
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;

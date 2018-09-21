@@ -36,9 +36,9 @@ public class CMMN_MainController {
 	
 	//트럭 왔냠 메인 페이지
 	@RequestMapping(value="cmmn/main")
-	public String main(HttpServletRequest request, Model model) throws Exception {
+	public String main(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		log.info("Access trwn/main");
-
+		session.invalidate();
 		log.info("Terminate trwn/main");
 		
 		return "/cmmn/main";

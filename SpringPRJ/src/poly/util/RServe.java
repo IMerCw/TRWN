@@ -6,12 +6,11 @@ import org.rosuda.REngine.Rserve.RserveException;
 
 public class RServe {
 
-	public static void test(){
+	public void test(){
 	    
         RConnection connection = null;
         
         try {
- 
             connection = new RConnection();
  
             String vector = "c(1,2,3,4)";
@@ -20,7 +19,7 @@ public class RServe {
             System.out.println("The mean of given vector is=" + mean);
             connection.eval("aa <- '한글'");
             System.out.println(connection.eval("aa").asString());
- 
+            
             connection.close();
         } catch (RserveException e) {
             e.printStackTrace();

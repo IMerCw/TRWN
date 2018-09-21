@@ -230,8 +230,8 @@
 	<table style="height: 100%; width: 100%">
 		<tr style="height:7%; bgcolor:#444">
 			<td style="padding:0;">
-				<%@ include file="/WEB-INF/view/seller/top.jsp" %>
 				
+				<%@ include file="/WEB-INF/view/seller/top.jsp" %>
 			</td>
 		</tr>
 		<tr bgcolor="">

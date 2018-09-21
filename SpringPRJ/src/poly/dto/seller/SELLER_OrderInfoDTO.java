@@ -13,7 +13,17 @@ public class SELLER_OrderInfoDTO {
 	private String rcv_time;
 	private String tid;
 	private String ft_seq;
+	private String tran_no;
+	private String gps_seq;
 	
+	
+	
+	public String getTran_no() {
+		return tran_no;
+	}
+	public void setTran_no(String tran_no) {
+		this.tran_no = tran_no;
+	}
 	public int getOrd_seq() {
 		return ord_seq;
 	}
@@ -85,6 +95,12 @@ public class SELLER_OrderInfoDTO {
 	}
 	public void setFt_seq(String ft_seq) {
 		this.ft_seq = ft_seq;
+	}
+	public String getGps_seq() {
+		return gps_seq;
+	}
+	public void setGps_seq(String gps_seq) {
+		this.gps_seq = gps_seq;
 	}
 	
 	

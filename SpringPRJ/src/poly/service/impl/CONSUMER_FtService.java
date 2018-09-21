@@ -1,6 +1,7 @@
 package poly.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_FtMenuCateDTO;
+import poly.dto.consumer.CONSUMER_FtReviewDTO;
 import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
@@ -212,6 +214,18 @@ public class CONSUMER_FtService implements CONSUMER_IFtService{ //IUserServiceë¥
 	@Override
 	public List<CONSUMER_FtLikeDTO> getFavoriteFt(String userSeq) throws Exception {
 		return mypageMapper.getFavoriteFt(userSeq);
+	}
+
+
+	@Override
+	public List<CONSUMER_FtReviewDTO> getReviewList(int userSeq) throws Exception {
+		return rcmmndMenuMapper.getReviewList(userSeq);
+	}
+
+
+	@Override
+	public List<CONSUMER_FtReviewDTO> getUsersReviewList(int userSeq) throws Exception {
+		return rcmmndMenuMapper.getUsersReviewList(userSeq);
 	}
 
 }

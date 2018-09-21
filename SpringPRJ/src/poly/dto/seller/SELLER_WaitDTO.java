@@ -12,8 +12,33 @@ public class SELLER_WaitDTO {
 	private String usrRcvTime;
 	private String userHp;
 	private String waitRow;
+	private String ordHis;
+	private String tranNO;
+	private String ordDate;
+	private String gps_seq;
+	private String cstmrName;
+	private String cstmrTel;
 	
 	
+	
+	public String getOrdDate() {
+		return ordDate;
+	}
+	public void setOrdDate(String ordDate) {
+		this.ordDate = ordDate;
+	}
+	public String getTranNO() {
+		return tranNO;
+	}
+	public void setTranNO(String tranNO) {
+		this.tranNO = tranNO;
+	}
+	public String getOrdHis() {
+		return ordHis;
+	}
+	public void setOrdHis(String ordHis) {
+		this.ordHis = ordHis;
+	}
 	public String getWaitRow() {
 		return waitRow;
 	}
@@ -67,6 +92,24 @@ public class SELLER_WaitDTO {
 	}
 	public void setUserHp(String userHp) {
 		this.userHp = userHp;
+	}
+	public String getGps_seq() {
+		return gps_seq;
+	}
+	public void setGps_seq(String gps_seq) {
+		this.gps_seq = gps_seq;
+	}
+	public String getCstmrTel() {
+		return cstmrTel;
+	}
+	public void setCstmrTel(String cstmrTel) {
+		this.cstmrTel = cstmrTel;
+	}
+	public String getCstmrName() {
+		return cstmrName;
+	}
+	public void setCstmrName(String cstmrName) {
+		this.cstmrName = cstmrName;
 	}
 	
 	

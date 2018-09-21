@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_FtMenuCateDTO;
+import poly.dto.consumer.CONSUMER_FtReviewDTO;
 import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
@@ -47,8 +48,10 @@ import poly.service.CONSUMER_IUserService;
 import poly.service.impl.CONSUMER_ImageService;
 import poly.service.impl.CONSUMER_UserService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -80,30 +83,23 @@ public class CONSUMER_DataAnalysisController {
 	
 	//소비자 맞춤 추천 메뉴
 	@RequestMapping(value="consumer/rcmmnd/CustomRcmmnd")
-	public String CustomRcmmnd(HttpServletRequest request, Model model) throws Exception{
+	public String CustomRcmmnd(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		log.info("Access CustomRcmmnd...");
-		CosineSimilarity cossim = new CosineSimilarity();
-		Map<CharSequence, Integer> leftVector = new HashMap<>();
-		Map<CharSequence, Integer> rightVector= new HashMap<>();
-		leftVector.put("수학", 10);
-		leftVector.put("영어", 4);
-		leftVector.put("과학", 0);
-		leftVector.put("국어", 0);
+		//로그인 안되어 있는 경우
+		String userSeq = (CmmUtil.nvl((String)session.getAttribute("userSeq")));
+		if("".equals(userSeq)) {
+			String url = "/cmmn/main.do"; //로그인 화면 이동
+			String msg = "로그인 후 이용해주시길 바랍니다.";
+			model.addAttribute("url", url);
+			model.addAttribute("msg", msg);
+			return "/cmmn/alert";
+		}
 		
-		rightVector.put("수학", 10);
-		rightVector.put("영어", 6999);
-		rightVector.put("과학", 9999);
-		rightVector.put("국어", 10000);
-		
-		
-		
-		Double result = cossim.cosineSimilarity(leftVector, rightVector);
-		
-		log.info("The cosine Similariry of two vectors is " + result);
+		RServe rserve = new RServe();
+		rserve.test();
 		
 		log.info("Terminate CustomRcmmnd...");
 		return "/consumer/rcmmnd/customRcmmnd";
 	}
-	
 	
 }

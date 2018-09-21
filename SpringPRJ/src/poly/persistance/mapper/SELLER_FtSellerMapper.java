@@ -36,6 +36,10 @@ public interface SELLER_FtSellerMapper {
 	public List<SELLER_OrderInfoDTO> latelyWeek(SELLER_FtSellerDTO ftsDTO)throws Exception;
 
 	public int insertwList(SELLER_FtSellerDTO ftsDTO)throws Exception;
+
+	public int insertMonth(SELLER_FtSellerDTO ftsDTO)throws Exception;
+
+	public SELLER_FtSellerDTO getNewFtseq(SELLER_FtSellerDTO ftSDTO)throws Exception;
 	
 
 	

@@ -26,6 +26,7 @@ import poly.service.ADMIN_IFtService;
 import poly.service.ADMIN_IImageService;
 import poly.service.impl.ADMIN_ImageService;
 import poly.util.ADMIN_UtilFile;
+import poly.util.UtilTime;
 
 
 @Controller
@@ -40,13 +41,7 @@ public class SELLER_FtController {
 	
 /*----------------------------------------------------------------------------------------*/
 	
-	public String getDate() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
-		String date = sdf1.format(cal.getTime());
-		
-		return date;
-	}
+
 	
 
 /*푸드트럭 관리----------------------------------------------------------------------------------------*/	
@@ -93,7 +88,7 @@ public class SELLER_FtController {
 		String ArrFt_Seq = request.getParameter("ArrFt_Seq");
 		String[] array = ArrFt_Seq.split(",");
 		for(int i=0; i<array.length; i++) {
-			fDTO.setFt_chan(getDate());
+			fDTO.setFt_chan(UtilTime.getDateYMDhms());
 			fDTO.setFt_seq(Integer.parseInt(array[i]));
 			fDTO.setFt_status(1);
 			ftService.ft_Active(fDTO);
@@ -108,7 +103,7 @@ public class SELLER_FtController {
 		String ArrFt_Seq = request.getParameter("ArrFt_Seq");
 		String[] array = ArrFt_Seq.split(",");
 		for(int i=0; i<array.length; i++) {
-			fDTO.setFt_chan(getDate());
+			fDTO.setFt_chan(UtilTime.getDateYMDhms());
 			fDTO.setFt_seq(Integer.parseInt(array[i]));
 			fDTO.setFt_status(-1);
 			ftService.ft_Drop(fDTO);
@@ -284,7 +279,7 @@ public class SELLER_FtController {
 			if(request.getParameter("catering")!=null) {
 				ft_func += request.getParameter("catering")+"/";
 			}
-			String ft_chan = getDate();
+			String ft_chan = UtilTime.getDateYMDhms();
 			int ft_status = Integer.parseInt(request.getParameter("ft_status"));
 			
 			ADMIN_Ft_InfoDTO ftDTO = new ADMIN_Ft_InfoDTO();
@@ -443,7 +438,7 @@ public class SELLER_FtController {
 			revDTO.setRev_title(request.getParameter("rev_title"));
 			revDTO.setRev_text(request.getParameter("rev_text"));
 			revDTO.setRev_point(Integer.parseInt(request.getParameter("rev_point")));
-			revDTO.setRev_regdate(getDate());
+			revDTO.setRev_regdate(UtilTime.getDateYMDhms());
 			revDTO.setRev_level(" ");
 			revDTO.setExp_yn(1);
 			ftService.ft_Review_Create(revDTO);
@@ -478,7 +473,7 @@ public class SELLER_FtController {
 			revDTO.setRev_title(" ");
 			revDTO.setRev_text(request.getParameter("rev_text"));
 			revDTO.setRev_point(0);
-			revDTO.setRev_regdate(getDate());
+			revDTO.setRev_regdate(UtilTime.getDateYMDhms());
 			revDTO.setRev_level(search_level+"1");
 			revDTO.setExp_yn(1);
 			ftService.ft_Review_Create(revDTO);

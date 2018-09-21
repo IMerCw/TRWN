@@ -19,11 +19,11 @@
     	//out.println(sumChartWeek.getOrd_sumprice());
     	//DateUtil.getDate();
     	//String todayDate = (String)DateUtil.getDate();
-	   	int todayY = Integer.parseInt(todayYMDhms.substring(0, 4));
+	   	//int todayY = Integer.parseInt(todayYMDhms.substring(0, 4));
 	   	//out.println(todayY);
-	   	int todayM = Integer.parseInt(todayYMDhms.substring(5, 7));
+	   	//int todayM = Integer.parseInt(todayYMDhms.substring(5, 7));
 	   	//out.println(todayM);
-	   	int todayD = Integer.parseInt(todayYMDhms.substring(8, 10));
+	   	//int todayD = Integer.parseInt(todayYMDhms.substring(8, 10));
 	   	//out.println(todayD);
     %> 
     
@@ -91,7 +91,7 @@
 		<ul class="nav nav-pills" style="background-color:black">
 			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;7일간 매출</a></li>
 			<li role="presentation"><a href="#tapp" aria-controls="tapp" role="tab" data-toggle="tab" style="color:white;">월별 매출</a></li>
-			<li role="#"><a href="/seller/sales/sales.do?userSeq=<%=ss_userSeq%>" aria-controls="#" role="#" data-toggle="#" style="color:white;">매출분석</a></li>
+			<li role="#"><a href="#" aria-controls="#" role="#" data-toggle="#" style="color:white;">매출분석</a></li>
 		</ul>
 		
 			<!-- Tab panes -->
@@ -191,17 +191,7 @@
 			
 	<!-- Chart code -->
 	<script>
-	var arraylatelySum = []; //7일 매출 
-	<%for(int i=0; i< wList.size(); i++){%>
-		arraylatelySum.push(<%=wList.get(i).getOrd_sumprice()%>);
-	<%}%>
-	var arraylatelyDate =[];//7일 날짜 
-	<%for(int i=0; i< wList.size(); i++){%>
-		arraylatelyDate.push('<%=wList.get(i).getOrd_date()%>');
-	<%}%>
-	for(var i=0; i< arraylatelyDate.length; i++){
-		console.log("arraylatelyDate " + i + " : " + arraylatelyDate[i]);
-	}
+	
 
 	var chart = AmCharts.makeChart( "chartdiv", {
 	  "type": "serial",
@@ -211,22 +201,22 @@
 	    "visits": 0
 	  }, {
 	    "country": 1,
-	    "visits": 1
+	    "visits": 0
 	  }, {
 	    "country": 2,
-	    "visits": 2
+	    "visits": 0
 	  }, {
 	    "country": 3,
-	    "visits": 3
+	    "visits": 0
 	  }, {
 	    "country": 4,
-	    "visits": 4
+	    "visits": 0
 	  }, {
 	    "country": 5,
-	    "visits": 5
+	    "visits": 0
 	  }, {
 	    "country": 6,
-	    "visits": 6
+	    "visits": 0
 	  } ],
 	  "valueAxes": [ {
 	    "gridColor": "#FFFFFF",
@@ -265,22 +255,7 @@
 	
 	<script>
 	
-	var arraySum = []; // 월별 매출 금액 
-	<%for(int i=0; i < monthChart.size();i++){%>
-		arraySum.push(<%=monthChart.get(i).getOrd_sumprice()%>);
-	<%}%>
-
-	 for(var i=0; i< arraySum.length; i++){
-		console.log("arraySum " + i + ":" + arraySum[i]);
-	} 
-	var arrayMonth = [];
-
-	<%for(int i=0; i < monthChart.size(); i++){%>
-		arrayMonth.push('<%=monthChart.get(i).getOrd_date() %>');
-	<%}%>
-	for(var i=0; i< arrayMonth.length; i++){
-		console.log("arrayMonth " + i + " : " + arrayMonth[i]);
-	}
+	
 	
 	 var chartDataM = [{
 	   "year": "00",

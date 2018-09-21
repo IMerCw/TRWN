@@ -20,20 +20,20 @@
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 			<div class="container">
 			<!-- 테이블  채우는 자리  -->		
 		
-		<h2>지역행사정보</h2><small>출처 : cheftruck</small>
+		<h2 style="color:white;">지역행사정보</h2><small style="color:white;">출처 : cheftruck</small>
 			<div class="row">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<table class="table table-striped" style="text-align: center; opacity: 0.9; background-color:white; border: 1px solid #dddddd">
 					
 					<tbody>
 					
 						<%-- <% for (int i = 0; i < festivalHTML.size(); i++) { %>
 						 System.out.println("elem test" + i + ": " + elem.eq(i).text()); %> --%>
 						<tr>
-							<td><%=festivalHTML %></td>
+							<td ><%=festivalHTML %></td>
 							
 						</tr>
 					</tbody>

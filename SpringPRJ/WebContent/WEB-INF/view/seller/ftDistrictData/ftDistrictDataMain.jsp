@@ -28,7 +28,7 @@ body { font-family:gulim; font-size:12px; }
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td>
+			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
 				<div class="container">
 				<div class="col-sm-12" >
 				
@@ -39,8 +39,8 @@ body { font-family:gulim; font-size:12px; }
 					<select name="dong2" id="dong2"></select>
 					</fieldset> -->
 					<fieldset style="margin-top:2%">
-						<h3 style="display:inline; margin:0; padding:0;" class="col-sm-8">구군 별 푸드트럭 분포</h3>
-							<select name="sido1" id="sido1" style="margin:0; padding:0;" class="col-sm-2"></select>
+						<h3 style="display:inline; color:white; margin:0; padding:0;" class="col-sm-8">구군 별 푸드트럭 분포</h3>
+							<select name="sido1" id="sido1" style="margin:0; background-color:white; padding:0;" class="col-sm-2"></select>
 							<select name="gugun1" id="gugun1" style="display:none;"></select>
 							<button type="button" onclick="findMap(); return false;" id="submitBttn" style="margin:0; padding:0;" class="col-sm-1">찾기</button>
 					</fieldset>
@@ -48,11 +48,11 @@ body { font-family:gulim; font-size:12px; }
 				
 				</div>
 					<div class="col-sm-12" style="height:80%;">
-						<div id="map" style="width:90%; height:350px; float:none;" class="col-sm-12"></div>
+						<div id="map" style="width:90%; opacity:0.8; height:350px; float:none;" class="col-sm-12"></div>
 						<div style="height: 2px;background-color: black;margin: 10px 0;">
 						
 						</div>
-						<div class="chart-container col-sm-5" style="position: relative; width:90%;" >
+						<div class="chart-container col-sm-5" style="position: relative; width:90%; background-color:white; opacity: 0.9;" >
 					   		<canvas style="width:50%; height:200px;" id="myChart" ></canvas>
 						</div>
 					</div>

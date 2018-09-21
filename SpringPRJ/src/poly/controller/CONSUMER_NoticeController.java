@@ -25,6 +25,7 @@ import poly.service.CONSUMER_IUserService;
 import poly.util.Coord;
 import poly.util.OpenAPI;
 import poly.util.SortRegCode;
+import poly.util.UtilTime;
 
 
 /*
@@ -35,15 +36,7 @@ import poly.util.SortRegCode;
 @Controller
 public class CONSUMER_NoticeController {
 	private Logger log = Logger.getLogger(this.getClass());
-	public String getDate() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
-		String date = sdf1.format(cal.getTime());
-		return date;
-	}
-	/*
-	 * 비즈니스 로직(중요 로직을 수행하기 위해 사용되는 서비스를 메모리에 적재(싱글톤패턴 적용됨)
-	 * */
+
 	
 	@Resource(name = "CONSUMER_FtService")
 	private CONSUMER_IFtService ftService;
@@ -140,6 +133,10 @@ public class CONSUMER_NoticeController {
 		String sido = myAddrArr[0];
 		String sigungu = myAddrArr[1];
 		String dong = myAddrArr[2];
+		String gpsEtc = "";  
+		for(int i = 3; i < myAddrArr.length; i++) {
+			gpsEtc += myAddrArr[i];
+		}
 		//미 로그인시 유저번호는 -1로 지정하여 DB에 저장
 		if(userSeq.equals("")) {
 			userSeq = "-1";
@@ -153,6 +150,7 @@ public class CONSUMER_NoticeController {
 		log.info(sido);
 		log.info(sigungu);
 		log.info(dong);
+		log.info(gpsEtc);
 		log.info("날씨용 지역 코드 X : " + gridX); //날씨용 지역코드 변환
 		log.info("날씨용 지역 코드 Y : " + gridY); //날씨용 지역코드 변환
 		
@@ -164,11 +162,12 @@ public class CONSUMER_NoticeController {
 		gpsDTO.setGps_sido(sido);
 		gpsDTO.setGps_sigungu(sigungu);
 		gpsDTO.setGps_dong(dong);
-		gpsDTO.setGps_renew_date(getDate());
+		gpsDTO.setGps_etc(gpsEtc);
+		gpsDTO.setGps_renew_date(UtilTime.getDateYMDhms());
 		
 		int resultSet = userService.setGps(gpsDTO);
-		log.info("gpsDTO " + resultSet);
-		int resultUpdate = userService.updateGps(gpsDTO.getUser_seq());
+		int resultUpdate = userService.updateGps(gpsDTO); //gpsDTO에 있는 gps_seq 값과 user_Seq값 이용
+		log.info(gpsDTO.getGps_seq());
 		log.info("DB저장 결과(1: 성공)  >>>>>>>> " + resultSet + ", " + resultUpdate);
 		
 		

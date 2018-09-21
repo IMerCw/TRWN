@@ -26,6 +26,13 @@
 <script>
 	location.href="/cmmn/main.do";
 </script>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
+<style>
+	* {
+		font-family: 'Noto Sans KR', sans-serif;
+		margin: 0 auto;
+	}
+</style>
 <%}%>
 		<div class="top topSecondContainer">
 <!-- 창원이형이 주신 top body  -->

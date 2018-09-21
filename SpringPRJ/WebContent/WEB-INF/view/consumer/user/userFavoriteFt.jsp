@@ -14,12 +14,23 @@
 		.mypageMenu > div {
 			padding: 0px;
 		}
+		
+		@media (max-width:768px) {
+			.table-font-size tr td{
+				font-size: 9px;
+				
+			}
+			.table-font-size tr th{
+				font-size: 12px;
+				
+			}
+		}
 	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/view/consumer/topBody.jsp" %>
-	<div class="container" style="width:90%;">
-		<div class="row mypageMenu" style="text-align:center; padding:15px 0; margin-bottom:10px; border-bottom:1px solid #bebebe; font-size:14px;">
+	<div class="container" style="width:100%;">
+		<div class="mypageMenu" style="text-align:center; padding:30px 0; margin-bottom:10px; border-bottom:1px solid #bebebe; font-size:14px;">
 			<div class="col-xs-3">
 				<a class="nav-link active" href="/consumer/user/mypage.do">회원정보</a>
 			</div>
@@ -35,19 +46,20 @@
 		</div>
 		<div style="width:100%">
 			<!-- 관심매장 넣을 곳 -->
-			<table class="table table-striped" style="border: 1px solid #dddddd; width:90%; margin: 0 auto;" >
+			<table class="table table-font-size" style="border:1px solid #dddddd; width:100%; margin:0 auto;" >
 					<thead>
 						<tr>
 							<th colspan="5"
-								style="background-color: #eeeeee; text-align: center;">내 쿠폰목록</th>
+								style="background-color: #f9f9f9; text-align: center;">관심매장</th>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
 							<td style="text-align: left;">유저번호</td>
 							<td style="text-align: left;">푸드트럭명</td>
 							<td style="text-align: left;">관심매장등록일</td>
 						</tr>
+					</thead>
+					<tbody>
+						
 						<%for(int i=0; i < fList.size(); i++) { %>
 						<tr>
 							<td style="text-align: left;"><%=fList.get(i).getUser_seq()%></td>

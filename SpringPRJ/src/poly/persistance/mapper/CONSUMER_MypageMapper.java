@@ -5,6 +5,7 @@ import java.util.List;
 import config.Mapper;
 import poly.dto.consumer.CONSUMER_CouponIssueDTO;
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
+import poly.dto.consumer.CONSUMER_FtReviewDTO;
 import poly.dto.consumer.CONSUMER_OrderInfoDTO;
 import poly.dto.consumer.CONSUMER_UserDTO;
 import poly.dto.seller.SELLER_OrderInfoDTO;

@@ -50,7 +50,9 @@
 <head>
 <title>푸드트럭 상세 보기 </title>
 <style>
-	
+	.footer{
+	    background-color: #f5f5f5;
+	}
 	#ft-detail-menu {
 		text-align: center;
 	}
@@ -114,6 +116,9 @@
 	}
 	/* 배달/예약/케이터링 가능 뱃지 */
 	.label {
+	    font-size: 15px;
+	    padding-top: 8px;
+	    height: 30px;
 		display:inline-block;
 		margin:3px 0;
 	}
@@ -145,7 +150,7 @@
 	<div id="map" style="width: 100%; height: 350px;"></div>
 	
 	<!-- 정보/메뉴/리뷰 탭 스크롤 내려도 고정됨 -->
-	<div class="header" id="myHeader" align="center">
+	<div class="header" id="myHeader" align="center" style="font-size:18px;">
 		<ul class="nav nav-tabs" id="ft-detail-menu">
 			<li class="active">
 				<a data-toggle="tab" href="#menu0" id="ftDetailInfo">정보</a>
@@ -290,7 +295,7 @@
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 	
-	var iwContent = '<div style="padding:5px;"> <%=fDTO.getFt_name()%> <br><a href="http://map.daum.net/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="http://map.daum.net/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	var iwContent = '<div style="padding:5px; width:150px; text-align:center;"><h3 style="margin:10px 0; font-size:2rem; font-weight:bold;"><%=fDTO.getFt_name()%></h3> <br><a href="http://map.daum.net/link/map/<%=fDTO.getFt_name()%>,<%=ftLat%>,<%=ftLon%>" style="color:#337ab7" target="_blank">큰지도보기</a> &nbsp;/&nbsp; <a href="http://map.daum.net/link/to/<%=fDTO.getFt_name()%>,<%=ftLat%>,<%=ftLon%>" style="color:#337ab7" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	    iwPosition = new daum.maps.LatLng(<%=ftLat + ", " + ftLon%>); //인포윈도우 표시 위치입니다
 	
 	// 인포윈도우를 생성합니다

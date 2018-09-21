@@ -4,6 +4,7 @@ public class CONSUMER_Gps_TableDTO {
 	private int user_seq;
 	private int ft_seq;
 	/*private String gps_data;*/ //수정중
+	private String gps_seq;
 	private String gps_renew_date;
 	private String gps_sido; //2018.08.24 PCW 시도 정보 
 	private String gps_sigungu; //2018.08.24 PCW 시군구 정보 
@@ -11,6 +12,7 @@ public class CONSUMER_Gps_TableDTO {
 	private String gps_doro; //2018.08.24 PCW 도로명 정보 
 	private String gps_x; //2018.08.24 PCW 위도 정보 
 	private String gps_y; //2018.08.24 PCW 경도 정보 
+	private String gps_etc;
 	
 	public int getUser_seq() {
 		return user_seq;
@@ -65,6 +67,18 @@ public class CONSUMER_Gps_TableDTO {
 	}
 	public void setGps_sigungu(String gps_sigungu) {
 		this.gps_sigungu = gps_sigungu;
+	}
+	public String getGps_etc() {
+		return gps_etc;
+	}
+	public void setGps_etc(String gps_etc) {
+		this.gps_etc = gps_etc;
+	}
+	public String getGps_seq() {
+		return gps_seq;
+	}
+	public void setGps_seq(String gps_seq) {
+		this.gps_seq = gps_seq;
 	}
 	
 }
