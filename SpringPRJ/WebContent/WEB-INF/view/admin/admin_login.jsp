@@ -521,22 +521,24 @@ input, button {
     <div class="login">
       <div class="login__check"></div>
       <div style="float:right; color:#ffffff; padding:8px; font-size:11px;">트럭왔냠 관리자 로그인</div>
-      <div class="login__form">
-        <div class="login__row">
-          <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
-          </svg>
-          <input type="text" class="login__input name" placeholder="EMAIL">
-        </div>
-        <div class="login__row">
-          <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
-          </svg>
-          <input type="password" class="login__input pass" placeholder="PASSWORD">
-        </div>
-        <button type="button" class="login__submit">로그인</button>
-        <p class="login__signup">TRWN ADMIN MODUEL VER 1.0</a></p>
-      </div>
+      <form action="<%=request.getContextPath()%>/admin/loginProc.do" method="post">
+	      <div class="login__form">
+	        <div class="login__row">
+	          <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+	            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
+	          </svg>
+	          <input type="text" class="login__input name" placeholder="EMAIL" name="user_Email">
+	        </div>
+	        <div class="login__row">
+	          <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+	            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
+	          </svg>
+	          <input type="password" class="login__input pass" placeholder="PASSWORD" name="user_Pwd">
+	        </div>
+	        <button type="submit" class="login__submit">로그인</button>
+	        <p class="login__signup">TRWN ADMIN MODUEL VER 1.0</a></p>
+	      </div>
+      </form>
     </div>
     <div class="app">
       <div class="app__top">

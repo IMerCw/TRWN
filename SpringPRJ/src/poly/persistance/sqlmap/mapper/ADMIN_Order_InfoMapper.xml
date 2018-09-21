@@ -6,7 +6,6 @@
 		SELECT 
 			ORD_SEQ,
 			USER_SEQ,
-			ITEM_SEQ,
 			ORD_SUMPRICE,
 			ORD_WAY,
 			ORD_DATE,
@@ -14,7 +13,10 @@
 			BUY_WAY,
 			USR_RCV_TIME,
 			RCV_TIME,
-			TID
+			TID,
+			FT_SEQ,
+			TRAN_NO,
+			GPS_SEQ
 		FROM ORDER_INFO ORDER BY ORD_DATE DESC
 	</select>
 	
@@ -22,7 +24,6 @@
 		SELECT 
 			ORD_SEQ,
 			USER_SEQ,
-			ITEM_SEQ,
 			ORD_SUMPRICE,
 			ORD_WAY,
 			ORD_DATE,
@@ -30,7 +31,10 @@
 			BUY_WAY,
 			USR_RCV_TIME,
 			RCV_TIME,
-			TID
+			TID,
+			FT_SEQ,
+			TRAN_NO,
+			GPS_SEQ
 		FROM ORDER_INFO WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY ORD_SEQ DESC
 	</select>
 

@@ -1,13 +1,21 @@
+<%@page import="poly.dto.admin.ADMIN_Search_TrendDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="poly.dto.admin.ADMIN_User_InfoDTO" %>
 <%@page import="poly.dto.admin.ADMIN_Board_PostDTO" %>
 <%@page import="java.util.List" %>
+<%@page import="java.util.Iterator" %>
+<%@page import="java.util.HashMap" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <% 
  	List<ADMIN_Board_PostDTO> bDTOArr = (List<ADMIN_Board_PostDTO>)request.getAttribute("board_P_List");
  	List<ADMIN_User_InfoDTO> bp_uDTOarr = (List<ADMIN_User_InfoDTO>)request.getAttribute("bp_uDTOarr");
+ 	HashMap<String, Integer> sc = (HashMap<String, Integer>)request.getAttribute("sc");
+ 	Iterator it = (Iterator)request.getAttribute("it");
+ 	
+ 	int thisMonth_UserSubmit_Count =(int)request.getAttribute("thisMonth_UserSubmit_Count");
+ 	int thisMonth_UserJoin_Count =(int)request.getAttribute("thisMonth_UserJoin_Count");
  	int date_3[] = (int[])request.getAttribute("date_3");
 	int date_2[] = (int[])request.getAttribute("date_2");
 	int date_1[] = (int[])request.getAttribute("date_1");
@@ -16,6 +24,10 @@
 	int date_week_sum[] = (int[])request.getAttribute("date_week_sum");
 	int date_month_avg[] = (int[])request.getAttribute("date_month_avg");
 	int date_month_sum[] = (int[])request.getAttribute("date_month_sum");
+	int year_month_avg[] = (int[])request.getAttribute("year_month_avg");
+	int year_month_sum[] = (int[])request.getAttribute("year_month_sum");
+	int year_month_cnt[] = (int[])request.getAttribute("year_month_cnt");
+	int year_month_user_join[] = (int[])request.getAttribute("year_month_user_join");
 %>
 <html>
 <head>
@@ -217,6 +229,10 @@
     var dd_3 = dd-3;
     var dd_2 = dd-2;
     var dd_1 = dd-1;
+    
+    var dd_3s = dd_3;
+    var dd_2s = dd_2;
+    var dd_1s = dd_1;
 	window.onload = function(){
         
         if(hour<10){
@@ -227,13 +243,10 @@
         	minute='0'+minute
         }
         
-        if(dd<10) {
-            dd='0'+dd;
-            dd_3s='0'+dd_3;
-            dd_2s='0'+dd_2;
-            dd_1s='0'+dd_1;
-        } 
-        
+        if(dd<10) {dd='0'+dd;}
+        if(dd_3<10){dd_3s='0'+dd_3;}
+        if(dd_2<10){dd_2s='0'+dd_2;}
+        if(dd_1<10){dd_1s='0'+dd_1;}
 
         if(mm<10) {
             mm='0'+mm
@@ -334,11 +347,46 @@
 							id="rs_RankSet_Btn2" onclick="javascript:rs_RankSet2()" class="noselect">
 								11위 20위
 							</span>
-							<div style="border-bottom:1px solid #cccccc; margin-top:3px; margin-left:24px; margin-right:24px; padding-top:10px; height:215px; display:block;" id="rs_RankSet_F1">
-							
+							<div style="border-bottom:1px solid #cccccc; margin-top:3px; margin-left:24px; margin-right:24px; padding-top:10px; height:215px; display:block; padding-left:15px; padding-right:15px; font-size:13px; line-height:19.5px;" id="rs_RankSet_F1">
+							<%	int rank = 1;
+								while(it.hasNext()) {
+									 String temp = (String)it.next();%>
+									 <div style="width:15%; float:left; text-align:center; padding-right:15px;">
+									 <b><%=rank%></b>
+									 </div>
+									 <div style="float:left;">
+									 <%=temp%>
+									 </div>
+									 <div style="width:10%; float:right; text-align:center;">
+									 <%=sc.get(temp)%>
+									 </div>
+									 <br>
+									 <%
+									 rank++;
+									 if(rank>10){break;}
+								 }
+							%>
 							</div>
-							<div style="border-bottom:1px solid #cccccc; margin-top:3px; margin-left:24px; margin-right:24px; padding-top:10px; height:215px; display:none;" id="rs_RankSet_F2">
-							
+							<div style="border-bottom:1px solid #cccccc; margin-top:3px; margin-left:24px; margin-right:24px; padding-top:10px; height:215px; display:none; padding-left:15px; padding-right:15px; font-size:13px; line-height:19.5px;" id="rs_RankSet_F2">
+							<%	int rank2 = 11;
+								while(it.hasNext()) {
+									String temp = (String)it.next();
+									if(rank2>10){ %>
+									 <div style="width:15%; float:left; text-align:center; padding-right:15px;">
+									 <b><%=rank2%></b>
+									 </div>
+									 <div style="float:left;">
+									 <%=temp%>
+									 </div>
+									 <div style="width:10%; float:right; text-align:center;">
+									 <%=sc.get(temp)%>
+									 </div>
+									 <br>
+									 <%}
+									 rank2++;
+									 if(rank2>20){ break; }
+								 }
+							%>
 							</div>
 						</div>
 					</div>
@@ -350,23 +398,26 @@
 		</div>
 		<div style="width:100%; border:1px solid #cccccc; height:160px; background-color:#ffffff; margin-bottom:20px;">
 			<table style="width:100%; height:100%;">
-				<tr height="60px">
-					<td style="border-right:1px solid #cccccc; width:25%;"></td>
-					<td style="border-right:1px solid #cccccc; width:25%;"></td>
-					<td style="border-right:1px solid #cccccc; width:25%;"></td>
-					<td style="width:25%;"></td> 
-				</tr>
-				<tr height="40px">
-					<td style="border-right:1px solid #cccccc; width:25%;"></td>
-					<td style="border-right:1px solid #cccccc; width:25%;"></td>
-					<td style="border-right:1px solid #cccccc; width:25%;"></td>
-					<td style="width:25%;"></td>
+				<tr height="60px" align="center">
+					<td style="border-right:1px solid #cccccc; width:25%; padding-top:10px;">
+						<b style="font-size:72px"><%=thisMonth_UserSubmit_Count%></b><b style="font-size:20px;">명</b><br>
+						<b style="font-size:18px">이번달 가입량</b>
+					</td>
+					<td style="border-right:1px solid #cccccc; width:25%; padding-top:10px;">
+						<b style="font-size:72px"><%=thisMonth_UserJoin_Count%></b><b style="font-size:20px;">명</b><br>
+						<b style="font-size:18px">이번달 접속자 수</b>
+					</td>
+					<td style="width:25%; padding-top:10px;">
+						<b style="font-size:72px"><%=date_month_sum[4]%></b>
+						<b style="font-size:20px;">건</b><br>
+						<b style="font-size:18px">이번달 주문량</b>
+					</td> 
 				</tr>
 			</table>
 		</div>
-		<script src="https://www.amcharts.com/lib/3/amcharts.js?x"></script>
-		<script src="https://www.amcharts.com/lib/3/serial.js?x"></script>
-		<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/js/admin/amcharts.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/js/admin/serial.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/js/admin/dark.js"></script>
 		<div id="chartdiv"></div>
 		<div class="row" style="margin-bottom:25px; margin-top:25px;">
 			<div class="col-xs-12 col-sm-12" align="center">
@@ -447,7 +498,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12" align="center" style="margin-top:30px;">
-				<h5 style="float:left;">&nbsp;|&nbsp;<b>푸드트럭 랭크</b></h5>
+				<h5 style="float:left;">&nbsp;|&nbsp;<b>인기 푸드트럭 목록</b></h5>
 				<div style="border-bottom:1px solid #cccccc; margin-bottom:10px; clear:both;"></div>
 				<div style="width:100%; height:auto;">
 					<%@include file="admin_truck_slider.jsp"%>
@@ -567,106 +618,18 @@
 	
 	<script>
 	var chartData = [
-	    {
-	        "date": "2018-01",
-	        "distance": 227,
-	        "townName": "New York",
-	        "townName2": "1분기",
-	        "townSize": 25,
-	        "latitude": 40.71,
-	        "duration": 18
-	    },
-	    {
-	        "date": "2018-02",
-	        "distance": 371,
-	        "townName": "Washington",
-	        "townSize": 14,
-	        "latitude": 38.89,
-	        "duration": 42
-	    },
-	    {
-	        "date": "2018-03",
-	        "distance": 433,
-	        "townName": "Wilmington",
-	        "townSize": 6,
-	        "latitude": 34.22,
-	        "duration": 37
-	    },
-	    {
-	        "date": "2018-04",
-	        "distance": 345,
-	        "townName": "Jacksonville",
-	        "townName2": "2분기",
-	        "townSize": 7,
-	        "latitude": 30.35,
-	        "duration": 26
-	    },
-	    {
-	        "date": "2018-05",
-	        "distance": 480,
-	        "townName": "Miami",
-	        "townSize": 10,
-	        "latitude": 25.83,
-	        "duration": 69
-	    },
-	    {
-	        "date": "2018-06",
-	        "distance": 386,
-	        "townName": "Tallahassee",
-	        "townSize": 7,
-	        "latitude": 30.46,
-	        "duration": 55
-	    },
-	    {
-	        "date": "2018-07",
-	        "distance": 348,
-	        "townName": "New Orleans",
-	        "townName2": "3분기",
-	        "townSize": 10,
-	        "latitude": 29.94,
-	        "duration": 88
-	    },
-	    {
-	        "date": "2018-08",
-	        "distance": 238,
-	        "townName": "Houston",
-	        "townSize": 16,
-	        "latitude": 29.76,
-	        "duration": 76
-	    },
-	    {
-	        "date": "2018-09",
-	        "distance": 218,
-	        "townName": "Dalas",
-	        "townSize": 17,
-	        "latitude": 32.8,
-	        "duration": 95
-	    },
-	    {
-	        "date": "2018-10",
-	        "distance": 349,
-	        "townName": "Oklahoma City",
-	        "townName2": "4분기",
-	        "townSize": 11,
-	        "latitude": 35.49,
-	        "duration": 67
-	    },
-	    {
-	        "date": "2018-11",
-	        "distance": 603,
-	        "townName": "Kansas City",
-	        "townSize": 10,
-	        "latitude": 39.1,
-	        "duration": 54
-	    },
-	    {
-	        "date": "2018-12",
-	        "distance": 534,
-	        "townName": "Denver",
-	        "townSize": 18,
-	        "latitude": 39.74,
-	        "duration": 45
-	    }
+		<% int branch=1;
+			for(int cnt=0; cnt<12; cnt++){%>
+		    {
+		        "date": "2018-<%=cnt+1%>",
+		        "distance": <%=year_month_sum[cnt]%>, //매출금액
+		        "townName": "New York", 
+		        <%if(cnt==0 || cnt==3 || cnt==6 || cnt==9){%>"townName2": "<%=branch%>분기",<%branch++;}%>
+		        "townSize": 25,
+		        "latitude": <%=year_month_user_join[cnt]%>, //접속자
+		        "duration": <%=year_month_cnt[cnt]%> //거래건수
+		    }<%if(cnt<11){%>,<%}%>
+	    <%}%>
 	];
 	var chart = AmCharts.makeChart("chartdiv", {
 	  type: "serial",
@@ -704,7 +667,7 @@
 
 	  valueAxes: [{
 	    id: "a1",
-	    title: "매출",
+	    title: "매출금액",
 	    gridAlpha: 0,
 	    axisAlpha: 0
 	  },{
@@ -715,7 +678,7 @@
 	    labelsEnabled: false
 	  },{
 	    id: "a3",
-	    title: "영업이익률",
+	    title: "거래건수",
 	    position: "right",
 	    gridAlpha: 0,
 	    axisAlpha: 0,
@@ -724,11 +687,11 @@
 	  graphs: [{
 	    id: "g1",
 	    valueField:  "distance",
-	    title:  "영업이익",
+	    title:  "매출금액",
 	    type:  "column",
 	    fillAlphas:  0.9,
 	    valueAxis:  "a1",
-	    balloonText:  "영업이익:[[value]]원",
+	    balloonText:  "매출금액:[[value]]원",
 	    legendValueText:  "[[value]]원",
 	    legendPeriodValueText:  "total: [[value.sum]]원",
 	    lineColor:  "#263138",
@@ -737,12 +700,12 @@
 	    id: "g2",
 	    valueField: "latitude",
 	    classNameField: "bulletClass",
-	    title: "순이익",
+	    title: "접속자",
 	    type: "line",
 	    valueAxis: "a2",
 	    lineColor: "#786c56",
 	    lineThickness: 1,
-	    legendValueText: "[[value]]원",
+	    legendValueText: "[[value]]명",
 	    descriptionField: "townName",
 	    bullet: "round",
 	    bulletSizeField: "townSize",
@@ -752,19 +715,19 @@
 	    bulletColor: "#000000",
 	    labelText: "[[townName2]]",
 	    labelPosition: "right",
-	    balloonText: "순이익:[[value]]원",
+	    balloonText: "접속자:[[value]]명",
 	    showBalloon: true,
 	    animationPlayed: true,
 	  },{
 	    id: "g3",
-	    title: "영업이익률",
+	    title: "거래건수",
 	    valueField: "duration",
 	    type: "line",
 	    valueAxis: "a3",
 	    lineColor: "#ff5755",
-	    balloonText: "영업이익률:[[value]]%",
+	    balloonText: "거래건수:[[value]]건",
 	    lineThickness: 1,
-	    legendValueText: "[[value]]",
+	    legendValueText: "[[value]]건",
 	    bullet: "square",
 	    bulletBorderColor: "#ff5755",
 	    bulletBorderThickness: 1,

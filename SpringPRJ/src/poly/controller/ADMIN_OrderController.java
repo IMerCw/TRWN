@@ -33,7 +33,7 @@ public class ADMIN_OrderController {
 	
 	public String getDate() {
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / HH:mm:ss");
 		String date = sdf1.format(cal.getTime());
 		
 		return date;

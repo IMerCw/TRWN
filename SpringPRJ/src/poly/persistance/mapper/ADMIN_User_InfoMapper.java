@@ -13,4 +13,5 @@ public interface ADMIN_User_InfoMapper {
 	public int user_Active(ADMIN_User_InfoDTO uDTO) throws Exception;
 	public int user_Drop(ADMIN_User_InfoDTO uDTO) throws Exception;
 	public int user_Auth(ADMIN_User_InfoDTO uDTO) throws Exception;
+	public int getUser_Submit_Full(String value) throws Exception;
 }

@@ -11,7 +11,7 @@
 			<p align="center" style="font-size: 12px;">
 				<span style="color: #cccccc;">관리자 접속일시 : 2018.09.01 18:29</span>
 				&nbsp;&nbsp;&nbsp;<input type="button" value="로그아웃"
-					onClick="location.href='#'"
+					onClick="location.href='<%=request.getContextPath()%>/admin/logout.do'"
 					style="border: #333333 1px solid; background-color: #454545; width: 70px; height: 21px;" />
 			</p>
 		</div>
@@ -35,8 +35,8 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<%=request.getContextPath() %>/admin/user/user_list.do">회원정보관리</a></li>
 						<li class="divider"></li>
-						<li><a href="#">정지/탈퇴관리</a></li>
-					</ul></li>
+						<li><a href="<%=request.getContextPath() %>/admin/user/user_activity_list.do">정지/탈퇴관리</a></li>
+					</ul></li> 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">푸드트럭관리
 						<span class="caret"></span>
@@ -44,7 +44,7 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<%=request.getContextPath() %>/admin/ft/ft_list.do">푸드트럭리스트</a></li>
 						<li class="divider"></li>
-						<li><a href="#">정지/탈퇴관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/admin/ft/ft_activity_list.do">정지/탈퇴관리</a></li>
 					</ul></li>
 				<li><a href="<%=request.getContextPath() %>/admin/board/board_list.do">게시판관리</a></li>
 				<li><a href="<%=request.getContextPath() %>/admin/board_p/board_p_list.do">게시물관리</a></li>

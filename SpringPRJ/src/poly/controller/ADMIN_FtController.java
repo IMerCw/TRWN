@@ -46,7 +46,7 @@ public class ADMIN_FtController {
 	
 	public String getDate() {
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / HH:mm:ss");
 		String date = sdf1.format(cal.getTime());
 		
 		return date;
@@ -128,7 +128,89 @@ public class ADMIN_FtController {
 		}
 		return ft_list(request, model);
 	}
-	
+//정지 탈퇴 푸드트럭관리------------------------------------------------------------------------------------------------------------------------------------
+	//정지-탈퇴 푸드트럭 리스트
+		@RequestMapping(value="admin/ft/ft_activity_list")
+		public String ft_activity_list(HttpServletRequest request, Model model) throws Exception{
+			List<ADMIN_Ft_InfoDTO> ftList = ftService.getFT_InfoList();
+			List<ADMIN_User_InfoDTO> uDTOarr = new ArrayList<ADMIN_User_InfoDTO>();
+			List<ADMIN_Ft_InfoDTO> activity_ftList = new ArrayList<ADMIN_Ft_InfoDTO>();
+			for(ADMIN_Ft_InfoDTO ftDTO : ftList) {
+				if(ftDTO.getFt_status()!=0) {
+					uDTOarr.add(userService.getUser(ftDTO.getUser_seq()));
+					activity_ftList.add(ftDTO);
+				}
+			}
+			//목록 쪼개기
+			model.addAttribute("pageNum", request.getParameter("pageNum"));
+			model.addAttribute("pageSize", request.getParameter("pageSize"));
+
+			model.addAttribute("ftList", activity_ftList);
+			model.addAttribute("uDTOarr", uDTOarr);
+			
+			return "/admin/ft/ft_activity_list";
+		}
+		
+		//정지-탈퇴 푸드트럭 검색 리스트
+		@RequestMapping(value="admin/ft/ft_activity_search_list", method=RequestMethod.GET)
+		public String ft_activity_search_list(HttpServletRequest request, Model model) throws Exception{
+			ADMIN_Ft_InfoDTO fDTO = new ADMIN_Ft_InfoDTO();
+			fDTO.setOption(request.getParameter("option"));
+			fDTO.setValue(request.getParameter("value"));
+			
+			List<ADMIN_Ft_InfoDTO> ft_SearchList = ftService.getFT_Search(fDTO);
+			List<ADMIN_User_InfoDTO> uDTOarr = new ArrayList<ADMIN_User_InfoDTO>();
+			List<ADMIN_Ft_InfoDTO> activity_ftList = new ArrayList<ADMIN_Ft_InfoDTO>();
+			
+			for(ADMIN_Ft_InfoDTO ftDTO : ft_SearchList) {
+				if(ftDTO.getFt_status()!=0) {
+					uDTOarr.add(userService.getUser(ftDTO.getUser_seq()));
+					activity_ftList.add(ftDTO);
+				}
+			}
+			model.addAttribute("uDTOarr", uDTOarr);
+			
+			model.addAttribute("option", request.getParameter("option"));
+			model.addAttribute("value", request.getParameter("value"));
+			
+			//목록 쪼개기
+			model.addAttribute("pageNum", request.getParameter("pageNum"));
+			model.addAttribute("pageSize", request.getParameter("pageSize"));
+
+			model.addAttribute("ft_SearchList", activity_ftList);
+			
+			return "/admin/ft/ft_activity_search_list";
+		}
+		
+		//푸드트럭 활동정지 해제
+		@RequestMapping(value="admin/ft/ft_activity_active", method=RequestMethod.GET)
+		public String ft_activity_active(HttpServletRequest request, Model model) throws Exception{
+			ADMIN_Ft_InfoDTO fDTO = new ADMIN_Ft_InfoDTO();
+			String ArrFt_Seq = request.getParameter("ArrFt_Seq");
+			String[] array = ArrFt_Seq.split(",");
+			for(int i=0; i<array.length; i++) {
+				fDTO.setFt_chan(getDate());
+				fDTO.setFt_seq(Integer.parseInt(array[i]));
+				fDTO.setFt_status(0);
+				ftService.ft_Active(fDTO);
+			}
+			return ft_activity_list(request, model);
+		}
+		
+		//푸드트럭 강제탈퇴 해제
+		@RequestMapping(value="admin/ft/ft_activity_drop", method=RequestMethod.GET)
+		public String ft_activity_drop(HttpServletRequest request, Model model) throws Exception{
+			ADMIN_Ft_InfoDTO fDTO = new ADMIN_Ft_InfoDTO();
+			String ArrFt_Seq = request.getParameter("ArrFt_Seq");
+			String[] array = ArrFt_Seq.split(",");
+			for(int i=0; i<array.length; i++) {
+				fDTO.setFt_chan(getDate());
+				fDTO.setFt_seq(Integer.parseInt(array[i]));
+				fDTO.setFt_status(0);
+				ftService.ft_Drop(fDTO);
+			}
+			return ft_activity_list(request, model);
+		}
 	//푸드트럭 상세정보[리뷰, 카테고리, 메뉴, 정보변경]--------------------------------------------------------------------------------------
 		@RequestMapping(value="admin/ft/ft_info", method=RequestMethod.GET)
 		public String ft_info(HttpServletRequest request, Model model) throws Exception{

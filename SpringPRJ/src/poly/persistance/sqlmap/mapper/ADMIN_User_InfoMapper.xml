@@ -69,4 +69,10 @@
 				USER_AUTH=${user_auth}
 				WHERE USER_SEQ=#{user_seq}
 	</update>
+	
+	<select id="getUser_Submit_Full" parameterType="string" resultType="integer">
+		SELECT 
+			COUNT(*)
+		FROM USER_INFO WHERE SUBSTRING_INDEX(USER_REGDATE, '/', 1) >= #{value};
+	</select>
 </mapper>

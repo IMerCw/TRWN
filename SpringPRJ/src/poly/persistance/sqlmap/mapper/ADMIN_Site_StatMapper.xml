@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Site_StatMapper">
+
+	<select id="getSite_Stat_Full" parameterType="string" resultType="integer">
+		SELECT 
+			COUNT(*)
+		FROM SITE_STAT WHERE SUBSTRING_INDEX(join_date, '/', 1) >= #{value};
+	</select>
+	
+	<select id="getSite_Stat_Month" parameterType="integer" resultType="integer">
+		SELECT 
+			COUNT(*)
+		FROM SITE_STAT WHERE SUBSTRING(SUBSTRING_INDEX(join_date, '/', 1),7,2) = #{value};
+	</select>
+	
+	<insert id="in_Site_Stat" parameterType="ADMIN_Site_StatDTO">
+		INSERT INTO SITE_STAT
+		(
+			STAT_SEQ,
+			JOIN_DATE,
+			USER_SEQ
+		)
+		VALUES
+		(
+			#{join_date},
+			#{user_seq}
+		)
+	</insert>
+</mapper>

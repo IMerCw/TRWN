@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ADMIN_Search_TrendMapper">
+	<select id="getSearch_Trend_List" resultType="ADMIN_Search_TrendDTO">
+		SELECT 
+			TREND_SEQ,
+			USER_SEQ,
+			SEARCH_WORD,
+			SEARCH_DATE
+		FROM SEARCH_TREND
+		ORDER BY SEARCH_DATE DESC
+	</select>
+	
+	<insert id="in_Search_Trend" parameterType="ADMIN_Search_TrendDTO">
+		INSERT INTO SEARCH_TREND
+		(
+			TREND_SEQ,
+			USER_SEQ,
+			SEARCH_WORD,
+			SEARCH_DATE
+		)
+		VALUES
+		(
+			#{user_seq},
+			#{search_word},
+			#{search_date},
+		)
+	</insert>
+</mapper>

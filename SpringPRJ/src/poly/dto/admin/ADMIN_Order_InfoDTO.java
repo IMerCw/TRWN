@@ -3,7 +3,6 @@ package poly.dto.admin;
 public class ADMIN_Order_InfoDTO {
 	private int ord_seq;
 	private int user_seq;
-	private int item_seq;
 	private int ord_sumprice;
 	private String ord_way;
 	private String ord_date;
@@ -12,6 +11,9 @@ public class ADMIN_Order_InfoDTO {
 	private String usr_rcv_time;
 	private String rcv_time;
 	private String tid;
+	private int ft_seq;
+	private String tran_no;
+	private int gps_seq;
 	
 	//------------------------------------------------
 	
@@ -44,12 +46,6 @@ public class ADMIN_Order_InfoDTO {
 	}
 	public void setUser_seq(int user_seq) {
 		this.user_seq = user_seq;
-	}
-	public int getItem_seq() {
-		return item_seq;
-	}
-	public void setItem_seq(int item_seq) {
-		this.item_seq = item_seq;
 	}
 	public int getOrd_sumprice() {
 		return ord_sumprice;
@@ -98,5 +94,23 @@ public class ADMIN_Order_InfoDTO {
 	}
 	public void setTid(String tid) {
 		this.tid = tid;
+	}
+	public int getFt_seq() {
+		return ft_seq;
+	}
+	public void setFt_seq(int ft_seq) {
+		this.ft_seq = ft_seq;
+	}
+	public String getTran_no() {
+		return tran_no;
+	}
+	public void setTran_no(String tran_no) {
+		this.tran_no = tran_no;
+	}
+	public int getGps_seq() {
+		return gps_seq;
+	}
+	public void setGps_seq(int gps_seq) {
+		this.gps_seq = gps_seq;
 	}
 }

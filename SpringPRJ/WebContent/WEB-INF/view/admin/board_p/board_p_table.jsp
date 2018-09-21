@@ -146,10 +146,10 @@
 					</tr>
 					<%cnt++;
 					
-					if(bDTOArr.size()==i+1)break;
+					if(bDTOArr.size()==i+1){break;}
 				} 
 			}
-			%>
+		%>
 		</table>
 		</form>
 		<div style="margin-top:10px;">

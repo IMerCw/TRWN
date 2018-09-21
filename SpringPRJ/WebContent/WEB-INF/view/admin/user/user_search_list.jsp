@@ -27,7 +27,7 @@
 <div class="container" style="background-color:rgba(255,255,255,0.9);  padding-top:15px; padding-bottom:30px;  padding-left:30px; padding-right:30px;">
 	<div style="width:100%;">
 		<div style="float:left;">
-			<h2>회원검색 검색리스트</h2>
+			<h2>회원 검색리스트</h2>
 		</div>
 		<div style="float:right; margin-top:20px;">
 			<input type="button" class="btn btn-default" value="뒤로가기" onclick="location.href='<%=request.getContextPath()%>/admin/user/user_list.do'">

@@ -51,6 +51,8 @@
 		<typeAlias type="poly.dto.admin.ADMIN_Order_ItemDTO" alias="ADMIN_Order_ItemDTO"/>
 		<typeAlias type="poly.dto.admin.ADMIN_Order_WaitDTO" alias="ADMIN_Order_WaitDTO"/>
 		<typeAlias type="poly.dto.admin.ADMIN_User_InfoDTO" alias="ADMIN_User_InfoDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Search_TrendDTO" alias="ADMIN_Search_TrendDTO"/>
+		<typeAlias type="poly.dto.admin.ADMIN_Site_StatDTO" alias="ADMIN_Site_StatDTO"/>
 		
 		<!-- 판매자  -->
 		<typeAlias type="poly.dto.seller.SELLER_FtSellerDTO" alias="SELLER_FtSellerDTO"/>

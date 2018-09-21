@@ -117,7 +117,6 @@
 				<th width="8%">주문번호</th>
 				<th width="12%">주문일시</th>
 				<th width="10%">주문자</th>
-				<th>주문상품</th>
 				<th width="8%">총 상품금액</th>
 				<th width="8%">총 배송비</th>
 				<th width="8%">총 주문금액</th>
@@ -126,7 +125,7 @@
 			</tr>
 			<%
 				if(orDTOarr.size()==0 || orDTOarr==null){%>
-					<tr height="80px"><td align="center" colspan="10">주문내역이 없습니다.</td></tr>	
+					<tr height="80px"><td align="center" colspan="9">주문내역이 없습니다.</td></tr>	
 				<%}else{
 				int startCnt=(startNum-1)*pageSize;	//시작 그룹번호
 				int endCnt=pageSize*startNum; //끝 그룹번호
@@ -137,13 +136,30 @@
 		            	<td><%=orDTOarr.get(i).getOrd_seq() %></td>
 		            	<td><%=orDTOarr.get(i).getOrd_date() %></td>
 		            	<td>주문자:<%=orDTOarr.get(i).getUser_seq()%></td>
-		                <td>주문상품:<%=orDTOarr.get(i).getItem_seq()%></td>
-						<td><%=orDTOarr.get(i).getOrd_sumprice()-2500%>원</td>
-						<td>2500원</td>
-						<td><%=orDTOarr.get(i).getOrd_sumprice()%>원</td>
+						<td>
+							<%if(orDTOarr.get(i).getOrd_way() != null && orDTOarr.get(i).getOrd_way().equals("배달")){ %>
+								<%=orDTOarr.get(i).getOrd_sumprice()%>원
+							<%}else{ %>
+								<%=orDTOarr.get(i).getOrd_sumprice()%>
+							<%} %>
+						</td>
+						<td>
+							<%if(orDTOarr.get(i).getOrd_way() != null && orDTOarr.get(i).getOrd_way().equals("배달")){ %>
+								2500원
+							<%}else{ %>
+								0원
+							<%} %>
+						</td>
+						<td>
+							<%if(orDTOarr.get(i).getOrd_way() != null && orDTOarr.get(i).getOrd_way().equals("배달")){ %>
+								<%=orDTOarr.get(i).getOrd_sumprice()+2500%>원
+							<%}else{ %>
+								<%=orDTOarr.get(i).getOrd_sumprice()%>
+							<%} %>
+						</td>
 						<td><%=orDTOarr.get(i).getBuy_way()%></td>
 						<td><%=orDTOarr.get(i).getOrd_status()%></td>
-					</tr>
+					</tr> 
 					<%cnt++;
 					if(orDTOarr.size()==i+1)break;
 				} 
