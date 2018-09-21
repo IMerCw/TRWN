@@ -70,7 +70,7 @@
 							<%} %>
 						</div>
 							
-						<div class="card-body">
+						<div class="card-body" style="font-size:20px;">
 							<%=ftList.get(i).getFt_name() %>
 						</div> 
 							<input type="hidden" name="ft_seq" value="<%=ftList.get(i).getFt_seq()%>" />

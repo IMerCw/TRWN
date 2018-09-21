@@ -102,7 +102,8 @@
 		ORD_HIS,
 		ORD_STATUS,
 		CSTMR_NAME,
-		CSTMR_TEL
+		CSTMR_TEL,
+		TRAN_NO
 	)
 	VALUES
 	(
@@ -112,7 +113,8 @@
 		#{ordHis},
 		#{ordStatus},
 		#{cstmrName},
-		#{cstmrTel}
+		#{cstmrTel},
+		#{tran_no}
 	)
 	</insert>
 	

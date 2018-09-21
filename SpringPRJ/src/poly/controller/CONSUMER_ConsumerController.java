@@ -73,7 +73,6 @@ public class CONSUMER_ConsumerController {
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
 			return "/cmmn/alert";
-			
 		}
 		String []locPosition = request.getParameter("locPosition").split(","); //GET방식으로 받은 locPosition을 분리하여 어레이 변수에 할당
 		
@@ -133,9 +132,9 @@ public class CONSUMER_ConsumerController {
 	
 	// 푸드트럭 상세 보기
 	@RequestMapping(value="consumer/cnsmr/ftDetail", method=RequestMethod.GET) //POST방식으로 데이터를 받음
-	public String ftDetail(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+	public String ftDetail(HttpServletRequest request, Model model) throws Exception {
 		log.info("Access cnsmr/ftDetail.do");
-		String user_seq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
+		String user_seq = CmmUtil.nvl(request.getParameter("userSeq"));
 		String ft_seq = CmmUtil.nvl(request.getParameter("ft_seq"));
 		// 푸드트럭 상세 보기 페이지 내의 어느 탭으로 이동할지를 결정 ---  0-정보 1-메뉴 2-리뷰
 		String cmd = request.getParameter("cmd"); 
@@ -171,7 +170,6 @@ public class CONSUMER_ConsumerController {
 
 		}
 		model.addAttribute("FtLikeResult", FtLikeResult);
-		log.info("Terminate cnsmr/ftDetail.do");
 		return "/consumer/cnsmr/ftDetail";		  
 	}
 	
@@ -253,7 +251,7 @@ public class CONSUMER_ConsumerController {
 			
 		}
 		///////////////////////////////////////////////////////
-		model.addAttribute("ft_seq", ft_seq);
+		
 		
 		menuDTOs = null;
 		return "/consumer/cnsmr/ftDetailMenu";

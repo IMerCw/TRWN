@@ -55,32 +55,17 @@ public class SELLER_OutController {
 	@RequestMapping(value="/seller/out/out_info")
 	public String out_info(HttpServletRequest request , Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + " out start !!~");
-		String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
-		log.info("userSeq : " + userSeq);
+
 		String userAuth = CmmUtil.nvl(request.getParameter("userAuth"));
 		log.info("userAuth : " + userAuth);
+		
 		//소비자가 주문하기 클릭할 경우 소비자가 보고 있던 푸드트럭의 번호를 받는다.
 		String ftSeq =CmmUtil.nvl(request.getParameter("ftSeq"));
 		log.info("ftSeq : " + ftSeq);
 		session.setAttribute("ftSeq", ftSeq);
 		
-		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
-		ftsDTO.setUserSeq(userSeq);
-		log.info("ftsDTO set : " + ftsDTO.getUserSeq());
-		if(userAuth.equals("2")) {
-			//판재자일 경우에는 판매자 id를 이용하여 ftSeq를 뽑아옵니다.
-			log.info("if userAuth = '2' 시작합니다.");
-			ftsDTO = OutService.getOutTruckInfo(ftsDTO);
-			session.setAttribute("ftSeq", ftsDTO.getFtSeq());
-			log.info("ftsDTO .get : " +ftsDTO.getFtSeq());
-		} else {
-			userAuth = "0"; //권한  0 : 소비자
-			log.info("if else 소비자 시작합니다.");
-			//소비자 화면에서 넘어올경루 소비자가  보고 있던 푸드트럭의 번호를 셋팅해줍니다.
-			ftsDTO.setFtSeq(ftSeq);
-			log.info("ftsDTO .get : " + ftsDTO.getFtSeq());
-		}
-		if(ftsDTO.getFtSeq() == null) {
+		/*
+		if(fDTO.getFtSeq() == null) {
 			String msg ="";
 			String url="";
 			msg = "등록된 트럭이 없습니다.";
@@ -89,14 +74,12 @@ public class SELLER_OutController {
 			model.addAttribute("url",url);
 			return "/cmmn/alert";
 		}
-		
+		*/
 		
 		ADMIN_Ft_InfoDTO fDTO = new ADMIN_Ft_InfoDTO();
-		fDTO = ftService.getFT_Info(Integer.parseInt(ftsDTO.getFtSeq()));
+		fDTO = ftService.getFT_Info(Integer.parseInt(ftSeq));
 		
-		//
-		String cmd = "";
-		int ft_seq = Integer.parseInt(ftsDTO.getFtSeq());
+		int ft_seq = fDTO.getFt_seq();
 		log.info("ft_seq : " + ft_seq);
 		
 		////메뉴&카테고리 리스트
@@ -104,41 +87,30 @@ public class SELLER_OutController {
 		List<ADMIN_Menu_InfoDTO> menuDTOarr = ftService.getFt_Menu_List(ft_seq);
 		List<String> ImgDTOs = new ArrayList<String>();
 		if(menuDTOarr.size()!=0) {
-			int i=0;
 			for(ADMIN_Menu_InfoDTO menuDTO : menuDTOarr) {
 				ImgDTOs.add(menuDTO.getFile_id());
-				i++;
 			}
 			List<ADMIN_ImageDTO> imgDTOarr = imgService.getMenuImage(ImgDTOs);
 			model.addAttribute("imgDTOarr", imgDTOarr);
 		}
+		/////////////////
+		
 		model.addAttribute("cateDTOarr", cateDTOarr);
 		model.addAttribute("menuDTOarr", menuDTOarr);
-		
-		log.info("outC cmd : " + cmd );
-		log.info("outC ft_seq : " + ft_seq);
-		
-		//페이지 커맨드 전송
-		model.addAttribute("cmd", cmd);
-		
-		//좌측 푸드트럭 기본정보
-		fDTO = ftService.getFT_Info(ft_seq);
-		
 		model.addAttribute("ftDTO", fDTO);
 		model.addAttribute("ft_seq", ft_seq);
 		model.addAttribute("userAuth", userAuth);
 		
-		cmd = null;
 		fDTO = null;
 		
 		log.info(this.getClass() + " out end !!@@");
 		
 		return "/seller/out/out_info";
-		
 	}
 	
 	
-	@RequestMapping(value="seller/out/item")//장바구니 메뉴 클릭 시
+	//장바구니 메뉴 클릭 시
+	@RequestMapping(value="seller/out/item")
 	public String insertTemp (HttpServletRequest request,HttpSession session,Model model) throws Exception{
 		log.info(this.getClass() + "insert item Start !!!!!");
 		String ftSeq = CmmUtil.nvl(request.getParameter("ftSeq"));
@@ -229,6 +201,7 @@ public class SELLER_OutController {
 			log.info(this.getClass() + "insert item end ~~!!!!");
 		return null;
 	}
+	
 	@RequestMapping(value="/seller/out/itemBtn")//장바구니 버튼
 	public void delitem(HttpServletRequest request, HttpSession session) throws Exception{
 		
@@ -295,6 +268,11 @@ public class SELLER_OutController {
 		log.info("inout view start !!!");
 		String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
 		log.info("Check userSeq : " + userSeq);
+		
+		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
+		ftsDTO.setUserSeq(userSeq);
+		ftsDTO = OutService.getOutTruckInfo(ftsDTO);
+		session.setAttribute("ftSeq", ftsDTO.getFtSeq());
 		
 		log.info("inout view end !!!");
 		return "/seller/out/inOutB";

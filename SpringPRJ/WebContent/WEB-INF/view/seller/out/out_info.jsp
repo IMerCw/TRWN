@@ -8,21 +8,18 @@
 <%@page import="poly.dto.admin.ADMIN_Ft_InfoDTO" %>
 
 <%
+	ADMIN_Ft_InfoDTO ftDTO = (ADMIN_Ft_InfoDTO)request.getAttribute("ftDTO");
 	ADMIN_Ft_InfoDTO ftDTO2 = (ADMIN_Ft_InfoDTO)request.getAttribute("ftDTO");
+	
 	List<ADMIN_Ft_Menu_CateDTO> cateDTOarr = (List<ADMIN_Ft_Menu_CateDTO>)request.getAttribute("cateDTOarr");
 	List<ADMIN_Menu_InfoDTO> menuDTOarr = (List<ADMIN_Menu_InfoDTO>)request.getAttribute("menuDTOarr");
 	List<ADMIN_ImageDTO> imgDTOarr = (List<ADMIN_ImageDTO>)request.getAttribute("imgDTOarr");
+	
 	String userAuth = (String) request.getParameter("userAuth");
 	
-	ADMIN_Ft_InfoDTO ftDTO = (ADMIN_Ft_InfoDTO)request.getAttribute("ftDTO");
 	String[] array_optime = ftDTO.getFt_optime().split("/");
 	String[] array = ftDTO.getFt_func().split("/"); 
 	
-	String cmd = (String)request.getAttribute("cmd");
-	if(cmd==null){
-		cmd="";
-	} 
-	String userSequence = CmmUtil.nvl((String)request.getParameter("userSeq"));
 
 	List<HashMap> Ilist = (List<HashMap>)session.getAttribute("Ilist");
 	int sum =0;
@@ -122,16 +119,13 @@
 			
 		};
 		
-		function complete(a,b,userAuth){
+		function complete(a,userAuth){
 			
 			if(<%=sum%> == 0){
 				alert("주문할 상품을 선택해주세요")
 				return false;
 			}
-			if(b == null){
-				alert("로그인을 해주세요.");
-				return false;
-			}
+			
 			// 폼 생성
 			var form = document.createElement("form");     
 			var actionTarget = (userAuth == 1 ) ? "/seller/order/goCheck.do":"/seller/order/orderLogin.do";
@@ -151,16 +145,6 @@
 			input_id.setAttribute("value", a);                          
 			
 			form.appendChild(input_id);
-			
-			//input 2 : 유저 번호
-			var input_id2 = document.createElement("input");
-		
-			input_id2.setAttribute("type", "hidden");
-			
-			input_id2.setAttribute("name", "userSeq"); 
-			input_id2.setAttribute("value", b);     
-			
-			form.appendChild(input_id2);
 			 
 			//input 3 : 유저 권한
 			var input_id3 = document.createElement("input");
@@ -335,21 +319,25 @@
 			<div class="row" style="padding :0;">
 				<div class="col-xs-12" style="margin-bottom: 12px;">
 					<button type="button" style="width:100%; margin-bottom: 12px;" class="btn btn-default" onclick="JavaScript:itemBtn('1','delAll');">전체메뉴취소</button>
-					<div class="col-xs-4" style="text-align:center; height:34px;"><b>총금액</b></div>
-					<div class="col-xs-4" style="text-align:center; height:34px;">
-						<div style="padding :0;">
-						<%=sum %> 원
-						</div>
+				</div>
+			</div>
+			<div style="margin-top:10px; margin-bottom:16px; border-bottom:1px solid #f2f2f2;"></div>
+			
+			<div class="row" style="padding :0; font-size:26px;">
+				<div class="col-xs-4" style="text-align:right; height:39px;"><b>총금액</b></div>
+				<div class="col-xs-4" style="text-align:center; height:39px;">
+					<div style="padding :0;" id="sumPriceBox">
+					
 					</div>
-					<div class="col-xs-4">
-						<%if(userAuth.equals("1")) {%>
-							<button type="button" class="btn btn-default" style="background-color: #d9534f; color:white;" 
-								onclick="Javascript:complete(<%=sum%>,<%=userSequence%>,1)">주문완료</button>
-						<%} else if(userAuth.equals("2")) {%>
-							<button type="button" class="btn btn-default" style="background-color: #337ab7; color:white;"
-								 onclick="Javascript:complete(<%=sum%>,<%=userSequence%>,2)">주문완료</button>
-						<%} %>
-					</div>
+				</div>
+				<div class="col-xs-4">
+					<%if(userAuth.equals("1")) {%>
+						<button type="button" class="btn btn-default" style="background-color: #d9534f; color:white; font-size:20px;" 
+							onclick="Javascript:complete(<%=sum%>,1)">주문 완료</button>
+					<%} else if(userAuth.equals("2")) {%>
+						<button type="button" class="btn btn-default" style="background-color: #d9534f; color:white; font-size:20px;"
+							 onclick="Javascript:complete(<%=sum%>,2)">주문 완료</button>
+					<%} %>
 				</div>
 			</div>
 		</div>
@@ -359,5 +347,26 @@
 		
 
 </body>
+<script>
+	
+	var sumPriceBox = document.getElementById('sumPriceBox');
+	sumPriceBox.innerHTML = commify(<%=sum%>) + '원';
 
+
+	//3자리 마다 콤마 찍는 함수
+	function commify(n) {
+
+		var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	
+	    n += '';                          // 숫자를 문자열로 변환
+	
+	    while (reg.test(n)){
+	
+	          n = n.replace(reg, '$1' + ',' + '$2');
+	
+	    }
+	
+	    return n;
+	}
+</script>
 </html>

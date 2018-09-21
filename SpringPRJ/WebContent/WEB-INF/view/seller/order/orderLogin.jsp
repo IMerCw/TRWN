@@ -12,24 +12,28 @@
     
 <%
 	String sum = (String)request.getAttribute("sum");
-	String userSeq = (String)request.getAttribute("userSeq");
-			
+	String ftSeq = (String) request.getAttribute("ftSeq");
 %>    
 <%-- <%= sum %>,<%= userSeq %>--%> <%-- 파라미터 확인 --%>
 	
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>트럭왔냠 - 로그인</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<!-- 부가적인 테마 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">		
-	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>트럭왔냠 - 로그인</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">		
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"> <%-- 구글 웹 폰트 --%>
+<style>
+		body {
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+	</style>
 <script>
 $(document).ready(function(){
 	$('#sumbitBtn').click(function(){
@@ -89,6 +93,15 @@ $(document).ready(function(){
 					
 					form.appendChild(input_id2);
 					
+					//input 생성
+					var input_id3 = document.createElement("input");  
+					
+					input_id3.setAttribute("type", "hidden");                 
+					input_id3.setAttribute("name", "ftSeq");                        
+					input_id3.setAttribute("value", <%=ftSeq%>);                          
+					
+					form.appendChild(input_id3);
+					
 					//폼전송
 					
 					form.submit();  
@@ -107,13 +120,7 @@ $(document).ready(function(){
 </script>
 
 </head>
-	<!-- //location.href="/seller/order/orderInfo.do?sum="+a+"&userSeq="+b; -->
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
-	<style>
-		body {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
-	</style>
+
 <body>
 	<div class="container" style="height:90%">
 		<div class="row">
@@ -173,6 +180,7 @@ $(document).ready(function(){
 	            </div>
 	            <form action="/seller/order/orderInfo_nmmbr.do" method="POST" id="nmbrForm">
 	            	<input type="hidden" value="<%=sum%>" name="sum"/>
+	            	<input type="hidden" value="<%=ftSeq%>" name="ftSeq"/>
 	            	<div class="form-group" style="margin-top:16px;">
 						<label for="usr">주문하시는 분의 성함</label>
 						<input type="text"  placeholder="이름" class="form-control" name="cstmrName">

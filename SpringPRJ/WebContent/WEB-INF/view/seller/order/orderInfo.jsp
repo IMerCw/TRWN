@@ -10,7 +10,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String userAuth = "2";
+	String userAuth = (String) request.getAttribute("userAuth");
 
 	List<HashMap> Ilist = (List<HashMap>) session.getAttribute("Ilist");
 	String sum = (String) request.getAttribute("sum");
@@ -604,7 +604,8 @@
 							maxlength=100 />
 						<!-- 결제 성공  URL !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 						<input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL"
-							value="http://54.180.77.82:8080/orderSuccess.do?uNo=<%=CmmUtil.nvl((String) session.getAttribute("ss_user_no"))%>"
+							value="http://54.180.77.82:8080/orderSuccess.do?
+								uNo=<%=CmmUtil.nvl((String) session.getAttribute("ss_user_no"))%>&userAuth=<%=userAuth%>&ftSeq=<%=ftSeq%>&"
 							size=30 maxlength=100 />
 						<!-- 결제도중 취소  URL !!!!!!!!!!!!!!!!!!!!!!!!이거는 바꿔줘야하는 파라미터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 						<input type="hidden" id="CANCEL_URL" name="CANCEL_URL"
@@ -780,7 +781,8 @@
 											%>
 											<tr style="border-bottom: 1px solid #BDBDBD;">
 												<td style="padding:10px 0;"><%=Ilist.get(i).get("menuName")%></td>
-												<td style="text-align: right;"><%=Ilist.get(i).get("menuPrice")%>
+												<td style="text-align: right;" class="menuPrices">
+													<%=Ilist.get(i).get("menuPrice")%>
 												</td>
 												<td style="text-align: right;"><%=Ilist.get(i).get("amnt")%>
 												</td>
@@ -886,7 +888,16 @@
 	
 	    return n;
 	}
+	
+	var menuPrices = document.getElementsByClassName('menuPrices');
+	for(var i = 0; i < menuPrices.length; i++) {
+		var menuPrice = menuPrices[i].innerHTML;
+		menuPrices[i].innerHTML = commify(menuPrice.trim());
+		
+		
+	}
 
+	
 
 </script>
 </html>

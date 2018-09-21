@@ -23,6 +23,7 @@ import poly.dto.admin.ADMIN_CouponDTO;
 import poly.dto.admin.ADMIN_Coupon_IssueDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
 import poly.dto.consumer.CONSUMER_Gps_TableDTO;
+import poly.dto.seller.SELLER_FtSellerDTO;
 import poly.dto.seller.SELLER_OrderInfoDTO;
 import poly.dto.seller.SELLER_WaitDTO;
 import poly.service.CONSUMER_IUserService;
@@ -80,7 +81,7 @@ public class SELLER_OrderController {
 		String sum = CmmUtil.nvl(request.getParameter("sum"));
 		String cstmrName = CmmUtil.nvl(request.getParameter("cstmrName"));
 		String cstmrPhn = CmmUtil.nvl(request.getParameter("cstmrPhn"));
-		String ftSeq = CmmUtil.nvl(String.valueOf(session.getAttribute("ftSeq")));
+		String ftSeq = CmmUtil.nvl(request.getParameter("ftSeq"));
 		String userAuth = "2";
 		
 		log.info(cstmrName);
@@ -363,45 +364,38 @@ public class SELLER_OrderController {
 	   }
 	   
 	   
-	   /****************************************************************
-	    * 여기도  코드 싹다 수정해야합니다 .
-	    * 
-	    */
 	   //페이누리로 보내는 COMPLETE_URL(결제 성공후 가맹점 페이지로 넘어갈 URL)에 대응하는 메소드
 	   @RequestMapping(value="orderSuccess")
 	   public String orderSuccess(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
-		  
 	      log.info(this.getClass() + "orderSuccess start!!!");
+	      
 	      String userNo = CmmUtil.nvl(req.getParameter("uNo")).split("[?]")[0];
 	      session.setAttribute("ss_user_no", userNo);
-	      log.info(this.getClass() + "user_no = " + userNo);
-	      /*Order_infoDTO oDTO = orderService.getOrderNo(userNo);
-	      if(oDTO == null){
-	         oDTO = new Order_infoDTO();
-	      }
-	      log.info(this.getClass() + " ordno = " + oDTO.getOrd_no());
-	      Order_itemDTO otDTO = new Order_itemDTO();
-	      otDTO.setOrd_no(oDTO.getOrd_no());
-	      List<Order_itemDTO> otList = orderService.getOrdItem(otDTO);
-	      if(otList ==null){
-	    	  otList = new ArrayList<Order_itemDTO>();
-	      }
-	      log.info(this.getClass() + " otListSize = "+ otList.size());
 	      
-	      model.addAttribute("ordNo", CmmUtil.nvl(oDTO.getOrd_no()));
-	      model.addAttribute("otList", otList);*/
+	      String userAuth = CmmUtil.nvl(req.getParameter("userAuth"));
+	      String ftSeq = CmmUtil.nvl(req.getParameter("ftSeq"));
+	      
 	      session.setAttribute("ss_tmpBasket", null);
-	      userNo = null;
-	      /*oDTO = null;
-	      otList = null;*/
+	      session.removeAttribute("Ilist");
+	      
 	      log.info(this.getClass() + "orderSuccess end!!!");
 	      
-	      /*out 주문하기 화면으로 반환 시켜줘야합니다.
-	       * 
-	       * /seller/out/out_info.do?userSeq=<%=userSeq%>&userAuth=2
-	       * userSeq 판매자 Seq 넘겨야 out 주문하면 띄울수 있어요.
-	       * */
-	      return "/seller/order/orderSuccess";
+	      //소비자 
+	      if(userAuth.equals("1")) {
+	    	  String msg="결제가 완료되었습니다.";
+	    	  String url="/consumer/cnsmr/ftDetail.do?ft_seq=" + ftSeq;
+	    	  model.addAttribute("msg", msg);
+	    	  model.addAttribute("url", url);
+	    	  return "/cmmn/alert";
+	      //판매자
+	      }else {
+	    	  String msg="결제가 완료되었습니다.";
+	    	  String url="/seller/out/out_info.do?&userAuth=2&ftSeq=" + ftSeq ;
+	    	  model.addAttribute("msg", msg);
+	    	  model.addAttribute("url", url);
+	    	  
+	    	  return "/cmmn/alert";
+	      }
 	   }
 	   
 	    //결제 도중 취소
@@ -414,10 +408,10 @@ public class SELLER_OrderController {
  		
  		//소비자로 접속 -> 결제화면으로 바로 이동
  		@RequestMapping(value="/seller/order/goCheck" ,method=RequestMethod.POST)
- 		public String goCheck(HttpServletRequest request, Model model) throws Exception{
+ 		public String goCheck(HttpServletRequest request, Model model, HttpSession session) throws Exception{
  			String sum = CmmUtil.nvl(request.getParameter("sum"));
  			log.info("sum : " + sum);
- 			String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
+ 			String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
  			log.info("userSeq : " + userSeq);
  			String userAuth = CmmUtil.nvl(request.getParameter("userAuth"));
  			log.info("userAuth : " + userAuth);
@@ -433,8 +427,8 @@ public class SELLER_OrderController {
 			log.info("uDTO. get : " + uDTO.getUserNick());
 			
 			model.addAttribute("sum", sum);
-			model.addAttribute("uDTO",uDTO);
-			model.addAttribute("ftSeq",ftSeq);
+			model.addAttribute("uDTO", uDTO);
+			model.addAttribute("ftSeq", ftSeq);
 			model.addAttribute("userAuth", userAuth);
 			
 			return "/seller/order/orderInfo";
@@ -446,15 +440,13 @@ public class SELLER_OrderController {
 	 	public String orderLogin(HttpServletRequest request, Model model) throws Exception{
 	 		String sum = CmmUtil.nvl(request.getParameter("sum"));
 			log.info("sum : " + sum);
-			String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
-			log.info("userSeq : " + userSeq);
 			String userAuth = CmmUtil.nvl(request.getParameter("userAuth"));
 			log.info("userAuth : " + userAuth);
 			String ftSeq = CmmUtil.nvl(request.getParameter("ftSeq"));
 			log.info("ftSeq : " + ftSeq);
 						
+			model.addAttribute("ftSeq",ftSeq);
 			model.addAttribute("userAuth",userAuth);
-			model.addAttribute("userSeq",userSeq);
 			model.addAttribute("sum",sum);
 	 		return "/seller/order/orderLogin";
 	 	}

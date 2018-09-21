@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
+	String ftSeq = CmmUtil.nvl((String)session.getAttribute("ftSeq"));
 	String userAuth = CmmUtil.nvl((String)session.getAttribute("userAuth"));
 %>
 <html>
@@ -49,6 +50,7 @@
 		-->
 		<form action="/seller/out/out_info.do" method="POST">
 		<input type="hidden" value="<%=userSeq%>" name="userSeq"/>
+		<input type="hidden" value="<%=ftSeq%>" name="ftSeq"/>
 		<input type="hidden" value="<%=userAuth%>" name="userAuth"/>
 			<section id="banner">
 				<div class="inner">

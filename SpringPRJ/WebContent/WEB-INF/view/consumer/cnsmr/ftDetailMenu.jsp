@@ -93,7 +93,7 @@
 		<input type="hidden" value="1" name="userAuth"/>
 		<input type="hidden" value="<%=ftSeq%>" name="ftSeq"/>
 	<div class="header" id="myHeader2">
-		<button type="button" onclick="goToOrder(); return false;" class="btn btn-primary" id="OrderBttnContainer" style="font-size:18px;">주문하러 가기</button>
+		<button type="button" onclick="goToOrder(); return false;" class="btn btn-primary" id="OrderBttnContainer" style="font-size:18px;">예약/배달 주문하러 가기</button>
 	</div>
 	</form>
 </body>
