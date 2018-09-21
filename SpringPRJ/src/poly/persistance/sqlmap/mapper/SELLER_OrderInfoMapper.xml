@@ -64,29 +64,31 @@
 	<insert id="insertOrderInfo" parameterType="SELLER_OrderInfoDTO">
 		INSERT INTO ORDER_INFO
 		(
-		ORD_SEQ,
-		USER_SEQ,
-		ORD_SUMPRICE,
-		BUY_WAY,
-		ORD_DATE,
-		ORD_STATUS,
-		USR_RCV_TIME,
-		TID,
-		FT_SEQ,
-		TRAN_NO
+			USER_SEQ,
+			ORD_SUMPRICE,
+			ORD_WAY,
+			BUY_WAY,
+			ORD_DATE,
+			ORD_STATUS,
+			USR_RCV_TIME,
+			TID,
+			FT_SEQ,
+			TRAN_NO,
+			GPS_SEQ
 		)
 		VALUES
 		(
-		null,
-		#{user_seq},
-		#{ord_sumprice},
-		#{buy_way},
-		#{ord_date},
-		#{ord_status},
-		#{usr_rcv_time},
-		#{tid},
-		#{ft_seq},
-		#{tran_no}
+			#{user_seq},
+			#{ord_sumprice},
+			#{ord_way},
+			#{buy_way},
+			#{ord_date},
+			#{ord_status},
+			#{usr_rcv_time},
+			#{tid},
+			#{ft_seq},
+			#{tran_no},
+			#{gps_seq}
 		)
 	
 	</insert>
@@ -94,21 +96,23 @@
 	<insert id="insertOrderItem" parameterType="SELLER_WaitDTO">
 	INSERT INTO ORDER_WAIT
 	(
-		WAIT_SEQ,
 		ORD_SEQ,
 		FT_SEQ,
 		ORD_DATE,
 		ORD_HIS,
-		ORD_STATUS
+		ORD_STATUS,
+		CSTMR_NAME,
+		CSTMR_TEL
 	)
 	VALUES
 	(
-		NULL,
 		#{ordSeq},
 		#{ftSeq},
 		#{ordDate},
 		#{ordHis},
-		#{ordStatus}
+		#{ordStatus},
+		#{cstmrName},
+		#{cstmrTel}
 	)
 	</insert>
 	
@@ -122,8 +126,7 @@
 				USER_GENDER as userGender,
 				USER_HP as userHp
 		FROM	USER_INFO
-		WHERE	USER_EMAIL=#{userEmail} AND USER_PWD=#{userPwd} AND USER_STATUS LIKE 'AuthY'
+		WHERE	USER_EMAIL= #{userEmail} AND USER_PWD=#{userPwd} AND USER_STATUS LIKE 'AuthY'
 		
-	
 	</select>
 </mapper>

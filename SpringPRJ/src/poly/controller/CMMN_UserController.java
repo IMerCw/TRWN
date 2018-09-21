@@ -43,13 +43,6 @@ public class CMMN_UserController {
 	@Resource(name="SELLER_OutService")
 	private SELLER_IOutService SELLER_OutService;
 	
-	//현재 날짜를 구하는 함수
-	public String getDate() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
-		String date = sdf1.format(cal.getTime());
-		return date;
-	}
 	
 	//로그인, 회원가입 화면은 메인페이지로 대체 합니다.
 	//로그인 화면
@@ -78,7 +71,7 @@ public class CMMN_UserController {
 		uDTO.setUserPwd(userPwd);
 		log.info("비밀번호 확인 CONTROLLER : " + uDTO.getUserPwd());
 		
-		uDTO=UserService.getUserLogin(uDTO, log);
+		uDTO = UserService.getUserLogin(uDTO, log);
 		System.out.println("udto 널 확인");
 		System.out.println(uDTO == null);
 		

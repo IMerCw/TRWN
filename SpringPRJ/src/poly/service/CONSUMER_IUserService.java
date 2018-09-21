@@ -44,7 +44,7 @@ public interface CONSUMER_IUserService {
 	//위치정보 DB저장
 	public int setGps(CONSUMER_Gps_TableDTO gpsDTO) throws Exception;
 
-	public int updateGps(int user_seq) throws Exception;
+	public int updateGps(CONSUMER_Gps_TableDTO gpsDTO) throws Exception;
 
 	public List<CONSUMER_OrderInfoDTO> getOrderList(String userSeq)throws Exception;
 }

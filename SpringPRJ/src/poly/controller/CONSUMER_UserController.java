@@ -40,6 +40,7 @@ import poly.util.CmmUtil;
 import poly.util.Email;
 import poly.util.EmailSender;
 import poly.util.SHA256Util;
+import poly.util.UtilTime;
 
 @Controller
 public class CONSUMER_UserController {
@@ -59,14 +60,7 @@ public class CONSUMER_UserController {
 	
 	@Resource(name="CONSUMER_FtService")
 	private CONSUMER_IFtService ftService;
-	//현재 날짜를 구하는 함수
-	public String getDate() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss");
-		String date = sdf1.format(cal.getTime());
-		return date;
-	}
-	
+
 	//로그아웃
 	@RequestMapping(value="consumer/user/logout")
 	public String logout(HttpSession session) throws Exception{
@@ -274,7 +268,7 @@ public class CONSUMER_UserController {
 		log.info(this.getClass() + "cnsmr/favoriteFtAdd start !!!");
 		String user_seq = request.getParameter("user_seq");
 		String ft_seq = request.getParameter("ft_seq");
-		String like_regdate = getDate();
+		String like_regdate = UtilTime.getDateYMDhms();
 		CONSUMER_FtLikeDTO ftLikeDTO = new CONSUMER_FtLikeDTO();
 		ftLikeDTO.setFt_seq(ft_seq);
 		ftLikeDTO.setUser_seq(user_seq);

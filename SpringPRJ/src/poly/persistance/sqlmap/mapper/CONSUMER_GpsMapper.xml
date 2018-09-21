@@ -12,6 +12,7 @@
 				GPS_SIDO,
 				GPS_SIGUNGU,
 				GPS_DONG,
+				GPS_ETC,
 				GPS_X,
 				GPS_Y
 			)
@@ -22,27 +23,17 @@
 				#{gps_sido},
 				#{gps_sigungu},
 				#{gps_dong},
+				#{gps_etc},
 				#{gps_x},
 				#{gps_y}
 			)
+			<selectKey keyProperty="gps_seq" resultType="string" order="AFTER"> SELECT LAST_INSERT_ID() </selectKey>
+
 	</insert>
-	<update id="updateGps" parameterType="integer">
+	<update id="updateGps" parameterType="CONSUMER_Gps_TableDTO">
 		UPDATE USER_INFO UI
 			SET
-				UI.GPS_SEQ = 
-				(	
-					SELECT 
-						GT.GPS_SEQ
-					FROM 
-						( 
-							SELECT GPST.*, <![CDATA[@RNUM := @RNUM+1 ROWNUM ]]>	
-							FROM GPS_TABLE GPST, <![CDATA[(SELECT @RNUM:=0) R]]>  
-							WHERE GPST.USER_SEQ = #{user_seq} 
-							ORDER BY GPST.GPS_RENEW_DATE DESC
-						) GT
-					WHERE
-						<![CDATA[GT.ROWNUM = 1]]>	
-	    	    )
+				UI.GPS_SEQ = #{gps_seq}
 			WHERE
 				UI.USER_SEQ = #{user_seq}
 	</update>

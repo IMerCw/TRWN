@@ -7,13 +7,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class UtilTime {
 	
 	//오늘 날짜("yyyy.MM.dd / hh:mm:ss")
 	public static String getDateYMDhms() {
-		Calendar cal = Calendar.getInstance(Locale.KOREA);
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / hh:mm:ss"); //년,월,일,시간,분,초
+		TimeZone seoul = TimeZone.getTimeZone("Asia/Seoul");
+		Calendar cal = Calendar.getInstance(seoul);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy. MM. dd / HH:mm:ss"); //년,월,일,시간,분,초
 		/*SimpleDateFormat sdf1 = new SimpleDateFormat("M월 d일");*/
 		String date = sdf1.format(cal.getTime());
 		
@@ -21,7 +23,7 @@ public class UtilTime {
 	}
 	public static String getDateYYMMDD(String a) {
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); //년,월,일,시간,분,초
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //년,월,일,시간,분,초
 		try {
 			cal.setTime(formatter.parse(a));
 			String date = new SimpleDateFormat("yyyyMMdd").format(cal.getTime());

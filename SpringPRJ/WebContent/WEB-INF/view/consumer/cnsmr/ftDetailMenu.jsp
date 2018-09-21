@@ -47,7 +47,6 @@
 		<%for(int k = 0; k < cateDTOs.size(); k++) {%>
 			<div class="col-sm-12">
 				<!-- 메뉴카테고리 명 출력 -->
-				
 				<div style="margin-bottom: 20px;">
 					<h3><%=cateDTOs.get(k).getCate_name() %></h3>
 					<div style="border-bottom:3px solid black; height:10px; width:80px;"></div>
@@ -105,6 +104,7 @@
 		<%}else {%>
 			var r = confirm('주문하시겠습니까?');
 			if(r){
+				
 				$('#sbmtOrdrForm').submit();
 			}
 		<%}%>

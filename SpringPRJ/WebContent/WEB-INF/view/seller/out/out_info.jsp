@@ -12,8 +12,8 @@
 	List<ADMIN_Ft_Menu_CateDTO> cateDTOarr = (List<ADMIN_Ft_Menu_CateDTO>)request.getAttribute("cateDTOarr");
 	List<ADMIN_Menu_InfoDTO> menuDTOarr = (List<ADMIN_Menu_InfoDTO>)request.getAttribute("menuDTOarr");
 	List<ADMIN_ImageDTO> imgDTOarr = (List<ADMIN_ImageDTO>)request.getAttribute("imgDTOarr");
-%>
-<%
+	String userAuth = (String) request.getParameter("userAuth");
+	
 	ADMIN_Ft_InfoDTO ftDTO = (ADMIN_Ft_InfoDTO)request.getAttribute("ftDTO");
 	String[] array_optime = ftDTO.getFt_optime().split("/");
 	String[] array = ftDTO.getFt_func().split("/"); 
@@ -22,9 +22,8 @@
 	if(cmd==null){
 		cmd="";
 	} 
-%>
-<% String userSequence = CmmUtil.nvl((String)request.getParameter("userSeq")); %>
-<%
+	String userSequence = CmmUtil.nvl((String)request.getParameter("userSeq"));
+
 	List<HashMap> Ilist = (List<HashMap>)session.getAttribute("Ilist");
 	int sum =0;
 	if(Ilist == null){
@@ -51,6 +50,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/ft_info.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -122,7 +122,7 @@
 			
 		};
 		
-		function complete(a,b){
+		function complete(a,b,userAuth){
 			
 			if(<%=sum%> == 0){
 				alert("주문할 상품을 선택해주세요")
@@ -134,24 +134,27 @@
 			}
 			// 폼 생성
 			var form = document.createElement("form");     
-
-			form.setAttribute("method","post");                    
-			form.setAttribute("action","/seller/order/orderLogin.do");        
-
+			var actionTarget = (userAuth == 1 ) ? "/seller/order/goCheck.do":"/seller/order/orderLogin.do";
+			
+			form.setAttribute("method","post");
+			
+			form.setAttribute("action",actionTarget);        
+			
 			document.body.appendChild(form);                        
-
-			// input 생성
+		
+			//input 1 : 구매 합 
 			var input_id = document.createElement("input");  
-
+		
 			input_id.setAttribute("type", "hidden");                 
-
+		
 			input_id.setAttribute("name", "sum");                        
 			input_id.setAttribute("value", a);                          
 			
 			form.appendChild(input_id);
-
+			
+			//input 2 : 유저 번호
 			var input_id2 = document.createElement("input");
-
+		
 			input_id2.setAttribute("type", "hidden");
 			
 			input_id2.setAttribute("name", "userSeq"); 
@@ -159,16 +162,32 @@
 			
 			form.appendChild(input_id2);
 			 
+			//input 3 : 유저 권한
+			var input_id3 = document.createElement("input");
+		
+			input_id3.setAttribute("type", "hidden");
+			
+			input_id3.setAttribute("name", "userAuth"); 
+			input_id3.setAttribute("value", userAuth);     
+			
+			form.appendChild(input_id3);
+			
+			//input 3 : 푸드트럭 번호
+			var input_id4 = document.createElement("input");
+		
+			input_id4.setAttribute("type", "hidden");
+			
+			input_id4.setAttribute("name", "ftSeq"); 
+			input_id4.setAttribute("value", <%=ftDTO.getFt_seq()%>);     
+			
+			form.appendChild(input_id4);
+			
 			//폼전송
-
 			form.submit();  
 			
-			/* location.href="/seller/order/orderLogin.do?sum="+a+"&userSeq="+b; */
 		}
-		
-		
-		
-		</script> 
+	
+	</script> 
 	<style>
 		* {
 			font-family: 'Noto Sans KR', sans-serif;
@@ -323,12 +342,16 @@
 						</div>
 					</div>
 					<div class="col-xs-4">
-						<button type="button" class="btn btn-default" onclick="Javascript:complete(<%=sum%>,<%=userSequence%>)">주문완료</button>
+						<%if(userAuth.equals("1")) {%>
+							<button type="button" class="btn btn-default" style="background-color: #d9534f; color:white;" 
+								onclick="Javascript:complete(<%=sum%>,<%=userSequence%>,1)">주문완료</button>
+						<%} else if(userAuth.equals("2")) {%>
+							<button type="button" class="btn btn-default" style="background-color: #337ab7; color:white;"
+								 onclick="Javascript:complete(<%=sum%>,<%=userSequence%>,2)">주문완료</button>
+						<%} %>
 					</div>
 				</div>
 			</div>
-			
-		 
 		</div>
 		
 		<div id="orderFooter">

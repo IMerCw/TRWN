@@ -36,7 +36,7 @@
 		
 		<div class="row" style="margin-top:15px; margin-bottom:15px;">
 			<div class="col-xs-6">
-				<img src="<%=request.getContextPath()%>/resources/img/consumer/personalCon/psnlCn (0).png"style="margin-right:10px;"/>
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/personalCon/psnlCn (-1).png"style="margin-right:10px;"/>
 				
 				관리자
 			</div>

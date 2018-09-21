@@ -51,7 +51,7 @@
 			
 			<div class="row" style="margin-top:15px; margin-bottom:15px;">
 				<div class="col-xs-6">
-					<%int personalCon = (revDTO.getUser_seq() < 1) ?  0 : revDTO.getUser_seq() % 62;%>
+					<%int personalCon = (revDTO.getUser_seq() < 1) ?  -1 : revDTO.getUser_seq() % 50;%>
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/personalCon/psnlCn (<%=personalCon%>).png" style="height: 40px; margin-right:10px;"/>
 					<%=revDTO.getUser_nick() %>
 				</div>

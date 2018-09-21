@@ -9,7 +9,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>트럭왔냠 관리자 페이지</title>
+	<title>트럭왔냠 관리자 페이지 - 삭제 예정</title>
 	<style>
 	    body {
 	    	margin: 0 auto;

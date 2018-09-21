@@ -135,8 +135,8 @@ public class CONSUMER_UserService implements CONSUMER_IUserService {
 	}
 
 	@Override
-	public int updateGps(int user_seq) throws Exception {
-		return gpsMapper.updateGps(user_seq);
+	public int updateGps(CONSUMER_Gps_TableDTO gpsDTO) throws Exception {
+		return gpsMapper.updateGps(gpsDTO);
 	}
 
 	@Override

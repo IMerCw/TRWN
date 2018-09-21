@@ -7,7 +7,7 @@
 %>
 <html>
 	<head>
-		<title>inOut TETST</title>
+		<title>트럭왔냠 - 관리자 페이지</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/seller/main.css" />
@@ -16,6 +16,11 @@
 			body {
 				font-family: 'Noto Sans KR', sans-serif;
 				margin: 0 auto;
+			}
+			@media screen and (max-width: 736px){
+				#banner {
+					height:unset;
+				}
 			}
 		</style>
 	</head>
@@ -54,15 +59,12 @@
 			                <hr width="100%"/>
 			            </div>
 					</div>
-					<div id="floatR">
-				        <button type="submit" style="background: none;">
-				            <div id="truck_out" >
-				                <hr width="100%"/>
-				                <h1>OUT</h1>
-				                <p style="font-family:'Noto Sans KR', sans-serif;">푸드트럭 밖</p>
-				            </div>
-				        </button>
-					</div>
+	                <hr width="100%"/>
+			
+			        <button type="submit" style="background: none;">
+		                <h1>OUT</h1>
+		                <p style="font-family:'Noto Sans KR', sans-serif;">푸드트럭 밖</p>
+			        </button>
 				</div>
 			</section>
 		</form>
@@ -71,7 +73,7 @@
 			<footer id="footer" class="wrapper">
 				<div class="inner">
 					<div class="copyright">
-						&copy; Untitled Design: <a href="https://templated.co/">TEMPLATED</a>. Images <a href="https://unsplash.com/">Unsplash</a>. Video <a href="http://coverr.co/">Coverr</a>.
+						&copy; Copyright © <a href="#">트럭왔냠.</a>, All rights reserved.
 					</div>
 				</div>
 			</footer>
