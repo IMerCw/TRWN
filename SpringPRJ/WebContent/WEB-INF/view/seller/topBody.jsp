@@ -35,7 +35,6 @@
 </style>
 <%}%>
 		<div class="top topSecondContainer">
-<!-- 창원이형이 주신 top body  -->
 			
 			<div class="navigation" style="color:white;">
 			<!--------------------------메뉴부분 시작 -------------------------->
@@ -206,7 +205,6 @@
 		</div>
 		
 	
-<!-- 창원이형이 주신 top body끝  -->
 		
 		
 		</div>
@@ -222,7 +220,6 @@
 		
 
 
-<!-- 창원이형이 주신 top script  -->
 	<script>
 
 			/* 메뉴 열기 함수 */
@@ -237,5 +234,4 @@
 		}
 	</script>
 	
-<!-- 창원이형이 주신 top script  끝-->
     

@@ -3,6 +3,7 @@ package poly.persistance.mapper;
 import java.util.List;
 
 import config.Mapper;
+import poly.dto.cmmn.CMMN_Site_StatDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
 
 @Mapper("CMMN_UserMapper")
@@ -32,5 +33,6 @@ public interface CMMN_UserMapper {
 	
 	int updateUserStatus(CMMN_UserDTO uDTO) throws Exception;
 
+	public int in_Site_Stat(CMMN_Site_StatDTO ssDTO) throws Exception;
 
 }

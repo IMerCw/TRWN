@@ -61,7 +61,7 @@
 			</div>
 
 			<div class="row" >
-				<div style="background-color:#cecece; height:2px; margin:20px 10px;">
+				<div style="background-color:#e2e2e2; height:2px; margin:20px 10px;">
 				</div>
 			</div>
 			<div class="row" >
@@ -75,7 +75,9 @@
 				<div class="row" >
 					<div class="col-xs-12">
 						<div class="form-group">
-							<img src="<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>" style="max-width:100%; height:auto;" />
+							<img src="<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>" 
+								onError="this.src='/resources/img/consumer/NfoundError.png;'"
+								style="max-width:100%; height:auto;" />
 						</div>
 					</div>
 				</div>
@@ -86,7 +88,7 @@
 			
 
 			<div class="row" >
-				<div style="background-color:#cecece; height:2px; margin:20px 10px;">
+				<div style="background-color:#e2e2e2; height:2px; margin:20px 10px;">
 				</div>
 			</div>
 		</div>

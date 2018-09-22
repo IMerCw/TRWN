@@ -137,6 +137,19 @@
 		WHERE USER_EMAIL = #{userEmail} AND USER_STATUS ='AuthN'
 	</update>
 	
+	<!-- 로그인 기록 저장 -->
+	<insert id="in_Site_Stat" parameterType="CMMN_Site_StatDTO">
+		INSERT INTO SITE_STAT
+		(
+			JOIN_DATE,
+			USER_SEQ
+		)
+		VALUES
+		(
+			#{join_date},
+			#{user_seq}
+		)
+	</insert>
 
 	
 </mapper>

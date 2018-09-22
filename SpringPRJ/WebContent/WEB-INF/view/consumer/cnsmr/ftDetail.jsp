@@ -1,3 +1,4 @@
+<%@page import="org.springframework.security.acls.model.NotFoundException"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.consumer.CONSUMER_Ft_InfoDTO"%>
 <%@page import="poly.dto.consumer.CONSUMER_Ft_ReviewDTO"%>
@@ -171,14 +172,14 @@
 					<div class="col-xs-2" style="height:64px; padding:15px; text-align:right;" id="favoriteContainer">
 						<!-- 관심매장 등록 버튼 -->
 						<%if(FtLikeResult.equals("1")) {%>
-							<img src="/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
+							<img src="<%=request.getContextPath()%><%=request.getContextPath()%>/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
 						<%}else { %>
-							<img src="/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>
+							<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>
 						<%} %>
 					</div>
 					<div class="col-xs-2" style="height:64px; padding:15px;">
 						<!-- 공유하기 버튼 -->
-						<img src="/resources/img/consumer/share-symbol.png" class="ftDetailBttn" onclick="shareBttnClick()" id="shareBttn"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/share-symbol.png" class="ftDetailBttn" onclick="shareBttnClick()" id="shareBttn"/>
 					</div>
 				</div>
 				<div class="row">
@@ -212,16 +213,18 @@
 					<div class="col-xs-12" style="text-align:center;">
 						<!-- 푸드트럭 대표 사진 -->
 						<%if (imgDTO != null) {%>
-							<img src="<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>" style=" max-width:100%; height:auto;">
+							<img src="<%=request.getContextPath()%><%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>" 
+								style=" max-width:100%; height:auto;"
+								 onError="this.src='/resources/img/consumer/NfoundError.png;'">
 						<%} else { %>
-	 						<img src="/resources/img/consumer/temp.png" style=" max-width:100%; height:auto;"> 
-	 					<%	} %>
+	 						<img src="<%=request.getContextPath()%>/resources/img/consumer/NfoundError.png" style=" max-width:100%; height:auto;"> 
+	 					<%} %>
 					</div>
 				</div>
 				<!-- 푸드트럭 운영시간  -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="/resources/img/consumer/clock-circular.png" class="ftIcon" />
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/alarm-clock.png" class="ftIcon" />
 					</div>
 				   	<div class="col-xs-4 ftDetailContents">
 						<p><%=opDay%></p>
@@ -236,7 +239,7 @@
 				<!-- 소개 -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="/resources/img/consumer/left-quote.png" class="ftIcon"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/speech-bubble.png" class="ftIcon"/>
 					</div>
 					<div class="col-xs-10 ftDetailContents">
 						<%=fDTO.getFt_intro()%>
@@ -245,7 +248,7 @@
 				<!-- 위치 -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="/resources/img/consumer/placeholder-filled-point.png" class="ftIcon"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/map.png" class="ftIcon"/>
 					</div>
 					<div class="col-xs-10 ftDetailContents">
 						<%=fDTO.getGps_sido() +" " + fDTO.getGps_sigungu() + " " + fDTO.getGps_dong()%>
@@ -254,7 +257,7 @@
 				<!-- 사업자번호 -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="/resources/img/consumer/man-with-tie.png" class="ftIcon"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/clipboard.png" class="ftIcon"/>
 					</div>
 					<div class="col-xs-10 ftDetailContents">
 						사업자번호:&nbsp;<%=fDTO.getSel_no()%>
@@ -407,7 +410,7 @@ function myFunction() {
 				success: function(data) {
 					if(data==1) {
 						alert('관심매장에서 삭제 되었습니다.');
-						var content = '<img src="/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>';
+						var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>';
 						$('#favoriteContainer').html(content);
 					}
 				},
@@ -437,7 +440,7 @@ function myFunction() {
 					success: function(data) {
 						if(data==1) {
 							alert('관심매장으로 추가되었습니다.');
-							var content = '<img src="/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>';
+							var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>';
 							$('#favoriteContainer').html(content);
 						}
 					},

@@ -59,15 +59,6 @@ public class CONSUMER_NoticeController {
 		if (imgDTOs == null) {			
 		imgDTOs = new ArrayList<CONSUMER_ImageDTO>();
 		}
-		//받아온 이미지 DTO 들 확인
-		for(int i = 0; i < imgDTOs.size(); i++) {
-		log.info("ImgDTOs. get : " + imgDTOs.get(i).getFileId());											
-		log.info("ImgDTOs. get : " + imgDTOs.get(i).getFileOrgname());
-		log.info("ImgDTOs.get : " + imgDTOs.get(i).getFilePath());				
-		log.info("ImgDTOs. get : " + imgDTOs.get(i).getFileSevname());
-		log.info("ImgDTOs.get : " + imgDTOs.get(i).getUserSeq());
-		}
-		
 		model.addAttribute("imgDTOs",imgDTOs);
 	
 		imgDTOs = null;

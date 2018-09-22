@@ -42,17 +42,21 @@
 				<%if(imgDTOs != null && imgDTOs.isEmpty() == false) {%>
 				    <div class="carousel-inner">
 				      <div class="item active">
-				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(0).getFileSevname()%>">
+				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(0).getFileSevname()%>"
+				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
 				      </div>
 				      <div class="item">
-				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(1).getFileSevname()%>">
+				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(1).getFileSevname()%>"
+				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
 				      </div>
 				    
 				      <div class="item">
-				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(2).getFileSevname()%>">
+				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(2).getFileSevname()%>"
+				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
 				      </div>
 				      <div class="item">
-				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(3).getFileSevname()%>">
+				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(3).getFileSevname()%>"
+				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
 				      </div>
 				    </div>
 				<%} %> 

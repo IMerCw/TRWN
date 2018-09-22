@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import poly.dto.admin.ADMIN_Site_StatDTO;
+import poly.dto.cmmn.CMMN_Site_StatDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
 
 public interface CMMN_IUserService {
@@ -32,4 +34,5 @@ public interface CMMN_IUserService {
 	
 	public int updateUserStatus(CMMN_UserDTO uDTO) throws Exception;
 	
+	public int in_Site_Stat(CMMN_Site_StatDTO ssDTO)throws Exception;
 }

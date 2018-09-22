@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import poly.dto.cmmn.CMMN_Site_StatDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
 import poly.persistance.mapper.CMMN_UserMapper;
 import poly.service.CMMN_IUserService;
@@ -54,21 +55,17 @@ public class CMMN_UserService implements CMMN_IUserService {
 
 	@Override
 	public CMMN_UserDTO getUserLogin(CMMN_UserDTO uDTO, Logger log) throws Exception {
-		log.info("this is service and udto.getuser_email : " + uDTO.getUserEmail());
-		// TODO Auto-generated method stub
 		return userMapper.getUserLogin(uDTO);
 	}
 
 	@Override
 	public int emailCheck(CMMN_UserDTO uDTO) throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("service" + uDTO.getUserEmail());
 		return userMapper.emailCheck(uDTO);
 	}
 
 	@Override
 	public CMMN_UserDTO getUserFindEmail(CMMN_UserDTO uDTO) throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("uDTOservice : " + uDTO.getUserHp());
 		
 		return userMapper.getUserFindEmail(uDTO);
@@ -106,6 +103,11 @@ public class CMMN_UserService implements CMMN_IUserService {
 		System.out.println("uDTO service : " + uDTO.getUserStatus());
 		System.out.println("uDTO service : " + uDTO.getUserEmail());
 		return userMapper.updateUserStatus(uDTO);
+	}
+
+	@Override
+	public int in_Site_Stat(CMMN_Site_StatDTO ssDTO) throws Exception {
+		return userMapper.in_Site_Stat(ssDTO);
 	}
 
 	

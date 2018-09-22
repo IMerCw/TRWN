@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import poly.dto.admin.ADMIN_Search_TrendDTO;
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_FtMenuCateDTO;
 import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
 import poly.dto.consumer.CONSUMER_Menu_InfoDTO;
+import poly.dto.consumer.CONSUMER_Search_TrendDTO;
 import poly.dto.consumer.CONSUMER_UserDTO;
 import poly.service.CONSUMER_IFtService;
 import poly.util.CmmUtil;
@@ -55,17 +57,34 @@ public class CONSUMER_SearchController {
 	@Resource(name="CONSUMER_UserService")
 	private CONSUMER_IUserService UserService;
 	
+	//현재 날짜 구하기 - 관리자용포맷
+	public String getDate() {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd / HH:mm:ss");
+		String date = sdf1.format(cal.getTime());
+		
+		return date;
+	}
 	
 
 	//키워드로 메뉴를 검색한 페이지 
 	@RequestMapping(value="consumer/cnsmr/findFtByMenu", method=RequestMethod.POST)
-	public String findFtByMenu(HttpServletRequest request, Model model) throws Exception {
+	public String findFtByMenu(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		log.info("Access consumer/cnsmr/findFtByMenu");
-
-				
-		String keyWord = request.getParameter("keyWord"); //cnsmrMain 페이지에서 아이디가 menu인 텍스트 상자에 입력받은 값을 불러옴
+		
+		String keyWord = CmmUtil.nvl(request.getParameter("keyWord")); //cnsmrMain 페이지에서 아이디가 menu인 텍스트 상자에 입력받은 값을 불러옴
 		String []locPosition = request.getParameter("locPosition").split(","); //GET방식으로 받은 locPosition을 분리하여 어레이 변수에 할당
 		String []myAddress = request.getParameter("myAddress").split(" "); //현 사용자의 시도구 구군 읍면동 주소 정보
+		
+		//검색어 저장
+		CONSUMER_Search_TrendDTO stDTO = new CONSUMER_Search_TrendDTO();
+		String userSeq = CmmUtil.nvl((String)(session.getAttribute("userSeq")));  
+		stDTO.setSearch_date(getDate());
+		stDTO.setSearch_word(keyWord);
+		stDTO.setUser_seq(("".equals(userSeq))? "-1" : userSeq); //비회원일경우(NULL) -1 저장
+		int result = ftService.in_Search_Trend(stDTO);
+		
+		
 		//위치 미 설정시 내 위치 설정 페이지로 이동
 		if("".equals(request.getParameter("myAddress")) || "".equals(request.getParameter("locPosition"))) {
 			String msg= "위치 설정을 먼저 해주세요";
@@ -76,10 +95,6 @@ public class CONSUMER_SearchController {
 			return "/cmmn/alert";
 		}
 		
-		log.info("위치 확인" + locPosition[0] + ", " + locPosition[1]);
-		log.info("주소 확인" + myAddress);
-		
-		log.info(keyWord); //검색어 확인
 		
 		//검색어 정규표현식 검사
 		String []keyWordList = keyWord.split(" "); // 검색어를 공백으로 나눠서 어레이에 저장
@@ -103,9 +118,9 @@ public class CONSUMER_SearchController {
 			log.info("....................................");
 			if(dongCheck) continue;
 			
-			//위의 3중 아무것에도 속하지 않을 경우 메뉴키워드로 지정
+			//위의 3 중 아무것에도 속하지 않을 경우 메뉴 키워드 검색으로 지정
 			keyWordMenu = keyWordList[i];
-			log.info("키워드메뉴검색" +keyWordMenu);
+			log.info("키워드메뉴검색" + keyWordMenu);
 		}
 		List<CONSUMER_Menu_InfoDTO> menuDTO  = new ArrayList<CONSUMER_Menu_InfoDTO>();
 		List<CONSUMER_Menu_InfoDTO> newMenuDTO  = new ArrayList<CONSUMER_Menu_InfoDTO>();
@@ -201,16 +216,6 @@ public class CONSUMER_SearchController {
 			if (imgDTOs == null) {			
 				imgDTOs = new ArrayList<CONSUMER_ImageDTO>();
 			}		
-			log.info("ImgDTOs size is :" + imgDTOs.size());
-			
-			//받아온 이미지 DTO 확인
-			for(int i = 0; i < imgDTOs.size(); i++) {
-				log.info("ImgDTOs. get : " + imgDTOs.get(i).getFileId());											
-				log.info("ImgDTOs. get : " + imgDTOs.get(i).getFileOrgname());
-				log.info("ImgDTOs.get : " + imgDTOs.get(i).getFilePath());				
-				log.info("ImgDTOs. get : " + imgDTOs.get(i).getFileSevname());
-				log.info("ImgDTOs.get : " + imgDTOs.get(i).getUserSeq());
-			}
 			
 			model.addAttribute("imgDTOs",imgDTOs);
 			imgDTOs = null;
@@ -225,8 +230,6 @@ public class CONSUMER_SearchController {
 		log.info("Current Location's Longitude is :" + locPosition[0]); //받아온 위도 확인
 		log.info("Current Location's Latitude is :" + locPosition[1]);	// 받아온 경도 확인
 		log.info(".............................");
-		
-
 		
 		
 		model.addAttribute("keyWord", keyWord); // 검색한 키워드 전송 

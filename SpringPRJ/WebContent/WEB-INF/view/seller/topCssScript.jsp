@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <!-- 창원이형꺼 top -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/bootstrap.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -10,7 +9,6 @@
 	
 	
 
-<!-- 창원이형이 주신 css 시작  -->
 	<style>
 	body {
 		margin: 0 auto;
@@ -195,5 +193,4 @@
 	}
 </script>
 	
-<!-- 창원이형이 주신 css 끝 -->
     

@@ -48,14 +48,14 @@
 			its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
 			formats to work correctly.
 		-->
-		<form action="/seller/out/out_info.do" method="POST">
+		<form action="/seller/out/out_info.do" method="POST" id="outInfoForm">
 		<input type="hidden" value="<%=userSeq%>" name="userSeq"/>
 		<input type="hidden" value="<%=ftSeq%>" name="ftSeq"/>
 		<input type="hidden" value="<%=userAuth%>" name="userAuth"/>
 			<section id="banner">
 				<div class="inner">
 					<div id="floatL">
-			            <div onclick = "location.href='/seller/main.do'" id="truck_in">
+			            <div onclick = "location.href='/seller/main.do'" id="truck_in" style="cursor:pointer">
 			                <h1>IN</h1>
 			                <p>푸드트럭 안</p>
 			                <hr width="100%"/>
@@ -63,10 +63,10 @@
 					</div>
 	                <hr width="100%"/>
 			
-			        <button type="submit" style="background: none;">
+			        <div onclick="document.getElementById('outInfoForm').submit();" style="background: none; cursor: pointer;">
 		                <h1>OUT</h1>
 		                <p style="font-family:'Noto Sans KR', sans-serif;">푸드트럭 밖</p>
-			        </button>
+			        </div>
 				</div>
 			</section>
 		</form>

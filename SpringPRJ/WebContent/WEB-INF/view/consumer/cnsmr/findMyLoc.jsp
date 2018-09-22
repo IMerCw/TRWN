@@ -9,7 +9,7 @@
 <!-- 지도 검색을 위한 services 라이브러리 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60f4f121242d90c886eacd9609c92e78&libraries=services,clusterer"></script>
 </head>
-<body style="width:100%;">
+<body style="">
 
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
 
@@ -23,7 +23,7 @@
 	      <div class="option">
 	          <div class="form-group">
 	              <form onsubmit="searchPlaces(); return false;">
-	              	<div class="row" style="padding-top:15px;">
+	              	<div class="row" style="padding-top:15px; margin:0;">
 		              	<div class="col-xs-2"></div>
 		              	<div class="col-xs-6">
 		             	<input type="text" class="form-control" value="한국폴리텍대학 서울강서캠퍼스" id="keyword" size="15">
@@ -61,9 +61,6 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 // 장소 검색 객체를 생성합니다
 var ps = new daum.maps.services.Places();  
-
-// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
 
 /* // 키워드로 장소를 검색합니다
@@ -136,31 +133,53 @@ function displayPlaces(places) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         bounds.extend(placePosition);
-
+		
+ 
+    
+            
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
         (function(marker, title) {
+        	
+            var content = 
+    			'<div style="text-align:center; border-radius:8px; background-color:white; font-size:1.8rem; z-index:1; width:114%; font-weight:bold;">' +
+    			title +	'</div>';
+    		
+    		var overlay = new daum.maps.CustomOverlay({
+    		    xAnchor: 0.5,
+    		    yAnchor: 2.6,
+    		    content: content,
+    		    map: map,
+    		    position: marker.getPosition()       
+    		});
+           	overlay.setMap(null);    
+    		
             daum.maps.event.addListener(marker, 'mouseover', function() {
-                displayInfowindow(marker, title);
+            	overlay.setMap(map);
             });
-
+			
             daum.maps.event.addListener(marker, 'mouseout', function() {
-                infowindow.close();
+            	overlay.setMap(null);    
             });
 
             itemEl.onmouseover =  function () {
-                displayInfowindow(marker, title);
+            	overlay.setMap(map);
             };
 
             itemEl.onmouseout =  function () {
-                infowindow.close();
+            	overlay.setMap(null);    
             };
             
             /* 마커 클릭시 혹은 목록 클릭시 일어날 이벤트 */
             daum.maps.event.addListener(marker, 'click', function() {
-         		alert('마커를 클릭 했습니다.');
-         	   
+            	 var r = confirm(title + "\n이 주소를 현재 위치로 지정하시겠습니까?");
+                 if (r == true) {
+     	        	myLat = marker.getPosition().getLat();	//위도 얻어오기
+     	        	myLon = marker.getPosition().getLng();	//경도 얻어오기
+     	        	var coord = new daum.maps.LatLng(myLat, myLon);
+     	        	geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+                 }
       	   	});
             itemEl.onclick =  function () {
                 var r = confirm(title + "\n이 주소를 현재 위치로 지정하시겠습니까?");
@@ -170,8 +189,6 @@ function displayPlaces(places) {
     	        	myLon = marker.getPosition().getLng();	//경도 얻어오기
     	        	var coord = new daum.maps.LatLng(myLat, myLon);
     	        	geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-    	        	
-
                 }
             };
             
@@ -194,13 +211,15 @@ function displayPlaces(places) {
 
 
 
+
+
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
 
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '" style="margin: 10px; margin-right: 20px; float: left; font-size:20px;">'+(index+1)+'</span>' +
                 '<div class="info"  style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' +
-                '   <h5>' + places.place_name + '</h5>';
+                '   <h4>' + places.place_name + '</h4>';
 
     if (places.road_address_name) {
         itemStr += 
@@ -281,14 +300,6 @@ function displayPagination(pagination) {
     paginationEl.appendChild(fragment);
 }
 
-// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
-// 인포윈도우에 장소명을 표시합니다
-function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
-    infowindow.setContent(content);
-    infowindow.open(map, marker);
-}
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
@@ -299,7 +310,7 @@ function removeAllChildNods(el) {
  
 
 	
-/**************** 위치추적 가능한 GEOLOCATION 자바스크립트 시작 ****************/
+/**************** 위치추적 GEOLOCATION ****************/
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 if (navigator.geolocation) {
     
@@ -309,12 +320,28 @@ if (navigator.geolocation) {
         var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
         
-        var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+        var locPosition = new daum.maps.LatLng(lat, lon) // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
         
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition, message);
-            
+           
+        var content = 
+        	'<div class="wrap" style="background-color:white; padding:4px 0; font-size:2rem; border: 1px solid #adadad; font-weight:bold; border-radius:10px; width: 120%; text-align:center;">' 
+        	+ '고객님의 현재 위치' 
+        	+ '</div>';
+        	
+		
+		//마커 위에 커스텀오버레이를 표시합니다
+		//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+		var overlay = new daum.maps.CustomOverlay({
+			content: content,
+			map: map,
+			position: locPosition,
+			xAnchor: 0.5,
+			yAnchor: 2,
+			zIndex: 3
+		});
+			
       });
     
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -337,18 +364,10 @@ function displayMarker(locPosition, message) {
     var iwContent = message, // 인포윈도우에 표시할 내용
         iwRemoveable = true;
 
-    // 인포윈도우를 생성합니다
-    infowindow = new daum.maps.InfoWindow({
-        content : iwContent,
-        removable : iwRemoveable,
-        zIndex : 1
-    });
+
     
     // 마커가 지도 위에 표시되도록 설정합니다
 	markerCurrent.setMap(map);
-	
-	// 인포윈도우를 마커위에 표시합니다 
-	infowindow.open(map, markerCurrent);
 	
 	// 지도 중심좌표를 접속위치로 변경합니다
 	map.setCenter(locPosition);        

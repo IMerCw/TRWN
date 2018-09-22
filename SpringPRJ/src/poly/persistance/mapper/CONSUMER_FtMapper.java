@@ -10,6 +10,7 @@ import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
 import poly.dto.consumer.CONSUMER_Menu_InfoDTO;
+import poly.dto.consumer.CONSUMER_Search_TrendDTO;
 
 @Mapper("CONSUMER_FtMapper") //UserMapper라는 이름의 Mapper라고 선언
 public interface CONSUMER_FtMapper {
@@ -42,8 +43,7 @@ public interface CONSUMER_FtMapper {
 
 	public List<CONSUMER_Ft_InfoDTO> getFtList_ALL()throws Exception;
 
-	
-	//getFavoriteFt선언을 MypageMapper.java에 옮김.
+	public int in_Search_Trend(CONSUMER_Search_TrendDTO stDTO) throws Exception;
 
 
 }

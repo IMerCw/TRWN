@@ -6,6 +6,7 @@
     
 		<!-- 공통 CMMN -->    
 		<typeAlias type="poly.dto.cmmn.CMMN_UserDTO" alias="CMMN_UserDTO"/>
+		<typeAlias type="poly.dto.cmmn.CMMN_Site_StatDTO" alias="CMMN_Site_StatDTO"/>
 		
     	<!-- 소비자 CONSUMER  -->
 		<typeAlias type="poly.dto.consumer.CONSUMER_NoticeDTO" alias="CONSUMER_NoticeDTO"/>
@@ -30,6 +31,7 @@
 		<typeAlias type="poly.dto.consumer.CONSUMER_Gps_TableDTO" alias="CONSUMER_Gps_TableDTO"/>
 		<typeAlias type="poly.dto.consumer.CONSUMER_RcmmndMenuDTO" alias="CONSUMER_RcmmndMenuDTO"/>
 		<typeAlias type="poly.dto.consumer.CONSUMER_BoardCounterDTO" alias="CONSUMER_BoardCounterDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_Search_TrendDTO" alias="CONSUMER_Search_TrendDTO"/>
 		
 		
 		<!-- 관리자 -->

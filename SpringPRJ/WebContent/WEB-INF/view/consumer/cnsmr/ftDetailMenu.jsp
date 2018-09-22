@@ -66,7 +66,8 @@
 										<%if(imgDTOs.get(j).getFileId().equals(menuDTOs.get(i).getFile_id())) {%>
 											<!-- 메뉴 사진 -->
 											<img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(j).getFileSevname()%>" 
-												style="max-height:240px; max-width:240px; width:auto;">
+												style="max-height:240px; max-width:240px; width:auto;"
+												onError="this.src='/resources/img/consumer/NfoundError.png;'">
 										<%} %> 		
 									<%} else {%>
 										<img src="/resources/img/consumer/temp.png" alt="메뉴이미지준비중" style="max-height:300px; width:100%;"/>

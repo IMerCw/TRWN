@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <!-- 창원이형꺼 top -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
 	<!-- <link rel="stylesheet" href="/img/b.css" /> -->    
@@ -238,4 +237,3 @@
 
 
 	
-<!-- 창원이형이 주신 css 끝 -->

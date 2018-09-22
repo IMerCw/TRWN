@@ -214,7 +214,7 @@
 		WHERE 
 			MN.EXP_YN = 1 AND
 			FT.FT_STATUS = 0 AND
-			MN.MENU_NAME like '%' ||  #{keyWord} || '%'
+			MN.MENU_NAME like CONCAT('%',trim(#{keyWord}),'%')
 	</select> 
 	
 	<!-- 특정 푸드트럭의 메뉴 이미지들 불러오기  -->
@@ -304,5 +304,20 @@
 		WHERE FILE_ID = #{file_id}
 	</select>
 	
+	<!-- 검색어 저장 -->
+	<insert id="in_Search_Trend" parameterType="CONSUMER_Search_TrendDTO">
+	INSERT INTO SEARCH_TREND
+	(
+		USER_SEQ,
+		SEARCH_WORD,
+		SEARCH_DATE
+	)
+	VALUES
+	(
+		#{user_seq},
+		#{search_word},
+		#{search_date}
+	)
+	</insert>
 
 </mapper>

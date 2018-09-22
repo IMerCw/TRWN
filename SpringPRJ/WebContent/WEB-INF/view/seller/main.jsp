@@ -149,7 +149,7 @@
 					<li><a href="JavaScript:truckConfig()">내 트럭 관리</a></li>
 					<li>
 						<%if(!userSeq.equals("")){ %>
-						<a href=/seller/orderWait/orderWait.do?userSeq=<%=userSeq%>">주문 대기열</a>
+						<a href="/seller/orderWait/orderWait.do?userSeq=<%=userSeq%>">주문 대기열</a>
 						<%}%>
 					</li>
 					<li>

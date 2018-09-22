@@ -94,7 +94,6 @@
 				}
 				/*본문 마지막 행 */
 			
-			/* height: auto 였는데 bottom 클릭이 안됨 창원이형이랑 회의 */
 				#contents_menu_bottom{
 					width:80%;
 					height:20%;  

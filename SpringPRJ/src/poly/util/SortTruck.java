@@ -35,18 +35,13 @@ public class SortTruck {
 		// Displaying the values after iterating through the set
         for(int j = 0; j <ftDTO.size(); j++) {
         	for (Iterator<Integer> iterator = menuDTOFtSeq.iterator(); iterator.hasNext();) {
-        		System.out.println("ftDTO is" + ftDTO.get(j).getFt_seq());
         		
         		if(iterator.next() == ftDTO.get(j).getFt_seq()) {
 					newList.add(ftDTO.get(j));
-					System.out.println("new DTO has been added to newList: " + ftDTO.get(j).getFt_seq());
 				}
         	} 
 			
         }
-        
-		System.out.println("newList size is " + newList.size());
-		
 		return newList;
 	}
 	
@@ -57,12 +52,9 @@ public class SortTruck {
 			for(int j = 0; j < menuDTO.size(); j++) {
 				if(ftDTO.get(i).getFt_seq() == menuDTO.get(j).getFt_seq()) {
 					newList.add(menuDTO.get(j));
-					System.out.println("new DTO has been added to newList: " + menuDTO.get(j).getFt_seq());
 				}
 			}
 		}
-		
-		System.out.println("newList size is " + newList.size());
 		return newList;
 	}
 	
@@ -126,8 +118,6 @@ public class SortTruck {
 	public static List<CONSUMER_Ft_InfoDTO> sortFtClose(List<CONSUMER_Ft_InfoDTO> ftList) {
 		
 		CONSUMER_Ft_InfoDTO tempDTO = new CONSUMER_Ft_InfoDTO(); //swap을 위한 임시 변수 설정
-		System.out.println("sortFtClose start!!"); 
-		
 		for(int i = 0; i < ftList.size()-1; i++) {
 			
 			for(int j = i+1; j < ftList.size(); j++) {

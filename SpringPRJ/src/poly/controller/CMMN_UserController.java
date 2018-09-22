@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import poly.dto.admin.ADMIN_Site_StatDTO;
+import poly.dto.cmmn.CMMN_Site_StatDTO;
 import poly.dto.cmmn.CMMN_UserDTO;
+import poly.service.ADMIN_IMainService;
 import poly.service.CMMN_IUserService;
 import poly.service.SELLER_IOutService;
+import poly.service.impl.CMMN_UserService;
 import poly.util.CmmUtil;
 import poly.util.Email;
 import poly.util.EmailSender;
@@ -43,17 +47,14 @@ public class CMMN_UserController {
 	@Resource(name="SELLER_OutService")
 	private SELLER_IOutService SELLER_OutService;
 	
-	
-	//로그인, 회원가입 화면은 메인페이지로 대체 합니다.
-	//로그인 화면
-/*  @RequestMapping(value="consumer/user/userLogin")
-	public String userLogin() throws Exception{
-		log.info(this.getClass() + "userLogin start!!!");
+	//현재 날짜 구하기 - 관리자용포맷
+	public String getDate() {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd / HH:mm:ss");
+		String date = sdf1.format(cal.getTime());
 		
-		
-		log.info(this.getClass() + "userLogin end!!!");
-		return "/consumer/user/userLogin";
-	}*/
+		return date;
+	}
 	
 	//로그인 
 	@RequestMapping(value="cmmn/user/loginProc", method=RequestMethod.POST)
@@ -92,6 +93,13 @@ public class CMMN_UserController {
 			log.info(uDTO.getUserNick());
 			log.info(uDTO.getUserGender());
 			log.info(uDTO.getUserHp());
+			
+			//로그인 기록 DB 저장
+			CMMN_Site_StatDTO ssDTO = new CMMN_Site_StatDTO();
+			ssDTO.setJoin_date(getDate());
+			ssDTO.setUser_seq(Integer.parseInt(uDTO.getUserSeq()));
+			int result = UserService.in_Site_Stat(ssDTO);
+			
 			
 			//로그인 성공
 			session.setAttribute("userSeq", uDTO.getUserSeq());

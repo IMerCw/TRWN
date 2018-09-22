@@ -53,7 +53,8 @@
 					<div class="row imgRow">
 						<%for(int j = 0; j < imgDTOs.size(); j++) {%>
 							<%if(menuDTO.get(i).getFile_id().equals(imgDTOs.get(j).getFileId())) { %>
-								<img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(j).getFileSevname()%>" width="100%"/>
+								<img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(j).getFileSevname()%>" width="100%"
+									onError="this.src='/resources/img/consumer/NfoundError.png;'">
 							<%}%>
 						<%} %>
 					</div>
