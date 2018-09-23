@@ -1,5 +1,6 @@
 package poly.persistance.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +15,6 @@ public interface CONSUMER_RcmmndMenuMapper {
 	public List<CONSUMER_FtReviewDTO> getReviewList(int userSeq) throws Exception;
 
 	public List<CONSUMER_FtReviewDTO> getUsersReviewList(int userSeq) throws Exception;
+
+	public ArrayList<Map<String, String>> getSearchTrnd() throws Exception;
 }

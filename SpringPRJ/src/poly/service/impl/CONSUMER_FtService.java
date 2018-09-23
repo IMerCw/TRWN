@@ -1,5 +1,6 @@
 package poly.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -233,6 +234,12 @@ public class CONSUMER_FtService implements CONSUMER_IFtService{ //IUserServiceë¥
 	@Override
 	public int in_Search_Trend(CONSUMER_Search_TrendDTO stDTO) throws Exception {
 		return ftMapper.in_Search_Trend(stDTO);
+	}
+
+
+	@Override
+	public ArrayList<Map<String, String>> getSearchTrnd() throws Exception {
+		return rcmmndMenuMapper.getSearchTrnd();
 	}
 
 }

@@ -63,7 +63,7 @@
 					</div>				
 					<div>
 						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/rcmmndMenu.png" />
-						<a href="/consumer/rcmmnd/rcmmndMenu.do?myAddress=<%=myAddress%>">트럭왔냠 추천 메뉴</a>
+						<a href="/consumer/rcmmnd/rcmmndMain.do?myAddress=<%=myAddress%>">트럭왔냠 추천 메뉴</a>
 					</div>				
 					<div>
 						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/mypage.png" />

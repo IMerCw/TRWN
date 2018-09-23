@@ -63,8 +63,7 @@
 			FR.REVIEW_SEQ as review_seq,
 			FR.FT_SEQ as ft_seq,
 		    FR.USER_SEQ as user_seq,
-		    FR.REV_POINT as rev_point,
-		    FR.REV_REGDATE rev_regdate
+		    FR.REV_POINT as rev_point
 		FROM FT_REVIEW AS FR, 
 		(SELECT 
 				FR.FT_SEQ,
@@ -83,8 +82,7 @@
 			FR.review_seq,
 			FR.FT_SEQ,
 		    FR.USER_SEQ,
-		    FR.REV_POINT,
-		    FR.REV_REGDATE
+		    FR.REV_POINT
 		FROM FT_REVIEW AS FR, 
 		(SELECT 
 				FR.FT_SEQ,
@@ -96,4 +94,19 @@
 		WHERE FR.REV_REGDATE = SORTED.LATEST
 		ORDER BY FT_SEQ
 	</select>
+	
+	<!-- 검색어와 빈도수 가져오기 -->
+	<select id="getSearchTrnd" resultType="hashmap">
+		SELECT 
+			SEARCH_WORD as word,
+			COUNT(SEARCH_WORD) as freq
+			
+		FROM SEARCH_TREND
+		
+		GROUP BY SEARCH_WORD
+		
+		ORDER BY COUNT(SEARCH_WORD) DESC
+	</select>
+	
+	
 </mapper>

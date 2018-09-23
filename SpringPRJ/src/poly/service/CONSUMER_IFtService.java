@@ -1,5 +1,6 @@
 package poly.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -70,4 +71,6 @@ public interface CONSUMER_IFtService {
 	public List<CONSUMER_FtReviewDTO> getUsersReviewList(int userSeq) throws Exception;
 
 	public int in_Search_Trend(CONSUMER_Search_TrendDTO stDTO) throws Exception;
+
+	public ArrayList<Map<String, String>> getSearchTrnd() throws Exception;
 }
