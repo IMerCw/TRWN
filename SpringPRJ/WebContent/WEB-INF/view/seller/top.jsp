@@ -72,7 +72,7 @@
 						<%if(!"".equals(userEmail)) { %>
 							<!-- 로그인 된 상태 -->
 								<b><%=userEmail + "님 환영합니다." %></b>
-								<a href="Javascript:logout();" >로그아웃</a>
+								<a href="/cmmn/user/logout.do" >로그아웃</a>
 							<%}else{ %>
 							<!-- 로그인이 안된 상태 -->
 							<a href="/cmmn/main.do">로그인</a>
@@ -134,13 +134,13 @@
 							  <strong style="color:tomato">위험!</strong>
 							  &nbsp;식중독 발생가능성이 매우 높으므로 식중독예방에 각별한 경계가 요망됩니다.
 						<%} %>
-						</div>
 					<%}else{ %>
 					<a href="/seller/weather/findMyLoc.do" style="color:white;" >
 						<span><img src="<%=request.getContextPath()%>/resources/img/seller/exclamation.png" width="22px"/></span>
 						&nbsp; 질병지수 : 위치를 설정해주세요
 					</a>
 					<%} %> 
+					</div>
 				</div>
 				<div class="col-sm-4" style="text-align:right">
 					<!-- 위치정보 있을 경우-->

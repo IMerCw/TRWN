@@ -164,7 +164,7 @@
 											<div class="input-group">
 												<input type="text" name="email" class="form-control" id="email_input" placeholder="*이메일 입력" data-msg="이메일을" />
 												<span class="input-group-btn">
-													<input type="button" class="btn btn-primary" id="emailCheck" value="이메일 중복체크" />
+													<input type="button" class="btn" id="emailCheck" style="color:white; background-color:#bbbbbb"value="이메일 중복체크" />
 												</span>
 											</div>
 										</div>
@@ -191,7 +191,7 @@
 											<input type="text" name="phone" id="phone" tabindex="5" class="form-control" placeholder="핸드폰 번호 입력" data-msg="핸드폰 번호를" maxlength="15" >
 										</div>
 										<div class="form-group">
-											<p><a class="btn btn-primary col-sm-12" data-target="#modal1" data-toggle="modal" id="agree" style="width:100%;" >회원약관</a></p>
+											<p><a class="btn col-sm-12" data-target="#modal1" data-toggle="modal" id="agree" style="color:white; background-color: #bbbbbb; width:100%;" >회원약관</a></p>
 										</div>
 										
 										
@@ -259,8 +259,8 @@
 
       <!-- 회원약관 footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="provistionY_Y" data-dismiss="modal">확인</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn" id="provistionY_Y" style="background-color: #428bca; color:white;"data-dismiss="modal">확인</button>
+        <button type="button" class="btn" style="background-color: #d9534f; color:white;"  data-dismiss="modal">닫기</button>
       </div>
 
     </div>
@@ -381,7 +381,8 @@
 	 					$('#emailCheck').val('사용가능 이메일');
 	 					$('#emailCheck').removeClass('btn-warning')
 	 					$('#emailCheck').removeClass('btn-danger')
-	 					$('#emailCheck').addClass('btn-primary active');
+	 					$('#emailCheck').css('background-color','#555')
+	 					//$('#emailCheck').addClass('active');
 	 					$('#count').val('1');
 	 				}
 	 				
@@ -416,11 +417,12 @@
 			// alert($('#radioY').is(":checked"));
 			 if($('#radioY').is(":checked")){
 			 	
-				$('#agree').attr('backgroundColor','black');
+				$('#agree').css('background-color','rgb(85, 85, 85)');
 				$('#modal1').fadeOut(100);
 				
 				
 			}else{
+				$('#agree').css('background-color','#bbbbbb');
 				alert('동의하셔야 다음으로 진행할 수 있습니다.');
 				 
 			}

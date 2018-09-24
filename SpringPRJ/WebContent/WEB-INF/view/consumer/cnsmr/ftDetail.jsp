@@ -195,11 +195,11 @@
 						<!-- 푸드트럭 이름 -->
 						<h2 style="text-align:left; margin-top:15px;"><%=fDTO.getFt_name()%></h2>
 					</div>
-					<div class="col-xs-4" style="height:64px; padding:15px; text-align:right; -webkit-filter: grayscale(100%);" id="favoriteContainer">
+					<div class="col-xs-4" style="height:64px; padding:15px; text-align:right;" id="favoriteContainer">
 						<!-- 관심매장 등록 버튼 -->
 						<span style="margin-right:10px;">
 						<%if(FtLikeResult.equals("1")) {%>
-							<img src="<%=request.getContextPath()%><%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
+							<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
 						<%}else { %>
 							<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>
 						<%} %>
