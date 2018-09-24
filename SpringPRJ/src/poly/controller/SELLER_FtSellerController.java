@@ -246,9 +246,9 @@ public class SELLER_FtSellerController {
 	
 	//푸드트럭관리 트럭등록 vs 기존 정보 
 	@RequestMapping(value="/seller/ft/truckConfig")
-	public String truckConfig(HttpServletRequest request, Model model) throws Exception{
+	public String truckConfig(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + " truckConfig start !!");
-		String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
+		String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
 		log.info("userSeq : " + userSeq);
 		
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
@@ -639,28 +639,30 @@ public class SELLER_FtSellerController {
 			
 		}
 		
-	
+	//판매자 메인
 	@RequestMapping(value="/seller/main")
 	public String test(HttpServletRequest request, Model model , HttpSession session)throws Exception{
 		log.info("seller main start !!!"); 
-		log.info("chart Start"); 
-		String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
-		log.info("getUserSeq : " + userSeq);
 		
-		/*String userSeq1 = request.getParameter("userSeq");*/
-		/*String ftSeq = request.getParameter("ftSeq");
-		log.info("getFtSeq : " + ftSeq);*/
+		String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
+
+		//미 로그인시 메인 이동
+		if("".equals(userSeq)) {
+			String msg="로그인을 해주시기 바랍니다. .";
+			String url="/cmmn/main.do";
+			return "/cmmn/alert";
+		}
+		
+		log.info("getUserSeq : " + userSeq);
 		
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
 		ftsDTO.setUserSeq(userSeq);
-		ftsDTO = FtSellerService.getTruckConfig(ftsDTO);
-	//	log.info("ftsDTO.get :" + ftsDTO.getFtSeq());
-	//	log.info("ftsDTO .get user : " + ftsDTO.getUserSeq());
-		log.info("확인");
+		ftsDTO = FtSellerService.getTruckConfig(ftsDTO); //푸드트럭 정보 가져오기
+		session.setAttribute("ftName", ftsDTO.getFtName()); //푸드트럭 이름 세션 올리기
+		
 		if(userSeq != null && ftsDTO != null) {
 			log.info("차트가 있을 경우 ? ");
 			log.info("userSeq , ftSeq : " + userSeq +","+ftsDTO.getFtSeq());
-			
 			
 			String todayMD = UtilTime.getDateMD();	//"M월 d일" 불러오기
 			String todayYMDhms = UtilTime.getDateYMDhms();	//"yyyy.MM.dd / hh:mm:ss" 불러오기
@@ -793,6 +795,7 @@ public class SELLER_FtSellerController {
 			model.addAttribute("chart",chart);
 			
 		}
+		
 		log.info(this.getClass() + "Main end !!!!");
 		return "/seller/main";
 	}

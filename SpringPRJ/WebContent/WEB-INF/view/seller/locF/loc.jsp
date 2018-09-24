@@ -19,27 +19,23 @@
 				<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 			</td>
 		</tr>
-		<tr bgcolor="">
-			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
-			<div class="container">
+		<tr>
+			<td style="background-color:#555;">
+			<div class="container" style="background-color:#ffffff; border-radius:8px;">
 			<!-- 테이블  채우는 자리  -->		
-		
-		<h2 style="color:white;">지역행사정보</h2><small style="color:white;">출처 : cheftruck</small>
-			<div class="row">
-				<table class="table table-striped" style="text-align: center; opacity: 0.9; background-color:white; border: 1px solid #dddddd">
+				<h2 style="color:black;">지역행사정보</h2><small style="color:white;">출처 : cheftruck</small>
+				<div class="row">
+					<table class="table table-striped" style="text-align: center; opacity: 0.9; background-color:white; border: 1px solid #dddddd">
+						<tbody>
+							<%-- <% for (int i = 0; i < festivalHTML.size(); i++) { %>
+							 System.out.println("elem test" + i + ": " + elem.eq(i).text()); %> --%>
+							<tr>
+								<td><%=festivalHTML %></td>
+							</tr>
+						</tbody>
+					</table>
 					
-					<tbody>
-					
-						<%-- <% for (int i = 0; i < festivalHTML.size(); i++) { %>
-						 System.out.println("elem test" + i + ": " + elem.eq(i).text()); %> --%>
-						<tr>
-							<td ><%=festivalHTML %></td>
-							
-						</tr>
-					</tbody>
-				</table>
-				
-			</div>
+				</div>
 			<script>
 			    $('.table table-striped').DataTable();
 			</script>	
@@ -51,8 +47,7 @@
 		</tr>
 		<tr height="7%" style="background-color:#444">
 			<td>
-			<%-- 	<%@ include file="/WEB-INF/view/seller/bottom.jsp" %> --%>
-			
+				<%@ include file="/WEB-INF/view/seller/bottom.jsp" %> 
 			</td>
 		</tr>
 	</table>

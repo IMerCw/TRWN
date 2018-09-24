@@ -46,7 +46,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
+			<td style="background-color:#555;">
+			
 			<!--tab 부분 시작-->
 			<div class="container" style="height:100%; margin-top:3%;" >
 				<div class="row" >

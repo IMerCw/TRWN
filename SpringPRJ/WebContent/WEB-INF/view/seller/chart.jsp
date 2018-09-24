@@ -85,11 +85,11 @@
 
 </head>
 <body>
-	<div style="margin-bottom:20px" >
+	<div style="background-color:black; padding-top:30px;" >
 		
 	 	 <!-- Nav tabs -->
-		<ul class="nav nav-pills" style="background-color:black">
-			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;7일간 매출</a></li>
+		<ul class="nav nav-pills" style="background-color:black; display: block;">
+			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="color:white;">7일간 매출</a></li>
 			<li role="presentation"><a href="#tapp" aria-controls="tapp" role="tab" data-toggle="tab" style="color:white;">월별 매출</a></li>
 			<li role="#"><a href="/seller/sales/sales.do?userSeq=<%=ss_userSeq%>" aria-controls="#" role="#" data-toggle="#" style="color:white;">매출분석</a></li>
 		</ul>

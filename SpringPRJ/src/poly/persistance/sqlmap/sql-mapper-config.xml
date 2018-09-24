@@ -32,6 +32,7 @@
 		<typeAlias type="poly.dto.consumer.CONSUMER_RcmmndMenuDTO" alias="CONSUMER_RcmmndMenuDTO"/>
 		<typeAlias type="poly.dto.consumer.CONSUMER_BoardCounterDTO" alias="CONSUMER_BoardCounterDTO"/>
 		<typeAlias type="poly.dto.consumer.CONSUMER_Search_TrendDTO" alias="CONSUMER_Search_TrendDTO"/>
+		<typeAlias type="poly.dto.consumer.CONSUMER_RcmmndFtDTO" alias="CONSUMER_RcmmndFtDTO"/>
 		
 		
 		<!-- 관리자 -->

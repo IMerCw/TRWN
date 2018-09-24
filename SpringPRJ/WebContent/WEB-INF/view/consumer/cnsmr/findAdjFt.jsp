@@ -108,7 +108,7 @@
 		var mapContainer = document.getElementById('map') 
 	    var mapOption = { 
 	        center: new daum.maps.LatLng(<%=myLocLat%>, <%=myLocLon%>), 
-	        level: 3 
+	        level: 5
 	    };
 	
 		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다	

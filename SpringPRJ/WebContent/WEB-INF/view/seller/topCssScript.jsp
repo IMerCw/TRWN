@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
 	
 	
 
 	<style>
 	body {
+		font-family: 'Noto Sans KR', sans-serif;
 		margin: 0 auto;
-	    font-family: "Lato", sans-serif;
 	}
 	a {
 		text-decoration: none;

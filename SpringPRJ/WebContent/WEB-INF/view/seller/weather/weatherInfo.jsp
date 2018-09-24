@@ -19,7 +19,7 @@
 
 	</style>
 </head>
-<body>
+<body style="background-color:#555;">
 	<%@include file="/WEB-INF/view/seller/top.jsp" %>
 	<%@include file="/WEB-INF/view/seller/topCssScript.jsp" %>
 
@@ -49,11 +49,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="row" style="height:15px;"></div>
+	
 	<!-- 식중독 예방 정보 -->
 	<div class="container-fluid">
 		<div class="panel panel-default">
-		    <div class="panel-heading">
+		    <div class="panel panel-body">
 		  		<h3>식중독 위험 지수</h3>
 		  		<% String riskFigure = dissInfoDTO.getRisk(); %> 
 				<% if(riskFigure.equals("1")) {%>
@@ -79,6 +79,7 @@
 				<%} %>
 			</div>
 		 </div>
+		 <div class="panel panel-default">
 		    <div class="panel-body">
 		    	<p class="grayText">질병예측 날짜:</p> 
 		    	<%=dissInfoDTO.getDt().substring(0, 4)%>년 
@@ -92,8 +93,8 @@
 		    	<p class="grayText">식중독 위험도 지침 :</p>
 		    	<%=dissInfoDTO.getDissRiskXpln()%> 
 		    </div>
-		    
-		</div>
+		 </div>
+	</div>
 </body>
 
 </html>

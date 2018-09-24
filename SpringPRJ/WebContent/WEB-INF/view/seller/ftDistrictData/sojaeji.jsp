@@ -4,17 +4,17 @@
 var sojaeji = function(sido, gugun, dong) {
 	var obj = this;
 	//window.onload = function() {
-		obj.sido = document.getElementById(sido);
-		obj.gugun = document.getElementById(gugun);
-		obj.dong = document.getElementById(dong);
-		obj.update_sido();
-		obj.sido.onchange = function() {
-			obj.update_gugun.apply(obj);
-			obj.update_dong.apply(obj);
-		}
-		obj.gugun.onchange = function() {
-			obj.update_dong.apply(obj);
-		}
+	obj.sido = document.getElementById(sido);
+	obj.gugun = document.getElementById(gugun);
+	obj.dong = document.getElementById(dong);
+	obj.update_sido();
+	obj.sido.onchange = function() {
+		obj.update_gugun.apply(obj);
+		obj.update_dong.apply(obj);
+	}
+	obj.gugun.onchange = function() {
+		obj.update_dong.apply(obj);
+	}
 	//}
 }
 

@@ -45,8 +45,17 @@
 </head>
 <body>
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
+<!-- 카카오  -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 
+<!-- 페이스북  -->
+<meta property="og:url"           content="http://daum.net" />
+<meta property="og:type"          content="트럭왔냠 -- 푸드트럭" + '<%=fDTO.getFt_name()%>' />
+<meta property="og:title"         content="트럭왔냠" />
+<meta property="og:description"   content="<%=fDTO.getFt_intro()%>" />
+<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+<!----------->
 <html>
 <head>
 <title>푸드트럭 상세 보기 </title>
@@ -143,11 +152,28 @@
 	.ftIcon {
 		max-width:100%; height:auto; max-height:30px;
 	}
+	#snsIcon {
+		display:none;
+		border-radius: 10px;
+	    text-align: right;
+	    padding: 20px 0;
+	    background-color: #eeeeee;
+	    padding-right: 10px;
+	    margin-bottom:10px;
+	}
+	#snsIcon>img {
+		padding:0 10px;
+		cursor:pointer;
+	}
+	#favoriteContainer > span {
+		cursor:pointer;
+	}
 </style>
 
 
 </head>
 <body>
+	<div id="fb-root"></div>
 	<div id="map" style="width: 100%; height: 350px;"></div>
 	
 	<!-- 정보/메뉴/리뷰 탭 스크롤 내려도 고정됨 -->
@@ -169,18 +195,29 @@
 						<!-- 푸드트럭 이름 -->
 						<h2 style="text-align:left; margin-top:15px;"><%=fDTO.getFt_name()%></h2>
 					</div>
-					<div class="col-xs-2" style="height:64px; padding:15px; text-align:right;" id="favoriteContainer">
+					<div class="col-xs-4" style="height:64px; padding:15px; text-align:right; -webkit-filter: grayscale(100%);" id="favoriteContainer">
 						<!-- 관심매장 등록 버튼 -->
+						<span style="margin-right:10px;">
 						<%if(FtLikeResult.equals("1")) {%>
-							<img src="<%=request.getContextPath()%><%=request.getContextPath()%>/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
+							<img src="<%=request.getContextPath()%><%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
 						<%}else { %>
-							<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>
+							<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>
 						<%} %>
-					</div>
-					<div class="col-xs-2" style="height:64px; padding:15px;">
+						</span>
 						<!-- 공유하기 버튼 -->
-						<img src="<%=request.getContextPath()%>/resources/img/consumer/share-symbol.png" class="ftDetailBttn" onclick="shareBttnClick()" id="shareBttn"/>
+						<span>
+							<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/share-arrow.png" class="ftDetailBttn" onclick="shareBttnClick()" id="shareBttn"/>
+						</span>
 					</div>
+				</div>
+				<div class="col-xs-12" id="snsIcon">
+					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/twitter.png" class="twitter-share-button" onclick="javascript:twitterShare();" id="twitterIcon"/>
+					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/facebook.png" onclick="javascript:facebookShare();" id="fbIcon"/>
+					
+					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/64_NAVER SQUARE ICON.png" onclick="javascript:naverShare();" id="naverIcon"/>
+					<a id="kakao-link-btn" href="javascript:;">
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/kakaolink_btn_medium_ov.png"/>
+					</a>
 				</div>
 				<div class="row">
 					<div class="col-xs-2">
@@ -224,7 +261,7 @@
 				<!-- 푸드트럭 운영시간  -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/alarm-clock.png" class="ftIcon" />
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/clock-with-white-face.png" class="ftIcon" />
 					</div>
 				   	<div class="col-xs-4 ftDetailContents">
 						<p><%=opDay%></p>
@@ -239,7 +276,7 @@
 				<!-- 소개 -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/speech-bubble.png" class="ftIcon"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/black-bubble-speech.png" class="ftIcon"/>
 					</div>
 					<div class="col-xs-10 ftDetailContents">
 						<%=fDTO.getFt_intro()%>
@@ -248,7 +285,7 @@
 				<!-- 위치 -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/map.png" class="ftIcon"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/map-placeholder.png" class="ftIcon"/>
 					</div>
 					<div class="col-xs-10 ftDetailContents">
 						<%=fDTO.getGps_sido() +" " + fDTO.getGps_sigungu() + " " + fDTO.getGps_dong()%>
@@ -257,7 +294,7 @@
 				<!-- 사업자번호 -->
 				<div class="row">
 					<div class="col-xs-2 ftDetailContents">
-						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/clipboard.png" class="ftIcon"/>
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/work-briefcase.png" class="ftIcon"/>
 					</div>
 					<div class="col-xs-10 ftDetailContents">
 						사업자번호:&nbsp;<%=fDTO.getSel_no()%>
@@ -454,14 +491,72 @@ function myFunction() {
 		<%}%>
 	};
 	function shareBttnClick() {
-		alert("공유하기!");
-		alert(window.location.href);
+		if($('#snsIcon').css('display') == 'none') {
+			$('#snsIcon').css('display','block');
+		}else {
+			$('#snsIcon').css('display','none');
+		}
 		
+		/* alert(window.location.href);*/
 	};
 	
+    function naverShare() {
+      var url = window.location.href;
+      var title = '트럭왔냠 -- 푸드트럭 맛집 ' + '<%=fDTO.getFt_name() %>';
+      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+      window.open(shareURL);
+    }
+	
+
+	  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('60f4f121242d90c886eacd9609c92e78');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: '<%=fDTO.getFt_name() %>',
+        description: '#트럭왔냠 #푸드트럭 맛집\n' + '<%=fDTO.getFt_intro() %>' ,
+        imageUrl: 'http://http://54.180.77.82:8080<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>',
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href
+        }
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href
+          }
+        }
+      ]
+    });
+  //]]>
+    
+	function facebookShare() {
+		window.open('https://www.facebook.com/sharer/sharer.php?u=http://daum.net');
+	}	  
+	function twitterShare() {
+		window.open('https://twitter.com/intent/tweet?text=트럭왔냠--<%=fDTO.getFt_name() %>&url=' + window.location.href);
+	}	  
+    
+   (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
 </script>
-</body>
-</html>
 
 
 </body>

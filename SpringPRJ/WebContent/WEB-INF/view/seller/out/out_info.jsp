@@ -177,17 +177,10 @@
 			font-family: 'Noto Sans KR', sans-serif;
 			margin: 0 auto;
 		}
-		/* body{
-			background-image:url('/resource/img/seller/pic02.jpg'); 
-		}
-		 */
 	</style>
 </head>
 <body>
-		<%-- <%@ include file="/WEB-INF/view/seller/top.jsp" %> --%>
-		<!-- 	<td style="background-image:url('/resources/img/seller/pic02.jpg');"> -->
-		
-			<!-- 판매자 푸드트럭관리 -->
+		<!-- 판매자 푸드트럭관리 -->
 		<div id="menuContainer">
 			<div class="menuInnerContainer" style="width:96%; margin:0 auto; background-color:white;">
 				<div><!------------------ 주문하기  ------------------>

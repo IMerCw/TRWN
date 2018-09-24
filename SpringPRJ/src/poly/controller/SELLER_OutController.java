@@ -267,6 +267,15 @@ public class SELLER_OutController {
 	public String inout (HttpSession session) throws Exception{
 		log.info("inout view start !!!");
 		String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
+		
+		//미 로그인시 메인 이동
+		if("".equals(userSeq)) {
+			String msg="로그인을 해주시기 바랍니다. .";
+			String url="/cmmn/main.do";
+			return "/cmmn/alert";
+		}
+		
+				
 		log.info("Check userSeq : " + userSeq);
 		
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();

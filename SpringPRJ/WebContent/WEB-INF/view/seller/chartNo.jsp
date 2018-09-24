@@ -15,9 +15,6 @@
 
 </head>
 <body>
-	<%-- <div>
-		<%@include file="/WEB-INF/view/consumer/topBody.jsp" %>	<!-- topBody에서 session으로 userEmail을 받는다. -->
-	</div> --%>
 	<div style="margin-bottom:20px">
 	
 		<div role="tabpanel" style="margin: 20px">

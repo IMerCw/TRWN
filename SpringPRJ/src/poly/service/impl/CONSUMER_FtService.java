@@ -15,6 +15,7 @@ import poly.dto.consumer.CONSUMER_Ft_InfoDTO;
 import poly.dto.consumer.CONSUMER_Ft_ReviewDTO;
 import poly.dto.consumer.CONSUMER_ImageDTO;
 import poly.dto.consumer.CONSUMER_Menu_InfoDTO;
+import poly.dto.consumer.CONSUMER_RcmmndFtDTO;
 import poly.dto.consumer.CONSUMER_RcmmndMenuDTO;
 import poly.dto.consumer.CONSUMER_Search_TrendDTO;
 import poly.persistance.mapper.CONSUMER_FtMapper;
@@ -240,6 +241,12 @@ public class CONSUMER_FtService implements CONSUMER_IFtService{ //IUserServiceë¥
 	@Override
 	public ArrayList<Map<String, String>> getSearchTrnd() throws Exception {
 		return rcmmndMenuMapper.getSearchTrnd();
+	}
+
+
+	@Override
+	public List<CONSUMER_RcmmndFtDTO> getRcmmndFtList(List<CONSUMER_RcmmndFtDTO> rftDTOArr) throws Exception {
+		return rcmmndMenuMapper.getRcmmndFtList(rftDTOArr);
 	}
 
 }

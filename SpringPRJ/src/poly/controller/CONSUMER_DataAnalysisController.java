@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.consumer.CONSUMER_FtReviewDTO;
+import poly.dto.consumer.CONSUMER_RcmmndFtDTO;
 import poly.dto.consumer.CONSUMER_RcmmndMenuDTO;
 import poly.service.CONSUMER_IFtService;
 import poly.util.CmmUtil;
@@ -34,6 +35,7 @@ import poly.util.ReadCSV;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /*
@@ -67,10 +69,10 @@ public class CONSUMER_DataAnalysisController {
 			return "/consumer/rcmmnd/rcmmndMenu";
 	}
 	
-	//소비자 맞춤 추천 메뉴
+	//소비자 맞춤 추천 푸드트럭
 	@RequestMapping(value="consumer/rcmmnd/CustomRcmmnd")
 	public String CustomRcmmnd(HttpServletRequest request, Model model, HttpSession session) throws Exception{
-		log.info("Access CustomRcmmnd...");
+		
 		//로그인 안되어 있는 경우
 		String userSeq = (CmmUtil.nvl((String)session.getAttribute("userSeq")));
 		if("".equals(userSeq)) {
@@ -82,16 +84,31 @@ public class CONSUMER_DataAnalysisController {
 		}
 		
 		//추천 대상이 되는 유저의 리뷰 DTO
-		List<CONSUMER_FtReviewDTO> mainUserRvDTO = ftService.getReviewList(Integer.parseInt(userSeq));
+		List<CONSUMER_FtReviewDTO> mainUserRvDTO = ftService.getUsersReviewList(Integer.parseInt(userSeq));
 		//비교 대상이 되는 유저들의 리뷰 DTO
-		List<CONSUMER_FtReviewDTO> compUsersRvDTO = ftService.getUsersReviewList(Integer.parseInt(userSeq));
+		List<CONSUMER_FtReviewDTO> compUsersRvDTO = ftService.getReviewList(Integer.parseInt(userSeq));
 		
-		
-	
+		//해쉬맵 생성 및 함수 호출
+		List<CONSUMER_RcmmndFtDTO> rftDTOArr = null;
 		RServe rserve = new RServe();
-		rserve.test(mainUserRvDTO, compUsersRvDTO);
-	
-		log.info("Terminate CustomRcmmnd...");
+		rftDTOArr = rserve.usrCossim(mainUserRvDTO, compUsersRvDTO);
+
+		//DB로 받아올 푸드트럭 목록들
+		List<CONSUMER_RcmmndFtDTO> rftDTOArrRslt = null;
+		rftDTOArrRslt = ftService.getRcmmndFtList(rftDTOArr);
+		
+		//추천점수 이식
+		for(CONSUMER_RcmmndFtDTO rftDTORslt : rftDTOArrRslt) {
+			for(CONSUMER_RcmmndFtDTO rftDTO : rftDTOArr) {
+				if(rftDTORslt.getUserSeq().equals(rftDTO.getUserSeq())) {
+					rftDTORslt.setRcmmndRating(rftDTO.getRcmmndRating());
+				}
+			}
+		}
+		
+		
+		model.addAttribute("rftDTOArr", rftDTOArrRslt);
+		
 		return "/consumer/rcmmnd/customRcmmnd";
 	}
 	

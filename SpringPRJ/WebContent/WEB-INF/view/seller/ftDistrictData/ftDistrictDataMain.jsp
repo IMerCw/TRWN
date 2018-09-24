@@ -15,7 +15,6 @@ body { font-family:gulim; font-size:12px; }
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c449b1cbc3c291def2d6edada3e87082&libraries=services,clusterer,drawing"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <title>상권 분석</title>
-<%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %>
 </head>
 <body>
 
@@ -28,27 +27,30 @@ body { font-family:gulim; font-size:12px; }
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
-				<div class="container">
-				<div class="col-sm-12" >
-				
+			<td style="background-color:#444;">
+				<div class="container" style="background-color:#ffffff; border-radius:8px; color:black;">
+				<div class="row">
 					<!-- 	<fieldset>
 					<legend>주소그룹2</legend>
 					<select name="sido2" id="sido2"></select>
 					<select name="gugun2" id="gugun2"></select>
 					<select name="dong2" id="dong2"></select>
 					</fieldset> -->
-					<fieldset style="margin-top:2%">
-						<h3 style="display:inline; color:white; margin:0; padding:0;" class="col-sm-8">구군 별 푸드트럭 분포</h3>
-							<select name="sido1" id="sido1" style="margin:0; background-color:white; padding:0;" class="col-sm-2"></select>
+					<fieldset style="margin:12px; width:96%;">
+						<div class="col-sm-8">
+							<h3 style="display:inline; margin:0; padding:0;" class="col-sm-8">구군 별 푸드트럭 분포</h3>
+						</div>
+						<div class="col-sm-4" style="text-align:right;">
+							<select name="sido1" id="sido1" style="width:80%; margin:0; background-color:white; padding:0;" class="col-sm-2"></select>
 							<select name="gugun1" id="gugun1" style="display:none;"></select>
-							<button type="button" onclick="findMap(); return false;" id="submitBttn" style="margin:0; padding:0;" class="col-sm-1">찾기</button>
+							<button type="button" onclick="findMap(); return false;" id="submitBttn" style="width:20%; margin:0; padding:0;" class="col-sm-1">찾기</button>
+						</div>
 					</fieldset>
 					
 				
 				</div>
-					<div class="col-sm-12" style="height:80%;">
-						<div id="map" style="width:90%; opacity:0.8; height:350px; float:none;" class="col-sm-12"></div>
+					<div class="container-fluid" style="height:80%;">
+						<div id="map" style="width:100%; opacity:0.8; height:350px; float:none;" class="col-sm-12"></div>
 						<div style="height: 2px;background-color: black;margin: 10px 0;">
 						
 						</div>
@@ -73,8 +75,8 @@ body { font-family:gulim; font-size:12px; }
 <!-- 다음 맵 -->
 <script>
 	var map = new daum.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-	    center : new daum.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
-	    level : 14 // 지도의 확대 레벨 
+	    center : new daum.maps.LatLng(37.5662952,126.9779450999999), // 지도의 중심좌표 
+	    level : 10 // 지도의 확대 레벨 
 	});
 	
 	// 마커 클러스터러를 생성합니다 
@@ -91,6 +93,7 @@ body { font-family:gulim; font-size:12px; }
     var myChart = new Chart(ctx, {
         type: 'bar',
         options: {
+        	
             scales: {
                 yAxes: [{
                     ticks: {
@@ -237,6 +240,11 @@ function getMyChart(gugunData) {
 	    },
 	    options: {
 	        scales: {
+	        	xAxes: [{
+	                gridLines: {
+	                    offsetGridLines: true
+	                }
+	            }],
 	            yAxes: [{
 	                ticks: {
 	                    beginAtZero:true

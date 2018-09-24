@@ -16,10 +16,8 @@
 			</div>
 			<!-- Footer -->
 	
-		<footer id="footer" class="wrapper" style="padding:0;">
-				<div class="copyright">
-					&copy; Copyright © <a href="#">트럭왔냠.</a>, All rights reserved.
-					 
-				</div>
+		<footer id="footer" class="wrapper" style="padding:10px 0; margin:0; background-color:#444;">
+			<div class="copyright">
+				&copy; Copyright © <a href="#">트럭왔냠.</a>, All rights reserved.
 			</div>
 		</footer> 
