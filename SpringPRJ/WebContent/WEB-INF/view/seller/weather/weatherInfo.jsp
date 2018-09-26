@@ -21,7 +21,6 @@
 </head>
 <body style="background-color:#555;">
 	<%@include file="/WEB-INF/view/seller/top.jsp" %>
-	<%@include file="/WEB-INF/view/seller/topCssScript.jsp" %>
 
 	<br/>
 	<!-- 날씨 예보 -->

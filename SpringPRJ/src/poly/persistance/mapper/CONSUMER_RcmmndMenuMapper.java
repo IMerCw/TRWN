@@ -8,6 +8,7 @@ import config.Mapper;
 import poly.dto.consumer.CONSUMER_FtReviewDTO;
 import poly.dto.consumer.CONSUMER_RcmmndFtDTO;
 import poly.dto.consumer.CONSUMER_RcmmndMenuDTO;
+import poly.dto.consumer.CONSUMER_Search_Trend_WDateDTO;
 
 @Mapper("CONSUMER_RcmmndMenuMapper")
 public interface CONSUMER_RcmmndMenuMapper {
@@ -20,4 +21,6 @@ public interface CONSUMER_RcmmndMenuMapper {
 	public ArrayList<Map<String, String>> getSearchTrnd() throws Exception;
 
 	public List<CONSUMER_RcmmndFtDTO> getRcmmndFtList(List<CONSUMER_RcmmndFtDTO> rftDTOArr) throws Exception;
+
+	public List<CONSUMER_Search_Trend_WDateDTO> getSearchTrndWDate() throws Exception;
 }

@@ -45,12 +45,10 @@ String stringTime ="";
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td style="background-color:#555;">
-				<div class="container" style="height:100%">
-				<br>
-					<h3 style="color:white;">매출분석</h3>
+			<td style="background-color:#555; padding: 20px 0;">
+				<div class="container" style="background-color:#ffffff; padding: 20px 40px 80px 40px; border-radius:8px;">
+					<h2 style="">매출분석</h2>
 					<hr>
-					<br>
 					<h3>
 						<span class="label label-Warning">
 						<%
@@ -87,19 +85,36 @@ String stringTime ="";
 						이 주요고객</span>
 					</h3>
 					<br>
-					<span style="color:white;">
+					<div class="col-sm-12" style="font-size: 18px;">
 						분석지역 내 매출특성은
-						<%=stringDay%>요일
-						(<%=percentD %>%),
-						<%=stringDay%>
-						(<%=percentT %>%) 사이의 매출이 높은 것으로 나타났고 , *20~30세*
+						<span style="font-weight:bold; color: #d9534f;">
+							<%=stringDay%>
+							(<%=percentD %>%),
+						</span>
+						요일
+						<span style="font-weight:bold; color: #d9534f;">
+							<%=stringDay%>
+							(<%=percentT %>%) 
+						</span>
+						사이의 매출이 높은 것으로 나타났습니다.
+					</div>
+					<div class="col-sm-12" style="height:12px;"></div>
+					<div class="col-sm-12" style="font-size: 18px;">
+					 	<span style="font-weight:bold; color: #000000;">
+					 	*20~30세*
+					 	</span>
 						<%if(percentM > percentF){ %>
+						<span style="font-weight:bold; color: #337ab7;">
 						남성 (<%= percentM%>%)
+						</span>
 						<%}else{ %>
+						<span style="font-weight:bold; color: #ff9390;">
 						여성 (<%= percentF%>%)
+						</span>
 						<%} %>
 						 이 주요고객인 것으로 분석 되었습니다 .	
-					</span>
+					</div>
+					<div class="col-sm-12" style="height:24px;"></div>
 					<br>
 					<div style="border:1px solid black; background-color:white;" class="col-sm-12">
 					

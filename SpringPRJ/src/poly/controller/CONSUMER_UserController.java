@@ -177,18 +177,12 @@ public class CONSUMER_UserController {
 	//주문내역
 	@RequestMapping(value="consumer/user/userOrderInfo", method=RequestMethod.GET)
 	public String userOrderInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-		log.info("Access userOrderInfo");
-		//dupyo 주문내역
 		String userSeq = (String)session.getAttribute("userSeq");
+		
 		List<CONSUMER_OrderInfoDTO> oList = UserService.getOrderList(userSeq);
-		if(oList == null) {
-			log.info("주문내역 불러오기 실패;;");
-		} else {
-			log.info("주문내역 불러오기 성공 oList : " + oList);
-			model.addAttribute("oList", oList);
-			log.info("---------------------------");
-		}
-		log.info("Terminate userOrderInfo");
+		
+		model.addAttribute("oList", oList);
+		
 		return "/consumer/user/userOrderInfo";
 	}
 	
@@ -240,27 +234,13 @@ public class CONSUMER_UserController {
 	//내 쿠폰목록
 	@RequestMapping(value="consumer/user/userCouponList", method=RequestMethod.GET)
 	public String mycoupon(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-		log.info("Access mycoupon");
 		//dupyo 쿠폰목록
 		String userSeq = (String)session.getAttribute("userSeq");
 		List<CONSUMER_CouponIssueDTO> cList = CouponService.couponList(userSeq);
-		if(cList == null) {
-			log.info("쿠폰목록 불러오기 실패;;");
-		} else {
-			log.info("쿠폰목록 불러오기 성공 couponList : " + cList);
-			model.addAttribute("cList", cList);
-			log.info("---------------------------");
-		}
+		model.addAttribute("cList", cList);
 		
-		log.info("Terminate mycoupon");
 		return "/consumer/user/userCouponList";
 	}
-	
-	
-	
-	
-	
-	
 	
 	//관심매장 추가 - ajax
 	@RequestMapping(value="consumer/cnsmr/favoriteFtAdd", method=RequestMethod.POST)

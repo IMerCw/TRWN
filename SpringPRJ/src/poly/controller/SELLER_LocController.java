@@ -23,7 +23,7 @@ public class SELLER_LocController {
 	@RequestMapping(value="seller/loc/loc")
 	public String loc(Model model)throws Exception{
 		log.info(this.getClass() + "loc start ~!!@");
-	
+		
 		String festivalHTML =CmmUtil.nvl(CrawlingUtil.getFestivalHTML());
 		log.info(festivalHTML);
 		//쉐프트럭 

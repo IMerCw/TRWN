@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.consumer.CONSUMER_FtReviewDTO;
 import poly.dto.consumer.CONSUMER_RcmmndFtDTO;
 import poly.dto.consumer.CONSUMER_RcmmndMenuDTO;
+import poly.dto.consumer.CONSUMER_Search_Trend_WDateDTO;
 import poly.service.CONSUMER_IFtService;
 import poly.util.CmmUtil;
 import poly.util.RServe;
@@ -59,13 +60,15 @@ public class CONSUMER_DataAnalysisController {
 	//트럭왔냠의 추천 메뉴
 	@RequestMapping(value="consumer/rcmmnd/rcmmndMenu", method=RequestMethod.GET)
 	public String rcmmndMenu(HttpServletRequest request, Model model) throws Exception{
+			
 			String myAddress= CmmUtil.nvl(request.getParameter("myAddress"));
 			String sido = "서울"; //기본 값 시도 명 서울
 			if(!"".equals(myAddress)) sido = myAddress.split(" ")[0]; //값이 존재할 경우 시도 명 지정
-			System.out.println(sido);
-			List<CONSUMER_RcmmndMenuDTO> rcmmndMenuDTO = ftService.getRcmmndMenuList(sido);
-			model.addAttribute("rcmmndMenuDTO", rcmmndMenuDTO);
 			
+			List<CONSUMER_RcmmndMenuDTO> rcmmndMenuDTO = ftService.getRcmmndMenuList(sido);
+			
+			model.addAttribute("rcmmndMenuDTO", rcmmndMenuDTO);
+
 			return "/consumer/rcmmnd/rcmmndMenu";
 	}
 	
@@ -85,6 +88,12 @@ public class CONSUMER_DataAnalysisController {
 		
 		//추천 대상이 되는 유저의 리뷰 DTO
 		List<CONSUMER_FtReviewDTO> mainUserRvDTO = ftService.getUsersReviewList(Integer.parseInt(userSeq));
+		
+		//데이터가 충분히 쌓이지 않은 경우
+		if( mainUserRvDTO == null || mainUserRvDTO.isEmpty()) {
+			return "/consumer/rcmmnd/customRcmmnd";
+		}
+		
 		//비교 대상이 되는 유저들의 리뷰 DTO
 		List<CONSUMER_FtReviewDTO> compUsersRvDTO = ftService.getReviewList(Integer.parseInt(userSeq));
 		
@@ -118,14 +127,25 @@ public class CONSUMER_DataAnalysisController {
 		
 		//csv파일을 저장할 실제경로
 		String realPathCSV = request.getSession().getServletContext().getRealPath("/")+ "resources\\js\\consumer\\d3Cloud\\" + "searchTrend.csv";
-		/*System.out.println(realPathCSV);*/ //실제 경로
+		System.out.println(realPathCSV);
 		
 		//DB에서 검색어 목록,빈도수 가져오기
 		ArrayList<Map<String, String>> trndKywrdMap = ftService.getSearchTrnd();
 		
 		//csv 읽기 함수
 		ReadCSV rcsv = new ReadCSV();
-		rcsv.wirteTrendCsv(realPathCSV, trndKywrdMap);
+		rcsv.wirteWrdCldCsv(realPathCSV, trndKywrdMap);
+		
+		/*-------------------------------------------- */
+		
+		//DB에서  날짜별 상위 3개 검색어 목록 가져오기
+		List<CONSUMER_Search_Trend_WDateDTO> trndKywrdWDateMap = ftService.getSearchTrndWDate();
+		
+		for(CONSUMER_Search_Trend_WDateDTO tkwd : trndKywrdWDateMap) {
+			log.info(tkwd.getTrend_date());
+			log.info(tkwd.getTrend_words().split(",")[0]);
+		}
+		
 		
 		return "/consumer/rcmmnd/wordCloudTrend";
 	}

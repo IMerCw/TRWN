@@ -203,8 +203,11 @@ public class CONSUMER_ConsumerController {
 	
 	// 푸드트럭 상세보기 페이지 내의 메뉴 탭 - AJAX
 	@RequestMapping(value="consumer/cnsmr/ftDetailMenu.do", method=RequestMethod.GET)
-	public String ftDetailMenu(HttpServletRequest request, Model model) throws Exception{
+	public String ftDetailMenu(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		String ft_seq = request.getParameter("ft_seq");
+		
+		session.removeAttribute("Ilist");//기존 장바구내 내역 삭제
+		
 		log.info("Access ftDetailMenu: " + ft_seq);
 		
 		//메뉴리스트 가져오기

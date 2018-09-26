@@ -13,7 +13,6 @@
 <html>
 <head>
 	<title>web</title>
-	<%-- <%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %> --%>
 	<!--  
 	<script type="text/javascript">
 		function UpdateView(user_email) {

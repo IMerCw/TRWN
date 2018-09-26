@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.httpclient.HttpsURL;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,7 @@ import poly.service.ADMIN_IFtService;
 import poly.service.ADMIN_IImageService;
 import poly.service.impl.ADMIN_ImageService;
 import poly.util.ADMIN_UtilFile;
+import poly.util.CmmUtil;
 import poly.util.UtilTime;
 
 
@@ -113,14 +117,24 @@ public class SELLER_FtController {
 	
 	//푸드트럭 상세정보[리뷰, 카테고리, 메뉴, 정보변경]--------------------------------------------------------------------------------------
 		@RequestMapping(value="seller/ft/ft_info", method=RequestMethod.GET)
-		public String ft_info(HttpServletRequest request, Model model) throws Exception{
+		public String ft_info(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			log.info("seller/ft_info================================================");
 			//페이지 커맨드 cmd
 			String cmd = request.getParameter("cmd");
 			if(cmd==null) {
 				cmd="";
 			}
-			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
+			String ftSeq = CmmUtil.nvl((String)session.getAttribute("ftSeq"));
+			
+			if("".equals(ftSeq)) {
+				String msg="로그인을 해주시기 바랍니다.";
+				String url="/cmmn/main.do";
+				 
+				 return "/cmmn/alert";
+			}
+			
+			int ft_seq = Integer.parseInt(ftSeq);
+			
 			ADMIN_Ft_InfoDTO fDTO = new ADMIN_Ft_InfoDTO();
 			//좌측 푸드트럭 기본정보
 			fDTO = ftService.getFT_Info(ft_seq);
@@ -261,7 +275,7 @@ public class SELLER_FtController {
 		}
 /*푸드트럭 정보수정----------------------------------------------------------------------------------------------------*/
 		@RequestMapping(value="seller/ft/ft_info_edit", method=RequestMethod.POST)
-		public String ft_info_edit(@RequestParam("uploadFile") MultipartFile uploadFile, MultipartHttpServletRequest request, Model model) throws Exception{
+		public String ft_info_edit(@RequestParam("uploadFile") MultipartFile uploadFile, HttpSession session, MultipartHttpServletRequest request, Model model) throws Exception{
 			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
 			String sel_name = request.getParameter("sel_name");
 			String sel_no = request.getParameter("sel_no");
@@ -301,7 +315,7 @@ public class SELLER_FtController {
 		        //System.out.println("RewardController reAddProCtrl n : " + n);
 		        System.out.println("RewardController reAddProCtrl uploadPath : " + uploadPath);
 				
-		        ftDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)-1));
+		        ftDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)));
 			}else { //업로드된 파일 없을때
 				if(request.getParameter("org_file_id")!="-1"){//변경이 없을경우
 					System.out.println(request.getParameter("org_file_id"));
@@ -323,13 +337,13 @@ public class SELLER_FtController {
 			ftDTO.setFt_status(ft_status);
 			
 			ftService.ft_Info_Edit(ftDTO);
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}	
 		
 /*리뷰관리----------------------------------------------------------------------------------------------------*/
 		//리뷰 수정 완료
 		@RequestMapping(value="seller/ft/ft_review_edit", method=RequestMethod.POST)
-		public String ft_Review_Edit(@RequestParam("uploadFile") MultipartFile uploadFile, MultipartHttpServletRequest request, Model model) throws Exception{
+		public String ft_Review_Edit(@RequestParam("uploadFile") MultipartFile uploadFile, HttpSession session, MultipartHttpServletRequest request, Model model) throws Exception{
 			ADMIN_Ft_ReviewDTO revDTO = new ADMIN_Ft_ReviewDTO();
 			int review_seq = Integer.parseInt(request.getParameter("review_seq"));
 			String rev_title = request.getParameter("rev_title");
@@ -358,7 +372,7 @@ public class SELLER_FtController {
 		        //System.out.println("RewardController reAddProCtrl n : " + n);
 		        System.out.println("RewardController reAddProCtrl uploadPath : " + uploadPath);
 				
-		        revDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)-1));
+		        revDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)));
 			}else { //업로드된 파일 없을때
 				if(request.getParameter("org_file_id")!="-1"){//변경이 없을경우
 					System.out.println(request.getParameter("org_file_id"));
@@ -372,12 +386,12 @@ public class SELLER_FtController {
 			revDTO.setRev_text(rev_text);
 			revDTO.setExp_yn(exp_yn);
 			ftService.ft_Review_Edit(revDTO);
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//리뷰 삭제
 		@RequestMapping(value="seller/ft/ft_review_delete", method=RequestMethod.GET)
-		public String ft_Review_Delete(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Review_Delete(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			String ArrReview_Seq = request.getParameter("ArrReview_Seq");
 			String review_seq = request.getParameter("review_seq");
 			String revp_seq = request.getParameter("revp_seq");
@@ -394,24 +408,24 @@ public class SELLER_FtController {
 				ftService.ft_Review_Delete(Integer.parseInt(revp_seq));
 			}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//리뷰 노출변경
 		@RequestMapping(value="seller/ft/ft_review_exp_yn", method=RequestMethod.GET)
-		public String ft_Review_Exp_Yn(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Review_Exp_Yn(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			String ArrReview_Seq = request.getParameter("ArrReview_Seq");
 			String[] array = ArrReview_Seq.split(",");
 			for(int i=0; i<array.length; i++) {
 				ftService.ft_Review_Exp_Yn(Integer.parseInt(array[i]));
 			}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//리뷰 쓰기
 		@RequestMapping(value="seller/ft/ft_review_create", method=RequestMethod.POST)
-		public String ft_Review_Create(@RequestParam("uploadFile") MultipartFile uploadFile, MultipartHttpServletRequest request, Model model) throws Exception{
+		public String ft_Review_Create(@RequestParam("uploadFile") MultipartFile uploadFile, HttpSession session, MultipartHttpServletRequest request, Model model) throws Exception{
 			ADMIN_Ft_ReviewDTO revDTO = new ADMIN_Ft_ReviewDTO();
 			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
 			revDTO.setFt_seq(ft_seq);
@@ -431,7 +445,7 @@ public class SELLER_FtController {
 		        //System.out.println("RewardController reAddProCtrl n : " + n);
 		        System.out.println("RewardController reAddProCtrl uploadPath : " + uploadPath);
 				
-		        revDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)-1));
+		        revDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)));
 			}else {
 				revDTO.setFile_id("-1");
 			}
@@ -447,12 +461,12 @@ public class SELLER_FtController {
 			//테이블생성 시 해당 테이블의 시퀀스값을 board_level 컬럼에 저장
 			ftService.ft_Set_Rev_level(revDTOarr.get(revDTOarr.size()-1).getReview_seq());
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//리뷰답글 쓰기
 		@RequestMapping(value="seller/ft/ft_review_reple_create", method=RequestMethod.POST)
-		public String ft_Review_Reple_Create(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Review_Reple_Create(HttpServletRequest request, Model model,HttpSession session) throws Exception{
 			ADMIN_Ft_ReviewDTO revDTO = new ADMIN_Ft_ReviewDTO();
 			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
 			
@@ -478,24 +492,24 @@ public class SELLER_FtController {
 			revDTO.setExp_yn(1);
 			ftService.ft_Review_Create(revDTO);
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//리뷰답글 수정
 		@RequestMapping(value="seller/ft/ft_review_reple_edit", method=RequestMethod.POST)
-		public String ft_Review_Reple_Edit(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Review_Reple_Edit(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Ft_ReviewDTO revDTO = new ADMIN_Ft_ReviewDTO();
 			revDTO.setReview_seq(Integer.parseInt(request.getParameter("edit_review_seq")));
 			revDTO.setRev_text(request.getParameter("rev_text"));
 			ftService.ft_Review_Reple_Edit(revDTO);
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 /*푸드트럭 메뉴 카테고리 관리----------------------------------------------------------------------------------------------------*/
 		
 		//카테고리 만들기
 		@RequestMapping(value="seller/ft/ft_cate_create", method=RequestMethod.POST)
-		public String ft_Cate_Create(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Cate_Create(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Ft_Menu_CateDTO cateDTO = new ADMIN_Ft_Menu_CateDTO();
 			cateDTO.setFt_seq(Integer.parseInt(request.getParameter("ft_seq")));
 			cateDTO.setCate_name(request.getParameter("cate_name"));
@@ -504,12 +518,12 @@ public class SELLER_FtController {
 			cateDTO.setCate_sort_no(cateDTOarr.size()+1);
 			ftService.ft_Cate_Create(cateDTO);
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//카테고리 삭제
 		@RequestMapping(value="seller/ft/ft_cate_delete", method=RequestMethod.GET)
-		public String ft_Cate_Delete(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Cate_Delete(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			String ArrCate_Seq = request.getParameter("ArrCate_Seq");
 			String cate_sort_no = request.getParameter("cate_sort_no");
 			ADMIN_Ft_Menu_CateDTO cateDTO = new ADMIN_Ft_Menu_CateDTO();
@@ -526,12 +540,12 @@ public class SELLER_FtController {
 				ftService.ft_Cate_Delete(cateDTO);
 			}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//카테고리 올리기
 		@RequestMapping(value="seller/ft/ft_cate_up", method=RequestMethod.GET)
-		public String ft_Cate_Up(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Cate_Up(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Ft_Menu_CateDTO cateDTO = new ADMIN_Ft_Menu_CateDTO();
 			String ArrCate_Seq = request.getParameter("ArrCate_Seq");
 			if(ArrCate_Seq!=null) {
@@ -551,12 +565,12 @@ public class SELLER_FtController {
 				}
 			}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//카테고리 내리기
 		@RequestMapping(value="seller/ft/ft_cate_down", method=RequestMethod.GET)
-		public String ft_Cate_Down(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Cate_Down(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Ft_Menu_CateDTO cateDTO = new ADMIN_Ft_Menu_CateDTO();
 			String ArrCate_Seq = request.getParameter("ArrCate_Seq");
 			if(ArrCate_Seq!=null) {
@@ -576,12 +590,12 @@ public class SELLER_FtController {
 				}
 			}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//카테고리 수정
 		@RequestMapping(value="seller/ft/ft_cate_edit", method=RequestMethod.POST)
-		public String ft_cate_edit(HttpServletRequest request, Model model) throws Exception{
+		public String ft_cate_edit(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Ft_Menu_CateDTO cateDTO = new ADMIN_Ft_Menu_CateDTO();
 			cateDTO.setFt_seq(Integer.parseInt(request.getParameter("ft_seq")));
 			cateDTO.setCate_name(request.getParameter("cate_name"));
@@ -589,12 +603,12 @@ public class SELLER_FtController {
 			cateDTO.setCate_sort_no(Integer.parseInt(request.getParameter("cate_sort_no")));
 			ftService.ft_Cate_Edit(cateDTO);
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//메뉴추가
 		@RequestMapping(value="seller/ft/ft_menu_create", method=RequestMethod.POST)
-		public String ft_Menu_Create(@RequestParam("uploadFile") MultipartFile uploadFile, MultipartHttpServletRequest request, Model model) throws Exception{
+		public String ft_Menu_Create(@RequestParam("uploadFile") MultipartFile uploadFile, HttpSession session, MultipartHttpServletRequest request, Model model) throws Exception{
 			ADMIN_Menu_InfoDTO menuDTO = new ADMIN_Menu_InfoDTO();
 			ADMIN_ImageDTO imgDTO = new ADMIN_ImageDTO();
 			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
@@ -613,7 +627,7 @@ public class SELLER_FtController {
 		        //System.out.println("RewardController reAddProCtrl n : " + n);
 		        System.out.println("RewardController reAddProCtrl uploadPath : " + uploadPath);
 				
-		        menuDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)-1));
+		        menuDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)));
 			}else {
 				menuDTO.setFile_id("-1");
 			}
@@ -640,12 +654,12 @@ public class SELLER_FtController {
 			
 			ftService.ft_Menu_Create(menuDTO);
 			
-			return ft_info(request, model);
+			return "redirect:/seller/ft/ft_info.do";
 		}
 		
 		//메뉴수정
 		@RequestMapping(value="/seller/ft/ft_menu_edit", method=RequestMethod.POST)
-		public String ft_Menu_Edit(@RequestParam("uploadFile") MultipartFile uploadFile, MultipartHttpServletRequest request, Model model) throws Exception{
+		public String ft_Menu_Edit(@RequestParam("uploadFile") MultipartFile uploadFile, HttpSession session, MultipartHttpServletRequest request, Model model) throws Exception{
 			ADMIN_Menu_InfoDTO menuDTO = new ADMIN_Menu_InfoDTO();
 			ADMIN_ImageDTO imgDTO = new ADMIN_ImageDTO();
 			int menu_seq = Integer.parseInt(request.getParameter("menu_seq"));
@@ -667,7 +681,7 @@ public class SELLER_FtController {
 		        //System.out.println("RewardController reAddProCtrl n : " + n);
 		        System.out.println("RewardController reAddProCtrl uploadPath : " + uploadPath);
 				
-		        menuDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)-1));
+		        menuDTO.setFile_id(String.valueOf(Integer.parseInt(file_id)));
 			}else { //업로드된 파일 없을때
 				if(request.getParameter("org_file_id")!="-1"){//변경이 없을경우
 					System.out.println(request.getParameter("org_file_id"));
@@ -700,21 +714,21 @@ public class SELLER_FtController {
 			
 			ftService.ft_Menu_Edit(menuDTO);
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//메뉴 삭제
 		@RequestMapping(value="seller/ft/ft_menu_delete", method=RequestMethod.GET)
-		public String ft_Menu_Delete(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Menu_Delete(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			int menu_seq = Integer.parseInt(request.getParameter("menu_seq"));
 			ftService.ft_Menu_Delete(menu_seq);
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 		
 		//메뉴 올리기
 		@RequestMapping(value="seller/ft/ft_menu_up", method=RequestMethod.GET)
-		public String ft_Menu_Up(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Menu_Up(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Menu_InfoDTO menuDTO = new ADMIN_Menu_InfoDTO();
 			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
 			int cate_sort_no = Integer.parseInt(request.getParameter("cate_sort_no"));
@@ -735,12 +749,12 @@ public class SELLER_FtController {
 				ftService.ft_Menu_Sort(menuDTO);
 			}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 				
 		//메뉴 내리기
 		@RequestMapping(value="seller/ft/ft_menu_down", method=RequestMethod.GET)
-		public String ft_Menu_Down(HttpServletRequest request, Model model) throws Exception{
+		public String ft_Menu_Down(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 			ADMIN_Menu_InfoDTO menuDTO = new ADMIN_Menu_InfoDTO();
 			int ft_seq = Integer.parseInt(request.getParameter("ft_seq"));
 			int menu_seq = Integer.parseInt(request.getParameter("menu_seq"));
@@ -763,7 +777,7 @@ public class SELLER_FtController {
 					ftService.ft_Menu_Sort(menuDTO);
 				}
 			
-			return ft_info(request, model);
+			return ft_info(request, model, session);
 		}
 }
 

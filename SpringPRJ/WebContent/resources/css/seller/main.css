@@ -1932,7 +1932,7 @@
 	button,
 	.button {
 		background-color: #f2f2f2;
-		color: #000 !important;
+		color: #000;
 	}
 
 		input[type="submit"]:hover,

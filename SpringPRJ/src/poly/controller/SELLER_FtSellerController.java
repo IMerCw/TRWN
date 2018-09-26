@@ -244,11 +244,20 @@ public class SELLER_FtSellerController {
 		return "/alert";*/
 	}
 	
-	//푸드트럭관리 트럭등록 vs 기존 정보 
+	//푸드트럭 관리 페이지 
 	@RequestMapping(value="/seller/ft/truckConfig")
 	public String truckConfig(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + " truckConfig start !!");
 		String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
+		log.info("userSeq : " + userSeq);
+		
+		if("".equals(userSeq)) {
+			String msg="로그인을 해주시기 바랍니다.";
+			String url="/cmmn/main.do";
+			 
+			 return "/cmmn/alert";
+		}
+		
 		log.info("userSeq : " + userSeq);
 		
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
@@ -256,31 +265,21 @@ public class SELLER_FtSellerController {
 		
 		ftsDTO = FtSellerService.getTruckConfig(ftsDTO);
 		
-		String url ="";
-		String msg ="";
-		
-		
 		if(ftsDTO == null) {
 			ftsDTO = new SELLER_FtSellerDTO();
-			 msg="등록된 푸드트럭이 없습니다 .";
-			 url="/seller/ft/ftReg.do";
-			
-		}else {
-			msg="안녕하세요"+ ftsDTO.getFtName()+"입니다";
-			url="/seller/ft/ft_info.do?ft_seq="+ftsDTO.getFtSeq()+"&userSeq="+userSeq;
+
+			String msg="등록된 푸드트럭이 없습니다 .\n 푸드트럭 등록 페이지로 이동합니다.";
+			String url="/seller/ft/ftReg.do";
+			 
+			 return "/cmmn/alert";
 		}
+		
 		log.info("ftsDTO.ftName : " + ftsDTO.getFtName());
 		log.info("ftsDTO.ftSEQ : " + ftsDTO.getFtSeq());
 		
-		model.addAttribute("url",url);
-		model.addAttribute("msg",msg);
-		
-			
-		ftsDTO=null;
-		url=null;
-		
 		log.info(this.getClass() + " truckConfig end !!!");
-		return "/cmmn/alert";
+		
+		return "redirect:/seller/ft/ft_info.do";
 	}
 	
 	//푸드트럭상권분석메인페이지
@@ -659,6 +658,7 @@ public class SELLER_FtSellerController {
 		ftsDTO.setUserSeq(userSeq);
 		ftsDTO = FtSellerService.getTruckConfig(ftsDTO); //푸드트럭 정보 가져오기
 		session.setAttribute("ftName", ftsDTO.getFtName()); //푸드트럭 이름 세션 올리기
+		session.setAttribute("ftSeq", ftsDTO.getFtSeq()); //푸드트럭 이름 세션 올리기
 		
 		if(userSeq != null && ftsDTO != null) {
 			log.info("차트가 있을 경우 ? ");

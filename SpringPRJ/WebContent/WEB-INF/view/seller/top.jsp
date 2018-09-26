@@ -7,6 +7,7 @@
 	String userNick = CmmUtil.nvl( (String)session.getAttribute("userNick") );
 	String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
 	String ftName = CmmUtil.nvl((String)session.getAttribute("ftName"));
+	String ftSeq =  CmmUtil.nvl((String)session.getAttribute("ftSeq"));
 	//nvl 널값이 들어오면 공백으로 바꿔줍니다.
 	
 	//위치정보 세션
@@ -67,22 +68,26 @@
 			
 		<!-- Nav -->
 			<nav id="menu">
-				<ul class="links">
+				<ul class="links" style="font-size: 18px; text-align: right;">
 					<li>
 						<%if(!"".equals(userEmail)) { %>
 							<!-- 로그인 된 상태 -->
-								<b><%=userEmail + "님 환영합니다." %></b>
-								<a href="/cmmn/user/logout.do" >로그아웃</a>
+							<b style="color:#888;"><%=userEmail + "님 환영합니다." %></b>
+							<a href="/cmmn/user/logout.do" >로그아웃</a>
 							<%}else{ %>
 							<!-- 로그인이 안된 상태 -->
 							<a href="/cmmn/main.do">로그인</a>
 						<%} %>
 					</li>
+					<li><a href="/seller/main.do">메인 페이지</a></li>
 					<li><a href="/seller/ft/truckConfig.do">내 트럭 관리</a></li>
 					<li>
 						<%if(!userSeq.equals("")){ %>
-						<a href=/seller/orderWait/orderWait.do?userSeq=<%=userSeq%>">주문 대기열</a>
+						<a href="/seller/orderWait/orderWait.do?userSeq=<%=userSeq%>">주문 대기열</a>
 						<%}%>
+					</li>
+					<li>
+						<a href="#">주문 목록</a>
 					</li>
 					<li>
 						<%if(!userSeq.equals("")){ %>
@@ -90,22 +95,23 @@
 						<%} %>
 					</li>
 					<li><a href="/seller/ftDistrictData/ftDistrictDataMain.do">상권분석</a></li>
+					<li><a href="/seller/foodSafety/fdSftyMain.do">식품안전정보</a></li>
 					<li><a href="/seller/gasStation/gas.do">주유정보</a></li>
 					<li><a href="/seller/loc/loc.do">행사정보</a></li>
 					<li><a href="/seller/board/boardList.do">게시판</a></li>
+					<li><a href="/seller/out/out_info.do?userAuth=2" style="color: #d9534f;">주문 화면으로 전환</a></li>
 				</ul>
 			</nav>
-
 	
 			<div class="style2" style="height:80px; width:100%; background-color:#444">
 			
 			
 			</div>
-			<div style="background-color:#505050; font-size:15px; height:32px; margin:0; padding-top:4px;" class="row">
+			<div class="row" style="background-color:#505050; font-size:15px; height:32px; margin:0; padding-top:4px;">
 				<div class="col-sm-8" style="overflow:hidden; color:white;">
 					<!-- 날씨정보 / 값 받아 온 경우 -->
+					<div class="col-sm-12" style="padding-right:0;">
 					<%if(!"".equals(t3hCode)) {%>
-						<div class="col-sm-12" style="padding-right:0;">
 						<%if (ptyCode.equals("0")) {%>
 							<img src="/resources/img/consumer/skyCode<%=skyCode%>.png" width="24px"/>
 						<%} else if(!(ptyCode.isEmpty())) { %>
@@ -135,14 +141,16 @@
 							  &nbsp;식중독 발생가능성이 매우 높으므로 식중독예방에 각별한 경계가 요망됩니다.
 						<%} %>
 					<%}else{ %>
-					<a href="/seller/weather/findMyLoc.do" style="color:white;" >
-						<span><img src="<%=request.getContextPath()%>/resources/img/seller/exclamation.png" width="22px"/></span>
-						&nbsp; 질병지수 : 위치를 설정해주세요
-					</a>
+					<span><img src="<%=request.getContextPath()%>/resources/img/seller/exclamation.png" width="22px"/></span>
+					<span style="display:inline-block; font-size:14px;">
+						<a href="/seller/weather/findMyLoc.do" style="color:white;" >
+							&nbsp; 질병지수 : 위치를 설정해주세요
+						</a>
+					</span>
 					<%} %> 
 					</div>
 				</div>
-				<div class="col-sm-4" style="text-align:right">
+				<div class="col-sm-4" style="text-align:right; font-size:14px;">
 					<!-- 위치정보 있을 경우-->
 					<img src="/resources/img/consumer/mapMarker.png" style="height:12px; margin-bottom:2px; margin-right:3px"/>
 					<a id="myLocLink" href="/consumer/cnsmr/findMyLoc.do"></a>

@@ -17,5 +17,4 @@ public interface CONSUMER_MypageMapper {
 	public List<CONSUMER_FtLikeDTO> getFavoriteFt(String userSeq)throws Exception;	//관심매장 불러오기
 	public List<CONSUMER_OrderInfoDTO> getOrderList(String userSeq)throws Exception;	//주문내역 불러오기
 
-
 }

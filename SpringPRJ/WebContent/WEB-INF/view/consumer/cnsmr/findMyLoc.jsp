@@ -143,11 +143,11 @@ function displayPlaces(places) {
         (function(marker, title) {
         	
             var content = 
-    			'<div style="text-align:center; border-radius:8px; background-color:white; font-size:1.8rem; z-index:1; width:114%; font-weight:bold;">' +
+    			'<div style="text-align:center; border-radius:8px;  border:1px solid #adadad; background-color:white; font-size:1.8rem; z-index:1; width:114%; font-weight:bold;">' +
     			title +	'</div>';
     		
     		var overlay = new daum.maps.CustomOverlay({
-    		    xAnchor: 0.5,
+    		    xAnchor: 0.6,
     		    yAnchor: 2.6,
     		    content: content,
     		    map: map,
@@ -337,7 +337,7 @@ if (navigator.geolocation) {
 			content: content,
 			map: map,
 			position: locPosition,
-			xAnchor: 0.5,
+			xAnchor: 0.6,
 			yAnchor: 2,
 			zIndex: 3
 		});

@@ -72,7 +72,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
-	<h1>트럭 왔냠이 추천하는 메뉴</h1>
+	<h1>트럭 왔냠이 추천하는 메뉴 </h1>
 	<div style="height:20px"></div>
 	<svg width="100%" height="640" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
 	
@@ -88,7 +88,6 @@
 		let foo= {};
 		
 		<% for(int i = 0; i < rcmmndMenuDTO.size(); i++) {%>
-		
 			foo = {
 				cat: 'first', name: '<%=rcmmndMenuDTO.get(i).getMenu_name()%>', 
 				value: <%=Double.parseDouble(rcmmndMenuDTO.get(i).getRev_score())%>,
@@ -102,11 +101,10 @@
 					</a>
 				`
 				};
-			data.push(foo);
-			
+			console.log(foo);
+			data.push(foo)˙;
 		<%}%>
 		console.log("data is ", data);
-		/* test  */
 	</script>
 	<script>
 		let svg = d3.select('svg');

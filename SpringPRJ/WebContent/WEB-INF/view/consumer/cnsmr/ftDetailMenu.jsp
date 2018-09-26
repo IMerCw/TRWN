@@ -5,6 +5,7 @@
 <%@page import="poly.dto.consumer.CONSUMER_Menu_InfoDTO"%>
 <%@page import="poly.dto.consumer.CONSUMER_ImageDTO"%>
 <%@page import="poly.dto.consumer.CONSUMER_FtMenuCateDTO"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -14,6 +15,7 @@
 	List<CONSUMER_FtMenuCateDTO> cateDTOs = (List<CONSUMER_FtMenuCateDTO>) request.getAttribute("cateDTOs"); //카테고리 데이터 리스트
 	String userSequence = (String) session.getAttribute("userSeq");
 	String ftSeq = (String) request.getParameter("ft_seq");
+	DecimalFormat df = new DecimalFormat("#,##0");
 %>
 
 <html>
@@ -30,6 +32,7 @@
 		margin:0; 
 		padding:6px 0;
 		text-align:center;
+		font-size:18px;
 		
 	}
 	/* 메뉴의 이미지를 높이를 고정 */
@@ -55,8 +58,8 @@
 			
 			<%for (int i = 0; i < menuDTOs.size(); i++) { %>
 				<%if(cateDTOs.get(k).getCate_sort_no() == menuDTOs.get(i).getCate_sort_no()) {%>
-					<div class="col-sm-6" style="height:368px; overflow:hidden">
-						<div class="contentBox" style="text-align:center;">
+					<div class="col-sm-6" style="height:360px; overflow:hidden; margin-bottom:6px; border-radius:4px;">
+						<div class="contentBox" style="height:100%; padding: 0px 12px; text-align:center;">
 							<!-- 메뉴 이미지 -->
 							<div class="row ftMenuRow imgRow" style="height:68%; overflow:hidden; padding:8% 0;">
 								<%for(int j = 0; j < imgDTOs.size(); j++) {%>
@@ -74,10 +77,10 @@
 									<%} %>
 								<%} %>
 							</div>
-							<div class="row ftMenuRow">음식명:&nbsp;<%=menuDTOs.get(i).getMenu_name() %></div>
-							<div class="row ftMenuRow">소개:&nbsp;<%=menuDTOs.get(i).getMenu_intro() %></div>
-							<div class="row ftMenuRow">가격:&nbsp;<%=menuDTOs.get(i).getMenu_price() %></div>
-						</div>
+							<div class="row ftMenuRow"><%=menuDTOs.get(i).getMenu_name() %></div>
+							<div class="row ftMenuRow"><%=menuDTOs.get(i).getMenu_intro() %></div>
+							<div class="row ftMenuRow"><%=df.format(menuDTOs.get(i).getMenu_price()) %> 원</div>
+							</div>
 					</div>
 					
 				<%} %>
@@ -101,16 +104,16 @@
 <script>
 	function goToOrder() {
 		<%if ("".equals(userSequence)) {%>
+		
 			alert('로그인을 해주시기 바랍니다.');
+			
 		<%}else {%>
-			var r = confirm('주문하시겠습니까?');
-			if(r){
-				
-				$('#sbmtOrdrForm').submit();
-			}
+		
+			$('#sbmtOrdrForm').submit();
+			
 		<%}%>
 		
 	}
-
+	
 </script>
 </html>

@@ -9,7 +9,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>board</title>
-	<%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %>
 	
 	<script type="text/javascript">
 		//window.setTimeout('window.location.reload()',3000);

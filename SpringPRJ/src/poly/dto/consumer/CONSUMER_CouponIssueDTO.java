@@ -7,7 +7,7 @@ public class CONSUMER_CouponIssueDTO {
 	private String coupon_issuedate;
 	private String coupon_option;
 	private String coupon_name;
-	
+	private String coupon_date;
 	
 	public int getUserSeq() {
 		return userSeq;
@@ -44,6 +44,12 @@ public class CONSUMER_CouponIssueDTO {
 	}
 	public void setCoupon_name(String coupon_name) {
 		this.coupon_name = coupon_name;
+	}
+	public String getCoupon_date() {
+		return coupon_date;
+	}
+	public void setCoupon_date(String coupon_date) {
+		this.coupon_date = coupon_date;
 	}
 	
 }

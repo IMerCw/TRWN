@@ -130,24 +130,5 @@
 			USER_SEQ = #{user_seq} AND FT_SEQ = #{ft_seq}
 	</delete>
 	
-	<!-- 마이페이지 주문목록 -->
-	<!-- <select id="getOrderList" parameterType="string" resultType="CONSUMER_OrderInfoDTO">
-		SELECT
-			OINFO.ORD_SEQ as ord_seq,
-			OITEM.USER_SEQ as user_seq,
-			OITEM.ITEM_SEQ as item_seq,
-			MINFO.MENU_NAME as menu_name,
-			OINFO.ORD_SUMPRICE as ord_sumprice,
-			OINFO.ORD_WAY as ord_way,
-			OINFO.BUY_WAY as buy_way,
-			OINFO.ORD_DATE as ord_date
-		FROM ORDER_INFO OINFO
-		
-		INNER JOIN ORDER_ITEM OITEM
-			ON OINFO.ITEM_SEQ=OITEM.ITEM_SEQ
-		INNER JOIN MENU_INFO MINFO
-			ON OITEM.MENU_SEQ=MINFO.MENU_SEQ
-		WHERE OITEM.USER_SEQ=#{userSeq};
 	
-	</select> -->
 </mapper>

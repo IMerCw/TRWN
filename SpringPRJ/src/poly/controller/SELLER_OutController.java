@@ -52,15 +52,19 @@ public class SELLER_OutController {
 	@Resource(name="SELLER_FtSellerService")
 	private SELLER_IFtSellerService FtSellerService;
 	
+	
+	//OUT화면 처음 페이지
 	@RequestMapping(value="/seller/out/out_info")
 	public String out_info(HttpServletRequest request , Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + " out start !!~");
 
 		String userAuth = CmmUtil.nvl(request.getParameter("userAuth"));
-		log.info("userAuth : " + userAuth);
 		
 		//소비자가 주문하기 클릭할 경우 소비자가 보고 있던 푸드트럭의 번호를 받는다.
 		String ftSeq =CmmUtil.nvl(request.getParameter("ftSeq"));
+		if("".equals(ftSeq)) {
+			ftSeq =  CmmUtil.nvl((String)session.getAttribute("ftSeq"));
+		}
 		log.info("ftSeq : " + ftSeq);
 		session.setAttribute("ftSeq", ftSeq);
 		

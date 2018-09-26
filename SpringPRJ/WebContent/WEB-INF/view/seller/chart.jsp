@@ -78,14 +78,8 @@
 	%>
 	<!-- 일간 매출액 끝 --> --%>
     
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>chart</title>
 
-</head>
-<body>
-	<div style="background-color:black; padding-top:30px;" >
+	<div style="background-color:black; padding-top:30px; padding:10px;" >
 		
 	 	 <!-- Nav tabs -->
 		<ul class="nav nav-pills" style="background-color:black; display: block;">

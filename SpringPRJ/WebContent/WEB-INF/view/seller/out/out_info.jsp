@@ -46,6 +46,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/bootstrap.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/ft_info.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -182,16 +183,20 @@
 <body>
 		<!-- 판매자 푸드트럭관리 -->
 		<div id="menuContainer">
-			<div class="menuInnerContainer" style="width:96%; margin:0 auto; background-color:white;">
-				<div><!------------------ 주문하기  ------------------>
-				<div>
-					<div style="float:left; width:70%; height:42px;">
-							<h3>메뉴/카테고리</h3>
+			<div class="menuInnerContainer" style="width:96%; padding-top:20px; margin:0 auto; background-color:white;">
+				<div class="row">	
+					<div class="col-xs-8" style="height:38px;">
+							<p style="margin:0; height:100%; font-size:28px;">메뉴/카테고리</p>
 					</div>
+					<div class="col-sm-4" style="text-align:right; cursor:pointer;" onclick="javascript:history.back()">
+						<img src="<%=request.getContextPath()%>/resources/img/consumer/left-arrow.png" style="height:38px;">
+					</div>
+				</div>
+				<div>
 					<div style="clear:both;"></div>
 					<hr style="margin-top:18px; margin-bottom:14px;">
 					<!-- Nav tabs -->
-			  <ul class="nav nav-pills">
+			  <ul class="nav nav-pills" style="font-size:18px;">
 			  <%for(ADMIN_Ft_Menu_CateDTO cateDTO : cateDTOarr){ %>
 			  	<%if(cateDTO.getCate_sort_no()==1){ %>
 			  		<li role="presentation" class="active">
@@ -244,7 +249,7 @@
 						    			등록된 이미지가 없습니다.
 						    		<%} %>
 						    		</div>
-						    		<div style="width:100%; height:35px; padding-top:4px; text-align:center; border-top:1px solid #cccccc;">
+						    		<div style="width:100%; height:35px; font-size:18px; padding-top:4px; text-align:center; border-top:1px solid #cccccc;">
 						    			<%=menuDTO.getMenu_name()%>
 						    		</div> 
 						    	</div>
@@ -259,8 +264,6 @@
 		<script src="<%=request.getContextPath()%>/resources/js/admin/jquery-1.11.2.min.js"></script> 
 		<!-- Include all compiled plugins (below), or include individual files as needed --> 
 		<script src="<%=request.getContextPath()%>/resources/js/admin/bootstrap.min.js"></script>
-						</div>
-						
 						</div>
 				</div>
 				<!-- 주문하기  -->
@@ -286,21 +289,21 @@
 				
 			<%}else{ %>
 				 <%for(int j=0; j<Ilist.size(); j++) {%>
-					<div class="row" style="padding :0;">
+					<div class="row" style="padding-left :30px; font-size:20px;">
 						<div class="col-xs-2">
 							<button type="button" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','amntMinus');">-</button>
 						</div>
-						<div class="col-xs-2" style="text-align:center; height: 34px; padding-top:6px">
+						<div class="col-xs-2">
 							<%=Ilist.get(j).get("amnt")%>
 						</div>
 						<div class="col-xs-2">
 							<button type="button" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','amntPlus');" >+</button>
 						</div>
-						<div class="col-xs-4" style="text-align:center; padding-top: 6px; height: 34px;">
+						<div class="col-xs-4">
 							<%=Ilist.get(j).get("menuName")%>
 						</div>
 						<div class="col-xs-2">
-							<button type="button" style="width:100%; padding-right: 16px; padding-bottom: 8px;" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','delItem');">
+							<button type="button" style=" padding-bottom: 8px;" class="btn btn-default" onclick="JavaScript:itemBtn('<%=j%>','delItem');">
 								 <b style="">x</b>
 							</button>
 						</div>
@@ -324,18 +327,10 @@
 					</div>
 				</div>
 				<div class="col-xs-4">
-					<%if(userAuth.equals("1")) {%>
-						<button type="button" class="btn btn-default" style="background-color: #d9534f; color:white; font-size:20px;" 
-							onclick="Javascript:complete(<%=sum%>,1)">주문 완료</button>
-					<%} else if(userAuth.equals("2")) {%>
-						<button type="button" class="btn btn-default" style="background-color: #d9534f; color:white; font-size:20px;"
-							 onclick="Javascript:complete(<%=sum%>,2)">주문 완료</button>
-					<%} %>
+					<button type="button" class="btn btn-default" style="border-color:#eeeeee; background-color: #d9534f; color:white; font-size:20px;" 
+						onclick="Javascript:complete(<%=sum%>,<%=userAuth %>)">주문 완료</button>
 				</div>
 			</div>
-		</div>
-		
-		<div id="orderFooter">
 		</div>
 		
 

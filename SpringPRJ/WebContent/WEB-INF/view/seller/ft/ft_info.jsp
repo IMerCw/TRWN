@@ -13,29 +13,20 @@
 	}
 %>
 
-<html>
-<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin/bootstrap.css">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin/ft_info.css">
-
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>board</title>
-</head>
+	
 <body>
-	<table style="height: 100%; width: 100%">
+	<table style="height: 100%; width: 100%; margin:0;">
 		<tr height="7%" bgcolor="#444">
 			<td style="padding:0">
 				<%@ include file="/WEB-INF/view/seller/top.jsp" %>
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td style="background-color:#555;">
+			<td style="background-color:#555; padding: 20px 0;">
+				<div class="container" style="background-color:#ffffff; width: 95%; padding: 20px 10px 80px 10px; border-radius:8px;">
 					<!-- 판매자 푸드트럭관리 -->
-				<div class="container" style="background-color:white; border-radius:8px; padding:8px;">
 					<!-- 푸드트럭이미지 & 푸드트럭 소개 -->
-					<div id="leftContents" style="height:auto;">
+					<div class="col-sm-4" id="" style="text-align:center; height:auto;">
 						<!-- 트럭이미지 -->
 						<div style="height:280px; border:1px solid #cccccc; margin:8px;">
 							<%if(LimgDTO!=null){ %>
@@ -49,9 +40,9 @@
 							<%=ftDTO.getFt_name() %>
 						</div>
 						<!-- 배달/케이터/주문예약 가능 불가능 설정 -->
-						<div class="truckDelivery" style="margin-top:5px; margin-bottom:5px;">
+						<div class="col-sm-12" style="margin:20px 0;">
 							<%for(int i=0; i<array.length; i++) {%>
-								<div style="background-color:#F2F2F2; margin-right:4px; width:80px; padding-top:2px; padding-bottom:2px; font-size:12px;"><%=array[i]%></div> 
+								<div class="col-sm-4" style="font-size:1.2rem; border: 1px solid #cccccc;  background-color:#F2F2F2; "><%=array[i]%></div> 
 							<%}%>
 						</div>
 						<div class="container-fluid" style="margin-top:10px;">
@@ -85,13 +76,17 @@
 						<div style="clear:both;"></div>
 						<!-- 설정 버튼 -->
 						<div style="margin-top:10px;"> 
-							<input type="button" class="btn btn-default" style="border-radius:0; background-color:#444444; color:#ffffff; width:160px;" value="리뷰관리" onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=review_list&ft_seq=<%=ftDTO.getFt_seq()%>'">
-							<input type="button" class="btn btn-default" style="border-radius:0; background-color:#444444; color:#ffffff; width:160px;" value="정보변경" onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=ft_info_edit&ft_seq=<%=ftDTO.getFt_seq()%>'">
+							<button type="button" class="btn btn-default" style="border-radius:0; background-color:#444444; color:#ffffff; font-size:16px; height:34px; width:160px;"  onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=review_list&ft_seq=<%=ftDTO.getFt_seq()%>'">
+								리뷰 관리
+							</button>
+							<button type="button" class="btn btn-default" style="border-radius:0; background-color:#444444; color:#ffffff; font-size:16px; height:34px; width:160px;"onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=ft_info_edit&ft_seq=<%=ftDTO.getFt_seq()%>'">
+								정보 변경
+							</button>
 						</div>
 					</div>
 			
 					<!------------------ 오른쪽 ------------------>
-					<div id="rightContents">
+					<div class="col-sm-8" style="padding:0;" id="">
 						<%if(cmd.equals("ft_info_edit")){ %>
 							<%@ include file="ft_info_edit.jsp" %>
 						<%}else if(cmd.equals("review_list")){ %>
@@ -122,11 +117,7 @@
 		<tr height="7%" style="background-color:#444">
 			<td>
 				<%@ include file="/WEB-INF/view/seller/bottom.jsp" %>
-			
 			</td>
 		</tr>
 	</table>
 	
-
-</body>
-</html>

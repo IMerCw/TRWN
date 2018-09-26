@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.CONSUMER_MypageMapper">
-	
-	<!-- DTO 변수 이름으로 등록  -->
-	
 	<!-- 마이페이지 회원 상세보기  -->
 	<select id="getUserDetail" parameterType="CONSUMER_UserDTO" resultType="CONSUMER_UserDTO">
 			SELECT USER_SEQ as userSeq,
@@ -25,7 +22,9 @@
 			COUPON.COUPON_NAME AS coupon_name,
 			COUPON.COUPON_OPTION AS coupon_option,
 			CISSUE.COUPON_COUNT AS coupon_count,
-			CISSUE.COUPON_ISSUEDATE AS coupon_issuedate
+			CISSUE.COUPON_ISSUEDATE AS coupon_issuedate,
+			COUPON.COUPON_DATE AS coupon_date
+			
 		FROM COUPON
 		
 		INNER JOIN COUPON_ISSUE CISSUE
@@ -36,25 +35,31 @@
 	
 	<!-- 마이페이지 주문목록 -->
 	<select id="getOrderList" parameterType="string" resultType="CONSUMER_OrderInfoDTO">
-		SELECT
-			OINFO.ORD_SEQ as ord_seq,
-			OITEM.USER_SEQ as user_seq,
-			OITEM.ITEM_SEQ as item_seq,
-			MINFO.MENU_NAME as menu_name,
-			OINFO.ORD_SUMPRICE as ord_sumprice,
-			OINFO.ORD_WAY as ord_way,
-			OINFO.BUY_WAY as buy_way,
-			OITEM.ORD_AMNT as ord_amnt,
-			OINFO.FT_SEQ as ft_seq,
-			OINFO.ORD_DATE as ord_date
-		FROM ORDER_INFO OINFO
+		SELECT 
 		
-		INNER JOIN ORDER_ITEM OITEM
-			ON OINFO.ITEM_SEQ=OITEM.ITEM_SEQ
-		INNER JOIN MENU_INFO MINFO
-			ON OITEM.MENU_SEQ=MINFO.MENU_SEQ
-		WHERE OITEM.USER_SEQ=#{userSeq}
-		ORDER BY OINFO.ORD_DATE DESC
+			OI.ORD_SEQ as ord_seq,
+		    OI.ORD_SUMPRICE as ord_sumprice,
+		    OI.ORD_WAY as ord_way,
+			OI.ORD_DATE as ord_date,
+		    upper(OI.BUY_WAY) as buy_way,
+		    OI.FT_SEQ as ft_seq,
+		    FI.FT_NAME as ft_name,
+		    OW.ORD_HIS as ord_his,
+		    OI.GPS_SEQ as gps_seq,
+		    CONCAT(GT.GPS_SIDO, ' ', GT.GPS_SIGUNGU, ' ', GT.GPS_DONG, ' ', GT.GPS_ETC) as address
+		    
+		FROM ORDER_INFO OI 
+		
+			INNER JOIN ORDER_WAIT OW
+				ON OI.TID = OW.ORD_SEQ
+				
+			INNER JOIN FT_INFO FI
+				ON OI.FT_SEQ = FI.FT_SEQ
+				
+			INNER JOIN GPS_TABLE GT
+				ON OI.GPS_SEQ = GT.GPS_SEQ
+				
+		WHERE OI.USER_SEQ = #{userSeq}
 	
 	</select>
 	

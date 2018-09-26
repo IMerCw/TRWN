@@ -20,7 +20,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
-	<%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">

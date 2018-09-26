@@ -12,7 +12,6 @@
 <body>
 
 <%@include file="/WEB-INF/view/seller/top.jsp" %>
-<%@include file="/WEB-INF/view/seller/topCssScript.jsp" %>
 
 
 

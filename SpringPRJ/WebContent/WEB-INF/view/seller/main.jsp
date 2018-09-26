@@ -76,7 +76,7 @@
 
 		<!-- Two -->
 			<section id="two" class="wrapper style3">
-				<div class="inner">
+				<div class="inner" style="width:100%;">
 					<div id="flexgrid">
 						<div>
 							<header>
@@ -137,14 +137,13 @@
 				</div>
 			</section>
 
-			<!-- Footer -->
-		
-			<footer id="footer" class="wrapper">
-					<div class="copyright">
-						<h4>&copy; Copyright © <a href="#">트럭왔냠.</a>, All rights reserved.</h4>
-					</div>
-			</footer> 
-			
+		<%@ include file="/WEB-INF/view/seller/bottom.jsp" %>
+		<!-- Footer -->
+		<!-- <footer id="footer" class="wrapper" style="padding:10px 0; margin:0; background-color:#444;">
+			<div class="copyright">
+				&copy; Copyright © <a href="#">트럭왔냠.</a>, All rights reserved.
+			</div>
+		</footer> --> 
 			
 	</body>
 </html>

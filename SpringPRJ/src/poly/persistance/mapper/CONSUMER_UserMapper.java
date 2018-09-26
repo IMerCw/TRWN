@@ -5,7 +5,6 @@ import java.util.List;
 
 import config.Mapper;
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
-import poly.dto.consumer.CONSUMER_OrderInfoDTO;
 import poly.dto.consumer.CONSUMER_UserDTO;
 
 @Mapper("CONSUMER_UserMapper")

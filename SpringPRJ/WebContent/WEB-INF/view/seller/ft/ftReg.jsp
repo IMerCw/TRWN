@@ -19,8 +19,7 @@
 	    <![endif]-->
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>board</title>
-<%-- 	<%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %> --%>
+	<title>트럭왔냠 - 푸드트럭 등록하기</title>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">

@@ -22,7 +22,8 @@
 				<h3>메뉴/카테고리</h3>
 			</div>
 			<div style="float:right; width:30%; height:42px; text-align:right; padding-top:15px;">
-				<input type="button" class="btn btn-default" value="카테고리 설정" onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=category_list&ft_seq=<%=ftDTO2.getFt_seq()%>'">
+				<input type="button" class="btn btn-default" style="height: 36px; font-size: 18px; font-weight: bold;"
+					value="카테고리 설정" onclick="location.href='<%=request.getContextPath()%>/seller/ft/ft_info.do?cmd=category_list&ft_seq=<%=ftDTO2.getFt_seq()%>'">
 			</div>
 			<div style="clear:both;"></div>
 			<hr>

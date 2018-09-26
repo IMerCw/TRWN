@@ -10,6 +10,7 @@ import poly.dto.consumer.CONSUMER_Menu_InfoDTO;
 import poly.dto.consumer.CONSUMER_RcmmndFtDTO;
 import poly.dto.consumer.CONSUMER_RcmmndMenuDTO;
 import poly.dto.consumer.CONSUMER_Search_TrendDTO;
+import poly.dto.consumer.CONSUMER_Search_Trend_WDateDTO;
 import poly.dto.consumer.CONSUMER_FtLikeDTO;
 import poly.dto.consumer.CONSUMER_FtMenuCateDTO;
 import poly.dto.consumer.CONSUMER_FtReviewDTO;
@@ -76,4 +77,6 @@ public interface CONSUMER_IFtService {
 	public ArrayList<Map<String, String>> getSearchTrnd() throws Exception;
 
 	public List<CONSUMER_RcmmndFtDTO> getRcmmndFtList(List<CONSUMER_RcmmndFtDTO> rftDTOArr) throws Exception;
+
+	public List<CONSUMER_Search_Trend_WDateDTO> getSearchTrndWDate() throws Exception;
 }

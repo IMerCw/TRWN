@@ -92,7 +92,7 @@
 		background-color: #444444;
 	}
 	.topFirstContainer a{
-		display:table-cell; color:#cbcbcb; font-size:12px;
+		display:table-cell; color:#cbcbcb; font-size:14px; font-weight:bold;
 	}
 	#nav_top_left{
 		float:left; display:table; font-weight:bold;

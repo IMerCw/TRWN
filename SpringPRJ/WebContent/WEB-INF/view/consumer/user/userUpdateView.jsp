@@ -28,6 +28,17 @@ CONSUMER_UserDTO uDTO = (CONSUMER_UserDTO)request.getAttribute("uDTO");
 				
 			}
 		}
+		.table>tbody>tr>td {
+			font-size:18px;
+			height:60px;
+		}
+		#mypageMenu > div > a {
+			border-bottom:1px solid #aaaaaa;
+			padding:5px 10px;
+		}
+		#mypageMenu > div  {
+			margin-bottom:12px;
+		}
 	</style>
 </head>
 
@@ -41,24 +52,24 @@ CONSUMER_UserDTO uDTO = (CONSUMER_UserDTO)request.getAttribute("uDTO");
 			<table class="table table-font-size" style="border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color: #f9f9f9; text-align: center;">회원정보 수정하기</th>
+						<th colspan="3" style="font-size:18px; font-weight:bold; background-color: #f9f9f9; text-align: center;">회원정보 수정하기</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td style="width: 20%; text-align:left;">회원번호 :</td>
+						<td style="text-align:left;">회원번호</td>
 						<td colspan="2">
 							<%=uDTO.getUserSeq() %>
 						</td>
 					</tr>
 					<tr>
-						<td >이메일 :</td>
+						<td >이메일</td>
 						<td colspan="2" style="text-align:left;" >
 							<%=uDTO.getUserEmail() %>
 						</td>
 					</tr>
 					<tr>
-						<td >새 비밀번호 :</td>
+						<td >새 비밀번호</td>
 						<td colspan="2" style="text-align:left;">
 							<div class="form-group">
 								<input type="password" name="userPassword" id="register_userPassword" tabindex="2" class="form-control" placeholder="새 비밀번호" data-msg="비밀번호를">
@@ -68,7 +79,7 @@ CONSUMER_UserDTO uDTO = (CONSUMER_UserDTO)request.getAttribute("uDTO");
 					</tr>
 					<!-- 새 비밀번호 확인 유효성검사 -->
 					<tr>
-						<td >새 비밀번호 확인:</td>
+						<td >새 비밀번호 확인</td>
 						<td colspan="2" style="text-align:left;">
 							<div class="form-group">
 									<input type="password" name="confirm-password" id="register_confirm-password" tabindex="2" class="form-control" placeholder="새 비밀번호확인" data-msg="새 비밀번호확인을"> 
@@ -77,19 +88,19 @@ CONSUMER_UserDTO uDTO = (CONSUMER_UserDTO)request.getAttribute("uDTO");
 						</td>
 					</tr>
 					<tr>
-						<td >닉네임 :</td>
+						<td >닉네임</td>
 						<td colspan="2" style="text-align:left;">
 							<input type="text" name="nickname" id="nickname" tabindex="3" class="form-control" data-msg="닉네임을" value="<%=uDTO.getUserNick()%>" >
 						</td>
 					</tr>
 					<tr>
-						<td >성별 :</td>
+						<td >성별</td>
 						<td colspan="2" style="text-align:left;">
 							<%=uDTO.getUserGender() %>
 						</td>
 					</tr>
 					<tr>
-						<td >핸드폰번호 :</td>
+						<td >핸드폰번호</td>
 						<td colspan="2" style="text-align:left;">
 							<input type="text" name="phone" id="phone" tabindex="5" class="form-control" data-msg="핸드폰 번호를" value="<%=uDTO.getUserHp() %>" >
 								

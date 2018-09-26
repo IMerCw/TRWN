@@ -78,17 +78,11 @@
 	%>
 	<!-- 일간 매출액 끝 --> --%>
     
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>chart</title>
 
-</head>
-<body>
 	<div style="margin-bottom:20px" >
 		
 	 	 <!-- Nav tabs -->
-		<ul class="nav nav-pills" style="background-color:black">
+		<ul class="nav nav-pills" style="background-color:black; padding: 10px;">
 			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;7일간 매출</a></li>
 			<li role="presentation"><a href="#tapp" aria-controls="tapp" role="tab" data-toggle="tab" style="color:white;">월별 매출</a></li>
 			<li role="#"><a href="#" aria-controls="#" role="#" data-toggle="#" style="color:white;">매출분석</a></li>
@@ -451,5 +445,4 @@
 	} */
 	</script>
 
-</body>
 </html>

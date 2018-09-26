@@ -23,8 +23,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
-	<%-- <%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %> --%>
-	<!-- tabs -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
@@ -32,26 +30,20 @@
 		<tr height="7%" bgcolor="#444">
 			<td style="padding:0;"> 
 				<%@ include file="/WEB-INF/view/seller/top.jsp" %>
-				<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 				<!-- 테이블 페이징  -->
 				<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 				<!-- tabs -->
-				  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 				  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-				  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-			
+
 				
 			
 			</td>
 		</tr>
 		<tr>
-			<td style="background-color:#555;">
-			
+		<td style="background-color:#555; padding: 20px 0;">
 			<!--tab 부분 시작-->
-			<div class="container" style="height:100%; margin-top:3%;" >
+			<div class="container" style="background-color:#ffffff; padding: 20px 40px 80px 40px; border-radius:8px;">
 				<div class="row" >
-					
 			            <div class="panel with-nav-tabs panel-dark" style="width:100%; opacity: 0.9;">
 			                <div class="panel-heading">
 			                        <ul class="nav nav-tabs">
@@ -268,7 +260,7 @@
 				
 				contents += "</tbody>";
 				contents += "</table>";
-				contents += "<div align='right' style='width:100%'>";
+				contents += "<div class='col-sm-12' align='right' style='width:100%'>";
 			
 				contents += "<button><a href='Javascript:userLoginCk(\""+userEmail+"\",\""+boardSeq+"\");'>글쓰기</a></button>"
 					

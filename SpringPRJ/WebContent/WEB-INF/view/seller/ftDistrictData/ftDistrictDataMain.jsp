@@ -27,8 +27,8 @@ body { font-family:gulim; font-size:12px; }
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td style="background-color:#444;">
-				<div class="container" style="background-color:#ffffff; border-radius:8px; color:black;">
+			<td style="background-color:#555; padding: 20px 0;">
+				<div class="container" style="background-color:#ffffff; padding: 20px 40px 60px 40px; border-radius:8px;">
 				<div class="row">
 					<!-- 	<fieldset>
 					<legend>주소그룹2</legend>

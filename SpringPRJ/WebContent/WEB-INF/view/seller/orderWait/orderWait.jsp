@@ -10,8 +10,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>board</title>
-	<%@ include file="/WEB-INF/view/seller/topCssScript.jsp" %>
+	<title>트럭왔냠 - 주문 대기열</title>
 
 	<script type="text/javascript">
 	window.setTimeout('window.location.reload()',30000);
@@ -73,25 +72,33 @@
 			</td>
 		</tr>
 		<tr bgcolor="">
-			<td style="background-image:url('/resources/img/seller/pic02.jpg'); opacity:0.9!important;">
+			<td style="background-color:#555;">
 				<div class="container" style="height:100%;">
 				<%if(wList.isEmpty() == false){ %>
 					<div id="newWaitList">
-						<div style="height:10%;" class="col-sm-12">
-							<div class="col-sm-6" style="margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px; color:white;">&nbsp;&nbsp;조리중인 주문 &nbsp;&nbsp;</span></div>
-							<div class="col-sm-6" style="text-align:right; margin-top:3%;"><span style="border:1px solid black; border-radius:5px 5px 5px 5px; color:black;">&nbsp;&nbsp; 대기열 : <%=wList.size()%> &nbsp;&nbsp; </span></div>			
+						<div style="height:10%; margin-bottom: 20px;" class="col-sm-12">
+							<div class="col-sm-6" style="margin-top:3%;">
+								<span class="btn" style="font-size: 22px; border-radius:5px 5px 5px 5px; background-color: #a8a6a2; ">
+									&nbsp;&nbsp;조리중인 주문 &nbsp;&nbsp;
+								</span>
+							</div>
+							<div class="col-sm-6" style="text-align:right; margin-top:3%;">
+								<span class="btn" style="font-size: 22px; border-radius:5px 5px 5px 5px; background-color: #a8a6a2; ">
+									&nbsp;&nbsp; 대기열 : <%=wList.size()%> &nbsp;&nbsp; 
+								</span>
+							</div>			
 						</div>
 						<div class="col-sm-12" style="padding:0;">
 							<div class="col-sm-8" style="background-color:#b2afab; height:70%; border-radius:20px 20px 20px 20px; opacity: 0.9" id="waitFirst">
-								<div style="background-color:#dbd8d4; margin-top:10%; height:20%; text-align:center; opacity: 0.9 overflow:auto" >
+								<div style="background-color:#dbd8d4; margin-top:20px; height:20%; text-align:center; padding: 20px 0;" >
 									<span>wait No. <%=wList.get(0).getWaitSeq()%></span><br/>
 									<span>order No. <%=wList.get(0).getOrdSeq()%></span><br/>
 									<span>order Hp. <%=wList.get(0).getUserHp()%></span>	
 								</div>
-								<div style="background-color:#dbd8d4; overflow:auto; margin-top:10%; height:50%; text-align:center;">
+								<div style="background-color:#dbd8d4; padding-top:10px; overflow:auto; margin-top: 16px; height:68%; text-align:center;">
 									<div class="col-sm-12">
-									<div class="col-sm-6" style="font-size:100%; ">메뉴 이름</div> 
-									<div class="col-sm-6" style="font-size:100%; ">수량</div> 
+									<div class="col-sm-6" style="padding-bottom:10px; border-bottom: 1px solid #a8a5a2; font-size:100%; ">메뉴 이름</div> 
+									<div class="col-sm-6" style="padding-bottom:10px; border-bottom: 1px solid #a8a5a2; font-size:100%; ">수량</div> 
 									</div>
 									<%for(int i=0; i < menuView.size(); i++){ %>
 										<div class="col-sm-12" >
@@ -107,14 +114,14 @@
 								
 									<%if(wList.size() <5){ %>
 										<%for (int i=1; i<wList.size(); i++){ %>
-											<div style="background-color:#dbd8d4; border:1px solid black; border-radius:10px 10px 10px 10px; margin-top:15%; height:15%; opacity: 0.9" >
+											<div style="background-color:#a8a5a2; padding: 10px; border-radius:10px 10px 10px 10px; margin-top:15%; height:15%;" >
 											order No. <%=wList.get(i).getOrdSeq()%><br/>
 											order Hp. <%=wList.get(i).getUserHp() %>
 											</div>
 										<%} %>
 									<%}else{ %>
 										<%for (int i=1; i< 5; i++){ %>
-											<div style="background-color:#dbd8d4; border:1px solid black; margin-top:15%; height:15%; opacity: 0.9" >
+											<div style="background-color:#a8a5a2; padding: 10px; margin-top:15%; height:15%;" >
 											order No. <%=wList.get(i).getOrdSeq()%><br/>
 											order Hp. <%=wList.get(i).getUserHp() %>
 											</div>
