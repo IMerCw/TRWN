@@ -7,29 +7,53 @@
 	<style>
 	text:hover {
 	    stroke: black;
+	    cursor:unset;
 	}
 	/****************/
-	#chart svg {
-	  height: 400px;
+	.axis path,	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+	
+	.x.axis path {
+	  display: none;
+	}
+	
+	.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 1.5px;
 	}
 	</style>
 	<script src="//d3js.org/d3.v3.min.js"></script>
  	<script src="<%=request.getContextPath()%>/resources/js/consumer/d3Cloud/d3.layout.cloud.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+ 	
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- 반응형 웹 설정 -->
 	<title>트럭왔냠 - 검색어 트렌드</title>
    
 </head>
 <body>
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
-
-<div id="cloud" style="overflow:hidden; text-align:center;"></div>
-
+<div class="container-fluid" style="margin-bottom: 20px; border-bottom: 4px solid white; 
+		width: 30%; padding: 12px; text-align: right; margin-right: 10px;">
+	<h3>검색어 트렌드</h3>
+</div>
+	
+<div id="cloud" style="overflow:hidden; 
+	text-align:center; background-color: white;
+    border-radius: 8px; border: 1px solid #b1aeae;
+   "></div>
+<div style="height:20px"></div>
 <%-- 워드 클라우드 자바스크립트 --%>
 
 <script type="text/javascript">
-  var cloudWeight = 16,   // change me
-      cloudWidth = 320,
-      cloudHeight = 240;
+  var windowWidth = $( window ).width();
+
+  var cloudWeight = 14,   // change me
+      cloudWidth = windowWidth,
+      cloudHeight = 260;
 
   var fill = d3.scale.category20();
   
@@ -71,8 +95,5 @@
 </script>
 
 
-<script>
-
-</script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String userEmail = CmmUtil.nvl( (String)session.getAttribute("userEmail") );
-	String userNick = CmmUtil.nvl( (String)session.getAttribute("userNick") );
+	String userEmail = CmmUtil.nvl((String)session.getAttribute("userEmail") );
+	String userNick = CmmUtil.nvl((String)session.getAttribute("userNick") );
 	String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
 	String ftName = CmmUtil.nvl((String)session.getAttribute("ftName"));
 	String ftSeq =  CmmUtil.nvl((String)session.getAttribute("ftSeq"));
@@ -110,7 +110,7 @@
 			<div class="row" style="background-color:#505050; font-size:15px; height:32px; margin:0; padding-top:4px;">
 				<div class="col-sm-8" style="overflow:hidden; color:white;">
 					<!-- 날씨정보 / 값 받아 온 경우 -->
-					<div class="col-sm-12" style="padding-right:0;">
+					<div class="col-sm-12" style="padding-right:0; font-size:13px;">
 					<%if(!"".equals(t3hCode)) {%>
 						<%if (ptyCode.equals("0")) {%>
 							<img src="/resources/img/consumer/skyCode<%=skyCode%>.png" width="24px"/>

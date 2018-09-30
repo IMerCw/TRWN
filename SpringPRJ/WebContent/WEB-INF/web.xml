@@ -27,6 +27,16 @@
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>  
 	
+	<!--  -->
+<!-- 	<filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>poly.filter.SessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>/admin/*.do</url-pattern>
+	</filter-mapping>   -->
+	
 	<!-- WAS 부팅시 설정파일 읽어오기 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

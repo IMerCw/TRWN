@@ -12,6 +12,7 @@
 		<title>트럭왔냠 - 판매자 메인 페이지</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
 		<!-- icon -->
 		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
 		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
@@ -23,7 +24,6 @@
 		<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
 	
 		<!-- 트럭관리  -->
-	
 	<style>
 	
 		#chartdiv {	
@@ -41,7 +41,7 @@
 		  background-color: #30303d; 
 		  color: #fff;
 		}
-		
+
 		.amcharts-graph-g1 .amcharts-graph-fill {
 		  filter: url(#blur);
 		}
@@ -53,7 +53,9 @@
 		.amcharts-cursor-fill {
 		  filter: url(#shadow);
 		}
-		
+		#flexgrid h3{
+			font-weight:bold;
+		}
 	</style>
 	
 	</head>
@@ -81,10 +83,10 @@
 						<div>
 							<header>
 								<h3>푸드트럭 관리</h3>
-								<p>#</p>
 							</header>
+							<p>#</p>
 							<ul class="actions">
-								<li><a href="/seller/ft/truckConfig.do" class="button alt">Learn More</a></li>
+								<li><a href="/seller/ft/truckConfig.do" class="button alt">자세히 보기</a></li>
 							</ul>
 						</div>
 						<div>
@@ -93,7 +95,7 @@
 							</header>
 							<p>#</p>
 							<ul class="actions">
-								<li><a href="/seller/orderWait/orderWait.do?userSeq=<%=userSeq%>" class="button alt">Learn More</a></li>
+								<li><a href="/seller/orderWait/orderWait.do?userSeq=<%=userSeq%>" class="button alt">자세히 보기</a></li>
 							</ul>
 						</div>
 						<div>
@@ -102,7 +104,7 @@
 							</header>
 							<p>#</p>
 							<ul class="actions">
-								<li><a href="/seller/loc/loc.do" class="button alt">Learn More</a></li>
+								<li><a href="/seller/loc/loc.do" class="button alt">자세히 보기</a></li>
 							</ul>
 						</div>
 						<div>
@@ -111,7 +113,7 @@
 							</header>
 							<p>#</p>
 							<ul class="actions">
-								<li><a href="/seller/gasStation/gas.do" class="button alt">Learn More</a></li>
+								<li><a href="/seller/gasStation/gas.do" class="button alt">자세히 보기</a></li>
 							</ul>
 						</div>
 						<div>
@@ -120,7 +122,7 @@
 							</header>
 							<p>#</p>
 							<ul class="actions">
-								<li><a href="/seller/ftDistrictData/ftDistrictDataMain.do" class="button alt">Learn More</a></li>
+								<li><a href="/seller/ftDistrictData/ftDistrictDataMain.do" class="button alt">자세히 보기</a></li>
 							</ul>
 						</div>
 						<div>
@@ -130,7 +132,7 @@
 							</header>
 							<p>#</p>
 							<ul class="actions">
-								<li><a href="/seller/board/boardList.do" class="button alt">Learn More</a></li>
+								<li><a href="/seller/board/boardList.do" class="button alt">자세히 보기</a></li>
 							</ul>
 						</div>
 					</div>
@@ -146,4 +148,5 @@
 		</footer> --> 
 			
 	</body>
+
 </html>

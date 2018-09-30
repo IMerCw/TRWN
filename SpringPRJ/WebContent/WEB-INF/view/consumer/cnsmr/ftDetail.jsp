@@ -41,24 +41,7 @@
 <html>
 <head>
 <title>트럭왔냠 - 푸드트럭 상세 보기</title>
-
-</head>
-<body>
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
-<!-- 카카오  -->
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-
-<!-- 페이스북  -->
-<meta property="og:url"           content="http://daum.net" />
-<meta property="og:type"          content="트럭왔냠 -- 푸드트럭" + '<%=fDTO.getFt_name()%>' />
-<meta property="og:title"         content="트럭왔냠" />
-<meta property="og:description"   content="<%=fDTO.getFt_intro()%>" />
-<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
-<!----------->
-<html>
-<head>
-<title>푸드트럭 상세 보기 </title>
 <style>
 	.footer{
 	    background-color: #f5f5f5;
@@ -170,9 +153,21 @@
 	}
 </style>
 
+<!-- 카카오  -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<!-- 페이스북  -->
+<meta property="og:url"           content="http://daum.net" />
+<meta property="og:type"          content="트럭왔냠 -- 푸드트럭" + '<%=fDTO.getFt_name()%>' />
+<meta property="og:title"         content="트럭왔냠" />
+<meta property="og:description"   content="<%=fDTO.getFt_intro()%>" />
+<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+<!----------->
 
 </head>
+
 <body>
+
 	<div id="fb-root"></div>
 	<div id="map" style="width: 100%; height: 350px;"></div>
 	
@@ -215,8 +210,9 @@
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/facebook.png" onclick="javascript:facebookShare();" id="fbIcon"/>
 					
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/64_NAVER SQUARE ICON.png" onclick="javascript:naverShare();" id="naverIcon"/>
-					<a id="kakao-link-btn" href="javascript:;">
-						<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/kakaolink_btn_medium_ov.png"/>
+					<a href="javascript:;" id="kakao-link-btn">
+						<%-- <img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/kakaolink_btn_medium_ov.png"/> --%>
+						<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
 					</a>
 				</div>
 				<div class="row">
@@ -228,9 +224,9 @@
 							<span class="label label-default">미 운행중</span>
 						<%} %>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					</div>
-					<div class="col-xs-4" style="text-align:right;">
+					<div class="col-xs-5" style="text-align:right;">
 						<%if(isDelivery) { %>
 							<span class="label label-success">배달 가능</span>
 						<%} %>
@@ -313,8 +309,154 @@
 
 
 
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60f4f121242d90c886eacd9609c92e78"></script>
+
+<!-- 관심매장 추가 / 공유하기 버튼 스크립트-->
+<script>
+	/* 로그인(userSeq) / 비 로그인(0) 상태 구분  */
+	<%if (!"".equals(userSeq)) {%>
+		var userSeq = <%=userSeq%>; 
+	<%}%>
+	
+	var favoriteBttn = document.getElementById('favoriteBttn');
+	var shareBttn = document.getElementById('shareBttn');
+	
+	function favoriteBttnRmvClick() {
+		alert("이미 관심매장으로 추가되어 있습니다.");
+		var p = confirm('관심매장에서 삭제 하시겠습니까?');
+		//관심매장 삭제하기
+		if(p){
+			$.ajax({
+				type:'POST',
+				url:"/consumer/cnsmr/favoriteFtRemove.do",
+				data: {
+					"ft_seq" : <%=fDTO.getFt_seq()%>,
+					"user_seq" : userSeq,
+				},
+				success: function(data) {
+					if(data==1) {
+						alert('관심매장에서 삭제 되었습니다.');
+						var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>';
+						$('#favoriteContainer').html(content);
+					}
+				},
+				error: function(error) {
+					alert("error :" + error);
+				}
+				
+			})
+		}
+		
+	}
+	
+	function favoriteBttnAddClick() {
+		<%if("".equals(userSeq)){%>
+			alert('로그인을 해주시기 바랍니다.');
+		<%} else {%>
+			<%if(!FtLikeResult.equals("1")) {%>
+			var r = confirm('관심매장에 추가 하시겠습니까?');
+			if(r) {
+				$.ajax({
+					type:'POST',
+					url:"/consumer/cnsmr/favoriteFtAdd.do",
+					data: {
+						"ft_seq" : <%=fDTO.getFt_seq()%>,
+						"user_seq" : userSeq,
+						
+					},
+					success: function(data) {
+						if(data==1) {
+							alert('관심매장으로 추가되었습니다.');
+							var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>';
+							$('#favoriteContainer').html(content);
+						}
+					},
+					error: function(error) {
+						alert("error :" + error);
+					}
+					
+				})
+			}
+			<%}%>
+		<%}%>
+	};
+</script>
+
+
+
+<script type="text/javascript">
+  //<![CDATA[
+   Kakao.init('60f4f121242d90c886eacd9609c92e78');
+    // // Create KakaoTalk Link button. You only need to call this function once.
+   Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: '<%=fDTO.getFt_name() %>',
+        description: '#트럭왔냠 #푸드트럭 맛집\n' + '<%=fDTO.getFt_intro() %>' ,
+        imageUrl: 'http://54.180.77.82:8080<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>',
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href
+        }
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href
+          }
+        }
+      ]
+    });
+</script>	
+
+<script>  
+	  
+	function shareBttnClick() {
+		if($('#snsIcon').css('display') == 'none') {
+			$('#snsIcon').css('display','block');
+		}else {
+			$('#snsIcon').css('display','none');
+		}
+		
+		/* alert(window.location.href);*/
+	};
+	
+    function naverShare() {
+      	var url = window.location.href;
+	    var title = '트럭왔냠 -- 푸드트럭 맛집 ' + '<%=fDTO.getFt_name() %>';
+	    var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+	    window.open(shareURL);
+    }
+	
+
+
+    
+	function facebookShare() {
+		window.open('https://www.facebook.com/sharer/sharer.php?u=http://daum.net');
+	}	  
+	function twitterShare() {
+		window.open('https://twitter.com/intent/tweet?text=트럭왔냠--<%=fDTO.getFt_name() %>&url=' + window.location.href);
+	}	  
+    
+   (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+ 
+</script>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60f4f121242d90c886eacd9609c92e78"></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
@@ -391,18 +533,18 @@
 <!-- 메뉴 탭 고정을 위한 JS -->
 
 <script>
-window.onscroll = function() {myFunction()};
-
-var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
-}
+	window.onscroll = function() {myFunction()};
+	
+	var header = document.getElementById("myHeader");
+	var sticky = header.offsetTop;
+	
+	function myFunction() {
+	  if (window.pageYOffset > sticky) {
+	    header.classList.add("sticky");
+	  } else {
+	    header.classList.remove("sticky");
+	  }
+	}
 </script>
 <!-------------------->
 
@@ -421,141 +563,6 @@ function myFunction() {
 	}
 	
 	
-</script>
-<!-- 관심매장 추가 / 공유하기 버튼 스크립트-->
-<script>
-	/* 로그인(userSeq) / 비 로그인(0) 상태 구분  */
-	<%if (!"".equals(userSeq)) {%>
-		var userSeq = <%=userSeq%>; 
-	<%}%>
-	
-	var favoriteBttn = document.getElementById('favoriteBttn');
-	var shareBttn = document.getElementById('shareBttn');
-	
-	function favoriteBttnRmvClick() {
-		alert("이미 관심매장으로 추가되어 있습니다.");
-		var p = confirm('관심매장에서 삭제 하시겠습니까?');
-		//관심매장 삭제하기
-		if(p){
-			$.ajax({
-				type:'POST',
-				url:"/consumer/cnsmr/favoriteFtRemove.do",
-				data: {
-					"ft_seq" : <%=fDTO.getFt_seq()%>,
-					"user_seq" : userSeq,
-				},
-				success: function(data) {
-					if(data==1) {
-						alert('관심매장에서 삭제 되었습니다.');
-						var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>';
-						$('#favoriteContainer').html(content);
-					}
-				},
-				error: function(error) {
-					alert("error :" + error);
-				}
-				
-			})
-		}
-		
-	}
-	function favoriteBttnAddClick() {
-		<%if("".equals(userSeq)){%>
-			alert('로그인을 해주시기 바랍니다.');
-		<%} else {%>
-			<%if(!FtLikeResult.equals("1")) {%>
-			var r = confirm('관심매장에 추가 하시겠습니까?');
-			if(r) {
-				$.ajax({
-					type:'POST',
-					url:"/consumer/cnsmr/favoriteFtAdd.do",
-					data: {
-						"ft_seq" : <%=fDTO.getFt_seq()%>,
-						"user_seq" : userSeq,
-						
-					},
-					success: function(data) {
-						if(data==1) {
-							alert('관심매장으로 추가되었습니다.');
-							var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>';
-							$('#favoriteContainer').html(content);
-						}
-					},
-					error: function(error) {
-						alert("error :" + error);
-					}
-					
-				})
-			}
-			<%}%>
-		<%}%>
-	};
-	function shareBttnClick() {
-		if($('#snsIcon').css('display') == 'none') {
-			$('#snsIcon').css('display','block');
-		}else {
-			$('#snsIcon').css('display','none');
-		}
-		
-		/* alert(window.location.href);*/
-	};
-	
-    function naverShare() {
-      var url = window.location.href;
-      var title = '트럭왔냠 -- 푸드트럭 맛집 ' + '<%=fDTO.getFt_name() %>';
-      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
-      window.open(shareURL);
-    }
-	
-
-	  //<![CDATA[
-    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('60f4f121242d90c886eacd9609c92e78');
-    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-    Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',
-      objectType: 'feed',
-      content: {
-        title: '<%=fDTO.getFt_name() %>',
-        description: '#트럭왔냠 #푸드트럭 맛집\n' + '<%=fDTO.getFt_intro() %>' ,
-        imageUrl: 'http://http://54.180.77.82:8080<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>',
-        link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href
-        }
-      },
-      social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845
-      },
-      buttons: [
-        {
-          title: '웹으로 보기',
-          link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href
-          }
-        }
-      ]
-    });
-  //]]>
-    
-	function facebookShare() {
-		window.open('https://www.facebook.com/sharer/sharer.php?u=http://daum.net');
-	}	  
-	function twitterShare() {
-		window.open('https://twitter.com/intent/tweet?text=트럭왔냠--<%=fDTO.getFt_name() %>&url=' + window.location.href);
-	}	  
-    
-   (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
 </script>
 
 

@@ -34,6 +34,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="conatiner" style="margin-top: 8px; padding: 20px 0; background: white; border-radius: 13px;">
 		<div class="container-fluid">
 			<div class="row" >
 				<div class="col-xs-6">

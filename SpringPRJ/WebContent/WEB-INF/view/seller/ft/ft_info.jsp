@@ -13,7 +13,11 @@
 	}
 %>
 
-	
+<style>
+	* {
+		font-family: 'Noto Sans KR', sans-serif !important;
+	}
+</style>
 <body>
 	<table style="height: 100%; width: 100%; margin:0;">
 		<tr height="7%" bgcolor="#444">
@@ -42,7 +46,7 @@
 						<!-- 배달/케이터/주문예약 가능 불가능 설정 -->
 						<div class="col-sm-12" style="margin:20px 0;">
 							<%for(int i=0; i<array.length; i++) {%>
-								<div class="col-sm-4" style="font-size:1.2rem; border: 1px solid #cccccc;  background-color:#F2F2F2; "><%=array[i]%></div> 
+								<div class="col-sm-4" style="padding:0; font-size:1.2rem; border: 1px solid #cccccc;  background-color:#F2F2F2; "><%=array[i]%></div> 
 							<%}%>
 						</div>
 						<div class="container-fluid" style="margin-top:10px;">

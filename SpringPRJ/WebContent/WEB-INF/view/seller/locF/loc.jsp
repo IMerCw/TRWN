@@ -23,6 +23,10 @@
 		.font-11, .list-subject {
 			padding-top:20px !important;
 		}
+		a:hover, a:focus {
+			color:#ccc;
+		} 
+		
 	</style>
 </head>
 <body>

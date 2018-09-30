@@ -252,8 +252,14 @@ public class CONSUMER_FtService implements CONSUMER_IFtService{ //IUserServiceë¥
 
 
 	@Override
-	public List<CONSUMER_Search_Trend_WDateDTO> getSearchTrndWDate() throws Exception {
-		return rcmmndMenuMapper.getSearchTrndWDate();
+	public List<CONSUMER_Search_Trend_WDateDTO> getSearchTrndWDate(Map<String, String> thrSrchKywrd) throws Exception {
+		return rcmmndMenuMapper.getSearchTrndWDate(thrSrchKywrd);
+	}
+
+
+	@Override
+	public String[] getThreeSearchTrnd() throws Exception {
+		return rcmmndMenuMapper.getThreeSearchTrnd();
 	}
 
 }

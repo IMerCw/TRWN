@@ -35,7 +35,8 @@
 		<div class="container-fluid">
 			<div class="row" >
 				<div class="col-xs-12">
-					<a href="/consumer/cnsmr/ftDetail.do?ft_seq=5&amp;cmd=2">
+					<!-- 목록으로 가기 // 뒤로 가기 -->
+					<a href="/consumer/cnsmr/ftDetail.do?ft_seq=<%=ftSeq%>&cmd=2">
 						<img src="/resources/img/consumer/left-arrow.png" width="35px" style="margin:20px 0;"/>	
 					</a>
 					<div style="display:inline-block"><%=ftName %>에 리뷰 쓰기</div>

@@ -78,5 +78,8 @@ public interface CONSUMER_IFtService {
 
 	public List<CONSUMER_RcmmndFtDTO> getRcmmndFtList(List<CONSUMER_RcmmndFtDTO> rftDTOArr) throws Exception;
 
-	public List<CONSUMER_Search_Trend_WDateDTO> getSearchTrndWDate() throws Exception;
+	public String[] getThreeSearchTrnd() throws Exception;
+
+	public List<CONSUMER_Search_Trend_WDateDTO> getSearchTrndWDate(Map<String, String> thrSrchKywrd) throws Exception;
+
 }

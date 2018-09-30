@@ -285,7 +285,12 @@ public class SELLER_OutController {
 		SELLER_FtSellerDTO ftsDTO = new SELLER_FtSellerDTO();
 		ftsDTO.setUserSeq(userSeq);
 		ftsDTO = OutService.getOutTruckInfo(ftsDTO);
-		session.setAttribute("ftSeq", ftsDTO.getFtSeq());
+		if(ftsDTO != null) {
+			session.setAttribute("ftSeq", ftsDTO.getFtSeq());
+		} else {
+			return "/seller/ft/ftReg";
+		}
+			
 		
 		log.info("inout view end !!!");
 		return "/seller/out/inOutB";
