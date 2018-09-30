@@ -39,13 +39,13 @@
 <body>
 	<%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
 	<div class="container-fluid" style="margin-top:20px;">
-		<div class="col-xs-12 rcmmndBox" style="background-color:#fd8469; "onclick="location.href='/consumer/rcmmnd/rcmmndMenu.do'">
+		<div class="rcmmndBox" style="background-color:#fd8469; "onclick="location.href='/consumer/rcmmnd/rcmmndMenu.do'">
 			<img src="<%=request.getContextPath()%>/resources/img/consumer/rcmmnd/statistics.png" />
 			<p>트럭왔냠 추천 메뉴</p></div>
-		<div class="col-xs-12 rcmmndBox" style="background-color:#84dbff;" onclick="location.href='/consumer/rcmmnd/wordCloudTrend.do'">
+		<div class="rcmmndBox" style="background-color:#84dbff;" onclick="location.href='/consumer/rcmmnd/wordCloudTrend.do'">
 			<img src="<%=request.getContextPath()%>/resources/img/consumer/rcmmnd/networking.png" />
 			<p>검색어 트렌드</p></div>
-		<div class="col-xs-12 rcmmndBox" style="background-color:#ffd15c;"onclick="location.href='/consumer/rcmmnd/CustomRcmmnd.do'">
+		<div class="rcmmndBox" style="background-color:#ffd15c;"onclick="location.href='/consumer/rcmmnd/CustomRcmmnd.do'">
 			<img src="<%=request.getContextPath()%>/resources/img/consumer/rcmmnd/brain.png" />
 			<p>소비자 맞춤 추천 </p></div>
 	</div>

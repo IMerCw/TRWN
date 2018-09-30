@@ -68,6 +68,12 @@
 		.legend-size circle {
 			fill: #eeeeee;
 		}
+		.circle-overlay__inner > h3 {
+				margin-top:80px;
+		}
+		.circle-overlay__inner * {
+			font-family: 'Noto Sans KR', sans-serif !important;
+		}
 	</style>
 </head>
 <body>
@@ -94,17 +100,14 @@
 				icon: '<%=request.getContextPath()%>/resources/files/<%=rcmmndMenuDTO.get(i).getFile_sevname()%>' ,
 				desc: 
 				`	
-					<br/>
 					<a href="/consumer/cnsmr/ftDetail.do?ft_seq=<%=rcmmndMenuDTO.get(i).getFt_seq()%> ">
-						<h4><%=rcmmndMenuDTO.get(i).getFt_name()%></h4><br/>
-						<%=rcmmndMenuDTO.get(i).getMenu_intro()%>
+						<p><%=rcmmndMenuDTO.get(i).getFt_name()%></p><br/>
+						<p style="font-size:6px;"><%=rcmmndMenuDTO.get(i).getMenu_intro()%></p>
 					</a>
 				`
 				};
-			console.log(foo);
-			data.push(foo)˙;
+			data.push(foo);
 		<%}%>
-		console.log("data is ", data);
 	</script>
 	<script>
 		let svg = d3.select('svg');
@@ -219,16 +222,21 @@
 				.attr('y', (d, i, nodes) => (13 + (i - nodes.length / 2 - 0.5) * 10))
 				.text(name => name);
 		
+		
+	
+			
 		// display image as circle icon
+		
 		node.filter(d => String(d.icon).includes('files/'))
 			.append('image')
 			.classed('node-icon', true)
 			.attr('clip-path', d => `url(#clip-\${d.id})`)
 			.attr('xlink:href', d => d.icon)
-			.attr('x', d => - d.radius * 1.5)
+			.attr('x', d => - d.radius * 1.5)	
 			.attr('y', d => - d.radius * 1.5)
 			.attr('height', d => d.radius * 2 * 1.5)
 			.attr('width', d => d.radius * 2 * 1.5)
+			
 			
 		node.append('title')
 			.text(d => (d.cat + '::' + d.name + '\n' + format(d.value)));
@@ -278,7 +286,7 @@
 			.attr('width', 350 * 0.8)
 				.append('xhtml:div')
 				.classed('circle-overlay__inner', true);
-
+		
 		infoBox.append('h3')
 			.classed('circle-overlay__title', true)
 			.text(d => d.name);

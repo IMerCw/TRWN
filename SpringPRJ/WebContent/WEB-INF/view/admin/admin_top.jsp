@@ -1,5 +1,7 @@
+<%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% String join_date = CmmUtil.nvl((String)(session.getAttribute("join_date"))); %>
 	
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/bootstrap.css">
 	
@@ -9,7 +11,7 @@
 		<div
 			style="width: 350px; height: 25px; border-radius: 0 0 10px 10px; background-color: #333333; margin: 0 auto; color: #fefefe; padding-right: 10px; padding-left: 15px; padding-top: 2px;">
 			<p align="center" style="font-size: 12px;">
-				<span style="color: #cccccc;">관리자 접속일시 : 2018.09.01 18:29</span>
+				<span style="color: #cccccc;">관리자 접속일시 : <%=join_date %></span>
 				&nbsp;&nbsp;&nbsp;<input type="button" value="로그아웃"
 					onClick="location.href='<%=request.getContextPath()%>/admin/logout.do'"
 					style="border: #333333 1px solid; background-color: #454545; width: 70px; height: 21px;" />

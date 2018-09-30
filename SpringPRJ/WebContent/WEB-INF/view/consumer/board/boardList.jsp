@@ -45,7 +45,7 @@
 				</span>
 				<div class="col-xs-12" style="font-size:20px; 
 					text-overflow: ellipsis;  white-space: nowrap; overflow: hidden;">
-					<a href="/consumer/board/boardDetail.do?boardPSeq=<%=bList.get(i).getBoardPSeq()%>&boardSeq=1">
+					<a href="/consumer/board/boardDetail.do?boardPSeq=<%=bList.get(i).getBoardPSeq()%>&boardSeq=2">
 						<%=bList.get(i).getTitle() %>
 					</a>
 				</div>

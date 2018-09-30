@@ -32,7 +32,6 @@
 		margin:0; 
 		padding:6px 0;
 		text-align:center;
-		font-size:18px;
 		
 	}
 	/* 메뉴의 이미지를 높이를 고정 */
@@ -58,10 +57,10 @@
 			
 			<%for (int i = 0; i < menuDTOs.size(); i++) { %>
 				<%if(cateDTOs.get(k).getCate_sort_no() == menuDTOs.get(i).getCate_sort_no()) {%>
-					<div class="col-sm-6" style="height:360px; overflow:hidden; margin-bottom:6px; border-radius:4px;">
-						<div class="contentBox" style="height:100%; padding: 0px 12px; text-align:center;">
+					<div class="col-sm-6" style="overflow:hidden; margin-bottom:6px; border-radius:4px;">
+						<div class="contentBox" style="height: 420px; padding: 0px 12px; text-align:center;">
 							<!-- 메뉴 이미지 -->
-							<div class="row ftMenuRow imgRow" style="height:68%; overflow:hidden; padding:8% 0;">
+							<div class="row ftMenuRow imgRow" style=" overflow:hidden; padding:8% 0;">
 								<%for(int j = 0; j < imgDTOs.size(); j++) {%>
 									<!--fileId NULL 확인 -->
 									<%if(!"".equals(imgDTOs.get(j).getFileSevname())) {%>
@@ -78,11 +77,12 @@
 								<%} %>
 							</div>
 							<div class="row ftMenuRow"><%=menuDTOs.get(i).getMenu_name() %></div>
-							<div class="row ftMenuRow"><%=menuDTOs.get(i).getMenu_intro() %></div>
-							<div class="row ftMenuRow"><%=df.format(menuDTOs.get(i).getMenu_price()) %> 원</div>
+							<div class="row ftMenuRow" style="height: 60px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+								<%=menuDTOs.get(i).getMenu_intro() %>
 							</div>
+							<div class="row ftMenuRow"><%=df.format(menuDTOs.get(i).getMenu_price()) %> 원</div>
+						</div>
 					</div>
-					
 				<%} %>
 			<%} %>
 			<!-- 등록된 음식이 없을 경우 -->	

@@ -1632,7 +1632,6 @@
 	}
 
 	body, input, select, textarea {
-		font-family: "Taviraj", serif;
 		font-weight: 300;
 		font-size: 1rem;
 		line-height: 1.65;
@@ -1721,7 +1720,6 @@
 	code {
 		border-radius: 4px;
 		border: solid 1px;
-		font-family: "Courier New", monospace;
 		font-size: 0.9rem;
 		margin: 0 0.25rem;
 		padding: 0.25rem 0.65rem;
@@ -1729,7 +1727,6 @@
 
 	pre {
 		-webkit-overflow-scrolling: touch;
-		font-family: "Courier New", monospace;
 		font-size: 0.9rem;
 		margin: 0 0 2rem 0;
 	}
@@ -1826,8 +1823,8 @@
 	.box {
 		border-color: rgba(144, 144, 144, 0.25);
 	}
-
-/* Button */
+/* 
+Button
 
 	input[type="submit"],
 	input[type="reset"],
@@ -2009,7 +2006,7 @@
 			.button.special:active {
 				background-color: #439aea;
 			}
-
+ */
 /* Form */
 
 	form {
@@ -2048,7 +2045,7 @@
 		font-weight: 400;
 		margin: 0 0 1rem 0;
 	}
-
+/* 
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
@@ -2253,7 +2250,7 @@
 		border-color: #5AA6ED;
 		box-shadow: 0 0 0 1px #5AA6ED;
 	}
-
+ */
 	::-webkit-input-placeholder {
 		color: #bbb !important;
 	}
@@ -2285,7 +2282,6 @@
 		.icon:before {
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
-			font-family: FontAwesome;
 			font-style: normal;
 			font-weight: normal;
 			text-transform: none !important;
@@ -2725,7 +2721,7 @@
 				.wrapper.style1 button.alt,
 				.wrapper.style1 .button.alt {
 					background-color: transparent;
-					box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+					/* box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25); */
 					color: #ffffff !important;
 				}
 
@@ -2917,7 +2913,7 @@
 				.wrapper.style2 button.alt,
 				.wrapper.style2 .button.alt {
 					background-color: transparent;
-					box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.15);
+					/* box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.15); */
 					color: #000 !important;
 				}
 
@@ -3145,7 +3141,7 @@
 				.wrapper.style3 button.alt,
 				.wrapper.style3 .button.alt {
 					background-color: transparent;
-					box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+					/* box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25); */
 					color: #ffffff !important;
 				}
 

@@ -29,8 +29,7 @@
 	            FT_REVIEW
 	        GROUP BY 
 	            FT_SEQ
-	        HAVING 
-	            AVG(REV_POINT) > 3) fr
+	    	) fr
 	        ON 
 	          fi.FT_SEQ = fr.FT_SEQ
 					
@@ -63,6 +62,64 @@
 	ORDER BY
 		fr.REV_SCORE DESC
 	</select>
+	
+<!-- 	SELECT 
+		fi.FT_SEQ AS ft_seq,
+	    fi.FT_NAME AS ft_name,
+	    mi.MENU_NAME as menu_name,
+	    mi.MENU_INTRO as menu_intro,
+	    fr.REV_SCORE as rev_score,
+	    mi.FILE_SEVNAME as file_sevname,
+		gt.GPS_SIDO
+	FROM 
+	    FT_INFO fi
+	      
+		INNER JOIN
+	    	GPS_TABLE gt 
+	    ON 
+	    	fi.GPS_SEQ = gt.GPS_SEQ
+	        
+		INNER JOIN 
+	    	(SELECT 
+	    		AVG(REV_POINT)*COUNT(REVIEW_SEQ) as rev_score,
+	            FT_SEQ
+	    	FROM 
+	            FT_REVIEW
+	        GROUP BY 
+	            FT_SEQ
+	        HAVING 
+	            AVG(REV_POINT) > 3) fr
+	        ON 
+	          fi.FT_SEQ = fr.FT_SEQ
+					
+	     INNER JOIN 
+	     	(SELECT 
+	        	MENU_NAME,
+	            MENU_INTRO,
+	            FILE_SEVNAME,
+	            FT_SEQ
+	     	FROM
+	            (SELECT 
+					MI1.MENU_NAME,
+					MI1.MENU_INTRO,
+					MI1.FT_SEQ,
+					MI1.MENU_SORT_NO,
+                    MI1.FILE_ID
+				FROM
+					MENU_INFO MI1
+				INNER JOIN
+					( SELECT
+						FT_SEQ,
+						MIN(MENU_SORT_NO) MIN_NO
+					FROM MENU_INFO
+					group by FT_SEQ
+					HAVING MIN(MENU_SORT_NO)
+					) MI2 ON MI1.MENU_SORT_NO = MI2.MIN_NO AND MI1.FT_SEQ = MI2.FT_SEQ
+				) MI3
+	        INNER JOIN IMAGE ON MI3.FILE_ID = IMAGE.FILE_ID
+			) mi ON fi.FT_SEQ = mi.FT_SEQ
+	ORDER BY
+		fr.REV_SCORE DESC -->
 	<!-- MENU_SORT_NO = 1 AND -->
 	
 	
@@ -165,23 +222,35 @@
 			) FT
 		ON USR.FT_SEQ = FT.FT_SEQ
 	</select>
-	
-	<select id="getSearchTrndWDate" resultType="CONSUMER_Search_Trend_WDateDTO" >
-		SELECT  
-		    GROUP_CONCAT(SEARCH_WORD SEPARATOR ',') as trend_words,
-			SUBSTR(SEARCH_DATE,1,10) as trend_date
-		FROM SEARCH_TREND
-		WHERE SEARCH_WORD IN (
-			SELECT SEARCH_WORD 
-			FROM
-			(SELECT SEARCH_WORD
+	<select id="getThreeSearchTrnd" resultType="string">
+
+		SELECT SEARCH_WORD
 			FROM SEARCH_TREND
-			GROUP BY SEARCH_WORD
+		    GROUP BY SEARCH_WORD
 			ORDER BY COUNT(*) DESC
 			LIMIT 3
-			) AS SW
-		)
-		GROUP BY SUBSTR(SEARCH_DATE,1,10)
-		ORDER BY SUBSTR(SEARCH_DATE,1,10)
+				
+	</select>	
+	<!--검색어순위 3위까지의 그래프 -->
+	<select id="getSearchTrndWDate" parameterType="hashmap" resultType="CONSUMER_Search_Trend_WDateDTO" >
+		SELECT   
+			GROUP_CONCAT(ST.SWORD SEPARATOR ',') as trend_words,    
+			ST.SDATE as trend_date
+		    
+		FROM ( SELECT CONCAT(SEARCH_WORD, ':', COUNT(SEARCH_WORD)) AS SWORD,  
+				SUBSTR(SEARCH_DATE,1,10) AS SDATE     
+				FROM SEARCH_TREND 
+		        WHERE SEARCH_WORD IN (
+					#{first}, #{second}, #{third}
+				)
+				GROUP BY   
+					SEARCH_WORD,
+					SUBSTR(SEARCH_DATE,1,10)
+				ORDER BY   SUBSTR(SEARCH_DATE,1,10) 
+			) ST 
+		GROUP BY ST.SDATE
+		
+
 	</select>
+	
 </mapper>

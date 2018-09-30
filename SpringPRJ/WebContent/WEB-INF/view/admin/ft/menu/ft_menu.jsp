@@ -79,7 +79,7 @@
 						    			등록된 이미지가 없습니다.
 						    		<%} %>
 						    		</div>
-						    		<div style="width:100%; height:35px; padding-top:4px; text-align:center; border-top:1px solid #cccccc;">
+						    		<div style="width:100%; height:35px; padding-top:6px; text-align:center; border-top:1px solid #cccccc; font-size:13px;">
 						    			<%=menuDTO.getMenu_name()%>
 						    		</div> 
 						    	</div>

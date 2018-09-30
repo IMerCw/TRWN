@@ -4,9 +4,14 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ser.std.IterableSerializer;
+
 import au.com.bytecode.opencsv.CSVWriter;
+import poly.dto.consumer.CONSUMER_Search_Trend_WDateDTO;
 
 
 public class ReadCSV {
@@ -47,8 +52,8 @@ public class ReadCSV {
 
 	}
 	
-	// 검색어 트렌드 추이
-	public void wirteTrndCsv(String realPathCSV, ArrayList<Map<String,String>> trndKywrdMap) {
+	// 검색어 트렌드 추이 csv쓰기
+	public void wirteTrndCsv(String realPathCSV, Map<String, String> trndKywrdMap, List<CONSUMER_Search_Trend_WDateDTO> trndKywrdWDate) {
 		
 		try {
 			/**
@@ -63,12 +68,33 @@ public class ReadCSV {
 					new FileOutputStream(realPathCSV), "UTF-8"),',', 
 					CSVWriter.NO_QUOTE_CHARACTER);
 			try {
-				//header입력
-				cw.writeNext(new String[] {"word", "freq"});
+				String firstKywrd = trndKywrdMap.get("first");
+				String secndKywrd = trndKywrdMap.get("second");
+				String thirdKywrd = trndKywrdMap.get("third");
 				
-				for(Map<String, String> m : trndKywrdMap) {
+				String thrrKyWrd[] = new String[] {firstKywrd, secndKywrd,thirdKywrd};
+				
+				
+				cw.writeNext(new String[] {"date", firstKywrd, secndKywrd , thirdKywrd});
+				String kywrdArr[] = null;
+				
+				String thingsToWrite = "";
+				
+				for(CONSUMER_Search_Trend_WDateDTO m : trndKywrdWDate) {
+					kywrdArr = m.getTrend_words().split(",");
+					
+					for(String kywrd : kywrdArr) {
+						String tmpKywrd;
+						tmpKywrd = kywrd.split(":")[0];
+						
+						if(tmpKywrd.equals(thrrKyWrd[0])) {
+							thingsToWrite += kywrd.split(":")[1];
+						} else {
+							thingsToWrite += "0";
+						}
+					}
 					//배열을 이용하여 row를 CSVWriter 객체에 write
-					cw.writeNext(new String[] { String.valueOf(m.get("word")),String.valueOf(m.get("freq"))});
+					cw.writeNext(new String[] { String.valueOf(m.getTrend_date()), });
 				}  
 			} catch (Exception e) {
 				e.printStackTrace();

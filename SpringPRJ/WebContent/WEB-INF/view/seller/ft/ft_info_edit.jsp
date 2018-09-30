@@ -55,7 +55,7 @@
 				<tr style="border-top:1px solid #DDDDDD; border-bottom:1px solid #DDDDDD;">
 					<td width="28%" class="table_Hline">푸드트럭 이미지</td>
 					<td class="table_line">
-						<input type="file" id="uploadFile" name="uploadFile" style="float:left; margin-top:5px;"> 
+						<input type="file" id="uploadFile" name="uploadFile" style="float:left; margin-top:5px; width: 60%;"> 
 						<input type="button" value="삭제" class="btn btn-default" onclick="javascript:file_delete()" style="float:left;">
 						<div style="clear:both;">
 							<label id="uploadFile_label" style="margin-top:3px;"></label>

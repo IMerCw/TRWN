@@ -139,14 +139,22 @@ public class CONSUMER_DataAnalysisController {
 		/*-------------------------------------------- */
 		
 		//DB에서  날짜별 상위 3개 검색어 목록 가져오기
-		List<CONSUMER_Search_Trend_WDateDTO> trndKywrdWDateMap = ftService.getSearchTrndWDate();
 		
-		for(CONSUMER_Search_Trend_WDateDTO tkwd : trndKywrdWDateMap) {
-			log.info(tkwd.getTrend_date());
-			log.info(tkwd.getTrend_words().split(",")[0]);
-		}
+		String[] threeSrchTrndKywrd = ftService.getThreeSearchTrnd();
+		Map<String, String> thrSrchKywrd = new HashMap<String, String>();
 		
+		thrSrchKywrd.put("first", threeSrchTrndKywrd[0]);
+		thrSrchKywrd.put("second", threeSrchTrndKywrd[1]);
+		thrSrchKywrd.put("third", threeSrchTrndKywrd[2]);
+		log.info(threeSrchTrndKywrd[0]);
+		log.info(threeSrchTrndKywrd[1]);
+		log.info(threeSrchTrndKywrd[2]);
 		
+		List<CONSUMER_Search_Trend_WDateDTO> trndKywrdWDate = ftService.getSearchTrndWDate(thrSrchKywrd);
+
+		String realPathCSV2 = request.getSession().getServletContext().getRealPath("/")+ "resources\\js\\consumer\\d3Cloud\\" + "topTrndKywrd.csv";
+		
+		/*rcsv.wirteTrndCsv(realPathCSV2, thrSrchKywrd, trndKywrdWDate);*/
 		return "/consumer/rcmmnd/wordCloudTrend";
 	}
 	

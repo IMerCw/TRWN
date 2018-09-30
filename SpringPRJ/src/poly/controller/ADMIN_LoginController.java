@@ -65,7 +65,9 @@ public class ADMIN_LoginController {
 		
 		if(uDTO != null && uDTO.getUserEmail().equals("admin") && uDTO.getUserSeq().equals("0") && uDTO.getUserAuth().equals("9")) {
 			//로그인 성공
+			session.setAttribute("join_date", getDate());
 			session.setAttribute("userSeq", uDTO.getUserSeq());
+			
 			return "redirect:/admin/admin_main.do";
 		}else {
 			String msg = "아이디 또는 비밀번호가 맞지 않습니다.";

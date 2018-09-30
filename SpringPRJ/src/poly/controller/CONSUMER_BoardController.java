@@ -186,15 +186,15 @@ public class CONSUMER_BoardController {
 		rDTO.setContent(content);
 		log.info("리뷰 rDTO getContent : "+rDTO.getContent());
 		
-		//공지사항 게시글 자세히 보기
+		/*//공지사항 게시글 자세히 보기
 		if(boardSeq.equals("1")) {
 			CONSUMER_BoardDTO bDTO = boardService.getNoticeDetail(boardPSeq);
 			model.addAttribute("bDTO", bDTO);
 			return "/consumer/board/noticeDetail";
-		}
-		
+		}*/
+		/*
 		List<CONSUMER_BoardRepleDTO> rList = boardService.commentList(boardPSeq);
-		model.addAttribute("rList", rList);
+		model.addAttribute("rList", rList);*/
 		
 		CONSUMER_BoardDTO bDTO = boardService.getBoardDetail(boardPSeq);
 		

@@ -14,7 +14,6 @@ public class ADMIN_User_InfoDTO {
 	private String user_chan;
 	private String user_status;
 	private String status;
-	
 	private String option;
 	private String value;
 	

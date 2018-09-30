@@ -29,7 +29,7 @@
 			<!--------------------------메뉴부분 시작 -------------------------->
 			<div class="menuButton">
 				<span style="font-size:30px;cursor:pointer" onclick="openNav()">
-					<img src="/resources/img/consumer/menu48x48.png" height="42px" style="margin-top:8px; margin-left:5px;"/>
+					<img src="/resources/img/consumer/mainIcon/menu_black_48x48.png" height="42px" style="margin-top:8px; margin-left:5px;"/>
 				</span>
 			</div>
 			<div id="mySidenav" class="sidenav">
@@ -88,21 +88,17 @@
 						
 			<!--------------------------메뉴부분 종료 -------------------------->
 			<!-- 검색 버튼/창 DIV -->	
-
-				<!-- 검색 돋보기 버튼 부분 -->
-				<div id="searchBttnContainer">
-					<a id="searchButton" href="javascript:void(0)" onclick="toggleNav()">
-						<img src="/resources/img/consumer/magnifyingGlass48x48.png" height="42px" style="margin-top:8px; margin-right:5px;"/>
-					</a>
-				</div>
+			<!-- 검색 돋보기 버튼 부분 -->
+			<div id="searchBttnContainer">
+				<a id="searchButton" href="javascript:void(0)" onclick="toggleNav()">
+					<img src="/resources/img/consumer/mainIcon/magnifyingGlass_black_48x48.png" height="42px" style="margin-top:8px; margin-right:5px;"/>
+				</a>
+			</div>
 
 			<!-- 로고 이미지 DIV -->
-			
 			<div id="logo_main">
-				<a href="/consumer/main.do"><img src="/resources/img/consumer/logoWhite48x48.png" height="46px" style="margin-top:6px;"/></a>
+				<a href="/consumer/main.do"><img src="/resources/img/consumer/logoBlack48x48.png" height="46px" style="margin-top:6px;"/></a>
 			</div>
-		
-			
 		</div>
 		<!-- 1번째 행 종료 -->
 		
@@ -126,7 +122,7 @@
 			</div>
 			<div id="nav_top_right" >
 				<!-- 위치정보 있을 경우-->
-				<img src="/resources/img/consumer/mapMarker.png" style="height:12px; margin-bottom:2px; margin-right:3px"/>
+				<img src="/resources/img/consumer/mainIcon/mapMarker.png" style="height:12px; margin-bottom:2px; margin-right:3px"/>
 				<a id="myLocLink" href="/consumer/cnsmr/findMyLoc.do"></a>
 				<%if(!"".equals(myAddress)) {%>
 					<a href="/consumer/cnsmr/findMyLoc.do"><%=myAddress%></a>
@@ -155,8 +151,13 @@
 	</div>
 	<!-- 푸터 -->
 	<footer class="footer">
-		<div style="padding-top:28px;"></div>
-		<div class="footerContainer" style="padding:0px 10px; background-color: #f5f5f5;"><span class="text-muted">© All Rights Reserved.</span></div>
+		<div class="footerContainer" style="line-height: 28px; padding: 16px 18px; background-color: #333333;">
+			<span class="text-muted" style="color: #cccccc;">
+			회사명 : TRWN &nbsp;|&nbsp;대표전화 : 02-000-0000 &nbsp;|&nbsp; Fax : 02-0000-0000<br/>
+			주소 : 서울특별시 강서구 화곡동 강서 폴리텍 대학교 본관 3층 <br/>
+			<b style="color: white;">COPYRIGHT © 2018 TRWN. ALL RIGHTS RESERVED.</b><br/>
+			</span>
+		</div>
 	</footer>
 
 <!--  top body끝  -->

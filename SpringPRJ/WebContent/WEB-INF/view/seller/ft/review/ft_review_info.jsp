@@ -1,3 +1,5 @@
+<%@page import="poly.dto.admin.ADMIN_User_InfoDTO"%>
+<%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="poly.dto.admin.ADMIN_Ft_InfoDTO" %>
@@ -6,10 +8,15 @@
 <%@page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
+	List<ADMIN_User_InfoDTO> revp_uDTOarr = (List<ADMIN_User_InfoDTO>)request.getAttribute("revp_uDTOarr");
 	ADMIN_Ft_InfoDTO ftDTO2 = (ADMIN_Ft_InfoDTO)request.getAttribute("ftDTO");
 	ADMIN_Ft_ReviewDTO revDTO = (ADMIN_Ft_ReviewDTO)request.getAttribute("revDTO");
 	List<ADMIN_Ft_ReviewDTO> repleList = (List<ADMIN_Ft_ReviewDTO>)request.getAttribute("repleList");
 	ADMIN_ImageDTO imgDTO = (ADMIN_ImageDTO)request.getAttribute("imgDTO");
+	String user_nick = CmmUtil.nvl((String)(request.getAttribute("user_nick")));
+	
+	String ftUsrNick = CmmUtil.nvl((String)session.getAttribute("userNick"));
+	
 %>
 <html>
 <style>
@@ -116,7 +123,7 @@
     		</tr>
     		<tr style="border-bottom:1px solid #EAEAEA;">
     			<td class="table_Hblock">작성자</td>
-    			<td class="table_Cblock">/작성자/</td>
+    			<td class="table_Cblock"><%=user_nick%></td>
     			<td class="table_Hblock" width="14%">작성일</td>
     			<td class="table_Cblock"><%=revDTO.getRev_regdate()%></td>
     			<td class="table_Hblock">평점</td>
@@ -145,10 +152,10 @@
     			<td class="table_Hblock">답글</td>
     			<td colspan="5" style="padding:8px;">
     				<table width="100%" style="border-top:1px solid #DDDDDD; border-bottom:1px solid #DDDDDD;">
-    				<%if(repleList!=null){ %>
+    				<%if(repleList!=null){ int i=0;%>
     				<%for(ADMIN_Ft_ReviewDTO revpDTO : repleList){ %>
     					<tr style="border-bottom:1px solid #DDDDDD;">
-    						<td class="reple_block" width="15%">/작성자/</td>
+    						<td class="reple_block" width="15%"><%=revp_uDTOarr.get(i).getUser_nick()%></td> 
     						<td class="textarea_block">
    								<span id="r_text<%=revpDTO.getReview_seq()%>">
    									<%=revpDTO.getRev_text()%>
@@ -158,17 +165,17 @@
     						<td class="reple_date_block"><%=revpDTO.getRev_regdate()%></td>
     						<td class="table_CCblock" width="20%" style="padding-left:5px; text-align:left;">
     							<input type="button"  value="수정" class="btn btn-default" onClick="javascript:reple_Edit(<%=revpDTO.getReview_seq()%>);">
-    							<input type="button"  value="삭제" class="btn btn-default" onClick="location.href='<%=request.getContextPath()%>/seller/ft/ft_review_delete.do?cmd=review_info&ft_seq=<%=ftDTO2.getFt_seq()%>&review_seq=<%=revDTO.getReview_seq()%>&revp_seq=<%=revpDTO.getReview_seq()%>'">
+    							<input type="button"  value="삭제" class="btn btn-default" onClick="location.href='<%=request.getContextPath()%>/admin/ft/ft_review_delete.do?cmd=review_info&ft_seq=<%=ftDTO2.getFt_seq()%>&review_seq=<%=revDTO.getReview_seq()%>&revp_seq=<%=revpDTO.getReview_seq()%>'">
     						</td>
     					</tr>
-    				<%}
+    				<%i++;}
     				} %>
     					<tr>
-	    					<form action="<%=request.getContextPath()%>/seller/ft/ft_review_reple_create.do" method="post">
+	    					<form action="<%=request.getContextPath()%>/admin/ft/ft_review_reple_create.do" method="post">
 	    						<input type="hidden" value="<%=revDTO.getFt_seq()%>" name="ft_seq">
 	    						<input type="hidden" value="<%=revDTO.getReview_seq()%>" name="review_seq">
 	    						<input type="hidden" value="review_info" name="cmd">
-	    						<td class="reple_block" >관리자</td>
+	    						<td class="reple_block" ><%=ftUsrNick  %></td>
 	    						<td colspan="2" class="textarea_block"><textarea name="rev_text" style="width:100%; height:75px;" class="form-control"></textarea></td>
 	    						<td class="textarea_block"><input type="submit" value="저장" class="btn btn-default" style="width:100%; height:75px;"></td>
 	    					</form>

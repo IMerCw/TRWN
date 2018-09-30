@@ -151,7 +151,7 @@ public class SELLER_FtSellerController {
 				        String file_id = ImgService.getFile_Seq();
 				        //System.out.println("RewardController reAddProCtrl n : " + n);
 				        System.out.println("RewardController reAddProCtrl uploadPath : " + uploadPath);
-				        ftSDTO.setFileId(String.valueOf(Integer.parseInt(file_id)-1));
+				        ftSDTO.setFileId(String.valueOf(Integer.parseInt(file_id)));
 		}else { //업로드된 파일 없을때
 			ftSDTO.setFileId("-1");
 		}

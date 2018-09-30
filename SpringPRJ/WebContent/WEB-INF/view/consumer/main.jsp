@@ -23,6 +23,16 @@
   		width:100%;
   		max-height: 480px;
 	}	
+
+	#thirdMenu > div {
+		height: 62px;
+	    border: 1px solid #ccc;
+	    border-radius: 8px;
+	    width:24%;
+	    display:inline-block;
+	    padding-top:4px;
+	    cursor:pointer;
+	}
 </style>
 </head>
 <body>
@@ -49,7 +59,6 @@
 				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(1).getFileSevname()%>"
 				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
 				      </div>
-				    
 				      <div class="item">
 				        <img src="<%=request.getContextPath()%>/resources/files/<%=imgDTOs.get(2).getFileSevname()%>"
 				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
@@ -72,17 +81,49 @@
 			  </div>
 			</div>
 		<%} %>
-			<!-- 네번째 라인 (이벤트 배너) 끝 -->
-			
-			<div id="mainAddress"  style="padding:50px;">
-			<p>서울특별시 강서구 화곡동</p>
-			<p>Tel: 02-000-0000</p>
-			<p>Fax:02-000-0000</p>
-			<p>E-mail: foodtruck@Truck.com</p>
-			<br/>
-			<p>트럭왔냠의 사전 서면 동의 없이 트럭왔냠의 일체의 정보, 콘텐츠 및 UI등을
-			상업적 목적으로 전재, 전송, 스크래핑 등 무단 사용할 수 없습니다.</p>
+		<div class="container" style="padding:8px 15px; text-align:center; color:white; font-size:16px;">
+			<div class="col-xs-6" onclick="location.href='/consumer/cnsmr/findAdjFt.do?locPosition=<%=myLat%>,<%=myLon%>&myAddress=<%=myAddress%>'" 
+				style="cursor:pointer; height:38px; background-color:#e85376; border-radius:50px 0 0 50px; padding:8px 0; border-right: 1px solid white;">
+				근처 푸드트럭
 			</div>
+			
+			<div class="col-xs-6" onclick="location.href='/consumer/user/userOrderInfo.do'" 
+				style="cursor:pointer; height:38px; background-color:#24A6BD; border-radius:0 50px 50px 0; padding:8px 0;">
+				주문 조회
+			</div>
+		</div>
+		<div class="container-fluid" style="text-align:center; font-size:18px; color:white;">
+			<div class="row" style="cursor:pointer; background-color:#fd8469; padding: 4px 18px; height:56px; "onclick="location.href='/consumer/rcmmnd/rcmmndMenu.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/rcmmnd/statistics.png" style="width:46px; float:left;" />
+				<p style="float:left; padding: 11px 12px;">트럭왔냠 추천 메뉴</p></div>
+		
+			<div class="row" style="cursor:pointer; background-color:#ffd15c; padding: 4px 18px; clear:both; height:56px;"onclick="location.href='/consumer/rcmmnd/CustomRcmmnd.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/rcmmnd/brain.png" style="width:46px; float:left;" />
+				<p style="float:left; padding: 11px 12px;">소비자 맞춤 추천 </p></div>
+				
+			<div class="row" style="cursor:pointer; background-color:#5497d6; padding: 4px 18px; clear:both; height:56px;" onclick="location.href='/consumer/rcmmnd/wordCloudTrend.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/rcmmnd/networking.png"style="width:46px; float:left;"  />
+				<p style="float:left; padding: 11px 12px;">검색어 트렌드</p></div>
+			
+		</div>
+		<div class="container" id="thirdMenu" style="text-align:center; padding: 10px 14px;">	
+			<div onclick="location.href='/consumer/board/noticeList.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/mainIcon/megaphone.png">
+				<p>공지사항</p>
+			</div>
+			<div onclick="location.href='/consumer/board/boardList.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/mainIcon/customer-service.png">
+				<p>고객센터</p>
+			</div>
+			<div onclick="location.href='/consumer/user/mypage.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/mainIcon/id-card.png">
+				<p>마이페이지</p>
+			</div>
+			<div onclick="location.href='/consumer/user/userFavoriteFt.do'">
+				<img src="<%=request.getContextPath()%>/resources/img/consumer/mainIcon/favorite_ft.png">
+				<p>관심매장</p>
+			</div>
+		</div>
 			
 
 

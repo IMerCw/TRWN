@@ -79,7 +79,7 @@
 	<!-- 일간 매출액 끝 --> --%>
     
 
-	<div style="background-color:black; padding-top:30px; padding:10px;" >
+	<div style="background-color:#000000; padding-top:30px; padding:10px;" >
 		
 	 	 <!-- Nav tabs -->
 		<ul class="nav nav-pills" style="background-color:black; display: block;">

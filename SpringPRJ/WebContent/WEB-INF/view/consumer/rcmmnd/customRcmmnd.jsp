@@ -39,7 +39,8 @@
 <%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
 
 <body>
-	<div class="container-fluid" style="border-bottom: 1px solid #eeeeee; width:95%; padding:12px; text-align:right;">
+	<div class="container-fluid" style="margin-bottom: 20px; border-bottom: 4px solid white; 
+		width: 30%; padding: 12px; text-align: right; margin-right: 10px;">
 		<h3>소비자 맞춤 추천</h3>
 	</div>
 	<!-- 푸드트럭 목록 -->  

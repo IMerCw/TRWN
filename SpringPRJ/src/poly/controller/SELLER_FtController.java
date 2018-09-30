@@ -25,8 +25,10 @@ import poly.dto.admin.ADMIN_Ft_Menu_CateDTO;
 import poly.dto.admin.ADMIN_Ft_ReviewDTO;
 import poly.dto.admin.ADMIN_ImageDTO;
 import poly.dto.admin.ADMIN_Menu_InfoDTO;
+import poly.dto.admin.ADMIN_User_InfoDTO;
 import poly.service.ADMIN_IFtService;
 import poly.service.ADMIN_IImageService;
+import poly.service.ADMIN_IUserService;
 import poly.service.impl.ADMIN_ImageService;
 import poly.util.ADMIN_UtilFile;
 import poly.util.CmmUtil;
@@ -42,6 +44,9 @@ public class SELLER_FtController {
 	
 	@Resource(name="ADMIN_ImageService")
 	private ADMIN_IImageService imgService;
+	
+	@Resource(name="ADMIN_UserService")
+	private ADMIN_IUserService userService;
 	
 /*----------------------------------------------------------------------------------------*/
 	
@@ -143,6 +148,7 @@ public class SELLER_FtController {
 				LimgDTO = imgService.getImageInfo(fDTO.getFile_id());
 				model.addAttribute("LimgDTO", LimgDTO);
 			}
+			
 			//페이지 커맨드 전송
 			model.addAttribute("cmd", cmd);
 			model.addAttribute("ftDTO", fDTO);
@@ -161,9 +167,10 @@ public class SELLER_FtController {
 				}
 			}else if(cmd.equals("review_list")) { //리뷰 리스트
 				List<ADMIN_Ft_ReviewDTO> ALL_review_List;
-				
 				ALL_review_List = ftService.getFT_Review_List(ft_seq);
 				List<ADMIN_Ft_ReviewDTO> review_List = new ArrayList<ADMIN_Ft_ReviewDTO>();
+				List<ADMIN_User_InfoDTO> uDTOarr = new ArrayList<ADMIN_User_InfoDTO>();
+				
 				
 				//리뷰&답글 분류
 				int reple_cnt = 0;
@@ -174,10 +181,14 @@ public class SELLER_FtController {
 						reple_cnt = ftService.getReview_Reple_Cnt(search_level);
 						irevDTO.setReple_cnt(reple_cnt);
 						
+						//작성자 셋팅
+						uDTOarr.add(userService.getUser(irevDTO.getUser_seq()));
+						
 						review_List.add(irevDTO);
 					}
 				}
 				
+				model.addAttribute("uDTOarr", uDTOarr);
 				model.addAttribute("review_List", review_List);
 				
 				//게시판 갯수 쪼개기
@@ -190,9 +201,16 @@ public class SELLER_FtController {
 				revDTO = ftService.getFT_Review_Info(Integer.parseInt(request.getParameter("review_seq")));
 				ALL_review_List = ftService.getFT_Review_List(ft_seq);
 				List<ADMIN_Ft_ReviewDTO> repleList = new ArrayList<ADMIN_Ft_ReviewDTO>();
+				String user_nick = CmmUtil.nvl((String)(request.getParameter("user_nick")));
+				
+				List<ADMIN_User_InfoDTO> revp_uDTOarr = new ArrayList<ADMIN_User_InfoDTO>();
 				for(ADMIN_Ft_ReviewDTO revpDTO : ALL_review_List) {
 					String[] array = revpDTO.getRev_level().split("-");
 					if(!String.valueOf(revpDTO.getReview_seq()).equals(revpDTO.getRev_level())&&(Integer.parseInt(request.getParameter("review_seq"))-1)==Integer.parseInt(array[0])) {
+						//리뷰답글 작성자 리스트
+						revp_uDTOarr.add(userService.getUser(revpDTO.getUser_seq()));
+						
+						//리뷰답글 리스트
 						repleList.add(revpDTO);
 					}
 				}
@@ -201,8 +219,12 @@ public class SELLER_FtController {
 					imgDTO = imgService.getImageInfo(revDTO.getFile_id());
 					model.addAttribute("imgDTO", imgDTO);
 				}
+				
 				model.addAttribute("revDTO", revDTO);
 				model.addAttribute("repleList", repleList);
+				model.addAttribute("user_nick", user_nick);
+				model.addAttribute("revp_uDTOarr", revp_uDTOarr);
+				
 			}else if(cmd.equals("review_edit")){ //리뷰 수정
 				ADMIN_Ft_ReviewDTO revDTO = new ADMIN_Ft_ReviewDTO();
 				ADMIN_ImageDTO imgDTO = new ADMIN_ImageDTO();

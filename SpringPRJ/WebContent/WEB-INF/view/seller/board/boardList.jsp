@@ -24,6 +24,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<style>
+		#datatable1_wrapper {
+			width:100%;
+		}
+		#customerCenter > div:nth-child(2), #boardCommunity > div:nth-child(2){
+			margin-top:20px;
+		}
+		#boardNotice > div:nth-child(2) {
+			display:none;
+		}
+	</style>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">
@@ -57,7 +68,7 @@
 			                    <div class="tab-content">
 			                    <!-- 공지사항  시작-->
 			                        <div class="tab-pane fade in active" id="tab1info">
-			                        	<div class="row" id="boardNotice">
+			                        	<div id="boardNotice">
 			                        		<div class="col-xs-6 col-sm-3" style="text-align:center">
 			                        		
 			                        		</div>	
@@ -67,7 +78,7 @@
 			                        </div>
 			                        <!-- info 2   -->
 			                        <div class="tab-pane fade" id="tab2info">
-			                        	<div class="row" id="customerCenter">
+			                        	<div id="customerCenter">
 			                        		<div class="col-xs-6 col-sm-3" style="text-align:center">
 			                        			
 			                        		</div>	
@@ -77,7 +88,7 @@
 			                        
 			                        <!-- info3 시작 -->
 			                        <div class="tab-pane fade" id="tab3info">
-			                        	<div class="row" id="boardCommunity">
+			                        	<div id="boardCommunity">
 			                        		<div class="col-xs-6 col-sm-3" style="text-align:center">
 			                        		
 			                        		</div>	
@@ -215,10 +226,10 @@
 			//업주 커뮤니티 ajax 끝 
 			
 			function createHTML(data){
-				console.log(data);
+				/* console.log(data);
 				console.log("data.length : " +Object.keys(data).length);
 				
-				console.log("data[0].boardPSeq : " + data[0].boardPSeq);
+				console.log("data[0].boardPSeq : " + data[0].boardPSeq); */
 				var tmp = 0;
 				var contents = "";
 				var userEmail = '<%=userEmail%>';

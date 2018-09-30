@@ -5,15 +5,16 @@
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
 	<!-- <link rel="stylesheet" href="/img/b.css" /> -->    
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"><%--구글 웹 폰트 --%>
 	
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
+		font-family: 'Noto Sans KR', sans-serif !important;
 		margin: 0 auto;
+	    background-color: #f0f0f0;
 	}
 	
 	a {
@@ -89,13 +90,13 @@
 	/* 1번째 행 최상단 날씨 / 지역 div */
 	.topFirstContainer{
 		overflow:hidden; height:24px;
-		background-color: #444444;
+		background-color: #f0f0f0;
 	}
 	.topFirstContainer a{
-		display:table-cell; color:#cbcbcb; font-size:14px; font-weight:bold;
+		display:table-cell; color:#cbcbcb; font-size:14px;  color:black;
 	}
 	#nav_top_left{
-		float:left; display:table; font-weight:bold;
+		float:left; display:table;
 	}
 	#nav_top_left img{
 		margin-left:10px;
@@ -113,7 +114,7 @@
  	/* 2번째 행 메뉴 / 검색 / 뒤로가기 버튼 div  */
  	.topSecondContainer {
  		height:56px; 
- 		background: #333333;
+ 		background: #ffffff;
  	}
  	.menuButton{
  		float:left;
