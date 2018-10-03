@@ -193,10 +193,18 @@
 	<%for(int i=0; i< wList.size(); i++){%>
 		arraylatelyDate.push('<%=wList.get(i).getOrd_date()%>');
 	<%}%>
-	for(var i=0; i< arraylatelyDate.length; i++){
+	for(var i=0; i< 7; i++){
+		console.log("arraylatelyDate " + i + " : " + arraylatelyDate[i]);
+		if(arraylatelyDate[i] == undefined){
+			arraylatelyDate[i] = "No Sales";
+		}
+	}
+	
+	for(var i=0; i< 7; i++){
+		console.log("=======");
 		console.log("arraylatelyDate " + i + " : " + arraylatelyDate[i]);
 	}
-
+		
 	var chart = AmCharts.makeChart( "chartdiv", {
 	  "type": "serial",
 	  "theme": "dark",
