@@ -51,11 +51,11 @@ body { font-family:gulim; font-size:12px; }
 				</div>
 					<div class="container-fluid" style="height:80%;">
 						<div id="map" style="width:100%; opacity:0.8; height:350px; float:none;" class="col-sm-12"></div>
-						<div style="height: 2px;background-color: black;margin: 10px 0;">
+						<div style="height: 2px;background-color: #eeeeee; margin: 21px 0;">
 						
 						</div>
-						<div class="chart-container col-sm-5" style="position: relative; width:90%; background-color:white; opacity: 0.9;" >
-					   		<canvas style="width:50%; height:200px;" id="myChart" ></canvas>
+						<div class="chart-container col-sm-5" style="position:relative; height:50vh; width:100%; background-color:white; opacity: 0.9;" >
+					   		<canvas style="height:50vh; width:115%;" id="myChart" ></canvas>
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,7 @@ body { font-family:gulim; font-size:12px; }
     var myChart = new Chart(ctx, {
         type: 'bar',
         options: {
-        	
+        	responsive : false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -259,8 +259,7 @@ function getMyChart(gugunData) {
 
 	
 	ctx = document.getElementById("myChart").getContext('2d');
-	ctx.canvas.width = 300;
-	ctx.canvas.height = 300;
+	ctx.canvas.height = 150;
 	var gugunLables = [];
 	var gugunDataValues = [];
 	for(var key in gugunData) {
