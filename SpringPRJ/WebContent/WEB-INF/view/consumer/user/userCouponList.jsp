@@ -79,14 +79,18 @@
 					<td>쿠폰 발행일</td>
 					<td>쿠폰 사용 기간</td>
 				</tr>
-				<%for(int i=0; i < cList.size(); i++) { %>
-				<tr>
-					<td><%=cList.get(i).getCoupon_name()%></td>
-					<td><%=cList.get(i).getCoupon_count()%></td>
-					<td><%=cList.get(i).getCoupon_count()%></td>
-					<td><%=cList.get(i).getCoupon_issuedate()%></td>
-					<td><%=cList.get(i).getCoupon_date()%></td>
-				</tr>
+				<%if(cList != null) { %>
+					<%for(int i=0; i < cList.size(); i++) { %>
+					<tr>
+						<td><%=cList.get(i).getCoupon_name()%></td>
+						<td><%=cList.get(i).getCoupon_count()%></td>
+						<td><%=cList.get(i).getCoupon_count()%></td>
+						<td><%=cList.get(i).getCoupon_issuedate()%></td>
+						<td><%=cList.get(i).getCoupon_date()%></td>
+					</tr>
+					<%} %>
+				<%} if(cList == null || cList.isEmpty()) {%>
+					<tr><td colspan="5" style="font-size: 28px; text-align: center; background: #ddd; padding: 20px;">사용 가능한 쿠폰 내역이 없습니다.</td></tr>
 				<%} %>
 			</tbody>
 	

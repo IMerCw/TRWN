@@ -66,7 +66,7 @@
 				<a class="nav-link" href="/consumer/user/userCouponList.do">쿠폰목록</a>
 			</div>
 		</div>
-		<table class="table table-font-size" style="border:1px solid #dddddd; width:100%; margin:0 auto;" >
+		<table class="table table-font-size" style="background:#ffffff; border:1px solid #dddddd; width:100%; margin:0 auto;" >
 			<thead>
 				<tr>
 					<th colspan="2"
