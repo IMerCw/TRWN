@@ -51,11 +51,11 @@ body { font-family:gulim; font-size:12px; }
 				</div>
 					<div class="container-fluid" style="height:80%;">
 						<div id="map" style="width:100%; opacity:0.8; height:350px; float:none;" class="col-sm-12"></div>
-						<div style="height: 2px;background-color: black;margin: 10px 0;">
+						<div style="height: 2px;background-color: #eeeeee; margin: 21px 0;">
 						
 						</div>
-						<div class="chart-container col-sm-5" style="position: relative; width:90%; background-color:white; opacity: 0.9;" >
-					   		<canvas style="width:50%; height:200px;" id="myChart" ></canvas>
+						<div class="chart-container col-sm-5" style="position:relative; height:50vh; width:100%; background-color:white; opacity: 0.9;" >
+					   		<canvas style="height:50vh; width:115%;" id="myChart" ></canvas>
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,7 @@ body { font-family:gulim; font-size:12px; }
     var myChart = new Chart(ctx, {
         type: 'bar',
         options: {
-        	
+        	responsive : false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -149,6 +149,7 @@ function findMap(){
 	console.log(gugunData);
 	
 	
+	
 	$.ajax({
 		url : "/seller/ftDistrictData/ftDistrictDataProc.do",	
 		method : "post",
@@ -175,7 +176,73 @@ function findMap(){
 				
 		}
 	});
-};
+	console.log(sido);
+	
+	/* 
+	var search = "부산광역시청"
+	console.log(search);
+	
+	//주소-좌표 변환 객체를 생성합니다.
+	var geocoder = new daum.maps.services.Geocoder();
+	
+	
+	//주소로 좌표를 검색합니다.
+	geocoder.addressSearch(search, function(result, status){
+		console.log("status : "+status); //status
+		
+		//정상적으로 검색이 완료됐으면
+		if(status === daum.maps.services.Status.OK){
+			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+			
+			console.log("좌표따기 : " + coords);
+			console.log("y : " + result[0].y);
+			console.log("x : " + result[0].x);
+			
+			//지도의 중심을 결과값으로 받은 위치로 이동시킵니다.
+			map.setCenter(coords);
+		}
+	}); 
+	*/
+	
+	 if(sido == "서울"){
+		map.setCenter(new daum.maps.LatLng(37.567476, 126.977917));
+	}else if(sido == "부산"){
+		map.setCenter(new daum.maps.LatLng(35.180013, 129.074957));
+	}else if(sido == "대구"){
+		map.setCenter(new daum.maps.LatLng(35.879482, 128.602207));
+	}else if(sido == "인천"){
+		map.setCenter(new daum.maps.LatLng(37.456252, 126.705906));
+	}else if(sido == "광주"){
+		map.setCenter(new daum.maps.LatLng(35.160368, 126.851446));
+	}else if(sido == "대전"){
+		map.setCenter(new daum.maps.LatLng(36.3517848, 127.384687));
+	}else if(sido == "울산"){
+		map.setCenter(new daum.maps.LatLng(35.539637, 129.311380));
+	}else if(sido == "강원"){
+		map.setCenter(new daum.maps.LatLng(37.8304115, 128.2260705));
+	}else if(sido == "경기"){
+		map.setCenter(new daum.maps.LatLng(37.5662952, 126.9779450999999));
+	}else if(sido == "경상남도"){
+		map.setCenter(new daum.maps.LatLng(35.345432, 128.529071));
+	}else if(sido == "경상북도"){
+		map.setCenter(new daum.maps.LatLng(36.361181, 128.613365));
+	}else if(sido == "전라남도"){
+		map.setCenter(new daum.maps.LatLng(34.802469, 126.811276));
+	}else if(sido == "전라북도"){
+		map.setCenter(new daum.maps.LatLng(35.813591, 126.907465));
+	}else if(sido == "제주"){
+		map.setCenter(new daum.maps.LatLng(33.379874, 126.568968));
+	}else if(sido == "충청남도"){
+		map.setCenter(new daum.maps.LatLng(36.634259, 126.972876));
+	}else if(sido == "충청북도"){
+		map.setCenter(new daum.maps.LatLng(36.806978, 127.610151));
+	}
+	
+	
+	 
+	
+	
+};// 찾기버튼 끝
 
 var callback = function(result, status) {
     if (status === daum.maps.services.Status.OK) {
@@ -192,8 +259,7 @@ function getMyChart(gugunData) {
 
 	
 	ctx = document.getElementById("myChart").getContext('2d');
-	ctx.canvas.width = 300;
-	ctx.canvas.height = 300;
+	ctx.canvas.height = 150;
 	var gugunLables = [];
 	var gugunDataValues = [];
 	for(var key in gugunData) {
