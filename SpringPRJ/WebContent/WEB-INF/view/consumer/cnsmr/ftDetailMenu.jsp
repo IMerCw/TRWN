@@ -41,6 +41,7 @@
 	.footer{
 		background-color: #f2f2f2;
 	}
+
 </style>
 <body>
 	
@@ -58,7 +59,7 @@
 			<%for (int i = 0; i < menuDTOs.size(); i++) { %>
 				<%if(cateDTOs.get(k).getCate_sort_no() == menuDTOs.get(i).getCate_sort_no()) {%>
 					<div class="col-sm-6" style="overflow:hidden; margin-bottom:6px; border-radius:4px;">
-						<div class="contentBox" style="height: 420px; padding: 0px 12px; text-align:center;">
+						<div class="contentBox" style="padding: 0px 12px; text-align:center;">
 							<!-- 메뉴 이미지 -->
 							<div class="row ftMenuRow imgRow" style=" overflow:hidden; padding:8% 0;">
 								<%for(int j = 0; j < imgDTOs.size(); j++) {%>

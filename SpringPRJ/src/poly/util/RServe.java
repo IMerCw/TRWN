@@ -69,7 +69,7 @@ public class RServe {
             	
             }
             //라이브러리
-            connection.eval("library(devtools)");
+            /*connection.eval("library(devtools)");*/
             connection.eval("library(RCurl)");
             connection.eval("library(lsa)"); 
             

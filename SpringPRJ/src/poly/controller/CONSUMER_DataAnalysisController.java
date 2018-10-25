@@ -102,7 +102,7 @@ public class CONSUMER_DataAnalysisController {
 		RServe rserve = new RServe();
 		rftDTOArr = rserve.usrCossim(mainUserRvDTO, compUsersRvDTO);
 
-		//DB로 받아올 푸드트럭 목록들
+		//DB로 받아 올 푸드트럭 목록들
 		List<CONSUMER_RcmmndFtDTO> rftDTOArrRslt = null;
 		rftDTOArrRslt = ftService.getRcmmndFtList(rftDTOArr);
 		
@@ -116,6 +116,7 @@ public class CONSUMER_DataAnalysisController {
 		}
 		
 		
+		
 		model.addAttribute("rftDTOArr", rftDTOArrRslt);
 		
 		return "/consumer/rcmmnd/customRcmmnd";
@@ -126,7 +127,7 @@ public class CONSUMER_DataAnalysisController {
 	public String wordCloudTrend(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		
 		//csv파일을 저장할 실제경로
-		String realPathCSV = request.getSession().getServletContext().getRealPath("/")+ "resources\\js\\consumer\\d3Cloud\\" + "searchTrend.csv";
+		String realPathCSV = request.getSession().getServletContext().getRealPath("/")+ "resources/js/consumer/d3Cloud/" + "searchTrend.csv";
 		System.out.println(realPathCSV);
 		
 		//DB에서 검색어 목록,빈도수 가져오기

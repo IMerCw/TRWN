@@ -69,10 +69,10 @@
 						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/mypage.png" />
 						<a href="/consumer/user/mypage.do">마이페이지</a>
 					</div>
-					<div>
+					<%-- <div>
 						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/event_menu.png" />
 						<a href="/consumer/user/CnsmrEvnt.do">이벤트</a>
-					</div>
+					</div> --%>
 					<div>
 						<img src="<%=request.getContextPath()%>/resources/img/consumer/menu_icon/notice.png" />
 						<a href="/consumer/board/noticeList.do">공지사항</a>

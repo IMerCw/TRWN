@@ -44,7 +44,7 @@
 	</div>
 <%} else { %>
 	<!-- 검색 결과가 있을 경우 -->
-	<div class="container-fluid" style="height:100%;">
+	<div class="container-fluid">
 		<div class="row"><h4>"<u><%=keyWord %></u>" 검색 결과 - 가까운 위치부터 정렬한 검색결과입니다.</h4></div>
 		<%for(int i = 0; i < menuDTO.size(); i++) {%>
 			<div class="col-sm-6">

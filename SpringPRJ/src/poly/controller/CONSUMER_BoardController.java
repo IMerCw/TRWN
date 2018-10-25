@@ -170,21 +170,13 @@ public class CONSUMER_BoardController {
 		log.info("boardDetail Start");
 		String boardPSeq = CmmUtil.nvl(request.getParameter("boardPSeq"));
 		log.info("boardPSeq : " + boardPSeq);
-		String userSeq = CmmUtil.nvl(request.getParameter("userSeq"));
-		log.info("userSeq : " + userSeq);
-		String content = CmmUtil.nvl(request.getParameter("content"));
-		log.info("content : " + content);
 		String boardSeq = CmmUtil.nvl(request.getParameter("boardSeq"));
 		log.info("boardSeq : " + boardSeq);
-	
+		
 		CONSUMER_BoardRepleDTO rDTO = new CONSUMER_BoardRepleDTO();
 		
 		rDTO.setBoardPSeq(boardPSeq);
 	    log.info("리뷰 rDTO getboardPSeq : " + rDTO.getBoardPSeq());
-		rDTO.setUserSeq(userSeq);
-		log.info("리뷰 rDTO getUserSeq : " + rDTO.getUserSeq());
-		rDTO.setContent(content);
-		log.info("리뷰 rDTO getContent : "+rDTO.getContent());
 		
 		/*//공지사항 게시글 자세히 보기
 		if(boardSeq.equals("1")) {

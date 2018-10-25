@@ -64,7 +64,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/view/consumer/topBody.jsp" %>
-		<div class="container" style="bgcolor:#e0e0e0">
+		<div class="container" style="background: white; padding:20px 0; border-radius: 10px;">
 			<ul style="list-style:none;">
 				<li>제목 : <%=bDTO.getTitle()%></li>
 			</ul>
@@ -81,18 +81,19 @@
 				<li>내용 : <%=bDTO.getContent()%></li>
 			</ul>
                
-			<div style="height:100px">
+			<div>
 			</div>
 			
 			<!-- 삭제 수정버튼 -->
-			<div align="right" style="height:200px">
-				<div style="line-height:100%; margin-left:10px; margin-right:10px;">
-				<button class="btn btn-default" onclick="location.href='/consumer/board/boardUpdateView.do?boardPSeq=<%=bDTO.getBoardPSeq()%>';">수정하기</button>
-				<button class="btn btn-default" onclick="deleteBoard('<%=bDTO.getBoardPSeq()%>');">삭제하기</button>
+			<%if(bDTO.getUserSeq().equals(userSeq) ) {%>
+				<div align="right">
+					<div style="line-height:100%; margin-left:10px; margin-right:10px;">
+					<button class="btn btn-default" onclick="location.href='/consumer/board/boardUpdateView.do?boardPSeq=<%=bDTO.getBoardPSeq()%>';">수정하기</button>
+					<button class="btn btn-default" onclick="deleteBoard('<%=bDTO.getBoardPSeq()%>');">삭제하기</button>
+					</div>
 				</div>
-			</div>
-			
-			<!-- 댓글 달기 버튼-->
+			 <%}%>			
+		<%-- 	<!-- 댓글 달기 버튼-->
 			<div align="right">
 				<p>댓글을 달아주세요:</p><textarea id="contentAjax" name="content" placeholder="댓글을 입력하세요"></textarea>
 				<button class="btn btn-default" style="margin-left:10px; margin-right:10px;" onclick="ajaxTest()">댓글</button> 
@@ -107,7 +108,7 @@
 				<%=rList.get(i).getContent() %><tr><td><div align="right"><button class="btn btn-default">수정</button><button class="btn btn-default">삭제</button></div></td></tr>
 				</table></div>
 				<%} %>
-			</div>
+			</div> --%>
 		</div>
 </body>
 </html>

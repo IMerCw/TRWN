@@ -189,9 +189,6 @@
 			<td>
 				<div class="container">
 				<div class="top" >
-						<div class="back">
-						<a href="/cmmn/user/userLogin.do" class="btn" role="button">뒤로가기</a>
-						</div>
 						<div class="logo">
 						<a href="/cmmn/main.do" class="btn" role="button" ><h1>트럭왔냠</h1></a>
 						</div>

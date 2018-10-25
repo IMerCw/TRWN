@@ -47,7 +47,7 @@
 	<div class="container-fluid" style="margin:0; padding:12px;">
 		<%if(rftDTOArr != null && rftDTOArr.isEmpty() == false) {%>
 			<%for(CONSUMER_RcmmndFtDTO rftDTO: rftDTOArr ) {%>
-			<div class="row" style="margin: 12px 0; text-align:right; background-color:#eeeeee; border-radius:8px;">
+			<div class="row" style="margin: 12px 0; text-align:right; background-color:#d6d6d6; border-radius:8px;">
 		    	<div class="col-xs-6" style="padding:16px; height:256px;">
 					<img src="<%=request.getContextPath()%>/resources/files/<%=rftDTO.getFileSevname()%>" 
 							onError="this.src='/resources/img/consumer/NfoundError.png;'"
@@ -58,7 +58,6 @@
 						<%-- 추천도 반올림 계산 --%>
 						<% 
 							rcmmndRate = Double.parseDouble(rftDTO.getRcmmndRating());
-							
 						%>
 						
 						<h3>추천도 <%=(Math.round(rcmmndRate * 10000)) / 100.0%> % </h3>
