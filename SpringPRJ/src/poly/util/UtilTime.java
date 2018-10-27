@@ -23,7 +23,7 @@ public class UtilTime {
 	}
 	public static String getDateYYMMDD(String a) {
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //년,월,일,시간,분,초
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd / HH:mm:ss"); //년,월,일,시간,분,초
 		try {
 			cal.setTime(formatter.parse(a));
 			String date = new SimpleDateFormat("yyyyMMdd").format(cal.getTime());
