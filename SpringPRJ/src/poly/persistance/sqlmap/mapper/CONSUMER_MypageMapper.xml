@@ -36,7 +36,6 @@
 	<!-- 마이페이지 주문목록 -->
 	<select id="getOrderList" parameterType="string" resultType="CONSUMER_OrderInfoDTO">
 		SELECT 
-		
 			OI.ORD_SEQ as ord_seq,
 		    OI.ORD_SUMPRICE as ord_sumprice,
 		    OI.ORD_WAY as ord_way,

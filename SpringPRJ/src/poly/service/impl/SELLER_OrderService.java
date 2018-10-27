@@ -50,7 +50,6 @@ public class SELLER_OrderService implements SELLER_IOrderService {
 
 	@Override
 	public void insertOrderSuccess(SELLER_OrderInfoDTO oDTO, SELLER_WaitDTO oIDTO) throws Exception {
-		// TODO Auto-generated method stub
 		int insertOrderInfo = orderMapper.insertOrderInfo(oDTO);
 		int insertOrderItem = orderMapper.insertOrderItem(oIDTO);
 		
@@ -60,7 +59,6 @@ public class SELLER_OrderService implements SELLER_IOrderService {
 
 	@Override
 	public CMMN_UserDTO getUserDTO(CMMN_UserDTO uDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return orderMapper.getUserDTO(uDTO);
 	}
 	

@@ -213,9 +213,9 @@
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/facebook.png" onclick="javascript:facebookShare();" id="fbIcon"/>
 					
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/64_NAVER SQUARE ICON.png" onclick="javascript:naverShare();" id="naverIcon"/>
-					<a id="kakao-link-btn" href="javascript:sendLink()">
+					<!-- <a id="kakao-link-btn" href="javascript:sendLink()">
 						<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-					</a>
+					</a> -->
 
 				</div>
 				<div class="row">
@@ -388,7 +388,7 @@
 <script type="text/javascript">
 Kakao.init('60f4f121242d90c886eacd9609c92e78');
 function sendLink() {
-
+		alert('yes2');
       Kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
@@ -396,8 +396,8 @@ function sendLink() {
           description: '#트럭왔냠 #푸드트럭 맛집\n' + '<%=fDTO.getFt_intro() %>',
           imageUrl: 'http://54.180.77.82:8080<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>',
           link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com'
+        	  mobileWebUrl: window.location.href,
+              webUrl: window.location.href
           }
         },
         social: {
@@ -408,13 +408,6 @@ function sendLink() {
         buttons: [
           {
             title: '웹으로 보기',
-            link: {
-              mobileWebUrl: window.location.href,
-              webUrl: window.location.href
-            }
-          },
-          {
-            title: '앱으로 보기',
             link: {
               mobileWebUrl: window.location.href,
               webUrl: window.location.href

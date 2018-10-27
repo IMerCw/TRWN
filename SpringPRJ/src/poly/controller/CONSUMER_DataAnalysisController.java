@@ -35,6 +35,7 @@ import poly.util.RServe;
 import poly.util.ReadCSV;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -100,8 +101,8 @@ public class CONSUMER_DataAnalysisController {
 		//해쉬맵 생성 및 함수 호출
 		List<CONSUMER_RcmmndFtDTO> rftDTOArr = null;
 		RServe rserve = new RServe();
-		rftDTOArr = rserve.usrCossim(mainUserRvDTO, compUsersRvDTO);
-
+		rftDTOArr = rserve.usrEcldDist(mainUserRvDTO, compUsersRvDTO);
+		
 		//DB로 받아 올 푸드트럭 목록들
 		List<CONSUMER_RcmmndFtDTO> rftDTOArrRslt = null;
 		rftDTOArrRslt = ftService.getRcmmndFtList(rftDTOArr);
@@ -115,7 +116,19 @@ public class CONSUMER_DataAnalysisController {
 			}
 		}
 		
-		
+		//거리 순으로 정렬 낮은값이 앞으로 옴
+		for(int i = 0; i < rftDTOArrRslt.size() - 1; i++) {
+			for(int j = i + 1; j < rftDTOArrRslt.size(); j++) {
+				Double pivot = Double.parseDouble(rftDTOArrRslt.get(i).getRcmmndRating()); 
+				Double compare = Double.parseDouble(rftDTOArrRslt.get(j).getRcmmndRating());
+				CONSUMER_RcmmndFtDTO temp;
+				if(pivot > compare) {
+					temp = rftDTOArrRslt.get(j);
+					rftDTOArrRslt.set(j, rftDTOArrRslt.get(i));
+					rftDTOArrRslt.set(i, temp);
+				}
+			}
+		}
 		
 		model.addAttribute("rftDTOArr", rftDTOArrRslt);
 		

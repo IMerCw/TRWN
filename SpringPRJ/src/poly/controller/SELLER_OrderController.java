@@ -197,10 +197,10 @@ public class SELLER_OrderController {
 		
 	 //페이누리로 보내는 RETURN_URL(결제결과 데이터 받기)에 대응하는 메소드
 	   @RequestMapping(value="/orderComplete")
-	   public void orerComplete(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+	   public void orderComplete(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 	      req.setCharacterEncoding("EUC-KR");
 	      
-		   log.info(this.getClass() + "orderComplete start!!!");
+		  log.info(this.getClass() + "orderComplete start!!!");
 	      //결과코드
 	      String rep_code =CmmUtil.nvl(req.getParameter("REP_CODE"));
 	      log.info(this.getClass() + " rep_code : " + rep_code);
@@ -344,12 +344,16 @@ public class SELLER_OrderController {
 	         oIDTO.setOrdStatus("0");
 	         oIDTO.setOrdSeq(tid);
 	         log.info(oIDTO.getOrdSeq());
+	         log.info("===============================================");
+	         
 	         oIDTO.setCstmrName(customer_name);
 	         oIDTO.setCstmrTel(customer_tel);
 	         oIDTO.setTranNO(tran_no);
+	         log.info("Test over");
+	         orderService.insertOrderSuccess(oDTO, oIDTO);
+	         log.info("Insert end");
 	         
 	         session.setAttribute("ss_tmpBasket", "");
-	         orderService.insertOrderSuccess(oDTO, oIDTO);
 	         
 	      }else{
 	         /**
@@ -409,6 +413,7 @@ public class SELLER_OrderController {
  		//소비자로 접속 -> 결제화면으로 바로 이동
  		@RequestMapping(value="/seller/order/goCheck" ,method=RequestMethod.POST)
  		public String goCheck(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+ 			
  			String sum = CmmUtil.nvl(request.getParameter("sum"));
  			log.info("sum : " + sum);
  			String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));
