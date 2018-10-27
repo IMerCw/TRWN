@@ -21,6 +21,7 @@ public class UtilTime {
 		
 		return date;
 	}
+	
 	public static String getDateYYMMDD(String a) {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd / HH:mm:ss"); //년,월,일,시간,분,초
