@@ -19,7 +19,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>트럭왔냠 <%=bDTO.getBoardSeq() %></title>
+	<title>트럭왔냠</title>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">

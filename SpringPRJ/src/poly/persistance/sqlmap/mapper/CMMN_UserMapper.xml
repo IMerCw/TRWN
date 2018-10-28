@@ -28,7 +28,7 @@
 			#{userHp},
 			#{userStatus},
 			0,
-			#{userRegDate}
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T")
 			<!-- DTO 변수 이름으로 등록  -->
 		)
 	</insert>
@@ -146,7 +146,7 @@
 		)
 		VALUES
 		(
-			#{join_date},
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
 			#{user_seq}
 		)
 	</insert>

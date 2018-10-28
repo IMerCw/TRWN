@@ -118,7 +118,7 @@
 		    #{rev_title},
 		    #{rev_point},
 		    #{rev_text},
-		    #{rev_regdate},
+		    DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
 		    #{rev_level},
 		    #{exp_yn}
 		)

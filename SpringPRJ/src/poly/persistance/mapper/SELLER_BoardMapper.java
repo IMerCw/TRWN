@@ -36,5 +36,9 @@ public interface SELLER_BoardMapper {
 	public int updateRe(SELLER_ReviewDTO rDTO)throws Exception;//댓글 업데이트
 	
 	public int deleteRe(SELLER_ReviewDTO rDTO)throws Exception;//댓글 삭제 
+
+	public String getBoardLevel() throws Exception;
+
+	public int board_P_CreateUpdate(int boardLevel) throws Exception;
 	
 }

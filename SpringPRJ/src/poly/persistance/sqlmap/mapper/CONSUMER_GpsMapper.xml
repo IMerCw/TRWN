@@ -19,7 +19,7 @@
 			VALUES
 			(
 				#{user_seq},
-				#{gps_renew_date},
+				DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
 				#{gps_sido},
 				#{gps_sigungu},
 				#{gps_dong},

@@ -107,6 +107,17 @@ public class SELLER_BoardService implements SELLER_IBoardService {
 		return boardMapper.deleteRe(rDTO);
 	}
 
+	@Override
+	public String getBoardLevel() throws Exception {
+		return boardMapper.getBoardLevel();
+	}
+
+	@Override
+	public int board_P_CreateUpdate(int boardLevel) throws Exception {
+		return boardMapper.board_P_CreateUpdate(boardLevel);
+				
+	}
+
 	
 	
 }

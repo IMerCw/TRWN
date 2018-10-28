@@ -41,7 +41,7 @@
 			UI.USER_NICK
 		FROM ORDER_INFO OI
 			INNER JOIN USER_INFO UI ON OI.USER_SEQ = UI.USER_SEQ
-		WHERE OI.${option} LIKE CONCAT('%', #{value}, '%') 
+		WHERE OI.${option} LIKE #{value}
 		ORDER BY OI.ORD_SEQ DESC
 	</select>
 

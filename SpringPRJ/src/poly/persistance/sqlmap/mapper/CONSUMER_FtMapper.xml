@@ -316,7 +316,7 @@
 	(
 		#{user_seq},
 		#{search_word},
-		#{search_date}
+		DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T")
 	)
 	</insert>
 

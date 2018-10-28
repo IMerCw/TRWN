@@ -91,7 +91,6 @@
             	<h4>주문내역 검색</h4>
                     <select class="form-control" name="option">
                    		<option value="user_seq">유저 번호</option>
-                   		<option value="user_email">유저 이메일</option>
                         <option value="ft_seq">푸드트럭 번호</option>
                     </select>
                     <input type="text" name="value" class="form-control">

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import poly.dto.admin.ADMIN_Board_PostDTO;
 import poly.dto.seller.SELLER_BoardDTO;
 import poly.dto.seller.SELLER_ReviewDTO;
 import poly.service.SELLER_IBoardService;
@@ -44,7 +44,7 @@ public class SELLER_BoardController {
 	}
 	
 	
-	//공지사항 insert 코드 
+	//게시판 글쓰기 
 	@RequestMapping(value="/seller/board/boardWriteProc",method=RequestMethod.POST)
 	public String boardWriteProc(HttpServletRequest request, Model model ) throws Exception{
 		String Title = CmmUtil.nvl( request.getParameter("Title") );
@@ -65,10 +65,15 @@ public class SELLER_BoardController {
 		bDTO.setRegDate(regDate);
 		bDTO.setBoardSeq(boardSeq);// 게시판 공지사항 구분 번호 1
 		bDTO.setUserSeq(userSeq);
-		
 		log.info("bDTOuserSeq : "+bDTO.getUserSeq());
 		
 		int result = BoardService.insertBoardDTO(bDTO);
+		
+		String boardLevel = BoardService.getBoardLevel();
+		//테이블생성 시 해당 테이블의 시퀀스값을 board_level 컬럼에 저장
+		int board_p_seq = Integer.parseInt(boardLevel);
+		
+		BoardService.board_P_CreateUpdate(board_p_seq);
 		
 		String msg = "";
 		String url = "";
@@ -76,7 +81,7 @@ public class SELLER_BoardController {
 		if(result != 0 ) {
 			//게시판 글쓰기가 정상적으로 이루어진 상태 
 			msg="등록에 성공하셨습니다";
-			url="/seller/main.do";
+			url="/seller/board/boardList.do";
 		}else {
 			//글쓰기가 이루어지지 않은 상태
 			msg="글쓰기 실패";

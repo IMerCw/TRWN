@@ -108,8 +108,7 @@
 		(
 			#{user_seq},
 			#{ft_seq},
-			#{like_regdate}
-			
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T")
 		)
 	</insert>
 	<!-- 관심매장 추가 여부 확인 -->

@@ -38,7 +38,7 @@
 						<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th colspan="2" style="background-color: #eeeeee; text-align: center;">공지사항 글쓰기</th>
+									<th colspan="2" style="background-color: #eeeeee; text-align: center; font-size:18px; font-weight:bold;">게시글 작성</th>
 								</tr>
 							</thead>
 							<tbody>
