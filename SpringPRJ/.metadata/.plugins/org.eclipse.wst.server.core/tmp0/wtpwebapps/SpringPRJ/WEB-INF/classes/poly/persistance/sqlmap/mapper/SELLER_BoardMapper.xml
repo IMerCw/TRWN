@@ -23,7 +23,7 @@
 			Board_P_SEQ.NEXTVAL,
 			#{boardSeq},
 			#{title},
-			#{boardContent},
+			#{content},
 			#{userSeq},
 			'0',
 			SYSDATE
@@ -33,7 +33,7 @@
 	<select id="getBoardList" resultType="SELLER_BoardDTO">
 		SELECT BP.BOARD_P_SEQ as boardPSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -46,9 +46,11 @@
 	<!--공지사항 디테일  -->
 	<!-- select 상세목록으로 들어가는 구문   -->
 	<select id="getBoardDetail" parameterType="SELLER_BoardDTO" resultType="SELLER_BoardDTO">
-		SELECT BP.BOARD_P_SEQ as boardPSeq,
+		SELECT 
+				BP.BOARD_P_SEQ as boardPSeq,
+				BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -68,7 +70,7 @@
 		 SELECT BP.BOARD_P_SEQ as boardPSeq,
 				 BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -93,7 +95,7 @@
 		 SELECT BP.BOARD_P_SEQ as boardPSeq,
 				 BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -107,7 +109,7 @@
 		SELECT BP.BOARD_P_SEQ as boardPSeq,
 				BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -127,8 +129,7 @@
 		UPDATE BOARD_POST
 		SET 
 			TITLE =#{title},
-			CONTENT = #{boardContent},
-			REG_DATE = SYSDATE
+			CONTENT = #{content}
 		WHERE BOARD_P_SEQ = #{boardPSeq}
 	</update>
 	<!-- 댓글 등록 -->

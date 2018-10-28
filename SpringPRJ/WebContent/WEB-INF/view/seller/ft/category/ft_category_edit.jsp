@@ -33,7 +33,7 @@
 		<h3>카테고리 수정</h3>
 	</div>
      <hr>
-	<form action="<%=request.getContextPath()%>/admin/ft/ft_cate_edit.do" method="post"  name="cate_edit">
+	<form action="<%=request.getContextPath()%>/seller/ft/ft_cate_edit.do" method="post"  name="cate_edit">
 		<input type="hidden" name="cmd" value="category_list">
 		<input type="hidden" name="ft_seq" value="<%=ftDTO2.getFt_seq()%>">
 		<input type="hidden" name="cate_sort_no" value="<%=cateDTO.getCate_sort_no() %>">

@@ -169,7 +169,7 @@ public class SELLER_BoardController {
 		
 	}
 	
-	//상세보기 코드 
+		//상세보기 코드 
 		@RequestMapping(value="/seller/board/boardDetail", method=RequestMethod.GET)
 		public String boardDetail(HttpServletRequest request , Model model) throws Exception{
 			log.info(this.getClass() + "BoardDetail start!!!");
@@ -184,20 +184,16 @@ public class SELLER_BoardController {
 			bDTO = BoardService.getBoardDetail(bDTO);
 			System.out.println(bDTO.getBoardPSeq());
 			
-			SELLER_ReviewDTO rDTO = new SELLER_ReviewDTO();
+			/*SELLER_ReviewDTO rDTO = new SELLER_ReviewDTO();
 			rDTO.setBoardPSeq(boardPSeq);
 			List<SELLER_ReviewDTO> rList = BoardService.getReList(rDTO);
-			
+			model.addAttribute("rList",rList);
+*/			
 			
 			model.addAttribute("bDTO",bDTO);
 			log.info("bDTOseq 114줄 :" + bDTO.getBoardPSeq());
 			log.info("bDTOuserNick 178줄 :" + bDTO.getUserNick());
-			model.addAttribute("rList",rList);
 		
-			bDTO = null;
-			rDTO = null;
-			rList = null;
-			
 			log.info(this.getClass() + "boardDetail end!!");
 			return "/seller/board/boardDetail";
 			
@@ -207,7 +203,9 @@ public class SELLER_BoardController {
 		@RequestMapping(value="/seller/board/boardDelete", method=RequestMethod.GET)
 		public String boardDelete(HttpServletRequest request, Model model) throws Exception{
 			log.info(this.getClass()+"boardDelete start!!");
+			
 			String boardPSeq = CmmUtil.nvl( request.getParameter("boardPSeq"));
+			String boardSeq = CmmUtil.nvl( request.getParameter("boardSeq"));
 			log.info("deleteSeq : "+ boardPSeq );
 			
 			SELLER_BoardDTO bDTO = new SELLER_BoardDTO();
@@ -222,11 +220,11 @@ public class SELLER_BoardController {
 			if(result != 0) {
 				//삭제가 정상적으로 이루어진 상태 
 				msg="게시물 삭제에 성공하셨습니다.";
-				url="/seller/main.do";
+				url="/seller/board/boardList.do";
 			}else {
 				//삭제가 이루어지지 않은 상태 
-				msg="게시뭉 삭제 실패";
-				url="/seller/main.do";
+				msg="게시물 삭제 실패";
+				url="/seller/board/boardList.do";
 			}
 			model.addAttribute("msg",msg);
 			model.addAttribute("url",url);
@@ -243,7 +241,6 @@ public class SELLER_BoardController {
 		public String boardUpdateView(HttpServletRequest request, Model model) throws Exception{
 			log.info(this.getClass()+ "boardUpdateView start!!");
 			String boardPSeq = CmmUtil.nvl( request.getParameter("boardPSeq"));
-			
 			SELLER_BoardDTO bDTO = new SELLER_BoardDTO();
 			bDTO.setBoardPSeq(boardPSeq);
 			log.info("bDTOup : " + bDTO.getBoardPSeq());
@@ -253,9 +250,6 @@ public class SELLER_BoardController {
 
 			model.addAttribute("bDTO",bDTO1);
 			
-			bDTO = null;
-			bDTO1 =null;
-			
 			log.info(this.getClass()+ "boardUpdateView end!!");
 			return "/seller/board/boardUpdateView";
 		}
@@ -263,21 +257,17 @@ public class SELLER_BoardController {
 		@RequestMapping(value="/seller/board/boardUpdateProc", method=RequestMethod.POST)
 		public String boardUpdateProc(HttpServletRequest request, Model model)throws Exception{
 			log.info(this.getClass()+ "updateProc start ~!!!");
+			
 			String Title = CmmUtil.nvl( request.getParameter("Title") );
 			log.info("Title : " + Title);
 			String boardContent = CmmUtil.nvl( request.getParameter("boardContent") );
 			log.info("boardContent : " + boardContent);
-			String regDate = CmmUtil.nvl( request.getParameter("regDate") );
-			log.info("regDate : " + regDate);
-			String boardSeq = CmmUtil.nvl(request.getParameter("boardSeq"));
-			log.info("boardSeq : " + boardSeq);
 			String boardPSeq = CmmUtil.nvl(request.getParameter("boardPSeq"));
 			log.info("boardPSeq : " + boardPSeq);
 			
 			SELLER_BoardDTO bDTO = new SELLER_BoardDTO();
 			bDTO.setTitle(Title);
 			bDTO.setContent(boardContent);
-			bDTO.setRegDate(regDate);
 			bDTO.setBoardPSeq(boardPSeq);
 			log.info("bDTO : " +bDTO.getTitle());
 			
@@ -289,13 +279,13 @@ public class SELLER_BoardController {
 			if(result!=0) {
 				// 앞에 redirect 방식으로 보내겠다 
 				log.info(this.getClass() + "updateProc end ~!!");
-				return "redirect:/seller/main.do";
+				return "redirect:/seller/board/boardList.do";
 			
 			}else {
 				
 			
 				String msg = "수정실패";
-				String url = "/seller/board/boardUpdateView.do?boardSeq=" + boardSeq;
+				String url = "/seller/board/boardList.do";
 				model.addAttribute("msg",msg);
 				model.addAttribute("url",url);
 				log.info(this.getClass() + "updateProc end ~!!");

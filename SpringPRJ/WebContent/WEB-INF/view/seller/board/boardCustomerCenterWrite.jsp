@@ -16,7 +16,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>트럭왔냠</title>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">

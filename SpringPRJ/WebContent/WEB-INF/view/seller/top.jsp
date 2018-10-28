@@ -128,16 +128,16 @@
 					<%if(dissInfoDTO != null){ %>
 							<% String riskFigure = dissInfoDTO.getRisk(); %> 
 						<% if(riskFigure.equals("1")) {%>
-							  <strong style="color:sky">관심!</strong>
+							  <strong style="color:#f2dede">관심!</strong>
 							  &nbsp; 식중독 발생가능성은 낮으나 식중독 예방에 지속적인 관심이 요망됩니다.
 						<%} else if(riskFigure.equals("2")){ %>	
-							  <strong style="color:yellow">주의!</strong>
+							  <strong style="color:#d6de64">주의!</strong>
 							  &nbsp;식중독 발생가능성이 중간 단계이므로 식중독예방에 주의가 요망됩니다.
 						<%} else if(riskFigure.equals("3")){%>
-							  <strong style="color:orange">경고!</strong>
+							  <strong style="color:#b96de6">경고!</strong>
 							  &nbsp; 식중독 발생가능성이 높으므로 식중독 예방에 경계가 요망됩니다. 
 						<%} else if(riskFigure.equals("4")){ %>
-							  <strong style="color:tomato">위험!</strong>
+							  <strong style="color:#de6464">위험!</strong>
 							  &nbsp;식중독 발생가능성이 매우 높으므로 식중독예방에 각별한 경계가 요망됩니다.
 						<%} %>
 					<%}else{ %>
