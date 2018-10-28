@@ -12,7 +12,7 @@
 	<select id="getSite_Stat_Month" parameterType="integer" resultType="integer">
 		SELECT 
 			COUNT(*)
-		FROM SITE_STAT WHERE SUBSTRING(SUBSTRING_INDEX(join_date, '/', 1),7,2) = #{value};
+		FROM SITE_STAT WHERE SUBSTRING(SUBSTRING_INDEX(join_date, '/', 1),6,2) = #{value};
 	</select>
 	
 	<insert id="in_Site_Stat" parameterType="ADMIN_Site_StatDTO">

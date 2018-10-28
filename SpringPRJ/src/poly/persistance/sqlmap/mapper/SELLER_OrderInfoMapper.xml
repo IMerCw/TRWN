@@ -36,7 +36,6 @@
 	</select>
 	
 	<!-- 주문하기에서 쿠폰 리스트 뽑아오기 -->
-	
 	<select id="getCpList" parameterType="ADMIN_Coupon_IssueDTO" resultType="ADMIN_Coupon_IssueDTO">
 		SELECT 
          CPIS.ISSUE_CODE as issue_code,
@@ -52,6 +51,7 @@
       WHERE   COUPON_USE <![CDATA[<]]> COUPON_COUNT AND USER_SEQ =#{user_seq}
       ORDER BY ISSUE_CODE DESC
 	</select>
+	
 	<!-- 쿠폰 사용   카운트 증가-->
 	<update id="updateCouponUse" parameterType="ADMIN_Coupon_IssueDTO">
 		UPDATE COUPON_ISSUE
@@ -60,6 +60,7 @@
 		WHERE
 			ISSUE_CODE = #{issue_code}
 	</update>
+	
 	<!-- 주문완료 시 insert -->
 	<insert id="insertOrderInfo" parameterType="SELLER_OrderInfoDTO">
 		INSERT INTO ORDER_INFO
@@ -82,7 +83,7 @@
 			#{ord_sumprice},
 			#{ord_way},
 			#{buy_way},
-			#{ord_date},
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
 			#{ord_status},
 			#{usr_rcv_time},
 			#{tid},
@@ -92,30 +93,29 @@
 		)
 	
 	</insert>
+	
 	<!-- 주문완료시 wait insert -->
-	<insert id="insertOrderItem" parameterType="SELLER_WaitDTO">
-	INSERT INTO ORDER_WAIT
-	(
-		ORD_SEQ,
-		FT_SEQ,
-		ORD_DATE,
-		ORD_HIS,
-		ORD_STATUS,
-		CSTMR_NAME,
-		CSTMR_TEL,
-		TRAN_NO
-	)
-	VALUES
-	(
-		#{ordSeq},
-		#{ftSeq},
-		#{ordDate},
-		#{ordHis},
-		#{ordStatus},
-		#{cstmrName},
-		#{cstmrTel},
-		#{tran_no}
-	)
+	<insert id="insertOrderWait" parameterType="SELLER_WaitDTO">
+		INSERT INTO ORDER_WAIT
+		(
+			ORD_SEQ,
+			FT_SEQ,
+			ORD_DATE,
+			ORD_HIS,
+			ORD_STATUS,
+			CSTMR_NAME,
+			CSTMR_TEL
+		)
+		VALUES
+		(
+			#{ordSeq},
+			#{ftSeq},
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
+			#{ordHis},
+			#{ordStatus},
+			#{cstmrName},
+			#{cstmrTel}
+		)
 	</insert>
 	
 	<!-- 회원 구매 userSeq select  -->

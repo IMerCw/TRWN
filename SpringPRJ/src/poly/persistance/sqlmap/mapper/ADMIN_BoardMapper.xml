@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="getBoard_Search" parameterType="map" resultType="ADMIN_BoardDTO">
-		SELECT BOARD_SEQ, BOARD_NAME, BOARD_READ, BOARD_WRITE, BOARD_REPLE, REG_DATE, EXP_YN FROM BOARD WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY BOARD_SEQ DESC
+		SELECT BOARD_SEQ, BOARD_NAME, BOARD_READ, BOARD_WRITE, BOARD_REPLE, REG_DATE, EXP_YN FROM BOARD WHERE ${option} LIKE CONCAT('%', #{value}, '%') ORDER BY BOARD_SEQ DESC
 	</select>
 	
 	<select id="getBoard_Detail" parameterType="integer" resultType="ADMIN_BoardDTO">

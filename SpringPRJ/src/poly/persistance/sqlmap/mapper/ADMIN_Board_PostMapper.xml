@@ -72,7 +72,7 @@
 			REG_DATE,
 			BOARD_LEVEL,
 			EXP_YN 
-		FROM BOARD_POST WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY BOARD_LEVEL DESC
+		FROM BOARD_POST WHERE ${option} LIKE CONCAT('%', #{value}, '%') ORDER BY BOARD_LEVEL DESC
 	</select>
 	
 	<select id="getBoard_P_Search" parameterType="ADMIN_Board_PostDTO" resultType="ADMIN_Board_PostDTO">

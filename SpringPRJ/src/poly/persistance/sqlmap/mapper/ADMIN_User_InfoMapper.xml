@@ -47,7 +47,7 @@
 			USER_CHAN, 
 			USER_STATUS,
 			STATUS
-			FROM USER_INFO WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY USER_SEQ DESC
+			FROM USER_INFO WHERE ${option} LIKE CONCAT('%', #{value}, '%') ORDER BY USER_SEQ DESC
 	</select>
 	
 	<update id="user_Active" parameterType="ADMIN_User_InfoDTO">
@@ -73,6 +73,6 @@
 	<select id="getUser_Submit_Full" parameterType="string" resultType="integer">
 		SELECT 
 			COUNT(*)
-		FROM USER_INFO WHERE SUBSTRING_INDEX(USER_REGDATE, '/', 1) >= #{value};
+		FROM USER_INFO WHERE SUBSTRING_INDEX(USER_REGDATE, '/', 1) >= date_format(SYSDATE(), '%Y-%m-01');
 	</select>
 </mapper>

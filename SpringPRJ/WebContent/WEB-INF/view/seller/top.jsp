@@ -95,7 +95,7 @@
 						<%} %>
 					</li>
 					<li><a href="/seller/ftDistrictData/ftDistrictDataMain.do">상권분석</a></li>
-					<li><a href="/seller/foodSafety/fdSftyMain.do">식품안전정보</a></li>
+					<!-- <li><a href="/seller/foodSafety/fdSftyMain.do">식품안전정보</a></li> -->
 					<li><a href="/seller/gasStation/gas.do">주유정보</a></li>
 					<li><a href="/seller/loc/loc.do">행사정보</a></li>
 					<li><a href="/seller/board/boardList.do">게시판</a></li>
@@ -110,7 +110,7 @@
 			<div class="row" style="background-color:#505050; font-size:15px; height:32px; margin:0; padding-top:4px;">
 				<div class="col-sm-8" style="overflow:hidden; color:white;">
 					<!-- 날씨정보 / 값 받아 온 경우 -->
-					<div class="col-sm-12" style="padding-right:0; font-size:13px;">
+					<div class="col-sm-12" style="text-overflow: ellipsis; padding-right: 0; font-size: 13px; white-space: nowrap; overflow: hidden;">
 					<%if(!"".equals(t3hCode)) {%>
 						<%if (ptyCode.equals("0")) {%>
 							<img src="/resources/img/consumer/skyCode<%=skyCode%>.png" width="24px"/>

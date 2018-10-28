@@ -135,7 +135,7 @@
 		            	<td><input type="checkbox" name="order_check" value="<%=orDTOarr.get(i).getOrd_seq()%>"/></td>
 		            	<td><%=orDTOarr.get(i).getOrd_seq() %></td>
 		            	<td><%=orDTOarr.get(i).getOrd_date() %></td>
-		            	<td>주문자:<%=orDTOarr.get(i).getUser_seq()%></td>
+		            	<td><%=orDTOarr.get(i).getUser_nick()%></td>
 						<td>
 							<%if(orDTOarr.get(i).getOrd_way() != null && orDTOarr.get(i).getOrd_way().equals("배달")){ %>
 								<%=orDTOarr.get(i).getOrd_sumprice()%>원

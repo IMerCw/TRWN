@@ -39,7 +39,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>트럭왔냠 - 결제</title>
+<title>트럭왔냠 - 주문서 작성</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

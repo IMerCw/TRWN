@@ -124,7 +124,7 @@
 			#{boardPSeq},
 			#{userSeq},
 			#{content},
-			SYSDATE
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T")
 			) 
 			
 	</insert> -->

@@ -280,6 +280,8 @@ public class ADMIN_MainController {
 		
 		//접속량--------------------------------------------------------------------------------------------------------
 			// [이번달 가입량]
+			log.info(today[0]+"."+today[1].trim()+"."+"01");
+			log.info("pcw");
 			int thisMonth_UserSubmit_Count = mainService.getUser_Submit_Full(today[0]+"."+today[1].trim()+"."+"01");
 			model.addAttribute("thisMonth_UserSubmit_Count", thisMonth_UserSubmit_Count);
 			// [이번달 접속자 수]

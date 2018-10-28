@@ -53,7 +53,7 @@
 			COUPON_NAME,
 			COUPON_OPTION,
 			COUPON_DATE
-		FROM COUPON WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY COUPON_CODE DESC
+		FROM COUPON WHERE ${option} LIKE CONCAT('%', #{value}, '%') ORDER BY COUPON_CODE DESC
 	</select>
 	
 </mapper>
