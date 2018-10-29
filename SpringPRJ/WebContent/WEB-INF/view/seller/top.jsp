@@ -95,7 +95,7 @@
 						<%} %>
 					</li>
 					<li><a href="/seller/ftDistrictData/ftDistrictDataMain.do">상권분석</a></li>
-					<li><a href="/seller/foodSafety/fdSftyMain.do">식품안전정보</a></li>
+					<li><a href="/seller/stop/stop1.do">식품안전정보</a></li>
 					<li><a href="/seller/gasStation/gas.do">주유정보</a></li>
 					<li><a href="/seller/loc/loc.do">행사정보</a></li>
 					<li><a href="/seller/board/boardList.do">게시판</a></li>
