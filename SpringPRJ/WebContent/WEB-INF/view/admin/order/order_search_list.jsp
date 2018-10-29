@@ -91,7 +91,6 @@
             	<h4>주문내역 검색</h4>
                     <select class="form-control" name="option">
                    		<option value="user_seq">유저 번호</option>
-                   		<option value="user_email">유저 이메일</option>
                         <option value="ft_seq">푸드트럭 번호</option>
                     </select>
                     <input type="text" name="value" class="form-control">
@@ -145,7 +144,7 @@
 		            	<td><input type="checkbox" name="order_check" value="<%=orDTOarr.get(i).getOrd_seq()%>"/></td>
 		            	<td><%=orDTOarr.get(i).getOrd_seq() %></td>
 		            	<td><%=orDTOarr.get(i).getOrd_date() %></td>
-		            	<td>주문자:<%=orDTOarr.get(i).getUser_seq()%></td>
+		            	<td><%=orDTOarr.get(i).getUser_nick()%></td>
 						<td>
 							<%if(orDTOarr.get(i).getOrd_way() != null && orDTOarr.get(i).getOrd_way().equals("배달")){ %>
 								<%=orDTOarr.get(i).getOrd_sumprice()%>원

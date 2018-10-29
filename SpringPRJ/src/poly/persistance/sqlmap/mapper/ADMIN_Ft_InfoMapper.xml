@@ -36,7 +36,7 @@
 			FT_CHAN,
 			FT_STATUS
 		FROM FT_INFO
-		WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY FT_SEQ DESC
+		WHERE ${option} LIKE CONCAT('%', #{value}, '%') ORDER BY FT_SEQ DESC
 	</select>
 	
 	<update id="ft_Active" parameterType="ADMIN_Ft_InfoDTO">

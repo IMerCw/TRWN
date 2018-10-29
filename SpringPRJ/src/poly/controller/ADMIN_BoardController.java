@@ -245,6 +245,7 @@ public class ADMIN_BoardController {
 	//게시물 검색
 	@RequestMapping(value="admin/board_p/board_p_search_list", method=RequestMethod.GET)
 	public String board_p_search_list(HttpServletRequest request, Model model) throws Exception{
+		
 		String board_select = request.getParameter("board_select");
 		String option = request.getParameter("option");
 		String value = request.getParameter("value");
@@ -282,9 +283,8 @@ public class ADMIN_BoardController {
 			board_P_SearchList.get(i).setReple_count(boardService.board_R_Count(board_P_SearchList.get(i).getBoard_p_seq()));
 			uDTOarr.add(userService.getUser(board_P_SearchList.get(i).getUser_seq()));
 		}
-		model.addAttribute("uDTOarr", uDTOarr);
+		model.addAttribute("bp_uDTOarr", uDTOarr);
 		model.addAttribute("board_P_SearchList", board_P_SearchList);
-		
 		return "/admin/board_p/board_p_search_list";
 	}
 	

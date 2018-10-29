@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>트럭왔냠 - 게시글 작성</title>
+<title>트럭왔냠 - 고객센터</title>
 <%@ include file="/WEB-INF/view/consumer/topCssScript.jsp" %>
 </head>
 <body>
@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="container-fluid" style="margin-bottom:20px;">
 			<!-- 목록으로 가기 // 뒤로 가기 -->
-			<a href="/consumer/cnsmr/#">
+			<a href="/consumer/board/boardList.do">
 				<img src="/resources/img/consumer/left-arrow.png" width="35px" style="margin-top:10px;"/>
 			</a>
 		</div>

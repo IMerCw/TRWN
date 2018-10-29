@@ -12,7 +12,7 @@
 
 <html>
 <head>
-	<title>web</title>
+	<title>트럭왔냠</title>
 	<!--  
 	<script type="text/javascript">
 		function UpdateView(user_email) {
@@ -31,7 +31,7 @@
 	<script type="text/javascript">
 		function boardDelete(boardPSeq){
 			//alert(boardPSeq);
-			location.href="/seller/board/boardDelete.do?boardPSeq="+boardPSeq;
+			location.href="/seller/board/boardDelete.do?boardSeq="+<%=bDTO.getBoardSeq()%>+"&boardPSeq="+boardPSeq;
 		}
 		
 		function boardUpdateView(boardPSeq){
@@ -52,7 +52,7 @@
 				}
 				$('#writeView').toggle();
 		}
-	
+	<%-- 
 		//댓글 등록
 		function reReg(){
 			//alert("test");
@@ -97,7 +97,7 @@
 			var upWrite = "#upWrite"+r+"";
 			alert(upWrite);
 		 	if(ss_userSeq == u){
-				<%-- upWrite<%=rList.get(i).getRepleSeq()%> --%>
+				upWrite<%=rList.get(i).getRepleSeq()%>
 				alert("수정 삭제");
 				var upBtn="";
 					//upBtn= "<button class='btn btn-default pull-right' onclick='#'>test</button>"
@@ -217,7 +217,7 @@
 				
 			
 			
-		}
+		} --%>
 	
 	</script>
 	
@@ -241,13 +241,13 @@
 						<table class="table table-striped" style=" border: 1px solid #dddddd">
 						<thead>
 						<tr>
-							<th colspan="3" style="background-color: #eeeeee; text-align: center;">공지사항 상세보기</th>
+							<th colspan="3" style="font-size:18px; font-weight:bold; background-color: #eeeeee; text-align: center;">공지사항 상세보기</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td style="width: 20%; style="text-align:left;">글번호 :</td>
-							<td colspan="2";>
+							<td colspan="2">
 								<%=bDTO.getBoardPSeq() %>
 							</td>
 						</tr>
@@ -260,7 +260,11 @@
 						<tr>
 							<td >글내용 :</td>
 							<td colspan="2" style="min-height:200px; text-align:left;">
-								<%=bDTO.getContent() %>
+								<%if(bDTO.getContent() == null) {%> 
+									글 내용이 없습니다.
+								<%} else {%> 
+									<%=bDTO.getContent()%>
+								<%}%>
 							</td>
 						</tr>
 						<tr>
@@ -292,13 +296,13 @@
 						 --%>
  				 		
 						</div>
-						
+						<%-- 
 						<div class="review" style="width:100%;">
 							<div align="left">
 								<h6 class="reviewWrite">
 									<a href="#" onclick="JavaScript:reWrite();" style="text-decoration:none; color:black;">
-										<span class="fas fa-chevron-down" id="reWrite"></span>
-										<b>댓글쓰기</b>
+										<span class="fas fa-chevron-down" id="reWrite"><img src="<%=request.getContextPath()%>/resources/img/seller/chevron-arrow-down.png" style="height:16px; padding-right:4px;"></span>
+										<b style="font-size:12px;">댓글쓰기</b> 
 									</a>
 								</h6>
 							</div>
@@ -337,6 +341,7 @@
 							</div>
 						
 						</div>
+						 --%>
 					
 					</div>
 				</div>

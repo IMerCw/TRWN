@@ -5,7 +5,8 @@
 
 <%
 	List<CONSUMER_RcmmndFtDTO> rftDTOArr = (List<CONSUMER_RcmmndFtDTO>)request.getAttribute("rftDTOArr");
-	Double rcmmndRate;
+	Double rcmmndRate; 
+	int rcmmndStarRate; //rcmmndRate 유클리드 거리 , rcmmndStarRate 유클리드 거리의 역수 * 5
 %>
 
 <html>
@@ -47,7 +48,7 @@
 	<div class="container-fluid" style="margin:0; padding:12px;">
 		<%if(rftDTOArr != null && rftDTOArr.isEmpty() == false) {%>
 			<%for(CONSUMER_RcmmndFtDTO rftDTO: rftDTOArr ) {%>
-			<div class="row" style="margin: 12px 0; text-align:right; background-color:#eeeeee; border-radius:8px;">
+			<div class="row" style="margin: 12px 0; text-align:right; background-color:#d6d6d6; border-radius:8px;">
 		    	<div class="col-xs-6" style="padding:16px; height:256px;">
 					<img src="<%=request.getContextPath()%>/resources/files/<%=rftDTO.getFileSevname()%>" 
 							onError="this.src='/resources/img/consumer/NfoundError.png;'"
@@ -58,10 +59,18 @@
 						<%-- 추천도 반올림 계산 --%>
 						<% 
 							rcmmndRate = Double.parseDouble(rftDTO.getRcmmndRating());
-							
+							rcmmndRate = ( 1.0 / (Math.round(rcmmndRate)) ) * 5;
 						%>
 						
-						<h3>추천도 <%=(Math.round(rcmmndRate * 10000)) / 100.0%> % </h3>
+						<h3>추천도</h3>
+							<%for(int cnt = 0; cnt < (int) Math.ceil(rcmmndRate); cnt++) {%>
+								<%if( (cnt+1)*1.0 > rcmmndRate && (cnt)+.5 <= rcmmndRate ) {%>
+									<img src="/resources/img/consumer/starRatingHalf.png">
+								<%} else if((cnt)*1.0 <= rcmmndRate && (cnt)+.5 >= rcmmndRate) {%>
+								<%} else { %>
+									<img src="/resources/img/consumer/starRating.png">
+								<%} %>
+							<%} %>
 					</div> 
 					<div class="col-xs-12" style="height:40px; font-size:2rem; float:right;">
 						<h4><%=rftDTO.getFtName() %></h4>

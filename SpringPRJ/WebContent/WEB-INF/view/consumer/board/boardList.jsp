@@ -26,7 +26,7 @@
 <body>
 
 	<%@include file="/WEB-INF/view/consumer/topBody.jsp" %>	<!-- topBody에서 session으로 userEmail을 받는다. -->
-	<div class="container-fluid" style="text-align:left;">
+	<div class="container-fluid" style="text-align:left; background: white; border-radius: 10px 10px 0 0;">
 		<div class="row" style="border-bottom:1px solid #eeeeee; padding:8px 0;">
 			<div class="col-xs-12" style="font-size:20px;">
 				<h5>트럭왔냠 고객센터</h5>

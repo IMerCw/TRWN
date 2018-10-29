@@ -17,7 +17,9 @@
   margin: 0;
   padding: 0;
 }
-
+input:-webkit-autofill{
+	background-color:white !important;
+}
 html, body {
   font-size: 62.5%;
   height: 100%;

@@ -73,6 +73,7 @@
 		SELECT 
 			BOARD_SEQ AS boardSeq,
 			BOARD_P_SEQ AS boardPSeq,
+			BOARD_POST.USER_SEQ AS userSeq,
 			TITLE AS title,
 			CONTENT,
 			REG_DATE AS regDate,
@@ -123,7 +124,7 @@
 			#{boardPSeq},
 			#{userSeq},
 			#{content},
-			SYSDATE
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T")
 			) 
 			
 	</insert> -->

@@ -46,6 +46,7 @@
 		border-right:1px solid #DDDDDD;
 	}
 	.reple_date_block{
+		font-size:4px;
 		text-align:center;
 		border-left:1px solid #DDDDDD;
 		border-right:1px solid #DDDDDD;
@@ -165,13 +166,13 @@
     						<td class="reple_date_block"><%=revpDTO.getRev_regdate()%></td>
     						<td class="table_CCblock" width="20%" style="padding-left:5px; text-align:left;">
     							<input type="button"  value="수정" class="btn btn-default" onClick="javascript:reple_Edit(<%=revpDTO.getReview_seq()%>);">
-    							<input type="button"  value="삭제" class="btn btn-default" onClick="location.href='<%=request.getContextPath()%>/admin/ft/ft_review_delete.do?cmd=review_info&ft_seq=<%=ftDTO2.getFt_seq()%>&review_seq=<%=revDTO.getReview_seq()%>&revp_seq=<%=revpDTO.getReview_seq()%>'">
+    							<input type="button"  value="삭제" class="btn btn-default" onClick="location.href='<%=request.getContextPath()%>/seller/ft/ft_review_delete.do?cmd=review_info&ft_seq=<%=ftDTO2.getFt_seq()%>&review_seq=<%=revDTO.getReview_seq()%>&revp_seq=<%=revpDTO.getReview_seq()%>'">
     						</td>
     					</tr>
     				<%i++;}
     				} %>
     					<tr>
-	    					<form action="<%=request.getContextPath()%>/admin/ft/ft_review_reple_create.do" method="post">
+	    					<form action="<%=request.getContextPath()%>/seller/ft/ft_review_reple_create.do" method="post">
 	    						<input type="hidden" value="<%=revDTO.getFt_seq()%>" name="ft_seq">
 	    						<input type="hidden" value="<%=revDTO.getReview_seq()%>" name="review_seq">
 	    						<input type="hidden" value="review_info" name="cmd">

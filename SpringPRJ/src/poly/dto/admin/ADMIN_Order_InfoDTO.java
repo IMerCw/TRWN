@@ -14,6 +14,7 @@ public class ADMIN_Order_InfoDTO {
 	private int ft_seq;
 	private String tran_no;
 	private int gps_seq;
+	private String user_nick;
 	
 	//------------------------------------------------
 	
@@ -112,5 +113,11 @@ public class ADMIN_Order_InfoDTO {
 	}
 	public void setGps_seq(int gps_seq) {
 		this.gps_seq = gps_seq;
+	}
+	public String getUser_nick() {
+		return user_nick;
+	}
+	public void setUser_nick(String user_nick) {
+		this.user_nick = user_nick;
 	}
 }

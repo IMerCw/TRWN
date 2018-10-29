@@ -46,6 +46,9 @@
 	.footer{
 	    background-color: #f5f5f5;
 	}
+	.footerContainer {
+		display:none;
+	}
 	#ft-detail-menu {
 		text-align: center;
 	}
@@ -192,7 +195,7 @@
 					</div>
 					<div class="col-xs-4" style="height:64px; padding:15px; text-align:right;" id="favoriteContainer">
 						<!-- 관심매장 등록 버튼 -->
-						<span style="margin-right:10px;">
+						<span style="margin-right:10px;" id="favortieBttn">
 						<%if(FtLikeResult.equals("1")) {%>
 							<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>
 						<%}else { %>
@@ -210,10 +213,10 @@
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/facebook.png" onclick="javascript:facebookShare();" id="fbIcon"/>
 					
 					<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/64_NAVER SQUARE ICON.png" onclick="javascript:naverShare();" id="naverIcon"/>
-					<a href="javascript:;" id="kakao-link-btn">
-						<%-- <img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/kakaolink_btn_medium_ov.png"/> --%>
+					<!-- <a id="kakao-link-btn" href="javascript:sendLink()">
 						<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-					</a>
+					</a> -->
+
 				</div>
 				<div class="row">
 					<div class="col-xs-2">
@@ -309,7 +312,6 @@
 
 
 
-
 <!-- 관심매장 추가 / 공유하기 버튼 스크립트-->
 <script>
 	/* 로그인(userSeq) / 비 로그인(0) 상태 구분  */
@@ -335,8 +337,8 @@
 				success: function(data) {
 					if(data==1) {
 						alert('관심매장에서 삭제 되었습니다.');
-						var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>';
-						$('#favoriteContainer').html(content);
+						var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_off.png" class="ftDetailBttn" onclick="favoriteBttnAddClick()" id="NONfavoriteBttn"/>';
+						$('#favortieBttn').html(content);
 					}
 				},
 				error: function(error) {
@@ -361,13 +363,13 @@
 					data: {
 						"ft_seq" : <%=fDTO.getFt_seq()%>,
 						"user_seq" : userSeq,
-						
+					
 					},
 					success: function(data) {
 						if(data==1) {
 							alert('관심매장으로 추가되었습니다.');
-							var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>';
-							$('#favoriteContainer').html(content);
+							var content = '<img src="<%=request.getContextPath()%>/resources/img/consumer/ftDetailIcon/favorite_on.png" class="ftDetailBttn" onclick="favoriteBttnRmvClick()" id="XTfavoriteBttn"/>';
+							$('#favortieBttn').html(content);
 						}
 					},
 					error: function(error) {
@@ -384,36 +386,38 @@
 
 
 <script type="text/javascript">
-  //<![CDATA[
-   Kakao.init('60f4f121242d90c886eacd9609c92e78');
-    // // Create KakaoTalk Link button. You only need to call this function once.
-   Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',
-      objectType: 'feed',
-      content: {
-        title: '<%=fDTO.getFt_name() %>',
-        description: '#트럭왔냠 #푸드트럭 맛집\n' + '<%=fDTO.getFt_intro() %>' ,
-        imageUrl: 'http://54.180.77.82:8080<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>',
-        link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href
-        }
-      },
-      social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845
-      },
-      buttons: [
-        {
-          title: '웹으로 보기',
+Kakao.init('60f4f121242d90c886eacd9609c92e78');
+function sendLink() {
+		alert('yes2');
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '<%=fDTO.getFt_name() %>',
+          description: '#트럭왔냠 #푸드트럭 맛집\n' + '<%=fDTO.getFt_intro() %>',
+          imageUrl: 'http://54.180.77.82:8080<%=request.getContextPath()%>/resources/files/<%=imgDTO.getFileSevname()%>',
           link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href
+        	  mobileWebUrl: window.location.href,
+              webUrl: window.location.href
           }
-        }
-      ]
-    });
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href
+            }
+          }
+        ]
+      });
+}
+
+  
 </script>	
 
 <script>  
@@ -439,7 +443,7 @@
 
     
 	function facebookShare() {
-		window.open('https://www.facebook.com/sharer/sharer.php?u=http://daum.net');
+		window.open('https://www.facebook.com/sharer/sharer.php?u='+ 'http://54.180.77.82:8080/consumer/cnsmr/ftDetail.do?ft_seq=' + <%=fDTO.getFt_seq()%>);
 	}	  
 	function twitterShare() {
 		window.open('https://twitter.com/intent/tweet?text=트럭왔냠--<%=fDTO.getFt_name() %>&url=' + window.location.href);

@@ -69,12 +69,15 @@
 					<td>푸드트럭명</td>
 					<td>관심매장등록일</td>
 				</tr>
-				
-				<%for(int i=0; i < fList.size(); i++) { %>
-				<tr>
-					<td><%=fList.get(i).getFt_name()%></td>
-					<td><%=fList.get(i).getLike_regdate()%></td>
-				</tr>
+				<%if(fList != null) { %>
+					<%for(int i=0; i < fList.size(); i++) { %>
+					<tr>
+						<td><%=fList.get(i).getFt_name()%></td>
+						<td><%=fList.get(i).getLike_regdate()%></td>
+					</tr>
+					<%} %>
+				<%} if(fList == null || fList.isEmpty()) {%>
+					<tr><td colspan="2" style="font-size: 28px; text-align: center; background: #ddd; padding: 20px;">등록된 푸드트럭 매장이 없습니다.</td></tr>
 				<%} %>
 			</tbody>
 

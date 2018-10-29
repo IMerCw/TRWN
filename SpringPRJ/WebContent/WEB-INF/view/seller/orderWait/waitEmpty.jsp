@@ -8,7 +8,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>board</title>
+	<title>트럭왔냠</title>
 	
 	<script type="text/javascript">
 		//window.setTimeout('window.location.reload()',3000);

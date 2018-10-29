@@ -148,8 +148,8 @@
 					</td>
 					<td><%=revDTOarr.get(i).getRev_regdate() %></td>
 					<td>
-						<%if(revDTOarr.get(i).getExp_yn()==1){ %>노출<%} 
-						else if(revDTOarr.get(i).getExp_yn()==-1){ %>비노출<%}%>
+						<%if(revDTOarr.get(i).getExp_yn()==1){ %>Y<%} 
+						else if(revDTOarr.get(i).getExp_yn()==-1){ %>N<%}%>
 					</td>
 					</tr>
 					<%cnt++;

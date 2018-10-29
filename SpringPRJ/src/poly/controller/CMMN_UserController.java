@@ -285,7 +285,8 @@ public class CMMN_UserController {
 		
 		sendEmail.setReciver(user_Email);
 		sendEmail.setSubject("트럭왔냠 이메일 인증");
-		sendEmail.setContent("<a href=\"http://192.168.170.104:8080/user/updateAuth.do?userStatus=AuthY&userEmail="+user_Email+"\">트럭왔냠 이메일 인증 클릭</a>");
+		sendEmail.setContent("<a href=\"http://54.180.77.82:8080/cmmn/user/updateAuth.do?userStatus=AuthY&userEmail="+user_Email+"\">트럭왔냠 이메일 인증 클릭</a>");
+//		sendEmail.setContent("<a href=\"http://192.168.170.104:8080/user/updateAuth.do?userStatus=AuthY&userEmail="+user_Email+"\">트럭왔냠 이메일 인증 클릭</a>");
 		//sendEmail.setContentsE()
 		emailSender.SendEmail(sendEmail);
 

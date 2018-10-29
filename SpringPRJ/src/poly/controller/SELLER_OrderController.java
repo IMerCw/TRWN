@@ -197,10 +197,10 @@ public class SELLER_OrderController {
 		
 	 //페이누리로 보내는 RETURN_URL(결제결과 데이터 받기)에 대응하는 메소드
 	   @RequestMapping(value="/orderComplete")
-	   public void orerComplete(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+	   public void orderComplete(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 	      req.setCharacterEncoding("EUC-KR");
 	      
-		   log.info(this.getClass() + "orderComplete start!!!");
+		  log.info(this.getClass() + "orderComplete start!!!");
 	      //결과코드
 	      String rep_code =CmmUtil.nvl(req.getParameter("REP_CODE"));
 	      log.info(this.getClass() + " rep_code : " + rep_code);
@@ -277,6 +277,7 @@ public class SELLER_OrderController {
 	         * 결제 성공
 	         */
 	    	 log.info("결제 성공");
+	    	 log.info("주문내역 데이터 삽입");
 	         log.info("orderss ss_user_no = " + session.getAttribute("userSeq"));
 	         SELLER_OrderInfoDTO oDTO = new SELLER_OrderInfoDTO();
 	         //etc_data1 첫 번째 split__유저번호( -1은 비회원 )
@@ -295,11 +296,6 @@ public class SELLER_OrderController {
 	         String userAuth = etc_data1.split(",")[4];
 	         log.info("userAuth : " + userAuth);
 	         
-	         String timeNow = UtilTime.getDateYMDhms(); //현재 시각
-	         
-	         String ord_date = timeNow;
-	         log.info(ord_date);
-	         oDTO.setOrd_date(ord_date);
 	         oDTO.setTran_no(tran_no);
 	         oDTO.setOrd_sumprice(Integer.parseInt(amt));
 	         if(tran_type.equals("PHON")){
@@ -312,8 +308,8 @@ public class SELLER_OrderController {
 	         //oDTO.setRcv_yn("n");
 	         oDTO.setTid(tid);
 	         
-	         
-	         log.info("oDTO.setting");
+
+	         int orderInsertResult = orderService.insertOrderSuccess(oDTO);
 	        /* String[] userNoAndMil = etc_data1.split(";");
 	         String[] mil = userNoAndMil[1].split("-");
 	         Map<String, String> milMap = new HashMap();
@@ -333,23 +329,27 @@ public class SELLER_OrderController {
 	         for(int i = 0; i< orderItems.length; i++){
 	            String[] orderItem = orderItems[i].split(":");
 	        */ 
+	         
+	         /*    주문대기 데이터 삽입       */
+	         log.info("주문대기 데이터 삽입");
 	         SELLER_WaitDTO oIDTO = new SELLER_WaitDTO();
-	         oIDTO.setWaitSeq("");
 	         oIDTO.setFtSeq(etc_data1.split(",")[1]);
-	         log.info(oIDTO.getFtSeq());
-	         oIDTO.setOrdDate(ord_date);
-	         log.info(oIDTO.getOrdDate());
 	         oIDTO.setOrdHis(etc_data3);
-	         log.info(oIDTO.getOrdHis());
 	         oIDTO.setOrdStatus("0");
 	         oIDTO.setOrdSeq(tid);
-	         log.info(oIDTO.getOrdSeq());
 	         oIDTO.setCstmrName(customer_name);
 	         oIDTO.setCstmrTel(customer_tel);
-	         oIDTO.setTranNO(tran_no);
+//	         oIDTO.setTranNO(tran_no);
 	         
-	         session.setAttribute("ss_tmpBasket", "");
-	         orderService.insertOrderSuccess(oDTO, oIDTO);
+	         log.info(oIDTO.getFtSeq());
+	         log.info(oIDTO.getCstmrName());
+	         log.info(oIDTO.getCstmrTel());
+	         log.info(oIDTO.getOrdHis());
+	         log.info(oIDTO.getOrdSeq());
+	         
+	         int orderWaitInsertResult = orderService.insertOrderWait(oIDTO);
+	         
+	         /*session.setAttribute("ss_tmpBasket", "");*/
 	         
 	      }else{
 	         /**
@@ -409,6 +409,7 @@ public class SELLER_OrderController {
  		//소비자로 접속 -> 결제화면으로 바로 이동
  		@RequestMapping(value="/seller/order/goCheck" ,method=RequestMethod.POST)
  		public String goCheck(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+ 			
  			String sum = CmmUtil.nvl(request.getParameter("sum"));
  			log.info("sum : " + sum);
  			String userSeq = CmmUtil.nvl((String)session.getAttribute("userSeq"));

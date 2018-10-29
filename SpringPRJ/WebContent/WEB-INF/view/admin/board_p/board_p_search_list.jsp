@@ -7,6 +7,7 @@
 	List<ADMIN_BoardDTO> bDTO_seq = (List<ADMIN_BoardDTO>)request.getAttribute("boardList");
 	String board_seq = (String)request.getAttribute("board_seq");
 %>
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

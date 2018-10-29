@@ -364,6 +364,10 @@
 		
 		<!--이메일 체크js -->
 		$('#emailCheck').on('click',function(){
+			if($('#email_input').val() == "") {
+				alert("이메일을 입력해주세요.");
+				return null;
+			}
  			$.ajax({
  				type:'POST',
  				url:'/cmmn/user/emailCheck.do',

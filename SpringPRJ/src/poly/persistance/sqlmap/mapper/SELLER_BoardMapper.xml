@@ -6,33 +6,54 @@
 	
 
 
-	<!-- 공지사항 추가 insert  -->
+	<!-- 게시판 글 쓰기 insert  -->
 	<insert id ="insertBoardDTO" parameterType="SELLER_BoardDTO">
 		INSERT INTO BOARD_POST
 		(
-			
 			BOARD_SEQ,
+			FILE_ID,
 			TITLE,
 			CONTENT,
 			USER_SEQ,
 			BOARD_COUNT,
-			REG_DATE
+			REG_DATE,
+			EXP_YN
 		)
 		VALUES(
 			<!-- 시퀀스 자리 -->
 			#{boardSeq},
+			-1,
 			#{title},
-			#{Content},
+			#{content},
 			#{userSeq},
 			'0',
-			now()
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
+			1
 		)
 	</insert>
+	<!-- 보드 단계 레벨 가져오기 -->
+	<select id="getBoardLevel" resultType="string">
+		SELECT board_p_seq 
+		FROM board_post
+		ORDER BY board_p_seq desc
+		LIMIT 1
+	</select>	
+	
+	<!-- 방금 작성한 게시물 단계 레벨 최신화 -->
+	<update id="board_P_CreateUpdate" parameterType="integer">
+			UPDATE 
+				BOARD_POST
+			SET
+				BOARD_LEVEL=#{board_p_seq}
+			WHERE 
+				BOARD_P_SEQ=#{board_p_seq}
+	</update>
+	
 	<!-- 공지사항 리스트   --> <!-- ansi 쿼리는 db ppt6장에 있습니다. 참고하세요  -->
 	<select id="getBoardList" resultType="SELLER_BoardDTO">
 		SELECT BP.BOARD_P_SEQ as boardPSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -45,9 +66,11 @@
 	<!--공지사항 디테일  -->
 	<!-- select 상세목록으로 들어가는 구문   -->
 	<select id="getBoardDetail" parameterType="SELLER_BoardDTO" resultType="SELLER_BoardDTO">
-		SELECT BP.BOARD_P_SEQ as boardPSeq,
+		SELECT 
+				BP.BOARD_P_SEQ as boardPSeq,
+				BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -67,32 +90,21 @@
 		 SELECT BP.BOARD_P_SEQ as boardPSeq,
 				 BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
 		FROM	BOARD_POST BP INNER JOIN USER_INFO UI
 		ON		BP.USER_SEQ = UI.USER_SEQ
 		WHERE	BP.BOARD_SEQ = #{boardSeq}
-		
-		<!--  SELECT BP.BOARD_P_SEQ as boardPSeq,
-				BP.BOARD_SEQ as boardSeq,
-				BP.TITLE as title,
-				BP.CONTENT as boardContent,
-				BP.BOARD_COUNT as boardCount,
-				TO_CHAR(BP.REG_DATE, 'YY-MM-DD') as regDate,
-				UI.USER_NICK as userNick
-		FROM	BOARD_POST BP INNER JOIN USER_INFO UI
-		ON		BP.USER_SEQ = UI.USER_SEQ
-		WHERE	BP.BOARD_SEQ = #{boardSeq}
-	 -->
+		ORDER BY BP.REG_DATE DESC
 	</select>
 	<!--고객센터 ajax -->
 	<select id="getCustomerCenter" parameterType="SELLER_BoardDTO" resultType="SELLER_BoardDTO">
 		 SELECT BP.BOARD_P_SEQ as boardPSeq,
 				 BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -106,7 +118,7 @@
 		SELECT BP.BOARD_P_SEQ as boardPSeq,
 				BP.BOARD_SEQ as boardSeq,
 				BP.TITLE as title,
-				BP.CONTENT as boardContent,
+				BP.CONTENT as content,
 				BP.BOARD_COUNT as boardCount,
 				BP.REG_DATE as regDate,
 				UI.USER_NICK as userNick
@@ -126,8 +138,7 @@
 		UPDATE BOARD_POST
 		SET 
 			TITLE =#{title},
-			CONTENT = #{boardContent},
-			REG_DATE = SYSDATE
+			CONTENT = #{content}
 		WHERE BOARD_P_SEQ = #{boardPSeq}
 	</update>
 	<!-- 댓글 등록 -->
@@ -149,7 +160,7 @@
 			#{boardPSeq},
 			#{userSeq},
 			#{content},
-			now(),
+			DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
 			#{reLevel},
 			'0'
 		)

@@ -51,6 +51,6 @@
 			COUPON_COUNT,
 			COUPON_ISSUEDATE,
 			COUPON_USE
-		FROM COUPON_ISSUE WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY ISSUE_CODE DESC
+		FROM COUPON_ISSUE WHERE ${option} LIKE CONCAT('%', #{value}, '%') ORDER BY ISSUE_CODE DESC
 	</select>
 </mapper>

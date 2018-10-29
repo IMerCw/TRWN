@@ -149,7 +149,7 @@
 					FROM (SELECT * FROM FT_REVIEW WHERE REVIEW_SEQ = REV_LEVEL) AS FR
 					GROUP BY USER_SEQ, FT_SEQ) FRR
 			GROUP BY FRR.USER_SEQ
-			HAVING COUNT(FRR.USER_SEQ) >= 3)
+			HAVING COUNT(FRR.USER_SEQ) >= 4)
 			)  AS SORTED
 		WHERE FR.REV_REGDATE = SORTED.LATEST
 		ORDER BY USER_SEQ, FT_SEQ
@@ -206,10 +206,11 @@
 		        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
 	    	        #{item.userSeq}
 		        </foreach>
-
+			
 			GROUP BY 
 				FT_SEQ, USER_SEQ
-			ORDER BY USER_SEQ, FT_SEQ
+			ORDER BY 
+				USER_SEQ, FT_SEQ
 	        ) USR 
 		INNER JOIN  
 			(SELECT 
@@ -222,6 +223,8 @@
 			) FT
 		ON USR.FT_SEQ = FT.FT_SEQ
 	</select>
+	
+	
 	<select id="getThreeSearchTrnd" resultType="string">
 
 		SELECT SEARCH_WORD

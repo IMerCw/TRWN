@@ -4,38 +4,45 @@
 <mapper namespace="poly.persistance.mapper.ADMIN_Order_InfoMapper">
 	<select id="getOrder_List" resultType="ADMIN_Order_InfoDTO">
 		SELECT 
-			ORD_SEQ,
-			USER_SEQ,
-			ORD_SUMPRICE,
-			ORD_WAY,
-			ORD_DATE,
-			ORD_STATUS,
-			BUY_WAY,
-			USR_RCV_TIME,
-			RCV_TIME,
-			TID,
-			FT_SEQ,
-			TRAN_NO,
-			GPS_SEQ
-		FROM ORDER_INFO ORDER BY ORD_DATE DESC
+			OI.ORD_SEQ,
+			OI.USER_SEQ,
+			OI.ORD_SUMPRICE,
+			OI.ORD_WAY,
+			OI.ORD_DATE,
+			OI.ORD_STATUS,
+			OI.BUY_WAY,
+			OI.USR_RCV_TIME,
+			OI.RCV_TIME,
+			OI.TID,
+			OI.FT_SEQ,
+			OI.TRAN_NO,
+			OI.GPS_SEQ,
+		    UI.USER_NICK
+		FROM ORDER_INFO OI
+			INNER JOIN USER_INFO UI ON OI.USER_SEQ = UI.USER_SEQ
+		ORDER BY ORD_DATE DESC
 	</select>
 	
 	<select id="getOrder_List_Search" parameterType="ADMIN_Order_InfoDTO" resultType="ADMIN_Order_InfoDTO">
 		SELECT 
-			ORD_SEQ,
-			USER_SEQ,
-			ORD_SUMPRICE,
-			ORD_WAY,
-			ORD_DATE,
-			ORD_STATUS,
-			BUY_WAY,
-			USR_RCV_TIME,
-			RCV_TIME,
-			TID,
-			FT_SEQ,
-			TRAN_NO,
-			GPS_SEQ
-		FROM ORDER_INFO WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY ORD_SEQ DESC
+			OI.ORD_SEQ,
+			OI.USER_SEQ,
+			OI.ORD_SUMPRICE,
+			OI.ORD_WAY,
+			OI.ORD_DATE,
+			OI.ORD_STATUS,
+			OI.BUY_WAY,
+			OI.USR_RCV_TIME,
+			OI.RCV_TIME,
+			OI.TID,
+			OI.FT_SEQ,
+			OI.TRAN_NO,
+			OI.GPS_SEQ,
+			UI.USER_NICK
+		FROM ORDER_INFO OI
+			INNER JOIN USER_INFO UI ON OI.USER_SEQ = UI.USER_SEQ
+		WHERE OI.${option} LIKE #{value}
+		ORDER BY OI.ORD_SEQ DESC
 	</select>
 
 	

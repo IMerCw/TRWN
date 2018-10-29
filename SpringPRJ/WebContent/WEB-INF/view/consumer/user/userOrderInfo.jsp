@@ -127,10 +127,9 @@
 					</div>
 				</div>
 			<%} %>
-		<%} else { %>
-			<div class="col-xs-12">주문 내역이 없습니다.</div>
+		<%}if(oList.isEmpty()) { %>
+			<div class="col-xs-12" style="font-size: 28px; text-align: center; background: #ddd; padding: 20px;">주문 내역이 없습니다.</div>
 		<%} %>
-
 
 						
 		

@@ -21,7 +21,9 @@
 			BANNER_LOC,
 			BANNER_REGDATE,
 			EXP_YN
-		FROM BANNER_POP WHERE ${option} LIKE '%'||#{value}||'%' ORDER BY BANNER_SEQ DESC
+		FROM BANNER_POP 
+		WHERE ${option} LIKE  CONCAT('%', #{value}, '%')
+		ORDER BY BANNER_SEQ DESC
 	</select>
 	
 	<select id="getBanner_Info" parameterType="integer" resultType="ADMIN_Banner_PopDTO">

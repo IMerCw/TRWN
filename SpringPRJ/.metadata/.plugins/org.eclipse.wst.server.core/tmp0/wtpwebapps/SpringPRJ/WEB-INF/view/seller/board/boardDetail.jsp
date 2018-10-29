@@ -82,7 +82,7 @@
 		//댓글 등록
 		function reReg(){
 			//alert("test");
-			$('#ajaxform').ajaxForm({
+			$('#ajaxform').ajax({
 				beforeSubmit : function(){
 					if($('#reContent').val() == ""){
 						alert("내용을 입력해주세요");
@@ -265,7 +265,7 @@
 						<table class="table table-striped" style=" border: 1px solid #dddddd">
 						<thead>
 						<tr>
-							<th colspan="3" style="background-color: #eeeeee; text-align: center;">공지사항 상세보기</th>
+							<th colspan="3" style="font-size:20px; font-weight:bold; background-color: #eeeeee; text-align: center;">공지사항 상세보기</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -284,7 +284,11 @@
 						<tr>
 							<td >글내용 :</td>
 							<td colspan="2" style="min-height:200px; text-align:left;">
-								<%=bDTO.getBoardContent() %>
+								<%if(bDTO.getBoardContent() == null) {%> 
+									글 내용이 없습니다.
+								<%} else { 
+									bDTO.getBoardContent()
+								}%>
 							</td>
 						</tr>
 						<tr>
@@ -321,8 +325,8 @@
 							<div align="left">
 								<h6 class="reviewWrite">
 									<a href="#" onclick="JavaScript:reWrite();" style="text-decoration:none; color:black;">
-										<span class="fas fa-chevron-down" id="reWrite"></span>
-										<b>댓글쓰기</b>
+										<span class="fas fa-chevron-down" id="reWrite"><img src="<%=request.getContextPath()%>/resources/img/seller/chevron-arrow-down.png"></span>
+										<b style="font-size:12px;">댓글쓰기</b> 
 									</a>
 								</h6>
 							</div>

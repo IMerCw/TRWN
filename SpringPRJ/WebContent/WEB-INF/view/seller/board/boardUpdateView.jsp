@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 
 <%
-	String boardSeq = (String)request.getAttribute("boardSeq");
 	SELLER_BoardDTO bDTO = (SELLER_BoardDTO)request.getAttribute("bDTO");
 %>
 
@@ -20,7 +19,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>트럭왔냠</title>
 </head>
 <body>
 	<table style="height: 100%; width: 100%">
@@ -35,7 +34,7 @@
 				<div class="container">
 			<!-- 	<h2>지역행사정보</h2> -->
 					<div class="row">
-					<form method="post" action="/seller/board/boardUpdateProc.do">
+					<form method="post" action="/seller/board/boardUpdateProc.do" style="width:100%;">
 						<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 							<thead>
 								<tr>
@@ -54,8 +53,6 @@
 							</tbody>
 							
 						</table>
-						<input type="hidden" name="regDate"/>
-						<input type="hidden" name="boardSeq" value="<%=boardSeq%>"/>
 						<input type="submit" class="btn btn-paimary pull-right" value="등록">
 						<input type="hidden" name="userSeq" value="<%=userSeq%>"/>
 						<input type="hidden" name="boardPSeq" value="<%=bDTO.getBoardPSeq()%>"/>
