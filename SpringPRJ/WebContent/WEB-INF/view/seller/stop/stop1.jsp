@@ -51,10 +51,6 @@
 				contentLi +='<tbody>';
 				
 				 $.each(data,function (key,value){
-					console.log(value);
-					console.log("valuerowis"+ value.row);
-					console.log("value.row[0]" + value.row[0]);
-					console.log(value.row[0].BSSHNM);
 					
 					value.row.forEach(function(element) {
 						console.log("resultis" + element.PRDTNM);
