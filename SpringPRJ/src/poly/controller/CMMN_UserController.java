@@ -76,7 +76,6 @@ public class CMMN_UserController {
 		System.out.println("udto 널 확인");
 		System.out.println(uDTO == null);
 		
-		
 		if(uDTO == null) {
 			//로그인실패
 			String msg="로그인 실패 \\n 1.아이디/비밀번호 다시 확인해주세요 \\n 2.이메일 인증 확인해주세요";

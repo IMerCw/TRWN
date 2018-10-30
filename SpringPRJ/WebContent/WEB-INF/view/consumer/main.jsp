@@ -49,6 +49,7 @@
 		    </ol>
 			
 		    <!-- Wrapper for slides -->
+		    	<%try{ %>
 				<%if(imgDTOs != null && imgDTOs.isEmpty() == false) {%>
 				    <div class="carousel-inner">
 				      <div class="item active">
@@ -68,6 +69,9 @@
 				        	onError="this.src='/resources/img/consumer/NfoundError.png;'">
 				      </div>
 				    </div>
+				<%} %>
+				<%}catch (IndexOutOfBoundsException iobe) { %>
+					
 				<%} %> 
 			    <!-- Left and right controls -->
 			    <a class="left carousel-control" href="#myCarousel" data-slide="prev">

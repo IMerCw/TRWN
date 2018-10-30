@@ -113,7 +113,7 @@ public class Email {
 		contentsE += "</tr>";
 		contentsE += "<tr>";
 		contentsE += "<td class='texts' style='color: rgb(97, 106, 116); line-height: 22px; padding-left: 10px; font-family: 돋움, Dotum; font-size: 12px;'>";
-		contentsE += "<a href='192.168.170.125:8080/user/updateAuth.do?status='AuthY''></a>";
+		contentsE += "<a href='http://54.180.77.82:8080/cmmn/user/updateAuth.do?status='AuthY''></a>";
 		contentsE += "</td>";
 		contentsE += "</tr>";
 		contentsE += "<tr>";
