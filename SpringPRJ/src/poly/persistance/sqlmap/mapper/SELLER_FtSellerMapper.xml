@@ -117,7 +117,7 @@
 		    U.USER_GENDER as userGender
 		  FROM ORDER_WAIT W
 		      INNER JOIN ORDER_INFO O
-		        ON  W.ORD_SEQ = O.ORD_SEQ
+		        ON  W.ORD_SEQ = O.TID
 		      INNER JOIN USER_INFO U
 		        ON  O.USER_SEQ = U.USER_SEQ
 		  WHERE W.FT_SEQ = #{ftSeq}

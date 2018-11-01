@@ -10,8 +10,9 @@ double percentF = (double) request.getAttribute("percentF");
 int[] arrayDay2 = (int[])request.getAttribute("arrayDay");
 String stringDay = "";
 String stringTime ="";
-%>
-<%-- 요일은 = <%=dayIndex %>
+ %>
+ 
+ <%-- 요일은 = <%=dayIndex %>
 요일% = <%=percentD %>
 시간은 = <%=timeIndex %>*3 ~ +3시간 까지
 시간대% = <%=percentT %>
@@ -21,7 +22,7 @@ String stringTime ="";
 	<% for(int i=0; i< arrayDay2.length; i++){
 		out.println(arrayDay2[i]);	
 	}
-	%> --%>
+	%> --%> 
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -66,17 +67,16 @@ String stringTime ="";
 						 <%
 						switch(timeIndex)  {
 								case 0 : stringTime="0시~3시"; break;
-								case 1 : stringDay="3시~6시"; break;
-								case 2 : stringDay="6시~9시"; break;
-								case 3 : stringDay="9시~12시"; break;
-								case 4 : stringDay="12시~15시"; break;
-								case 5 : stringDay="15시~18시"; break;
-								case 6 : stringDay="18시~21시"; break;
-								case 7 : stringDay="21시~24시"; break;
+								case 1 : stringTime="3시~6시"; break;
+								case 2 : stringTime="6시~9시"; break;
+								case 3 : stringTime="9시~12시"; break;
+								case 4 : stringTime="12시~15시"; break;
+								case 5 : stringTime="15시~18시"; break;
+								case 6 : stringTime="18시~21시"; break;
+								case 7 : stringTime="21시~24시"; break;
 								}
 						%>
-						<%=stringDay%>
-						시의 매출비중이 높고 , *20~30세* 
+						<%=stringTime%>의 매출비중이 높고 , *20~30세* 
 						<%if(percentM > percentF){ %>
 						남성 (<%= percentM%>%)
 						<%}else{ %>
@@ -88,12 +88,12 @@ String stringTime ="";
 					<div class="col-sm-12" style="font-size: 18px;">
 						분석지역 내 매출특성은
 						<span style="font-weight:bold; color: #d9534f;">
-							<%=stringDay%>
+							<%=stringDay%>요일
 							(<%=percentD %>%),
 						</span>
-						요일
+						
 						<span style="font-weight:bold; color: #d9534f;">
-							<%=stringDay%>
+							<%=stringTime%>
 							(<%=percentT %>%) 
 						</span>
 						사이의 매출이 높은 것으로 나타났습니다.
@@ -153,7 +153,7 @@ String stringTime ="";
 		var myChart = new Chart(ctx, {
 		    type: 'line',
 		    data: {
-		        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+		        labels: [ "일", "월", "화", "수", "목", "금", "토"],
 		        datasets: [{
 		            label: '# day',
 		            data: arrayDay,
@@ -178,6 +178,14 @@ String stringTime ="";
 		            line: {
 		                tension: 0, // disables bezier curves
 		            }
+		        },
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    min: 0,
+		                    stepSize: 1
+		                }
+		            }]
 		        }
 		    } 
 		});
