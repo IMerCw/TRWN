@@ -370,13 +370,14 @@ public class SELLER_FtSellerController {
 			day = sList.get(i).getOrdDate().split("/")[0].replace(".", "");
 			log.info("day " +i+ ":" + day);
 			
-			DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
 			Date date = dateFormat.parse(day);
-			
+			log.info("data start : " + date);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
 			
-			log.info("date : " + calendar.get(Calendar.DAY_OF_WEEK));
+			//현재요일
+			log.info("date dayOfWeek : " + calendar.get(Calendar.DAY_OF_WEEK));
 
 			
 			switch(calendar.get(Calendar.DAY_OF_WEEK)) {
