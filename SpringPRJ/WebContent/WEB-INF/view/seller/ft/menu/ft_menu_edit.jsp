@@ -17,7 +17,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>푸드트럭 메뉴수정</title>
+<title>트럭왔냠 - 푸드트럭 메뉴수정</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin/bootstrap.css">
 <style>
 	.table_Hline{

@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>푸드트럭 메뉴</title>
+<title>트럭왔냠 - 내 트럭 관리</title>
 </head>
 <body>
 			<div style="float:left; width:70%; height:42px;">

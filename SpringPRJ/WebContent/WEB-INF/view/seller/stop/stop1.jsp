@@ -198,7 +198,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>트럭왔냠 - 식품안전정보</title>
 </head>
 <body>
 	   
