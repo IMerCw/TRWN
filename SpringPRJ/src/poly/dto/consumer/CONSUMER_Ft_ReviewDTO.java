@@ -13,6 +13,8 @@ public class CONSUMER_Ft_ReviewDTO {
 	private int exp_yn;
 	private String user_nick; //추가함
 	
+	private int rev_snty_point; //푸드트럭 위생 점수
+	
 	private int reple_cnt; //답글 갯수 세팅
 	
 	public int getReple_cnt() {
@@ -54,12 +56,7 @@ public class CONSUMER_Ft_ReviewDTO {
 	public void setRev_title(String rev_title) {
 		this.rev_title = rev_title;
 	}
-	public int getRev_point() {
-		return rev_point;
-	}
-	public void setRev_point(int rev_point) {
-		this.rev_point = rev_point;
-	}
+
 	public String getRev_text() {
 		return rev_text;
 	}
@@ -89,5 +86,17 @@ public class CONSUMER_Ft_ReviewDTO {
 	}
 	public void setUser_nick(String user_nick) {
 		this.user_nick = user_nick;
+	}
+	public int getRev_point() {
+		return rev_point;
+	}
+	public void setRev_point(int rev_point) {
+		this.rev_point = rev_point;
+	}
+	public int getRev_snty_point() {
+		return rev_snty_point;
+	}
+	public void setRev_snty_point(int rev_snty_point) {
+		this.rev_snty_point = rev_snty_point;
 	}
 }

@@ -14,6 +14,10 @@ public class CONSUMER_Ft_InfoDTO {
 	private String ft_chan;
 	private int ft_status;
 	private double ft_dist_order;
+	private String ft_snty_point;
+	
+	private String ft_avg_rev_point;
+	
 	//위치정보 GPS_TABLE로부터 가져옴
 	private String gps_sido;
 	private String gps_sigungu;
@@ -152,6 +156,18 @@ public class CONSUMER_Ft_InfoDTO {
 	}
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
+	}
+	public String getFt_snty_point() {
+		return ft_snty_point;
+	}
+	public void setFt_snty_point(String ft_snty_point) {
+		this.ft_snty_point = ft_snty_point;
+	}
+	public String getFt_avg_rev_point() {
+		return ft_avg_rev_point;
+	}
+	public void setFt_avg_rev_point(String ft_avg_rev_point) {
+		this.ft_avg_rev_point = ft_avg_rev_point;
 	}
 
 	

@@ -54,13 +54,35 @@
 			</div>
 			<!-- 리뷰 평점 -->
 			<div class="row" >
-				<div class="col-xs-2">평점</div> 
+				<div class="col-xs-2">음식 평점</div> 
 				<div class="col-xs-10"> 
 					<div class="form-group">
 						<div class="stars stars-example-bootstrap">
 				            <select id="example-bootstrap" name="rev_point" autocomplete="off">
-				            	<%for(int i=1; i<6; i++){ %>
-				            		<%if(i==edit_reviewDTO.getRev_point()){ %>
+				            	<%float rev_point = Float.valueOf(edit_reviewDTO.getRev_point()); %>
+				            	<%for(float i=1; i<6; i+=1.5){ %>
+				            		<%if(i == rev_point){ %>
+				            			<option value="<%=i%>" selected><%=i%></option>
+				            		<%}else{ %>
+				            			<option value="<%=i%>"><%=i%></option>
+				            		<%} %>
+					            <%} %>
+			                </select>
+		              	</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 위생 점수  -->
+			<div class="row" >
+				<div class="col-xs-2">위생 점수</div> 
+				<div class="col-xs-10"> 
+					<div class="form-group">
+						<div class="stars stars-example-bootstrap">
+				            <select id="example-bootstrap" name="rev_snty_point" autocomplete="off">
+				            	<%float rev_snty_point = Float.valueOf(edit_reviewDTO.getRev_snty_point()); %>
+				            	<%for(float i=1; i<6; i+=1.5){ %>
+				            		<%if(i == rev_snty_point){ %>
 				            			<option value="<%=i%>" selected><%=i%></option>
 				            		<%}else{ %>
 				            			<option value="<%=i%>"><%=i%></option>

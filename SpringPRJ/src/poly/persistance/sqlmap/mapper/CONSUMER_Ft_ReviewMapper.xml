@@ -61,7 +61,8 @@
 			FR.REV_REGDATE as rev_regdate,
 			FR.REV_LEVEL as rev_level,
 			FR.EXP_YN as exp_yn,
-			UI.USER_NICK as user_nick
+			UI.USER_NICK as user_nick,
+			FR.REV_SNTY_POINT as rev_snty_point
 		FROM 
 			FT_REVIEW FR
 			INNER JOIN USER_INFO UI ON UI.USER_SEQ = FR.USER_SEQ 
@@ -108,7 +109,8 @@
 		    REV_TEXT,
 		    REV_REGDATE,
 		    REV_LEVEL,
-		    EXP_YN
+		    EXP_YN,
+		    REV_SNTY_POINT
 		)
 		VALUES
 		(
@@ -120,7 +122,8 @@
 		    #{rev_text},
 		    DATE_FORMAT(SYSDATE(), "%Y. %m. %d / %T"),
 		    #{rev_level},
-		    #{exp_yn}
+		    #{exp_yn},
+		    #{rev_snty_point}
 		)
 	</insert>
 	

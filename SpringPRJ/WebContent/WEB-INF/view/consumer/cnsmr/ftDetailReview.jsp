@@ -18,7 +18,6 @@
 %>
 
 
-
 <html>
 <body>
 	<div class="container-fluid contentBox">
@@ -30,9 +29,9 @@
 				<!-- /* 리뷰 평점 계산 */ -->
 				<% if(dtoNullCheck) { %>
 				<%
-					int sumRate = 0;
+					float sumRate = 0;
 					for(CONSUMER_Ft_ReviewDTO frDTO:repleList){
-						sumRate += frDTO.getRev_point();
+						sumRate += Float.valueOf(frDTO.getRev_point());
 					}
 					double avgRate = (double) sumRate / repleList.size();	
 					avgRate = (Math.round(avgRate*10))/10.0; /* 소수점 첫 째자리까지 계산 */
@@ -86,6 +85,36 @@
 				<%} %>
 			</div>
 		</div>
+		<div style="height:2px; background-color:#eeeeee; margin:15px;"></div>
+		<!-- 위생 점수 -->
+		<div class="row" style="padding:15px; text-align:center;">
+			<div class="col-xs-6" style="font-size:24px; padding:10px;">
+				푸드트럭 위생 점수 <br/>
+				<%=fDTO.getFt_snty_point()%>
+				
+			</div>
+			<div class="col-xs-6" style="padding:15px;">
+				<%float avgSntyPoint = Float.valueOf(fDTO.getFt_snty_point()); %>
+				<%int k;%>
+				<%for(k = 1; k <= avgSntyPoint; k++ ) {%>
+					<img src="/resources/img/consumer/SntystarRating_big.png" style="height:48px;"/>
+				<%} %>
+				<%-- 별점 0.5 가 있을 경우 반 별 모양 추가 --%>
+				<%if(avgSntyPoint >= k-1 + 0.5) {%>
+					<%k++;%> <%-- 별점 반개가 올라갔다면 1개 자리를 차지하도록 함 --%> 
+					<img src="/resources/img/consumer/SntystarRatingHalf_big.png" style="height:48px;"/>
+				<%} %>
+				<%for(; k <= 5; k++ ) {%>
+					<img src="/resources/img/consumer/SntystarRating_blank_big.png" style="height:48px;"/>
+				<%} %>
+			</div>							
+			<div class="col-xs-12">
+				<a href="#" data-toggle="tooltip" data-placement="top" title="푸드트럭의 위생신뢰도를 식품의약품안전처의 공공데이터를 기반으로 점수로 환산하여 계산한 값입니다."
+						style="text-decoration: underline;">
+						푸드트럭 위생 점수란?
+				</a>
+			</div>
+		</div>
 	</div>
 	<!----------------- 리뷰 글 쓰기 ----------------->
 	<form action="/consumer/review/writeReivew.do" method="POST">
@@ -101,7 +130,7 @@
 	<div class="container-fluid">
 		<% if (dtoNullCheck) { %>
   			<% for (int i = 0; i < repleList.size(); i++) { %>
-  				<div class="row contentBox" onclick="location.href='/consumer/review/viewReview.do?&review_seq=<%=repleList.get(i).getReview_seq()%>'" style="padding:15px;">
+  				<div class="row contentBox" onclick="location.href='/consumer/review/viewReview.do?&review_seq=<%=repleList.get(i).getReview_seq()%>'" style="cursor:pointer; padding:15px;">
 	  				<div class="row">
 		  				<!-- 리뷰 작성자 닉네임 -->
 						<div class="col-xs-4" style="font-size:16px;"><%=repleList.get(i).getUser_nick()%>님</div>
@@ -113,8 +142,15 @@
 						<div class="col-xs-6"><%=repleList.get(i).getRev_title()%></div>
 						<!-- 평점 갯수 -->
 						<div class="col-xs-6" style="text-align:right;">
-							<%for(int q = 0; q < (repleList.get(i).getRev_point()); q++) {%>
-								<img src="/resources/img/consumer/starRating.png">
+							<%-- 리뷰점수와 위생점수 별 모양 표시 --%>
+							<%int usrRevPoint = (repleList.get(i).getRev_point()); %>
+							<%int j;%>
+							<%for(j = 1; j <= usrRevPoint; j++ ) {%>
+								<img src="/resources/img/consumer/starRating.png"/>
+							<%} %>
+							<%int usrSntyPoint = (repleList.get(i).getRev_snty_point()); %>
+							<%for(int q = 0; q < usrSntyPoint; q++) {%>
+								<img src="/resources/img/consumer/SntystarRating.png">
 							<%} %>
 						</div>
 					</div>
@@ -132,6 +168,10 @@
 	function redirectTo(url) {
 		window.location.href = url;
 	}
-
+	
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+	})
+	
 </script>
 </html>

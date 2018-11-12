@@ -90,6 +90,10 @@ public class CONSUMER_ConsumerController {
 		model.addAttribute("locPositionLon", locPosition[1]); //전송
 		model.addAttribute("ftList", ftList); //fList라는 변수로 리턴으로 가져갈 리스트 변수 전송 
 		
+		////////////////////리뷰 평균 점수 가져오기///////////////////
+		
+		/////////////////////////////////////////////////////// 											
+
 		////////////////////트럭 사진 리스트 불러오기////////////////// 											
 		log.info(this.getClass() + " // truckImages start !!");
 		List<CONSUMER_ImageDTO> imgDTOs = new ArrayList<CONSUMER_ImageDTO>();
@@ -184,7 +188,7 @@ public class CONSUMER_ConsumerController {
 		List<CONSUMER_Ft_ReviewDTO> repleList = new ArrayList<CONSUMER_Ft_ReviewDTO>();
 		repleList = ftService.getFt_Review_List_ftDetail(ft_seq);	//특정 푸드트럭 상세 정보 리뷰 리스트-- 답글 제외
 		//날짜 수정
-		for(int i =0; i < repleList.size();i++) {
+		for(int i =0; i < repleList.size(); i++) {
 			String newRegDate = UtilTime.SetupRegDate(repleList.get(i).getRev_regdate());
 			repleList.get(i).setRev_regdate(newRegDate);
 		}
@@ -195,7 +199,6 @@ public class CONSUMER_ConsumerController {
 		CONSUMER_Ft_InfoDTO fDTO = ftService.getFtDetail(String.valueOf(ft_seq));
 		model.addAttribute("fDTO", fDTO);
 		/////////////
-		
 		
 		
 		return "/consumer/cnsmr/ftDetailReview";
@@ -314,6 +317,7 @@ public class CONSUMER_ConsumerController {
 		revDTO.setRev_title(request.getParameter("rev_title"));
 		revDTO.setRev_text(request.getParameter("rev_text"));
 		revDTO.setRev_point(Integer.parseInt(request.getParameter("rev_point")));
+		revDTO.setRev_snty_point(Integer.parseInt(request.getParameter("rev_snty_point")));
 		revDTO.setRev_regdate(UtilTime.getDateYMDhms());
 		revDTO.setRev_level(" ");
 		revDTO.setExp_yn(1);
@@ -482,7 +486,8 @@ public class CONSUMER_ConsumerController {
 		String userSeq = request.getParameter("userSeq"); //수정하려는 사용자 번호
 		String rev_text = request.getParameter("rev_text"); //수정하려는 리뷰 제목
 		String rev_title = request.getParameter("rev_title"); //수정하려는 리뷰 내용
-		int rev_point = Integer.parseInt(request.getParameter("rev_point")); //수정하려는 리뷰 별점 갯수
+		String rev_point = request.getParameter("rev_point"); //수정하려는 리뷰 별점 갯수
+		String rev_snty_point = request.getParameter("rev_snty_point"); //수정하려는 리뷰 별점 갯수
 		
 		CONSUMER_Ft_ReviewDTO revDTO = new CONSUMER_Ft_ReviewDTO();
 
@@ -516,7 +521,8 @@ public class CONSUMER_ConsumerController {
 		}
 		
 		revDTO.setReview_seq(edit_review_seq);
-		revDTO.setRev_point(rev_point);
+		revDTO.setRev_point(Integer.parseInt(rev_point));
+		revDTO.setRev_snty_point(Integer.parseInt(rev_snty_point));
 		revDTO.setRev_title(rev_title);
 		revDTO.setRev_text(rev_text);
 		ftService.ft_Review_Edit(revDTO);

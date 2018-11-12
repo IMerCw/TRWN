@@ -42,9 +42,28 @@
 				</div>
 				<div class="col-xs-6" style="padding:20px; text-align:right;">
 					<h5>
-						<%for(int q = 0; q < (revDTO.getRev_point()); q++) {%>
-								<img src="/resources/img/consumer/starRating.png">
-						<%} %>
+						리뷰 평점 : 
+							<%-- 리뷰점수와 위생점수 별 모양 표시 --%>
+							<%float avgRevPoint = Float.valueOf(revDTO.getRev_point()); %>
+							<%int j;%>
+							<%for(j = 1; j <= avgRevPoint; j++ ) {%>
+								<img src="/resources/img/consumer/starRating.png"/>
+							<%} %>
+							<%-- 별점 0.5 가 있을 경우 반 별 모양 추가 --%>
+							<%if(avgRevPoint >= j-1 + 0.5) {%>
+								<img src="/resources/img/consumer/starRatingHalf.png"/>
+							<%} %>
+							&nbsp;/&nbsp; 위생 점수: 
+							<%float avgSntyPoint = Float.valueOf(revDTO.getRev_snty_point()); %>
+							<%int k;%>
+							<%for(k = 1; k <= avgSntyPoint; k++ ) {%>
+								<img src="/resources/img/consumer/SntystarRating.png"/>
+							<%} %>
+							<%-- 별점 0.5 가 있을 경우 반 별 모양 추가 --%>
+							<%if(avgSntyPoint >= k-1 + 0.5) {%>
+								<img src="/resources/img/consumer/SntystarRatingHalf.png"/>
+							<%} %>
+							
 					</h5>
 				</div>
 			</div>

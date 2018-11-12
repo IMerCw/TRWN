@@ -12,15 +12,29 @@
 			FI.FT_OPTIME AS ft_optime, <!-- 푸드트럭 영업시간 -->
 			FI.FT_FUNC AS ft_func, <!-- 푸드트럭 서비스(배달/케이터링/주문예약)  -->
 			FI.FILE_ID AS file_id, <!-- 푸드트럭 이미지 파일 고유 번호 -->
+			ROUND(FI.FT_SNTY_POINT,1) AS ft_snty_point, <!-- 푸드트럭 위생 점수 -->
 			GT.GPS_SIDO AS gps_sido, <!-- 푸드트럭 시도구 정보 -->
 			GT.GPS_SIGUNGU AS gps_sigungu, <!-- 푸드트럭 시군구 정보 -->
 			GT.GPS_DONG AS gps_dong, <!-- 푸드트럭 gpsdong 정보 -->
 			GT.GPS_X AS gps_x, <!-- 푸드트럭 위도  -->
-			GT.GPS_Y AS gps_y <!-- 푸드트럭 경도 -->
+			GT.GPS_Y AS gps_y, <!-- 푸드트럭 경도 -->
+			ROUND(FR.FT_AVG_REV_POINT,1) AS FT_AVG_REV_POINT <!-- 푸드트럭 평균 리뷰 점수 -->			
 		FROM 
 			FT_INFO FI
 		    	INNER JOIN GPS_TABLE GT
-		    	ON  FI.GPS_SEQ = GT.GPS_SEQ
+		    		ON  FI.GPS_SEQ = GT.GPS_SEQ
+			  	INNER JOIN (
+					SELECT
+						FT_SEQ,
+						AVG(REV_POINT) AS FT_AVG_REV_POINT
+					FROM
+						FT_REVIEW
+					WHERE 
+						REV_POINT > 0
+					GROUP BY
+						FT_SEQ	
+				) FR
+					ON 	FI.FT_SEQ = FR.FT_SEQ
 		WHERE  
 			GT.GPS_SIDO like '%' ||  #{sido}  || '%'  <!-- 시도 검색어를 포함하는 경우  --> 
 			AND FI.FT_STATUS = 0 <!-- 푸드트럭 영업상태가 0, 운행중 -->
@@ -112,6 +126,7 @@
 			FI.FT_OPTIME AS ft_optime, <!-- 푸드트럭 영업 시간 -->
 			FI.FT_FUNC AS ft_func, <!-- 푸드트럭 서비스(배달/케이터링/주문예약) -->
 			FI.FT_STATUS AS ft_status, <!-- 푸드트럭 서비스(배달/케이터링/주문예약) -->
+			ROUND(FI.FT_SNTY_POINT,1) AS ft_snty_point, <!-- 푸드트럭 위생 점수 -->
 			GT.GPS_X AS gps_x,
 			GT.GPS_Y AS gps_y,
 			GT.GPS_SIGUNGU AS gps_sigungu,

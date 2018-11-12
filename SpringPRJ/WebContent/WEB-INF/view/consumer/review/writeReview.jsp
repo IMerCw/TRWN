@@ -55,13 +55,25 @@
 				</div>
 				<div class="col-xs-12">
 					<div class="form-group">
-						<label for="rating">푸드트럭 평점</label>
+						<label for="rating">푸드트럭 음식 평점</label>
 						<select class="form-control" name="rev_point">
 						  <option value="5">5</option>
 						  <option value="4">4</option>
 						  <option value="3">3</option>
 						  <option value="2">2</option>
-						  <option value="5">1</option>
+						  <option value="1">1</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="rating">푸드트럭 위생 점수</label>
+						<select class="form-control" name="rev_snty_point">
+						  <option value="5">5</option>
+						  <option value="4">4</option>
+						  <option value="3">3</option>
+						  <option value="2">2</option>
+						  <option value="1">1</option>
 						</select>
 					</div>
 				</div>

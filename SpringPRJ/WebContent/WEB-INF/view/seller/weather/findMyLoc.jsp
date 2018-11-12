@@ -53,7 +53,7 @@
 	              	<div class="row" style="padding-top:15px; margin:0;">
 		              	<div class="col-xs-2"></div>
 		              	<div class="col-xs-6">
-		             	<input type="text" class="form-control" value="한국폴리텍대학 서울강서캠퍼스" id="keyword" size="15">
+		             	<input type="text" class="form-control" value="충청북도 청주시 흥덕구 오송읍 오송생명2로 187 식품의약품안전처" id="keyword" size="15">
 		             	</div> 
 		                <div class="col-xs-2">
 		                  <button type="submit" class="btn btn-default">검색하기</button>

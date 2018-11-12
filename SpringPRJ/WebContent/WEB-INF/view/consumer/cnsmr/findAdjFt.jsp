@@ -72,23 +72,43 @@
 							<%} %>
 						</div>
 							
-						<div class="card-body" style="font-size:2rem;">
+						<div class="card-body" style="font-size:2.5rem;">
 							<%=ftList.get(i).getFt_name() %>
 						</div> 
 							<input type="hidden" name="ft_seq" value="<%=ftList.get(i).getFt_seq()%>" />
-						<div class="card-body">
+						<div class="card-body" style="font-size:18px; color:#888888; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
 							<%=ftList.get(i).getFt_intro() %>
 						</div> 
-						<div class="card-body">
+						<div class="card-body" style="">
 							<%String []optime = ftList.get(i).getFt_optime().split("/"); %>
-							<%= optime[0] %>
+							<%= optime[0] %> / <%= optime[1] + " ~ " + optime[2] %>
 						</div>
 						<div class="card-body">
-							<%= optime[1] + " ~ " + optime[2] %>
+							리뷰 평점 : 
+							<%-- 리뷰점수와 위생점수 별 모양 표시 --%>
+							<%float avgRevPoint = Float.valueOf(ftList.get(i).getFt_avg_rev_point()); %>
+							<%int j;%>
+							<%for(j = 1; j <= avgRevPoint; j++ ) {%>
+								<img src="/resources/img/consumer/starRating.png"/>
+							<%} %>
+							<%-- 별점 0.5 가 있을 경우 반 별 모양 추가 --%>
+							<%if(avgRevPoint >= j-1 + 0.5) {%>
+								<img src="/resources/img/consumer/starRatingHalf.png"/>
+							<%} %>
+							&nbsp;/&nbsp; 위생 점수: 
+							<%float avgSntyPoint = Float.valueOf(ftList.get(i).getFt_snty_point()); %>
+							<%int k;%>
+							<%for(k = 1; k <= avgSntyPoint; k++ ) {%>
+								<img src="/resources/img/consumer/SntystarRating.png"/>
+							<%} %>
+							<%-- 별점 0.5 가 있을 경우 반 별 모양 추가 --%>
+							<%if(avgSntyPoint >= k-1 + 0.5) {%>
+								<img src="/resources/img/consumer/SntystarRatingHalf.png"/>
+							<%} %>
 						</div>
 						<div class="card-body">
 							<button onclick="location.href='/consumer/cnsmr/ftDetail.do?ft_seq=<%=ftList.get(i).getFt_seq()%>'" 
-								type="button" class="btn btn-primary">푸드트럭 자세히 보기</button>
+								type="button" class="btn btn-primary" style="width:100%;">푸드트럭 자세히 보기</button>
 						</div>
 					</div>
 				</div>
