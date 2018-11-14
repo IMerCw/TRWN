@@ -36,7 +36,6 @@ public class SELLER_FoodSafety {
 		
 		return "/seller/foodSafety/fdSftyMain";
 	}
-	//게시판 목록 select 
 	
 	
 

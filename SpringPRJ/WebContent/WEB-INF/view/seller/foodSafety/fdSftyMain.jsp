@@ -7,10 +7,7 @@
 <title>트럭왔냠 - 식품 안전 정보</title>
 </head>
 <body>
-<%@include file="/WEB-INF/view/seller/top.jsp" %>
-
-	회수 및 판매 중지 정보
-	식품 영양 성분 DB
-	
+	<%@include file="/WEB-INF/view/seller/top.jsp" %>
+	<img src="/resources/img/seller/sample_img/foodSanity.png"/>
 </body>
 </html>
