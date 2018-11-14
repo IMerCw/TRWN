@@ -44,6 +44,13 @@
 		$(uploadFile_label).text("파일없음");
 		document.getElementById("org_file_id").value = '-1';
 	}
+	
+	function borderit(which,color){ 
+		//if IE 4+ or NS 6+ 
+		if (document.all||document.getElementById){ 
+		which.style.borderColor=color 
+		} 
+		} 
 </script> 
 </head>
 <body>
@@ -103,6 +110,37 @@
 					</td>
 				</tr>
 				<tr style="border-bottom:1px solid #DDDDDD;">
+					<td class="table_Hline" style="position:relative;">
+						<span style="position:absolute; top:47%; left:20px;">
+							재료등록
+						</span>
+					</td>
+					<td class="table_line">
+						<div style="float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/1.PNG" style=" border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style="float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/2.PNG" style=" border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style=" float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/3.PNG" style="border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style="float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/4.PNG" data-toggle="modal" data-target="#myModal" style="border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style="float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/5.png" style=" border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style="float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/6.png" style=" border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style="float:left;">
+							<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/7.png" style="border:1px solid #ffffff; cursor:pointer; "onMouseover="borderit(this,'#D9534F')" onMouseout="borderit(this,'white')">
+						</div>
+						<div style="clear:both;"></div>
+					</td>
+				</tr>
+				<tr style="border-bottom:1px solid #DDDDDD;">
 					<td class="table_Hline">주재료원산지</td>
 					<td class="table_line">
 						<textarea name="orign" class="form-control" style="height:80px;"><%=menuDTO.getOrign()%></textarea>
@@ -123,6 +161,26 @@
 				<button type="submit" class="btn btn-primary" style="width:80px;" >저장</button>
 			</div>
 			</form>
+		</div>
+		 <!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header" style="border-bottom:0px;">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      </div>
+		      <div style="padding-top:30px; padding-bottom:0px; text-align:center;">
+		      		<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/9.png"">
+		      </div>
+		      <div class="modal-body" style="text-align:center; padding-top:0px;">
+		      		<img src="<%=request.getContextPath()%>/resources/img/seller/sample_img/8.png">
+		      </div>
+		      <div class="modal-footer" style="text-align:center; border-top:0px; margin-bottom:30px;">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" style="width:120px; border-radius:0px;">취소</button>
+		        <button type="button" class="btn btn-primary" onClick="javascript:cate_create.submit()" style="width:120px; border-radius:0px;">수정</button>
+		      </div>
+		    </div>
+		  </div>
 		</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="<%=request.getContextPath()%>/resources/js/admin/jquery-1.11.2.min.js"></script> 
