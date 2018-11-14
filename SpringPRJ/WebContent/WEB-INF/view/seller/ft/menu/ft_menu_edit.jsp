@@ -34,6 +34,9 @@
 		padding-left:20px;
 		padding-right:20px;
 	}
+	body {
+		padding: 0 !important;
+	}
 </style>
 <script>
 	window.onload = function(){
