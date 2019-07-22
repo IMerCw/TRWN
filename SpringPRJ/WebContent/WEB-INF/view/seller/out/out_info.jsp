@@ -1,11 +1,13 @@
+<%@page import="java.util.List"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@page import="poly.dto.admin.ADMIN_ImageDTO"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="poly.dto.admin.ADMIN_ImageDTO"%>
 <%@page import="poly.dto.admin.ADMIN_Menu_InfoDTO"%>
 <%@page import="poly.dto.admin.ADMIN_Ft_Menu_CateDTO"%>
-<%@page import="java.util.List"%>
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="poly.dto.admin.ADMIN_Ft_InfoDTO" %>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <%
 	ADMIN_Ft_InfoDTO ftDTO = (ADMIN_Ft_InfoDTO)request.getAttribute("ftDTO");
@@ -35,7 +37,7 @@
 	}
 }
 
-	
+	DecimalFormat df = new DecimalFormat("#,##0");
 %>
 
 <html>
@@ -232,9 +234,9 @@
 			  		<%} %>
 			  			<%for(ADMIN_Menu_InfoDTO menuDTO : menuDTOarr){ %>
 			  				<%if(cateDTO.getCate_sort_no()==menuDTO.getCate_sort_no()){ %>
-			  					<div style="border:1px solid #cccccc; width:138px; height:200px; margin:3px; float:left; cursor:pointer;"
-			  					onmouseover="this.style='border:1px solid #D9534F; width:138px; height:200px; margin:3px; float:left; cursor:pointer;'"
-			  					onmouseout="this.style='border:1px solid #cccccc; width:138px; height:200px; margin:3px; float:left; cursor:pointer;'"
+			  					<div style="border:1px solid #cccccc; width:138px; height:224px; margin:3px; float:left; cursor:pointer;"
+			  					onmouseover="this.style='border:1px solid #D9534F; width:138px; height:224px; margin:3px; float:left; cursor:pointer;'"
+			  					onmouseout="this.style='border:1px solid #cccccc; width:138px; height:224px; margin:3px; float:left; cursor:pointer;'"
 			  					onclick="JavaScript:item('<%=ftDTO2.getFt_seq()%>','<%=menuDTO.getMenu_seq()%>','RegItem');">
 			  					<%-- onclick="location.href='<%=request.getContextPath()%>/admin/ft/ft_info.do?cmd=menu_info&ft_seq=<%=ftDTO2.getFt_seq()%>&menu_seq=<%=menuDTO.getMenu_seq()%>'"> --%>
 						    		<div style="width:100%; height:165px; padding:3px; ">
@@ -250,7 +252,8 @@
 						    		<%} %>
 						    		</div>
 						    		<div style="width:100%; height:35px; font-size:13px; padding-top:7px; text-align:center; border-top:1px solid #cccccc;">
-						    			<%=menuDTO.getMenu_name()%>
+						    			<p><%=menuDTO.getMenu_name()%></p>
+						    			<p><%=df.format(menuDTO.getMenu_price()) %> 원</p>
 						    		</div> 
 						    	</div>
 			  				<%} %>
@@ -355,6 +358,15 @@
 	    }
 	
 	    return n;
+	}
+	
+	//메뉴 가격 콤마 적용
+	var menuPrices = document.getElementsByClassName('menuPrices');
+	for(var i = 0; i < menuPrices.length; i++) {
+		var menuPrice = menuPrices[i].innerHTML;
+		menuPrices[i].innerHTML = commify(menuPrice.trim());
+		
+		
 	}
 </script>
 </html>

@@ -408,7 +408,7 @@
 						<b style="font-size:18px">이번달 접속자 수</b>
 					</td>
 					<td style="width:25%; padding-top:10px;">
-						<b style="font-size:72px"><%=date_month_sum[4]%></b>
+						<b style="font-size:72px"><%=date_month_sum[3]%></b>
 						<b style="font-size:20px;">건</b><br>
 						<b style="font-size:18px">이번달 주문량</b>
 					</td> 

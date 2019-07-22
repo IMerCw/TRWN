@@ -26,7 +26,7 @@
 	              	<div class="row" style="padding-top:15px;">
 		              	<div class="col-sm-2"></div>
 		              	<div class="col-sm-6">
-		             	<input type="text" class="form-control" value="충청북도 청주시 흥덕구 오송읍 오송생명2로 187 식품의약품안전처" id="keyword" size="15">
+		             	<input type="text" class="form-control" value="경기 고양시 일산서구 킨텍스로 217-60" id="keyword" size="15">
 		             	</div> 
 		                <div class="col-sm-2">
 		                  <button type="submit" class="btn btn-default">검색하기</button>
@@ -46,14 +46,14 @@
     <div id="map" style="width:100%;height:40%;position:relative;overflow:hidden;"></div>
 </div>
 	
-	<div id="menu_wrap" class="bg_white">
+	<!-- <div id="menu_wrap" class="bg_white">
 	      <div class="option">
 	          <div class="form-group">
 	              <form onsubmit="searchPlaces(); return false;">
 	              	<div class="row" style="padding-top:15px; margin:0;">
 		              	<div class="col-xs-2"></div>
 		              	<div class="col-xs-6">
-		             	<input type="text" class="form-control" value="충청북도 청주시 흥덕구 오송읍 오송생명2로 187 식품의약품안전처" id="keyword" size="15">
+		             	<input type="text" class="form-control" value="경기 고양시 일산서구 킨텍스로 217-60" id="keyword" size="15">
 		             	</div> 
 		                <div class="col-xs-2">
 		                  <button type="submit" class="btn btn-default">검색하기</button>
@@ -67,7 +67,7 @@
 	      <hr>
 	      <ul id="placesList" style="padding: 0px;"></ul>
 	      <div id="pagination" style="text-align:center; font-size:20px;"></div>
-	</div>
+	</div> -->
 </body>
 
 <!-- 지도를 띄울 코드를 작성합니다. -->
@@ -373,7 +373,7 @@ if (navigator.geolocation) {
     
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
     
-    var locPosition = new daum.maps.LatLng(33.450701, 126.570667),    
+    var locPosition = new daum.maps.LatLng(37.6693071,126.74568449999992),    
         message = 'geolocation을 사용할수 없어요..'
         
     displayMarker(locPosition, message);

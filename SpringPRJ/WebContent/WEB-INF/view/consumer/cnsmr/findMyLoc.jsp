@@ -26,7 +26,7 @@
 	              	<div class="row" style="padding-top:15px; margin:0;">
 		              	<div class="col-xs-2"></div>
 		              	<div class="col-xs-6">
-		             	<input type="text" class="form-control" value="충청북도 청주시 흥덕구 오송읍 오송생명2로 187 식품의약품안전처" id="keyword" size="15">
+		             	<input type="text" class="form-control" value="경기 고양시 일산서구 킨텍스로 217-60" id="keyword" size="15">
 		             	</div> 
 		                <div class="col-xs-2">
 		                  <button type="submit" class="btn btn-default">검색하기</button>
@@ -52,7 +52,7 @@ var markerCurrent;
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new daum.maps.LatLng(37.5606707, 126.9737639), // 지도의 중심좌표
+        center: new daum.maps.LatLng(37.6693071,126.74568449999992), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
@@ -320,7 +320,7 @@ if (navigator.geolocation) {
         var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
             
-        var locPosition = new daum.maps.LatLng(36.6407093,127.33232210000006) // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+        var locPosition = new daum.maps.LatLng(37.6693071,126.74568449999992) // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
         
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition, message);

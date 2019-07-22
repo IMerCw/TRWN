@@ -8,6 +8,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/view/seller/top.jsp" %>
-	<img src="/resources/img/seller/sample_img/foodSanity.png"/>
+	<img src="/resources/img/seller/sample_img/foodSanity.png"/ style="width: 152rem;">
 </body>
 </html>

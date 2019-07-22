@@ -1,3 +1,5 @@
-/SpringPRJ.zip
-/.project
-/SpringPRJ/pom.xml
+target/
+.settings/
+.classpath
+.project
+pom.xml

@@ -211,6 +211,8 @@ public class ADMIN_MainController {
 				}
 				if(Integer.parseInt(ord_date[1].trim())==Integer.parseInt(today[1].trim())){//1달 통계
 					if(ordDTO.getOrd_status()==0) { 
+						log.info(ordDTO.getOrd_status());
+						log.info(date_month_sum[3]+ ",=========");
 						date_month_sum[0] += ordDTO.getOrd_sumprice();
 						date_month_sum[3] += 1;
 						date_month_avg[3] += 1;
@@ -290,7 +292,8 @@ public class ADMIN_MainController {
 			
 		
 		//푸드트럭 지도 셋팅---------------------------------------------------------------------------------------------
-		String []locPosition = {"37.54961852825523", "126.8426243815202"}; //GET방식으로 받은 locPosition을 분리하여 어레이 변수에 할당
+//		String []locPosition = {"37.54961852825523", "126.8426243815202"}; //GET방식으로 받은 locPosition을 분리하여 어레이 변수에 할당
+		String []locPosition = {"37.6693071","126.74568449999992"}; //GET방식으로 받은 locPosition을 분리하여 어레이 변수에 할당
 		
 		List<CONSUMER_Ft_InfoDTO> ftList = ftService.getFtList_ALL(); //리스트형식의 푸드트럭객체들을 지역코드를 파라미터를 사용해 테이블로부터 불러옴
 		

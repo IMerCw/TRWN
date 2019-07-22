@@ -7,6 +7,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.util.CmmUtil"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -34,6 +35,8 @@
 	session.setAttribute("userHp", uDTO.getUserHp());
 	
 	String ftSeq = (String) request.getAttribute("ftSeq");
+	
+	DecimalFormat df = new DecimalFormat("#,##0");
 %>
 
 <html>
@@ -889,13 +892,7 @@
 	    return n;
 	}
 	
-	var menuPrices = document.getElementsByClassName('menuPrices');
-	for(var i = 0; i < menuPrices.length; i++) {
-		var menuPrice = menuPrices[i].innerHTML;
-		menuPrices[i].innerHTML = commify(menuPrice.trim());
-		
-		
-	}
+
 
 	
 
