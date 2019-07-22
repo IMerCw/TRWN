@@ -1,2 +1,2 @@
-# truck
-Truck Data analysis system
+# TRWN(Truck Whatnahum)
+@Author @cwJohnPark, @YOULYA, @dupyo, @jinsusong
